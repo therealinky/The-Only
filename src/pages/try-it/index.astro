@@ -1,5 +1,6 @@
 ---
 import ArticleListing from '../../components/ArticleListing.astro';
+import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getListableArticles, filterByFormat } from '../../lib/articles';
 
@@ -10,8 +11,12 @@ const articles = filterByFormat(await getListableArticles(), 'test');
   title="Try It"
   description="Hands-on assessments of AI tools and features for working designers."
 >
-  <h1>Try It</h1>
-  <p>Hands-on assessments — what we tested, what worked, and what to watch for.</p>
+  <PageHero
+    eyebrow="Try It"
+    lines={['Hands', 'On']}
+    subtitle="Hands-on assessments — what we tested, what worked, and what to watch for."
+    variant="rose"
+  />
   <ArticleListing
     articles={articles}
     allHref="/try-it/"

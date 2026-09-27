@@ -1,0 +1,167 @@
+/* Page hero — a distinct, large-type composition per main-nav section.
+   Structure: gradient layer -> grain texture -> content (stacked headline +
+   frosted-glass panel) -> fade-to-background at the bottom. */
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 46vh;
+  display: flex;
+  align-items: flex-end;
+  margin-inline: calc(-1 * var(--space-4));
+  margin-block-end: var(--space-7);
+}
+
+/* Cancel <main>'s top padding so the hero sits flush under the header. */
+main > .page-hero:first-child {
+  margin-block-start: calc(-1 * var(--space-7));
+}
+
+@media (min-width: 48rem) {
+  .page-hero {
+    margin-inline: calc(-1 * var(--space-6));
+    min-height: 56vh;
+  }
+}
+
+.page-hero__gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.page-hero__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.page-hero__fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  pointer-events: none;
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-4) var(--space-8);
+}
+
+@media (min-width: 48rem) {
+  .page-hero__content {
+    padding-inline: var(--space-6);
+  }
+}
+
+.page-hero__eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 var(--space-3);
+}
+
+.page-hero__title {
+  margin: 0 0 var(--space-6);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-hero);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.page-hero__line {
+  position: relative;
+  display: block;
+}
+
+.page-hero__line-echo,
+.page-hero__line-fill {
+  display: block;
+}
+
+.page-hero__line-echo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.28);
+  transform: translate(0.05em, 0.09em);
+  filter: blur(1px);
+}
+
+.page-hero__line-fill {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.page-hero__glass {
+  max-width: 34rem;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.page-hero__glass p {
+  margin: 0;
+  max-width: none;
+  color: #fff;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+/* Gradient compositions — one per main-nav page. Layered radial gradients
+   for a soft, dream-like blend rather than a single flat direction. */
+
+.page-hero--purple .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 15% -10%, var(--hero-blue) 0%, transparent 55%),
+    radial-gradient(120% 140% at 100% 110%, var(--hero-rose) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-purple), color-mix(in srgb, var(--hero-purple) 60%, var(--hero-blue)));
+}
+
+.page-hero--rose .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 10% 110%, var(--hero-gold) 0%, transparent 55%),
+    radial-gradient(120% 140% at 100% -10%, var(--hero-purple) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-rose), color-mix(in srgb, var(--hero-rose) 55%, var(--hero-gold)));
+}
+
+.page-hero--sage .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 100% -10%, var(--hero-blue) 0%, transparent 55%),
+    radial-gradient(120% 140% at 0% 110%, var(--hero-gold) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-sage), color-mix(in srgb, var(--hero-sage) 55%, var(--hero-blue)));
+}
+
+.page-hero--blue .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 100% 110%, var(--hero-purple) 0%, transparent 55%),
+    radial-gradient(120% 140% at 0% -10%, var(--hero-sage) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-blue), color-mix(in srgb, var(--hero-blue) 55%, var(--hero-purple)));
+}
+
+.page-hero--gold .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 0% -10%, var(--hero-rose) 0%, transparent 55%),
+    radial-gradient(120% 140% at 100% 110%, var(--hero-sage) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-gold), color-mix(in srgb, var(--hero-gold) 55%, var(--hero-rose)));
+}

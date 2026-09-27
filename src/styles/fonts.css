@@ -1,13 +1,14 @@
 /* Self-hosted, open-licensed (SIL OFL 1.1) fonts via Fontsource. No third-party font CDN. */
 
-/* Fraunces — display/headline face. Variable across weight, optical size, SOFT, and WONK axes. */
-@import '@fontsource-variable/fraunces/full.css';
-@import '@fontsource-variable/fraunces/full-italic.css';
+/* Unbounded — display/headline face. Bold, geometric, blocky at heavy weights. */
+@import '@fontsource-variable/unbounded/wght.css';
 
 /* Inter — body text face. Variable across weight. */
 @import '@fontsource-variable/inter/wght.css';
 @import '@fontsource-variable/inter/wght-italic.css';
 
-/* Space Mono — badges, metadata, code. */
-@import '@fontsource/space-mono/400.css';
-@import '@fontsource/space-mono/700.css';
+/* JetBrains Mono — reserved for actual code (<code>/<pre>) in article
+   content. Deliberately NOT used for badges/eyebrows/labels — monospace as
+   UI chrome reads as generic "AI tool" styling; those use Inter instead
+   (see global.css / hero.css). */
+@import '@fontsource-variable/jetbrains-mono/wght.css';

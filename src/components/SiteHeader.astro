@@ -42,6 +42,27 @@ function isActive(href: string): boolean {
     <div class="site-header__actions">
       <a class="site-header__search" href="/search/">Search</a>
       <ThemeToggle />
+      <details class="mobile-nav">
+        <summary class="mobile-nav__trigger" aria-label="Menu">
+          <span class="mobile-nav__icon" aria-hidden="true">
+            <span class="mobile-nav__line"></span>
+            <span class="mobile-nav__line"></span>
+          </span>
+        </summary>
+        <nav class="mobile-nav__panel" aria-label="Main (mobile)">
+          <ul>
+            {
+              navItems.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
     </div>
   </div>
 </header>

@@ -1,5 +1,6 @@
 ---
 import ArticleListing from '../../components/ArticleListing.astro';
+import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { filterByFormat, getListableArticles } from '../../lib/articles';
 
@@ -7,8 +8,12 @@ const articles = filterByFormat(await getListableArticles(), 'workflow');
 ---
 
 <BaseLayout title="Workflows" description="Repeatable, step-by-step AI workflows for working designers.">
-  <h1>Workflows</h1>
-  <p>Repeatable tutorials — follow along and get the same result.</p>
+  <PageHero
+    eyebrow="Workflows"
+    lines={['Step', 'By Step']}
+    subtitle="Repeatable tutorials — follow along and get the same result."
+    variant="sage"
+  />
   <ArticleListing
     articles={articles}
     allHref="/workflows/"
