@@ -1,0 +1,59 @@
+---
+title: "Spline V2 Rebuilds the 3D Editor Around an AI Agent and MCP"
+dek: >-
+  Spline's V2 relaunch adds an in-editor AI agent that can build and edit
+  full 3D scenes from a prompt, plus an MCP server so tools like Claude
+  Code and Cursor can drive the editor directly.
+format: brief
+evidence: researched
+status: draft
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - 3D
+  - Creative Coding
+tools:
+  - Spline
+sources:
+  - title: Introducing Spline V2 (Spline changelog)
+    url: https://updates.spline.design/changelog/introducing-spline-v2
+    accessed: 2026-09-27
+  - title: AI 3D Generation (Spline documentation)
+    url: https://docs.spline.design/generate/ai-3d-generation
+    accessed: 2026-09-27
+beforeYouUse:
+  clientData: >-
+    not verified — unclear what happens to scene data or assets sent to
+    Spline's AI agent, or whether MCP access changes that
+  usageRights: >-
+    not verified — usage rights for AI-generated or AI-edited 3D scenes
+    weren't confirmed in the sources checked
+  disclosure: >-
+    not verified — no stated requirement to disclose that a scene was
+    generated or modified by Spline's AI agent
+  accessibility: >-
+    not verified — no accessibility considerations (e.g. for interactive
+    3D/WebGPU output) were mentioned in the announcement
+  cost: >-
+    not verified — which plan tiers include the AI agent and MCP access
+    wasn't confirmed
+---
+Spline, the browser-based 3D design tool, shipped a ground-up rebuild on August 21, 2026 that it's calling V2. The headline change: an AI agent built into the editor that can generate and edit 3D scenes from natural-language instructions, alongside a new WebGPU-based renderer, a rebuilt desktop app, and — notably for anyone building agent-driven workflows — an MCP server.
+
+## What changed
+
+Spline's AI agent isn't limited to generating a starting scene and stepping aside. According to Spline's own documentation, it can create and edit objects, materials, lights, cameras, booleans, particles, cloners, and paths, as well as interactivity — events, tweens, states — and custom code-driven behavior. Anything it generates is described as fully editable afterward, rather than a locked black-box output.
+
+The MCP server is the other half of the story: it lets external agentic tools — Spline names Claude Code and Cursor as examples — connect to and drive the 3D editor directly, the same way Runway's and Figma's MCP servers let outside agents call into those products (see our coverage of Figma's Weave node and Runway's Brand Kit access via MCP). That's a meaningful shift for a 3D tool specifically, where "drive the editor from code" has historically meant a much steeper scripting learning curve than it does in 2D design tools.
+
+## Why it matters for designers
+
+For 3D and creative-coding work, the promise here is a shorter loop between "I want a scene that does X" and a working, still-editable scene — useful for early exploration, prototyping interactive states, or generating variations of an existing scene without hand-placing every light and material. The MCP piece matters for a different reason: it puts Spline in the same camp as other design tools opening themselves up to external agents, which means workflows that chain multiple AI tools together (write a script that also asks Spline to build the 3D asset it references) become more plausible than they were with a closed, GUI-only editor.
+
+As with any agent that can touch materials, lights, and interactivity all at once, the risk is the usual one — it's easier to get something that looks right at a glance and is subtly broken (wrong scale, a light that doesn't survive a scene export, an interaction that only works in the editor) than to get something a human built deliberately, piece by piece.
+
+## What to watch out for
+
+We haven't hands-on tested Spline V2 yet, so the `beforeYouUse` fields above are unverified rather than confirmed. Worth checking directly before using it on client work: what happens to scene assets processed through the AI agent or MCP, and what usage rights apply to agent-generated or agent-edited scenes specifically. We'll follow up with a Test once we've put it through an actual project.
