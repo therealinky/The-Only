@@ -1,0 +1,64 @@
+---
+title: "Recraft Ships V4.1 Flash, a Sub-2-Second Image Model"
+dek: >-
+  A new fast tier of Recraft's image model trades reference-image input and
+  aspect-ratio range for generation times of about 1.4 seconds, at $0.007
+  an image.
+format: brief
+evidence: researched
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - Illustration
+  - Brand
+tools:
+  - Recraft
+sources:
+  - title: "Meet Recraft V4.1 Flash: The Fastest Image Model on the Market (Recraft Blog)"
+    url: https://www.recraft.ai/blog/meet-recraft-v4-1-flash
+    accessed: 2026-09-27
+  - title: "Recraft V4.1 Flash (Recraft API Reference)"
+    url: https://www.recraft.ai/docs/api-reference/models/recraft-v4-1-flash
+    accessed: 2026-09-27
+beforeYouUse:
+  clientData: >-
+    not applicable: this is a hosted text-to-image API and studio tool, not
+    something that connects to or reads a client's existing files
+  usageRights: >-
+    not verified: we didn't independently confirm whether Flash-generated
+    images carry the same commercial usage terms as standard Recraft V4.1
+    output
+  disclosure: >-
+    not verified: no stated requirement to disclose that an image came from
+    the fast tier versus Recraft's standard model
+  accessibility: >-
+    not applicable: nothing in the release relates to accessibility
+    metadata or alt text
+  cost: >-
+    $0.007 per image through the API, per Recraft; pricing inside a Recraft
+    Studio subscription (credits, limits) wasn't independently confirmed by
+    us
+---
+Recraft added a faster tier to its V4.1 image model this month, and the pitch is speed over flexibility. V4.1 Flash is live now in Recraft Studio's model picker and through the API.
+
+## What changed
+
+Recraft's own benchmarks put Flash at a median generation time of about 1.4 seconds for a 1K image, with 1.8 seconds at the 95th percentile, which the company is calling the fastest image model on the market. It's also the cheapest option in Recraft's API lineup, at $0.007 per image.
+
+The tradeoff is flexibility. Flash generates from a text prompt only, there's no reference-image input, and it's limited to five aspect ratios (1:1, 4:3, 3:4, 16:9, 9:16) with up to six images per request. The standard V4.1 model still supports reference images for anyone who needs style or subject matching.
+
+## Why it matters for designers
+
+For exploratory work, mood boards, quick concept variations, thumbnails you'll throw most of away, the round trip is short enough to iterate close to real time instead of waiting on each generation. At well under a cent an image, it's cheap enough that generating ten options to keep one is a reasonable way to work, which is really the point of a tier like this.
+
+It's not a replacement for the standard model in workflows that depend on reference images. If your process involves matching an existing logo, product shot, or established style, that still means the flagship V4.1, not Flash.
+
+## What to watch out for
+
+Check which tier your existing prompts and workflows actually depend on before switching over by default. Anything built around reference-image input won't work on Flash at all.
+
+We haven't run Flash against the standard model side by side ourselves, so treat the quality comparison, not just the speed claim, as something to verify before you commit a real workflow to it.
