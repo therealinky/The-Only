@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllTools } from '../../lib/articles';
+import { slugify } from '../../lib/slugify';
+
+const tools = await getAllTools();
+---
+
+<BaseLayout title="Tools" description="Every tool discussed on The Only, linked to the articles that cover it.">
+  <h1>Tools</h1>
+  <p>Every tool we've covered, linked to the articles that discuss it.</p>
+  {
+    tools.length === 0 ? (
+      <p>No tools indexed yet.</p>
+    ) : (
+      <ul>
+        {tools.map((tool) => (
+          <li>
+            <a href={`/tools/${slugify(tool)}/`}>{tool}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

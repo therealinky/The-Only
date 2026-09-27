@@ -1,0 +1,122 @@
+---
+import { DISCIPLINES, type Discipline } from '../config/site';
+import type { Article } from '../lib/articles';
+import { slugify } from '../lib/slugify';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  /** All articles for this locked format (or all published articles), unfiltered by discipline. */
+  articles: Article[];
+  /** Link for the "All disciplines" filter. */
+  allHref: string;
+  /** Prefix that a discipline slug is appended to, e.g. "/discipline/" or "/try-it/". */
+  disciplineBase: string;
+  activeDiscipline?: Discipline;
+  emptyMessage?: string;
+}
+
+const {
+  articles,
+  allHref,
+  disciplineBase,
+  activeDiscipline,
+  emptyMessage = 'No articles match this filter yet.',
+} = Astro.props;
+
+const visibleCount = activeDiscipline
+  ? articles.filter((a) => a.data.disciplines.includes(activeDiscipline)).length
+  : articles.length;
+---
+
+<nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase}>
+  <ul class="filter-bar__list">
+    <li>
+      <a href={allHref} aria-current={!activeDiscipline ? 'page' : undefined} data-discipline="">
+        All disciplines
+      </a>
+    </li>
+    {
+      DISCIPLINES.map((d) => (
+        <li>
+          <a
+            href={`${disciplineBase}${slugify(d)}/`}
+            aria-current={activeDiscipline === d ? 'page' : undefined}
+            data-discipline={d}
+          >
+            {d}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<p data-filter-count>
+  {visibleCount} {visibleCount === 1 ? 'article' : 'articles'}
+</p>
+
+<div data-article-grid>
+  {
+    articles.map((article) => {
+      const hiddenByFilter = !!activeDiscipline && !article.data.disciplines.includes(activeDiscipline);
+      return (
+        <div
+          data-article-item
+          data-disciplines={article.data.disciplines.join('|')}
+          hidden={hiddenByFilter || undefined}
+        >
+          <ArticleCard article={article} />
+        </div>
+      );
+    })
+  }
+</div>
+
+{articles.length === 0 && <p>{emptyMessage}</p>}
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-filter-bar]');
+  const grid = document.querySelector<HTMLElement>('[data-article-grid]');
+  const count = document.querySelector<HTMLElement>('[data-filter-count]');
+  if (bar && grid) {
+    const allHref = bar.dataset.allHref ?? '/';
+    const items = Array.from(grid.querySelectorAll<HTMLElement>('[data-article-item]'));
+    const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>('a[data-discipline]'));
+
+    function applyFilter(discipline: string, href: string, push: boolean) {
+      let visible = 0;
+      for (const item of items) {
+        const disciplines = (item.dataset.disciplines ?? '').split('|');
+        const matches = discipline === '' || disciplines.includes(discipline);
+        item.hidden = !matches;
+        if (matches) visible += 1;
+      }
+      for (const link of links) {
+        if ((link.dataset.discipline ?? '') === discipline) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      }
+      if (count) {
+        count.textContent = `${visible} ${visible === 1 ? 'article' : 'articles'}`;
+      }
+      if (push) {
+        history.pushState({ discipline }, '', href);
+      }
+    }
+
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        applyFilter(link.dataset.discipline ?? '', link.getAttribute('href') ?? allHref, true);
+      });
+    }
+
+    window.addEventListener('popstate', () => {
+      const path = location.pathname;
+      const link = links.find((l) => l.getAttribute('href') === path);
+      applyFilter(link?.dataset.discipline ?? '', path, false);
+    });
+  }
+</script>

@@ -1,0 +1,13 @@
+---
+import { EVIDENCE_DESCRIPTIONS, EVIDENCE_LABELS, type Evidence } from '../config/site';
+
+interface Props {
+  evidence: Evidence;
+}
+
+const { evidence } = Astro.props;
+---
+
+<span class="badge badge--evidence" data-evidence={evidence} title={EVIDENCE_DESCRIPTIONS[evidence]}>
+  Evidence: {EVIDENCE_LABELS[evidence]}
+</span>

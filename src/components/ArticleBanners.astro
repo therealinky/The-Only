@@ -1,0 +1,27 @@
+---
+import type { Article } from '../lib/articles';
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { data } = article;
+---
+
+{
+  data.example && (
+    <p class="notice notice--example" role="note">
+      <strong>Example article — not real reporting.</strong> This is a development placeholder used to preview the
+      site's design and structure.
+    </p>
+  )
+}
+
+{
+  data.status === 'draft' && (
+    <p class="notice notice--draft" role="note">
+      <strong>Draft.</strong> This article is only visible in local development and will not appear in production.
+    </p>
+  )
+}

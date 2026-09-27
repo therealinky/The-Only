@@ -1,0 +1,28 @@
+---
+import ArticleListing from '../../../components/ArticleListing.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { DISCIPLINES, type Discipline } from '../../../config/site';
+import { filterByFormat, getListableArticles } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { discipline: slugify(discipline) },
+    props: { discipline },
+  }));
+}
+
+const { discipline } = Astro.props as { discipline: Discipline };
+const articles = filterByFormat(await getListableArticles(), 'test');
+---
+
+<BaseLayout title={`${discipline} — Try It`} description={`Hands-on assessments for ${discipline}.`}>
+  <h1>Try It: {discipline}</h1>
+  <ArticleListing
+    articles={articles}
+    allHref="/try-it/"
+    disciplineBase="/try-it/"
+    activeDiscipline={discipline}
+    emptyMessage="No Test articles match this filter yet."
+  />
+</BaseLayout>

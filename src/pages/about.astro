@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
+---
+
+<BaseLayout title="About" description={`About ${SITE.name}: ${SITE.descriptor}.`}>
+  <h1>About {SITE.name}</h1>
+  <p><strong>{SITE.descriptor}.</strong></p>
+  <p>
+    {SITE.name} is a small field guide for working web, brand, UI/UX, motion, and interactive designers who want to
+    stay current on AI without spending hours following announcements or taking courses.
+  </p>
+  <p>Every article answers four questions:</p>
+  <ul>
+    <li><strong>What changed</strong> — the development itself, stated plainly.</li>
+    <li><strong>Why a designer should care</strong> — the practical stakes, not the hype.</li>
+    <li><strong>What is worth trying</strong> — concrete next steps, when there are any.</li>
+    <li><strong>What to watch out for</strong> — client data, usage rights, disclosure, accessibility, and cost.</li>
+  </ul>
+  <p>
+    We publish three formats: <strong>Briefs</strong> (concise, sourced updates), <strong>Tests</strong> (hands-on
+    assessments), and <strong>Workflows</strong> (repeatable tutorials). Read our{' '}
+    <a href="/editorial-policy/">Editorial Policy</a> for how we source, review, and label evidence.
+  </p>
+</BaseLayout>

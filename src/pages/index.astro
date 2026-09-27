@@ -1,0 +1,15 @@
+---
+import ArticleListing from '../components/ArticleListing.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
+import { getListableArticles } from '../lib/articles';
+
+const articles = await getListableArticles();
+---
+
+<BaseLayout title={SITE.name} description={SITE.description}>
+  <h1>Latest</h1>
+  <p>New developments in AI for working designers — what changed, why it matters, and what to try.</p>
+  <p><a href="/search/">Search all articles</a></p>
+  <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" />
+</BaseLayout>

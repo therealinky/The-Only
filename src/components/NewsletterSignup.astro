@@ -1,0 +1,24 @@
+---
+import { NEWSLETTER } from '../config/site';
+
+// Hidden entirely — no markup rendered at all — until NEWSLETTER_PROVIDER is
+// set. Wiring up a real provider means: picking an RSS-to-email service
+// (e.g. Buttondown, ConvertKit, Mailcoach) or writing to that provider's
+// subscribe API, adding its endpoint/site-specific form fields below, and
+// setting NEWSLETTER_PROVIDER (see .env.example). None of that is decided
+// or built here — this component only stops being a no-op once it is.
+---
+
+{
+  NEWSLETTER.provider && (
+    <section aria-labelledby="newsletter-heading" class="newsletter-signup">
+      <h2 id="newsletter-heading">Get the weekly digest</h2>
+      <p>One email a week with everything published in The Brief.</p>
+      <form>
+        <label for="newsletter-email">Email address</label>
+        <input id="newsletter-email" type="email" name="email" required autocomplete="email" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  )
+}

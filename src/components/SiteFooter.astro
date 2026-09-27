@@ -1,0 +1,18 @@
+---
+import { SITE } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>&copy; {year} {SITE.name}.</p>
+    <nav aria-label="Footer">
+      <ul class="site-footer__list">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/editorial-policy/">Editorial Policy</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+---
+import ArticleListing from '../../components/ArticleListing.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { filterByFormat, getListableArticles } from '../../lib/articles';
+
+const articles = filterByFormat(await getListableArticles(), 'brief');
+---
+
+<BaseLayout title="The Brief" description="Concise, sourced updates on what changed in AI for designers.">
+  <h1>The Brief</h1>
+  <p>Concise, sourced updates — what changed and why it matters.</p>
+  <p><em>This section will also hold the weekly digest archive once the digest launches.</em></p>
+  <NewsletterSignup />
+  <ArticleListing
+    articles={articles}
+    allHref="/the-brief/"
+    disciplineBase="/the-brief/"
+    emptyMessage="No Brief articles match this filter yet."
+  />
+</BaseLayout>

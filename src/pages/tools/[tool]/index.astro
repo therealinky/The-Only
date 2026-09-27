@@ -1,0 +1,24 @@
+---
+import ArticleCard from '../../../components/ArticleCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllTools, getArticlesByTool } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  const tools = await getAllTools();
+  return Promise.all(
+    tools.map(async (tool) => ({
+      params: { tool: slugify(tool) },
+      props: { tool, articles: await getArticlesByTool(tool) },
+    }))
+  );
+}
+
+const { tool, articles } = Astro.props as { tool: string; articles: Awaited<ReturnType<typeof getArticlesByTool>> };
+---
+
+<BaseLayout title={tool} description={`Articles that discuss ${tool}.`}>
+  <p><a href="/tools/">← All tools</a></p>
+  <h1>{tool}</h1>
+  {articles.map((article) => <ArticleCard article={article} />)}
+</BaseLayout>

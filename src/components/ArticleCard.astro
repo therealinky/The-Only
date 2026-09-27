@@ -1,0 +1,28 @@
+---
+import type { Article } from '../lib/articles';
+import { formatDate } from '../lib/format-date';
+import EvidenceBadge from './EvidenceBadge.astro';
+import FormatBadge from './FormatBadge.astro';
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { data } = article;
+---
+
+<article class="article-card" data-format={data.format} data-disciplines={data.disciplines.join('|')}>
+  <div class="article-card__meta">
+    <FormatBadge format={data.format} />
+    <EvidenceBadge evidence={data.evidence} />
+    {data.example && <span class="badge badge--example">Example</span>}
+    {data.status === 'draft' && <span class="badge badge--draft">Draft</span>}
+  </div>
+  <h2><a href={`/articles/${data.slug}/`}>{data.title}</a></h2>
+  <p>{data.dek}</p>
+  <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
+  <p class="article-card__date">
+    <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
+  </p>
+</article>

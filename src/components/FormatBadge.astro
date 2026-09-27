@@ -1,0 +1,13 @@
+---
+import { FORMAT_DESCRIPTIONS, FORMAT_LABELS, type Format } from '../config/site';
+
+interface Props {
+  format: Format;
+}
+
+const { format } = Astro.props;
+---
+
+<span class="badge badge--format" data-format={format} title={FORMAT_DESCRIPTIONS[format]}>
+  {FORMAT_LABELS[format]}
+</span>

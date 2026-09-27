@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EVIDENCE_DESCRIPTIONS, EVIDENCE_LABELS, EVIDENCE_LEVELS, SITE } from '../config/site';
+---
+
+<BaseLayout title="Editorial Policy" description={`How ${SITE.name} sources, reviews, and labels its reporting.`}>
+  <h1>Editorial Policy</h1>
+
+  <h2>How AI is used in producing this publication</h2>
+  <p>
+    AI may help discover sources and prepare first drafts. It does not decide what gets published. A human editor
+    checks and approves every article before it goes live, and nothing generated or imported by AI publishes
+    automatically — every change reaches the live site only through a reviewed, human-approved pull request merged
+    to <code>main</code>.
+  </p>
+
+  <h2>Evidence labels</h2>
+  <p>Every article carries one of three evidence labels, shown on its card and at the top of the article:</p>
+  <dl>
+    {
+      EVIDENCE_LEVELS.map((level) => (
+        <div>
+          <dt>{EVIDENCE_LABELS[level]}</dt>
+          <dd>{EVIDENCE_DESCRIPTIONS[level]}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <h2>Before you use it</h2>
+  <p>
+    Test and Workflow articles include a "Before you use it" section covering client data handling, usage rights,
+    disclosure obligations, accessibility, and cost. Any field we haven't personally checked is marked
+    <code>not verified</code> rather than guessed at.
+  </p>
+
+  <h2>Corrections and withdrawals</h2>
+  <p>
+    When new information changes our assessment, we update the article and bump its "updated" date; if we re-check
+    the underlying facts without changing the conclusion, we bump "last verified" instead. When something we
+    reported turns out to be wrong, no longer applies, or is withdrawn by its maker, we withdraw the article: its
+    URL keeps working, but the page shows a short withdrawal notice explaining why instead of the original body. A
+    withdrawn article is removed from listings, search, and our RSS feed, and marked so search engines don't index
+    it.
+  </p>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+interface Props {
+  whatChanged: string;
+  whyItMatters: string;
+  bestFor: string;
+  timeToTry: string;
+  hasTutorial: boolean;
+}
+
+const { whatChanged, whyItMatters, bestFor, timeToTry, hasTutorial } = Astro.props;
+---
+
+<section class="summary-block" aria-label="Summary">
+  <dl>
+    <div>
+      <dt>What changed</dt>
+      <dd>{whatChanged}</dd>
+    </div>
+    <div>
+      <dt>Why it matters</dt>
+      <dd>{whyItMatters}</dd>
+    </div>
+    <div>
+      <dt>Best for</dt>
+      <dd>{bestFor}</dd>
+    </div>
+    <div>
+      <dt>Time to try</dt>
+      <dd>{timeToTry}</dd>
+    </div>
+  </dl>
+  {hasTutorial && <p><a href="#tutorial">Jump to the tutorial ↓</a></p>}
+</section>

@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "the-only-dev",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": [
+        "-lc",
+        "export PATH=\"/Users/beat33marketing/.nvm/versions/node/v22.23.3/bin:$PATH\" && npm run dev"
+      ],
+      "port": 4321
+    }
+  ]
+}

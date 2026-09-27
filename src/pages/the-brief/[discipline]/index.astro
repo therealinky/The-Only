@@ -1,0 +1,28 @@
+---
+import ArticleListing from '../../../components/ArticleListing.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { DISCIPLINES, type Discipline } from '../../../config/site';
+import { filterByFormat, getListableArticles } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { discipline: slugify(discipline) },
+    props: { discipline },
+  }));
+}
+
+const { discipline } = Astro.props as { discipline: Discipline };
+const articles = filterByFormat(await getListableArticles(), 'brief');
+---
+
+<BaseLayout title={`${discipline} — The Brief`} description={`Brief updates for ${discipline}.`}>
+  <h1>The Brief: {discipline}</h1>
+  <ArticleListing
+    articles={articles}
+    allHref="/the-brief/"
+    disciplineBase="/the-brief/"
+    activeDiscipline={discipline}
+    emptyMessage="No Brief articles match this filter yet."
+  />
+</BaseLayout>

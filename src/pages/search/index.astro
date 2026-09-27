@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search The Only.">
+  <h1>Search</h1>
+  <noscript>
+    <p>
+      Search requires JavaScript. You can still browse by <a href="/">Latest</a>, <a href="/try-it/">Try It</a>,
+      <a href="/workflows/">Workflows</a>, <a href="/tools/">Tools</a>, or <a href="/the-brief/">The Brief</a>.
+    </p>
+  </noscript>
+  <div id="search"></div>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.PagefindUI) {
+        new window.PagefindUI({ element: '#search', showSubResults: true });
+      }
+    });
+  </script>
+</BaseLayout>

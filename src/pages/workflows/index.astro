@@ -1,0 +1,18 @@
+---
+import ArticleListing from '../../components/ArticleListing.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { filterByFormat, getListableArticles } from '../../lib/articles';
+
+const articles = filterByFormat(await getListableArticles(), 'workflow');
+---
+
+<BaseLayout title="Workflows" description="Repeatable, step-by-step AI workflows for working designers.">
+  <h1>Workflows</h1>
+  <p>Repeatable tutorials — follow along and get the same result.</p>
+  <ArticleListing
+    articles={articles}
+    allHref="/workflows/"
+    disciplineBase="/workflows/"
+    emptyMessage="No Workflow articles match this filter yet."
+  />
+</BaseLayout>

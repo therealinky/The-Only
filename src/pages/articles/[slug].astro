@@ -1,0 +1,131 @@
+---
+import { render } from 'astro:content';
+import ArticleBanners from '../../components/ArticleBanners.astro';
+import BeforeYouUse from '../../components/BeforeYouUse.astro';
+import EvidenceBadge from '../../components/EvidenceBadge.astro';
+import FormatBadge from '../../components/FormatBadge.astro';
+import SourcesList from '../../components/SourcesList.astro';
+import SummaryBlock from '../../components/SummaryBlock.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRenderableArticles } from '../../lib/articles';
+import { formatDate } from '../../lib/format-date';
+import { slugify } from '../../lib/slugify';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  const articles = await getRenderableArticles();
+  return articles.map((article) => ({
+    params: { slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { data } = article;
+const isWithdrawn = data.status === 'withdrawn';
+const { Content, headings } = await render(article);
+const hasTutorial = headings.some((h) => h.slug === 'tutorial');
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.dek,
+  datePublished: data.publishedAt.toISOString(),
+  dateModified: data.updatedAt.toISOString(),
+  author: { '@type': 'Person', name: data.author },
+  ...(data.reviewedBy !== SITE.defaultReviewedBy
+    ? { editor: { '@type': 'Person', name: data.reviewedBy } }
+    : {}),
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.dek}
+  ogType="article"
+  ogImagePath={`/og/${data.slug}.png`}
+  noindex={isWithdrawn}
+  structuredData={isWithdrawn ? undefined : structuredData}
+>
+  <article data-pagefind-body={isWithdrawn ? undefined : true}>
+    <ArticleBanners article={article} />
+
+    <header>
+      <div class="article-card__meta">
+        <FormatBadge format={data.format} />
+        <EvidenceBadge evidence={data.evidence} />
+      </div>
+      <h1>{data.title}</h1>
+      <p>{data.dek}</p>
+      <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
+    </header>
+
+    {
+      isWithdrawn ? (
+        <div class="notice notice--withdrawn" role="note">
+          <p>
+            <strong>This article has been withdrawn</strong> as of {formatDate(data.updatedAt)}.
+          </p>
+          <p>{data.withdrawnNote}</p>
+        </div>
+      ) : (
+        <>
+          {data.summary && (
+            <SummaryBlock
+              whatChanged={data.summary.whatChanged}
+              whyItMatters={data.summary.whyItMatters}
+              bestFor={data.summary.bestFor}
+              timeToTry={data.summary.timeToTry}
+              hasTutorial={hasTutorial}
+            />
+          )}
+
+          <div class="article-body">
+            <Content />
+          </div>
+
+          {data.tools.length > 0 && (
+            <section aria-labelledby="tools-heading">
+              <h2 id="tools-heading">Tools discussed</h2>
+              <ul>
+                {data.tools.map((tool) => (
+                  <li>
+                    <a href={`/tools/${slugify(tool)}/`}>{tool}</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <BeforeYouUse
+            clientData={data.beforeYouUse.clientData}
+            usageRights={data.beforeYouUse.usageRights}
+            disclosure={data.beforeYouUse.disclosure}
+            accessibility={data.beforeYouUse.accessibility}
+            cost={data.beforeYouUse.cost}
+          />
+
+          <SourcesList sources={data.sources} />
+
+          <footer>
+            <p>
+              By {data.author} · Reviewed by {data.reviewedBy}
+            </p>
+            <p>
+              Published <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
+              {data.updatedAt.getTime() !== data.publishedAt.getTime() && (
+                <>
+                  {' '}
+                  · Updated <time datetime={data.updatedAt.toISOString()}>{formatDate(data.updatedAt)}</time>
+                </>
+              )}
+              {' '}· Last verified{' '}
+              <time datetime={data.lastVerified.toISOString()}>{formatDate(data.lastVerified)}</time>
+            </p>
+          </footer>
+        </>
+      )
+    }
+  </article>
+</BaseLayout>

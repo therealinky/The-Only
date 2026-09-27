@@ -1,0 +1,22 @@
+---
+import ArticleListing from '../../../components/ArticleListing.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { DISCIPLINES, type Discipline } from '../../../config/site';
+import { getListableArticles } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { discipline: slugify(discipline) },
+    props: { discipline },
+  }));
+}
+
+const { discipline } = Astro.props as { discipline: Discipline };
+const articles = await getListableArticles();
+---
+
+<BaseLayout title={`${discipline} — Latest`} description={`Latest articles for ${discipline}.`}>
+  <h1>Latest: {discipline}</h1>
+  <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" activeDiscipline={discipline} />
+</BaseLayout>

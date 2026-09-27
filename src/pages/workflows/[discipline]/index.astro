@@ -1,0 +1,28 @@
+---
+import ArticleListing from '../../../components/ArticleListing.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { DISCIPLINES, type Discipline } from '../../../config/site';
+import { filterByFormat, getListableArticles } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { discipline: slugify(discipline) },
+    props: { discipline },
+  }));
+}
+
+const { discipline } = Astro.props as { discipline: Discipline };
+const articles = filterByFormat(await getListableArticles(), 'workflow');
+---
+
+<BaseLayout title={`${discipline} — Workflows`} description={`Repeatable workflows for ${discipline}.`}>
+  <h1>Workflows: {discipline}</h1>
+  <ArticleListing
+    articles={articles}
+    allHref="/workflows/"
+    disciplineBase="/workflows/"
+    activeDiscipline={discipline}
+    emptyMessage="No Workflow articles match this filter yet."
+  />
+</BaseLayout>
