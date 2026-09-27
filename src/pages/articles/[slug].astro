@@ -15,7 +15,7 @@ import { SITE } from '../../config/site';
 export async function getStaticPaths() {
   const articles = await getRenderableArticles();
   return articles.map((article) => ({
-    params: { slug: article.data.slug },
+    params: { slug: article.id },
     props: { article },
   }));
 }
@@ -44,7 +44,7 @@ const structuredData = {
   title={data.title}
   description={data.dek}
   ogType="article"
-  ogImagePath={`/og/${data.slug}.png`}
+  ogImagePath={`/og/${article.id}.png`}
   noindex={isWithdrawn}
   structuredData={isWithdrawn ? undefined : structuredData}
 >
@@ -71,12 +71,12 @@ const structuredData = {
         </div>
       ) : (
         <>
-          {data.summary && (
+          {data.summary?.whatChanged && (
             <SummaryBlock
               whatChanged={data.summary.whatChanged}
-              whyItMatters={data.summary.whyItMatters}
-              bestFor={data.summary.bestFor}
-              timeToTry={data.summary.timeToTry}
+              whyItMatters={data.summary.whyItMatters ?? ''}
+              bestFor={data.summary.bestFor ?? ''}
+              timeToTry={data.summary.timeToTry ?? ''}
               hasTutorial={hasTutorial}
             />
           )}

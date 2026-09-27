@@ -13,7 +13,7 @@ export async function GET(context: APIContext) {
       title: article.data.title,
       description: article.data.dek,
       pubDate: article.data.publishedAt,
-      link: `/articles/${article.data.slug}/`,
+      link: `/articles/${article.id}/`,
       categories: [article.data.format, ...article.data.disciplines],
     })),
   });

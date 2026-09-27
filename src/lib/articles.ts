@@ -29,7 +29,7 @@ export async function getListableArticles(): Promise<Article[]> {
 
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
   const renderable = await getRenderableArticles();
-  return renderable.find((entry) => entry.data.slug === slug);
+  return renderable.find((entry) => entry.id === slug);
 }
 
 export function filterByFormat(articles: Article[], format?: Format): Article[] {

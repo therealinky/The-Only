@@ -12,6 +12,12 @@ export default config({
     articles: collection({
       label: 'Articles',
       path: 'src/content/articles/*',
+      // Keystatic treats whichever field is named here as the entry's
+      // filename/identity and strips it out of the saved frontmatter by
+      // design (the filename already encodes it — that's the point, not a
+      // bug). content.config.ts no longer expects a `slug` frontmatter
+      // field for exactly this reason; the article's `id` (filename-derived)
+      // is the canonical identifier everywhere on the site.
       slugField: 'slug',
       format: { contentField: 'content' },
       schema: {

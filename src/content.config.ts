@@ -9,10 +9,14 @@ const sourceSchema = z.object({
 });
 
 const summarySchema = z.object({
-  whatChanged: z.string(),
-  whyItMatters: z.string(),
-  bestFor: z.string(),
-  timeToTry: z.string(),
+  // Optional per-field: Keystatic saves this whole object as `{}` (no keys
+  // at all) when every field is left blank, e.g. on a Brief that doesn't
+  // need one — this must not fail schema validation on its own. Whether a
+  // summary is actually *required* is enforced separately, in superRefine.
+  whatChanged: z.string().optional(),
+  whyItMatters: z.string().optional(),
+  bestFor: z.string().optional(),
+  timeToTry: z.string().optional(),
 });
 
 const beforeYouUseSchema = z.object({
@@ -26,10 +30,6 @@ const beforeYouUseSchema = z.object({
 const articleSchema = z
   .object({
     title: z.string().min(1),
-    slug: z
-      .string()
-      .min(1)
-      .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug must be lowercase and dash-separated (e.g. "my-article-slug").'),
     dek: z.string().min(1, 'dek (one-sentence summary) is required.'),
     format: z.enum(FORMATS),
     evidence: z.enum(EVIDENCE_LEVELS),
@@ -49,7 +49,7 @@ const articleSchema = z
   })
   // --- Build rules enforced here (not just in documentation) ---
   .superRefine((data, ctx) => {
-    const id = `"${data.slug}"`;
+    const id = `"${data.title}"`;
 
     if (data.evidence === 'tested' && data.format === 'brief') {
       ctx.addIssue({
@@ -62,10 +62,10 @@ const articleSchema = z
     const needsSummary = data.format === 'test' || data.format === 'workflow';
     const summaryComplete =
       !!data.summary &&
-      data.summary.whatChanged.trim() !== '' &&
-      data.summary.whyItMatters.trim() !== '' &&
-      data.summary.bestFor.trim() !== '' &&
-      data.summary.timeToTry.trim() !== '';
+      (data.summary.whatChanged ?? '').trim() !== '' &&
+      (data.summary.whyItMatters ?? '').trim() !== '' &&
+      (data.summary.bestFor ?? '').trim() !== '' &&
+      (data.summary.timeToTry ?? '').trim() !== '';
 
     if (needsSummary && !summaryComplete) {
       ctx.addIssue({
