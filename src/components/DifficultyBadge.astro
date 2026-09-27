@@ -1,0 +1,13 @@
+---
+import { DIFFICULTY_DESCRIPTIONS, DIFFICULTY_LABELS, type Difficulty } from '../config/site';
+
+interface Props {
+  difficulty: Difficulty;
+}
+
+const { difficulty } = Astro.props;
+---
+
+<span class="badge badge--difficulty" data-difficulty={difficulty} title={DIFFICULTY_DESCRIPTIONS[difficulty]}>
+  {DIFFICULTY_LABELS[difficulty]}
+</span>

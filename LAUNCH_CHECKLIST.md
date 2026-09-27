@@ -15,11 +15,12 @@ Everything below needs your credentials or a decision — none of it can be done
       `NODE_VERSION=22`.
 - [x] **DNS record for `theonly.bemosu.com`.** Live and verified: resolves correctly across resolvers, HTTPS
       responds 200, SSL certificate valid (issued by Google Trust Services, auto-renews).
-- [x] **Editor name.** `defaultAuthor` in [`src/config/site.ts`](src/config/site.ts) is now "Ana M. Rivas".
-      `defaultReviewedBy` is deliberately left as the placeholder — it's the sentinel the build checks to catch an
-      article that was never actually reviewed, so it shouldn't be set to a real name (see the comment in
-      `site.ts`). Every `published` article still needs a real `reviewedBy` filled in by hand; the build enforces
-      this either way.
+- [x] **Byline.** `defaultAuthor` in [`src/config/site.ts`](src/config/site.ts) is a house byline ("The Only
+      Editors"), not a person's name — articles here are AI-drafted and human-reviewed, and it would be misleading
+      to put an individual's name on them as though they wrote it. `defaultReviewedBy` is deliberately left as the
+      placeholder — it's the sentinel the build checks to catch an article that was never actually reviewed, so it
+      shouldn't be set to a real name (see the comment in `site.ts`). Every `published` article still needs a real
+      `reviewedBy` filled in by hand with the actual human who checked it; the build enforces this either way.
 
 ## Decisions, not blockers
 

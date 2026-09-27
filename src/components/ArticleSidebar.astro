@@ -1,0 +1,109 @@
+---
+import type { Difficulty } from '../config/site';
+import { slugify } from '../lib/slugify';
+import DifficultyBadge from './DifficultyBadge.astro';
+
+interface Summary {
+  whatChanged?: string;
+  whyItMatters?: string;
+  bestFor?: string;
+  timeToTry?: string;
+}
+
+interface BeforeYouUse {
+  clientData: string;
+  usageRights: string;
+  disclosure: string;
+  accessibility: string;
+  cost: string;
+}
+
+interface Props {
+  dek: string;
+  difficulty: Difficulty;
+  tools: string[];
+  beforeYouUse: BeforeYouUse;
+  summary?: Summary;
+  hasTutorial: boolean;
+}
+
+const { dek, difficulty, tools, beforeYouUse, summary, hasTutorial } = Astro.props;
+const hasSummary = Boolean(summary?.whatChanged);
+---
+
+<aside class="article-sidebar" aria-label="At a glance: summary, effort, tools, and things to check before you use it">
+  <div class="article-sidebar__section">
+    <h2 class="article-sidebar__heading">At a glance</h2>
+    {
+      hasSummary ? (
+        <dl>
+          <div>
+            <dt>What changed</dt>
+            <dd>{summary!.whatChanged}</dd>
+          </div>
+          <div>
+            <dt>Why it matters</dt>
+            <dd>{summary!.whyItMatters}</dd>
+          </div>
+          <div>
+            <dt>Best for</dt>
+            <dd>{summary!.bestFor}</dd>
+          </div>
+          <div>
+            <dt>Time to try</dt>
+            <dd>{summary!.timeToTry}</dd>
+          </div>
+        </dl>
+      ) : (
+        <p>{dek}</p>
+      )
+    }
+    {hasTutorial && <p class="article-sidebar__jump"><a href="#tutorial">Jump to the tutorial ↓</a></p>}
+  </div>
+
+  <div class="article-sidebar__section">
+    <h2 class="article-sidebar__heading">Effort to try</h2>
+    <DifficultyBadge difficulty={difficulty} />
+  </div>
+
+  {
+    tools.length > 0 && (
+      <div class="article-sidebar__section">
+        <h2 class="article-sidebar__heading">Tools discussed</h2>
+        <ul class="article-sidebar__tools">
+          {tools.map((tool) => (
+            <li>
+              <a href={`/tools/${slugify(tool)}/`}>{tool}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class="article-sidebar__section">
+    <h2 class="article-sidebar__heading">Before you use it</h2>
+    <dl>
+      <div>
+        <dt>Client data</dt>
+        <dd>{beforeYouUse.clientData}</dd>
+      </div>
+      <div>
+        <dt>Usage rights</dt>
+        <dd>{beforeYouUse.usageRights}</dd>
+      </div>
+      <div>
+        <dt>Disclosure</dt>
+        <dd>{beforeYouUse.disclosure}</dd>
+      </div>
+      <div>
+        <dt>Accessibility</dt>
+        <dd>{beforeYouUse.accessibility}</dd>
+      </div>
+      <div>
+        <dt>Cost</dt>
+        <dd>{beforeYouUse.cost}</dd>
+      </div>
+    </dl>
+  </div>
+</aside>

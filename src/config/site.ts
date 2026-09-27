@@ -9,7 +9,11 @@ export const SITE = {
     import.meta.env?.SITE_URL ||
     (typeof process !== 'undefined' ? process.env.SITE_URL : undefined) ||
     'http://localhost:4321',
-  defaultAuthor: 'Ana M. Rivas',
+  // A house byline, not a person's name. Articles here are AI-drafted and
+  // human-reviewed, not written by "Ana M. Rivas" or any other individual —
+  // the accountable human goes in `reviewedBy` on each article instead. See
+  // the Editorial Policy page and the README.
+  defaultAuthor: 'The Only Editors',
   // Intentionally NOT the real editor name — content.config.ts treats a
   // published article whose reviewedBy still equals this placeholder as
   // "not actually reviewed yet" and fails the build. See the README.
@@ -71,3 +75,20 @@ export const EVIDENCE_DESCRIPTIONS: Record<Evidence, string> = {
 
 export const STATUSES = ['draft', 'published', 'withdrawn'] as const;
 export type Status = (typeof STATUSES)[number];
+
+// Framed as effort to try, not skill level — a "hard" tool a reader already
+// knows is quick for them; the point is how much time this takes to act on.
+export const DIFFICULTY_LEVELS = ['quick', 'moderate', 'involved'] as const;
+export type Difficulty = (typeof DIFFICULTY_LEVELS)[number];
+
+export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
+  quick: 'Quick',
+  moderate: 'Moderate',
+  involved: 'Involved',
+};
+
+export const DIFFICULTY_DESCRIPTIONS: Record<Difficulty, string> = {
+  quick: 'Read it and you already have what you need. Nothing to set up or learn.',
+  moderate: 'Worth a focused session: some setup, a new interface, or a workflow to get used to.',
+  involved: 'A real time investment: new tooling, a multi-step process, or a skill that takes practice.',
+};

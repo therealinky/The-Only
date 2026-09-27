@@ -22,6 +22,11 @@
      text color. */
   --color-brand: #2a2550;
 
+  /* Muted dt-label text for the inverted article sidebar panel, which uses
+     --color-brand as its background. Reuses dark mode's own muted color,
+     which checks out at ~6.25:1 against this dark background (AA). */
+  --color-inverse-muted: #b0a8c3;
+
   /* Frosted-glass header — deliberately whiter/more opaque than --color-bg
      so it reads as its own distinct layer, with just enough translucency
      for the blur to show. */
@@ -89,6 +94,9 @@
     --color-text: #edeaf5;
     --color-text-muted: #b0a8c3;
     --color-brand: #edeaf5;
+    /* --color-brand is light here, so the sidebar panel flips to a light
+       background — reuse light mode's own muted color (~5.37:1 against it). */
+    --color-inverse-muted: #625c72;
     --color-border: #322c42;
     --color-border-strong: #6b6280;
     --color-accent: #a79bf0;
@@ -115,6 +123,9 @@
   --color-text: #edeaf5;
   --color-text-muted: #b0a8c3;
   --color-brand: #edeaf5;
+  /* --color-brand is light here, so the sidebar panel flips to a light
+     background — reuse light mode's own muted color (~5.37:1 against it). */
+  --color-inverse-muted: #625c72;
   --color-border: #322c42;
   --color-border-strong: #6b6280;
   --color-accent: #a79bf0;
