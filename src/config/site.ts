@@ -9,7 +9,10 @@ export const SITE = {
     import.meta.env?.SITE_URL ||
     (typeof process !== 'undefined' ? process.env.SITE_URL : undefined) ||
     'http://localhost:4321',
-  defaultAuthor: 'Editor name (set in config)',
+  defaultAuthor: 'Ana M. Rivas',
+  // Intentionally NOT the real editor name — content.config.ts treats a
+  // published article whose reviewedBy still equals this placeholder as
+  // "not actually reviewed yet" and fails the build. See the README.
   defaultReviewedBy: 'Editor name (set in config)',
 } as const;
 
