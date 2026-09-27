@@ -1,5 +1,5 @@
 import { collection, config, fields } from '@keystatic/core';
-import { DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE } from './src/config/site';
+import { DIFFICULTY_LEVELS, DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE } from './src/config/site';
 
 // Keystatic runs in LOCAL MODE ONLY (storage: 'local'), as an optional
 // editing UI at /keystatic during `astro dev`. It is never wired up for
@@ -51,6 +51,12 @@ export default config({
           options: EVIDENCE_LEVELS.map((value) => ({ label: value[0].toUpperCase() + value.slice(1), value })),
           defaultValue: 'announced',
         }),
+        difficulty: fields.select({
+          label: 'Difficulty (effort to try)',
+          description: 'Quick: nothing to set up. Moderate: a focused session. Involved: a real time investment.',
+          options: DIFFICULTY_LEVELS.map((value) => ({ label: value[0].toUpperCase() + value.slice(1), value })),
+          defaultValue: 'quick',
+        }),
         status: fields.select({
           label: 'Status',
           options: [
@@ -68,7 +74,11 @@ export default config({
         publishedAt: fields.date({ label: 'Published at', defaultValue: { kind: 'today' } }),
         updatedAt: fields.date({ label: 'Updated at', defaultValue: { kind: 'today' } }),
         lastVerified: fields.date({ label: 'Last verified', defaultValue: { kind: 'today' } }),
-        author: fields.text({ label: 'Author', defaultValue: SITE.defaultAuthor }),
+        author: fields.text({
+          label: 'Author',
+          description: 'The house byline for AI-drafted articles. Leave as the default; set `reviewedBy` to the real human instead.',
+          defaultValue: SITE.defaultAuthor,
+        }),
         reviewedBy: fields.text({
           label: 'Reviewed by',
           description: `Required (and must not be the "${SITE.defaultReviewedBy}" placeholder) before this article can be published.`,

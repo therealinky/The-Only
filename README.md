@@ -53,7 +53,11 @@ Test/Workflow) a `summary` fails the build with a specific error; `evidence: tes
 
 Formats: **Brief** (a concise sourced update), **Test** (a hands-on assessment), **Workflow** (a repeatable
 tutorial). Evidence levels: **Announced** (reported by the maker), **Researched** (checked against sources),
-**Tested** (hands-on tested by us).
+**Tested** (hands-on tested by us). Difficulty is a required effort-to-try rating, not a skill level: **Quick**
+(nothing to set up), **Moderate** (worth a focused session), **Involved** (a real time investment).
+
+Every article's summary, effort rating, tools, and "before you use it" checklist render together in a single,
+visually distinct sidebar (see `ArticleSidebar.astro`), not inline in the article body.
 
 ### Writing an article by hand
 
@@ -61,9 +65,11 @@ tutorial). Evidence levels: **Announced** (reported by the maker), **Researched*
 2. Set `status: draft` while you work — draft articles render only in `astro dev`, never in a build.
 3. Fill in `beforeYouUse` honestly; use the literal string `"not verified"` for anything you haven't checked, rather
    than guessing.
-4. Leave `author` / `reviewedBy` unset while drafting — they default to the placeholder in
-   [`src/config/site.ts`](src/config/site.ts). Before you set `status: published`, replace `reviewedBy` with a real
-   name and add at least one source — the build enforces this.
+4. Leave `author` unset — it defaults to the house byline in [`src/config/site.ts`](src/config/site.ts) and should
+   stay that way; articles here are AI-drafted and human-reviewed, not written by a named individual. Leave
+   `reviewedBy` unset while drafting too (it defaults to a placeholder). Before you set `status: published`, replace
+   `reviewedBy` with the real name of the human who checked it, and add at least one source — the build enforces
+   this.
 
 ### Writing an article with Keystatic
 
@@ -179,8 +185,8 @@ vendored local-only tool, not part of the public site).
 
 - `src/content/articles/` — article content (Markdown/MDX)
 - `src/content.config.ts` — the schema and build rules (source of truth)
-- `src/config/site.ts` — site name, descriptor, default author/reviewer placeholders, discipline/format/evidence
-  lists
+- `src/config/site.ts` — site name, descriptor, default author byline/reviewer placeholder, discipline/format/
+  evidence/difficulty lists
 - `src/pages/` — routes
 - `src/components/`, `src/layouts/` — UI
 - `src/lib/` — article querying/filtering helpers, OG image generation, date/slug utilities

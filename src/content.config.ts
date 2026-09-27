@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE, STATUSES } from './config/site';
+import { DIFFICULTY_LEVELS, DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE, STATUSES } from './config/site';
 
 const sourceSchema = z.object({
   title: z.string().min(1, 'Source title is required.'),
@@ -33,6 +33,7 @@ const articleSchema = z
     dek: z.string().min(1, 'dek (one-sentence summary) is required.'),
     format: z.enum(FORMATS),
     evidence: z.enum(EVIDENCE_LEVELS),
+    difficulty: z.enum(DIFFICULTY_LEVELS),
     status: z.enum(STATUSES),
     example: z.boolean().default(false),
     publishedAt: z.coerce.date(),
