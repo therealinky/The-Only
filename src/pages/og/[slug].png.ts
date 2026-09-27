@@ -6,7 +6,7 @@ import { renderOgImage } from '../../lib/og-image';
 export async function getStaticPaths() {
   const articles = await getRenderableArticles();
   return articles.map((article) => ({
-    params: { slug: article.data.slug },
+    params: { slug: article.id },
     props: { article },
   }));
 }
