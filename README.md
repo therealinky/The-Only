@@ -110,6 +110,14 @@ usual. The article keeps its URL, but the page shows your withdrawal notice inst
 Anything AI-generated or imported — sourced by an assistant, drafted with help, whatever — arrives as a `draft` on
 a branch like any other article. Nothing publishes without going through this same human review and a merged PR.
 
+### Automated drafting
+
+A scheduled Routine can run the [`daily-articles`](.claude/skills/daily-articles/SKILL.md) skill to research and
+draft a batch of Brief articles on its own. It only ever produces `status: draft` articles and opens a PR, it never
+sets `reviewedBy`, never sets `status: published`, and never merges, publishing still goes through the same Approve
+and Publish steps above. The skill file is the source of truth for what it will and won't write; it can also be run
+manually anytime with `/daily-articles`.
+
 ### Branch protection (recommended)
 
 Turn this on once the repo is on GitHub, so nothing reaches `main` without a pull request:
