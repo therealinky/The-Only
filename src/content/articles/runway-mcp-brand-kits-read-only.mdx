@@ -1,0 +1,62 @@
+---
+title: Runway's MCP Server Can Now Read Your Brand Kit
+dek: >-
+  AI agents connected through Runway MCP can now find and reference Brand
+  Kit assets — logos, colors, fonts — when generating images and video,
+  though creating or editing a kit still has to happen in the product.
+format: brief
+evidence: researched
+status: draft
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - Brand
+  - Motion & Video
+tools:
+  - Runway
+  - Runway MCP
+sources:
+  - title: Runway product changelog
+    url: https://runway.com/changelog
+    accessed: 2026-09-27
+  - title: "Runway opens MCP server for ChatGPT, Claude, Cursor, Replit (AI Weekly)"
+    url: https://aiweekly.co/alerts/runway-opens-mcp-server-for-chatgpt-claude-cursor-replit
+    accessed: 2026-09-27
+beforeYouUse:
+  clientData: >-
+    not verified — unclear from the changelog entry whether Brand Kit
+    assets accessed through MCP are handled any differently than assets
+    used directly in the Runway product
+  usageRights: >-
+    not verified — standard Runway generation terms are assumed to apply to
+    outputs referencing Brand Kit assets, but this wasn't independently
+    confirmed for the MCP path specifically
+  disclosure: >-
+    not verified — no stated requirement to disclose that a generated asset
+    referenced an internal Brand Kit via an agent
+  accessibility: >-
+    not verified — no mention of accessibility metadata (alt text, etc.)
+    being carried through generated outputs
+  cost: >-
+    not verified — which plan tiers include Runway MCP and Brand Kit access
+    wasn't confirmed in the sources checked
+---
+On September 22, 2026, Runway added Brand Kits to Runway MCP — its Model Context Protocol server, which lets external agents (in tools like Claude, ChatGPT, Cursor, and Replit) drive Runway's generation tools directly. With this update, an agent connected via MCP can find a project's Brand Kit and use its assets — logos, color palettes, fonts — as references when generating images or video.
+
+## What changed
+
+Brand Kits themselves aren't new to Runway; they're the product's existing way of storing a team's on-brand assets so generations can pull from a consistent source instead of loose uploads. What's new is that this now works through MCP: an agent doesn't need a human to manually attach the right logo or palette to a prompt, it can look up the kit and reference it directly. Runway's changelog is explicit that this is read-only for now — creating or editing a Brand Kit still happens inside the Runway product itself, not through the agent.
+
+This landed alongside other September additions to Runway MCP, including support for several Kling models and a Runway plugin for Grok Bot — part of a broader push to make Runway's generation tools something other agents can call into, rather than a destination you only visit directly.
+
+## Why it matters for designers
+
+If your team already keeps a Brand Kit current in Runway, this closes a small but real gap in agent-driven workflows: an agent generating variations or exploring options doesn't have to be told what "on-brand" means for every single request, because it can read it from the kit. For teams doing any kind of AI-assisted, high-volume asset generation, that's the difference between "mostly on-brand, if you remembered to attach the right reference" and "on-brand by default."
+
+The read-only limitation is worth noting on its own: an agent can use your brand assets but can't (yet) update them, which keeps a human in the loop for the one part — what counts as "the brand" — that arguably shouldn't be automated anyway.
+
+## What to watch out for
+
+We haven't tested this ourselves yet, so treat the `beforeYouUse` fields above as open questions. In particular: it's worth checking directly what access an MCP-connected agent actually has to a Brand Kit's underlying files, and whether that's scoped any differently than a human user's access inside the product.
