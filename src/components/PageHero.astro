@@ -1,0 +1,39 @@
+---
+interface Props {
+  /** Small label above the big stacked headline, e.g. the nav label. */
+  eyebrow: string;
+  /** The big stacked headline, one word (or short phrase) per line. */
+  lines: string[];
+  /** Shown inside the frosted-glass panel. */
+  subtitle: string;
+  variant: 'purple' | 'rose' | 'sage' | 'blue' | 'gold';
+}
+
+const { eyebrow, lines, subtitle, variant } = Astro.props;
+---
+
+<header class={`page-hero page-hero--${variant}`}>
+  <div class="page-hero__gradient" aria-hidden="true"></div>
+  <div class="page-hero__grain" aria-hidden="true"></div>
+
+  <div class="page-hero__content">
+    <p class="page-hero__eyebrow">{eyebrow}</p>
+    <h1 class="page-hero__title">
+      {
+        lines.map((line) => (
+          <span class="page-hero__line">
+            <span class="page-hero__line-echo" aria-hidden="true">
+              {line}
+            </span>
+            <span class="page-hero__line-fill">{line}</span>
+          </span>
+        ))
+      }
+    </h1>
+    <div class="page-hero__glass">
+      <p>{subtitle}</p>
+    </div>
+  </div>
+
+  <div class="page-hero__fade" aria-hidden="true"></div>
+</header>
