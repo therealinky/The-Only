@@ -188,6 +188,7 @@ main {
   text-transform: uppercase;
   letter-spacing: -0.01em;
   line-height: 1;
+  color: var(--color-brand);
 }
 
 .site-header__descriptor {
