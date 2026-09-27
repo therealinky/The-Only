@@ -4,23 +4,22 @@ Everything below needs your credentials or a decision — none of it can be done
 
 ## Required before launch
 
-- [ ] **GitHub repository.** Create one and push this repo to it (`git init` has already been run locally; no
-      commits exist yet). Decide public or private.
-- [ ] **Branch protection on `main`.** Once the repo is on GitHub: **Settings → Branches → Add branch protection
-      rule** → branch name `main` → enable **Require a pull request before merging**. See the README's
-      [Branch protection](README.md#branch-protection-recommended) section for why this matters — without it, the
-      "merging is the only way anything goes live" promise in the editorial policy isn't actually enforced.
-- [ ] **Cloudflare Pages project.** Connect the GitHub repo (**Workers & Pages → Create → Pages → Connect to Git**).
-      Build command `npm run build`, output directory `dist`. Full steps in the README's
-      [Deploying to Cloudflare Pages](README.md#deploying-to-cloudflare-pages) section.
-- [ ] **Environment variables on Cloudflare Pages** (Production environment): `SITE_URL=https://theonly.bemosu.com`,
+- [x] **GitHub repository.** Live at [therealinky/The-Only](https://github.com/therealinky/The-Only) (public — made
+      public specifically so branch protection is available on the free plan; see next item).
+- [x] **Branch protection on `main`.** Enabled via the GitHub API: a pull request is required before merging,
+      direct pushes to `main` are blocked. See the README's
+      [Branch protection](README.md#branch-protection-recommended) section.
+- [x] **Cloudflare Pages project.** Connected to the GitHub repo, build command `npm run build`, output directory
+      `dist`.
+- [x] **Environment variables on Cloudflare Pages** (Production): `SITE_URL=https://theonly.bemosu.com`,
       `NODE_VERSION=22`.
-- [ ] **DNS record for `theonly.bemosu.com`.** Add the custom domain in Cloudflare Pages
-      (**Custom domains**) and point DNS at it — this needs access to bemosu.com's DNS, which is yours to grant.
-- [ ] **Editor name.** Replace the `"Editor name (set in config)"` placeholder in
-      [`src/config/site.ts`](src/config/site.ts) (`defaultAuthor` / `defaultReviewedBy`) with a real name. Every
-      `published` article needs a real `reviewedBy` anyway (the build enforces it), but this default is what
-      drafts start with.
+- [x] **DNS record for `theonly.bemosu.com`.** Live and verified: resolves correctly across resolvers, HTTPS
+      responds 200, SSL certificate valid (issued by Google Trust Services, auto-renews).
+- [x] **Editor name.** `defaultAuthor` in [`src/config/site.ts`](src/config/site.ts) is now "Ana M. Rivas".
+      `defaultReviewedBy` is deliberately left as the placeholder — it's the sentinel the build checks to catch an
+      article that was never actually reviewed, so it shouldn't be set to a real name (see the comment in
+      `site.ts`). Every `published` article still needs a real `reviewedBy` filled in by hand; the build enforces
+      this either way.
 
 ## Decisions, not blockers
 
@@ -44,3 +43,8 @@ Everything below needs your credentials or a decision — none of it can be done
 - Accessibility: axe-core audit run against every page type — zero violations after one fix (see the README's
   [Accessibility](README.md#accessibility) section)
 - 6 example placeholder articles (`example: true`) — excluded from any real production build automatically
+
+## The site is live
+
+**https://theonly.bemosu.com** — everything in "Required before launch" is done. The only things left are the
+optional decisions above, whenever you're ready for them.
