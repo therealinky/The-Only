@@ -129,7 +129,7 @@ main > .page-hero:first-child {
 .page-hero__line:last-child .page-hero__line-fill {
   color: transparent;
   -webkit-text-stroke-color: rgba(255, 255, 255, 0.94);
-  --hero-outline-width: 0.03em;
+  --hero-outline-width: 0.01em;
   -webkit-text-stroke-width: var(--hero-outline-width);
   animation: page-hero-outline-grow 700ms ease-out both;
 }
