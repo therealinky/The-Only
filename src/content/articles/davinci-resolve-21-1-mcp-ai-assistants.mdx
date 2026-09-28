@@ -1,0 +1,69 @@
+---
+title: "DaVinci Resolve 21.1 Adds a Native MCP Server for AI Assistants"
+dek: >-
+  Claude, Claude Code, and ChatGPT Codex can now organize media, cut a
+  highlight reel, or batch-render inside Resolve through plain language,
+  using a native MCP server built into Resolve Studio. Studio tier only.
+format: brief
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - Motion & Video
+  - Creative Coding
+tools:
+  - DaVinci Resolve
+reviewedBy: Ana
+sources:
+  - title: "DaVinci Resolve 21.1 release notes (Blackmagic Design)"
+    url: https://www.blackmagicdesign.com/media/partial/release/20260908-03
+    accessed: 2026-09-27
+  - title: "DaVinci Resolve 21.1 Released, AI Assistant Integration via MCP (CineD)"
+    url: https://www.cined.com/davinci-resolve-21-1-released-ai-assistant-integration-via-mcp-individual-hdr-trims-and-python-scripting-moves-to-studio/
+    accessed: 2026-09-27
+beforeYouUse:
+  clientData: >-
+    not verified: Blackmagic's notes don't say whether project or media
+    metadata is sent off the machine when an outside AI assistant reads or
+    acts on a Resolve project through MCP
+  usageRights: >-
+    not applicable: this changes how you drive Resolve's editing tools, not
+    the licensing of any media you produce with them
+  disclosure: >-
+    not verified: no stated requirement to disclose that an edit, render, or
+    organizational pass was directed by an AI assistant rather than a human
+    editor
+  accessibility: >-
+    not verified: no accessibility-specific changes were mentioned for
+    AI-directed edits or exports
+  cost: >-
+    requires DaVinci Resolve Studio (the paid tier); the free version of
+    Resolve 21.1 doesn't include the MCP server or AI assistant integration
+---
+Blackmagic Design shipped DaVinci Resolve 21.1 on September 8, 2026, and the standout addition for anyone already using outside AI tools is a native MCP server built into Resolve Studio. Point Claude, Claude Code, or ChatGPT Codex at a project, and it can drive the actual application instead of just describing how you'd do something yourself.
+
+## What changed
+
+Resolve Studio 21.1's new MCP server covers project setup, timeline editing, the media pool, color grading, Fairlight audio, the render queue, and export. Setup happens from File, then Setup AI Assistants, which connects Resolve to Claude, Claude Code, or ChatGPT Codex.
+
+In practice that means you can ask for something like a three minute highlight reel with every cut under a second trimmed out, rendered as H.265, and have the assistant actually execute it across the timeline, not just tell you how.
+
+This ships inside a bigger 21.1 release. Blackmagic counts more than 100 new tools and controls in total, including a batch of new Fusion tools, but the MCP server is the part that changes how the app can be used, not just what it can do.
+
+One limit worth flagging up front: this is a Studio feature. The free version of DaVinci Resolve doesn't include the MCP server or AI assistant integration.
+
+## Why it matters for designers
+
+This fits a broader pattern this year of creative tools opening themselves up to outside AI agents through MCP, rather than shipping their own bolted-on chat assistant. For motion and video work specifically, a lot of the tedious parts of editing, renaming and organizing media, standard export passes, rough assembly cuts, are exactly the kind of task you can describe in a sentence and hand off, freeing up actual editing time for the parts that need a human's judgment.
+
+Claude Code support in particular opens the door to more than one-off requests. Because it's a code-capable agent, it's plausible to script repeatable batch workflows, consistent renders across a season of episodes, say, rather than re-prompting the same request project by project.
+
+## What to watch out for
+
+Blackmagic's release notes don't say what happens to project or media metadata when an outside AI assistant reads or acts on a Resolve project, whether anything about your timeline or footage leaves your machine to reach Claude's or OpenAI's servers. That's worth checking directly before pointing an agent at anything covered by an NDA.
+
+We haven't tested this against a real project ourselves yet, so treat the sidebar as open questions rather than confirmed answers.

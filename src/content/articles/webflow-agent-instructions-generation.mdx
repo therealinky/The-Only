@@ -1,0 +1,67 @@
+---
+title: "Webflow Can Now Auto-Draft the Instructions Your AI Agents Follow"
+dek: >-
+  Agent Instructions, Webflow's context files for AI agents working on a
+  site, can now be generated from a site you've already built, covering
+  brand voice, design system, assets, and CMS content.
+format: brief
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - Web
+  - UI/UX
+  - Brand
+tools:
+  - Webflow
+reviewedBy: Ana
+sources:
+  - title: "The biggest announcements from Webflow Conf 2026 (Webflow Blog)"
+    url: https://webflow.com/blog/webflow-conf-2026-announcements
+    accessed: 2026-09-27
+  - title: "Create and manage AI agent instructions (Webflow Help Center)"
+    url: https://help.webflow.com/hc/en-us/articles/52536649709971-Create-and-manage-AI-agent-instructions
+    accessed: 2026-09-27
+beforeYouUse:
+  clientData: >-
+    not verified: it's unclear whether generating instructions from a
+    client's site sends more of that site's content through Webflow's AI
+    backend than normal editing already does
+  usageRights: >-
+    not applicable: this generates internal guideline documents for agents
+    to read, not client-facing or licensed creative assets
+  disclosure: >-
+    not verified: no stated requirement to tell a client that the brand
+    voice or design-system guidance their agents follow was AI-drafted
+    rather than written in-house
+  accessibility: >-
+    not verified: no mention of whether generated Design System or Asset
+    Guidelines address accessibility (contrast, alt text conventions) or
+    only visual and brand consistency
+  cost: >-
+    not verified: Webflow's announcement doesn't say whether Agent
+    Instructions generation is limited to certain plan tiers
+---
+Webflow can now write the first draft of the instructions your AI agents follow on a site, instead of leaving that job to whoever gets around to it. The feature, Agent Instructions generation, started rolling out to every workspace on September 2, 2026.
+
+## What changed
+
+Agent Instructions themselves aren't new. They launched earlier in the summer as markdown files that give an AI agent working on your site real context: your brand voice, your design system, how a given CMS collection should be structured. What's new is that Webflow can generate a first draft of four of those files by analyzing a site you've already built: Brand Guidelines for voice and tone, Design System for components and variables, Asset Guidelines for logos and visual style, and CMS Guidelines for content in a specific collection.
+
+The output is an editable markdown file, saved as a draft you're expected to review, not something that goes live automatically. Once you do put it in place, though, it becomes the context every agent working on that site reads before making changes.
+
+## Why it matters for designers
+
+Writing genuinely useful agent context by hand is real work, and it's the kind of task that tends to get skipped, or written once and never updated. Generating a starting draft from the site as it actually exists lowers the barrier enough that more teams will probably bother doing it at all.
+
+The part worth sitting with is what happens after. Once a generated file becomes the standing instructions for every agent on that site, an error in the draft doesn't just affect one edit, it becomes the assumption every future AI-assisted change is built on. That raises the stakes on the review step in a way that's easy to skip when a draft looks plausible at a glance.
+
+## What to watch out for
+
+Treat the first draft as exactly that. An automated summary of what your site currently looks like isn't the same thing as what your brand guidelines should be, especially if the current site has inconsistencies nobody's caught yet. Read each generated file against your actual standards before letting an agent treat it as ground truth.
+
+We haven't tested this against a real, imperfect production site ourselves, so treat the sidebar as unverified for now.

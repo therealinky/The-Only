@@ -1,15 +1,13 @@
 ---
 import { render } from 'astro:content';
 import ArticleBanners from '../../components/ArticleBanners.astro';
-import BeforeYouUse from '../../components/BeforeYouUse.astro';
+import ArticleSidebar from '../../components/ArticleSidebar.astro';
 import EvidenceBadge from '../../components/EvidenceBadge.astro';
 import FormatBadge from '../../components/FormatBadge.astro';
 import SourcesList from '../../components/SourcesList.astro';
-import SummaryBlock from '../../components/SummaryBlock.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRenderableArticles } from '../../lib/articles';
 import { formatDate } from '../../lib/format-date';
-import { slugify } from '../../lib/slugify';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -70,61 +68,41 @@ const structuredData = {
           <p>{data.withdrawnNote}</p>
         </div>
       ) : (
-        <>
-          {data.summary?.whatChanged && (
-            <SummaryBlock
-              whatChanged={data.summary.whatChanged}
-              whyItMatters={data.summary.whyItMatters ?? ''}
-              bestFor={data.summary.bestFor ?? ''}
-              timeToTry={data.summary.timeToTry ?? ''}
-              hasTutorial={hasTutorial}
-            />
-          )}
-
-          <div class="article-body">
-            <Content />
-          </div>
-
-          {data.tools.length > 0 && (
-            <section aria-labelledby="tools-heading">
-              <h2 id="tools-heading">Tools discussed</h2>
-              <ul>
-                {data.tools.map((tool) => (
-                  <li>
-                    <a href={`/tools/${slugify(tool)}/`}>{tool}</a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          <BeforeYouUse
-            clientData={data.beforeYouUse.clientData}
-            usageRights={data.beforeYouUse.usageRights}
-            disclosure={data.beforeYouUse.disclosure}
-            accessibility={data.beforeYouUse.accessibility}
-            cost={data.beforeYouUse.cost}
+        <div class="article-layout">
+          <ArticleSidebar
+            dek={data.dek}
+            difficulty={data.difficulty}
+            tools={data.tools}
+            beforeYouUse={data.beforeYouUse}
+            summary={data.summary}
+            hasTutorial={hasTutorial}
           />
 
-          <SourcesList sources={data.sources} />
+          <div class="article-main">
+            <div class="article-body">
+              <Content />
+            </div>
 
-          <footer>
-            <p>
-              By {data.author} · Reviewed by {data.reviewedBy}
-            </p>
-            <p>
-              Published <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
-              {data.updatedAt.getTime() !== data.publishedAt.getTime() && (
-                <>
-                  {' '}
-                  · Updated <time datetime={data.updatedAt.toISOString()}>{formatDate(data.updatedAt)}</time>
-                </>
-              )}
-              {' '}· Last verified{' '}
-              <time datetime={data.lastVerified.toISOString()}>{formatDate(data.lastVerified)}</time>
-            </p>
-          </footer>
-        </>
+            <SourcesList sources={data.sources} />
+
+            <footer>
+              <p>
+                By {data.author} · Reviewed by {data.reviewedBy}
+              </p>
+              <p>
+                Published <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
+                {data.updatedAt.getTime() !== data.publishedAt.getTime() && (
+                  <>
+                    {' '}
+                    · Updated <time datetime={data.updatedAt.toISOString()}>{formatDate(data.updatedAt)}</time>
+                  </>
+                )}
+                {' '}· Last verified{' '}
+                <time datetime={data.lastVerified.toISOString()}>{formatDate(data.lastVerified)}</time>
+              </p>
+            </footer>
+          </div>
+        </div>
       )
     }
   </article>

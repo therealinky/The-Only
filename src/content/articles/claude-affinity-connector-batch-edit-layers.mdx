@@ -1,0 +1,101 @@
+---
+title: "Use Claude's Affinity Connector to Batch-Edit Layers and Save the Result as a Reusable Script"
+dek: >-
+  A write-up of Nolen Jonker's XDA walkthrough: connect Claude to Affinity,
+  let it do the tedious layer renaming and color swaps, then keep the good
+  ones as scripts. Updated for Affinity 3.3's new Scripting Studio.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-09-27
+updatedAt: 2026-09-27
+lastVerified: 2026-09-27
+disciplines:
+  - Brand
+  - Illustration
+tools:
+  - Affinity
+  - Claude
+reviewedBy: Ana
+sources:
+  - title: "I connected Claude to Affinity, and now I batch-edit my designs without touching a single layer (Nolen Jonker, XDA Developers, May 14, 2026)"
+    url: https://www.xda-developers.com/connected-claude-to-affinity-batch-edit-designs-write-scripts/
+    accessed: 2026-09-27
+  - title: "AI Automation with Claude (Affinity Help Center)"
+    url: https://www.affinity.studio/help/ai-connector-setup/
+    accessed: 2026-09-27
+  - title: "Canva releases Affinity 3.3 as part of the Canva ProSuite (CG Channel, Sept 15, 2026)"
+    url: https://www.cgchannel.com/2026/09/canva-releases-affinity-3-3/
+    accessed: 2026-09-27
+summary:
+  whatChanged: >-
+    Affinity's connector lets Claude read and edit your open documents
+    directly, and Affinity 3.3 adds a proper JavaScript Scripting Studio
+    for the scripts Claude writes.
+  whyItMatters: >-
+    Layer cleanup, renaming, and bulk color changes are the jobs nobody
+    wants to do by hand, and Affinity's old macros couldn't handle logic or
+    variable inputs.
+  bestFor: >-
+    Cleaning up messy files before handoff, applying a palette change across
+    a multi-page document, and building small repeatable automations.
+  timeToTry: >-
+    About 30 minutes to connect and try a first batch edit on a copy of a
+    real file.
+beforeYouUse:
+  clientData: >-
+    not verified: when Claude reads a document through the connector, layer
+    names, text, and structure are sent to Anthropic. Check your client
+    agreement before pointing it at confidential work.
+  usageRights: >-
+    not applicable for edits to your own artwork; scripts Claude writes for
+    you are yours to reuse, but we haven't reviewed any terms specific to
+    this connector
+  disclosure: >-
+    not verified: this automates edits rather than generating imagery, so
+    most studios won't need to disclose it, but check your client's AI
+    policy if it covers any AI-assisted production
+  accessibility: >-
+    not verified: Claude will apply whatever colors you ask for and won't
+    check contrast unless you explicitly ask it to
+  cost: >-
+    Affinity is free. The source walkthrough used Claude for Desktop on a
+    paid Claude plan; we haven't confirmed whether the free plan works.
+---
+This workflow comes from **Nolen Jonker's walkthrough on XDA Developers** (May 14, 2026), where they connected Claude to Affinity and handed it the fiddly, repetitive parts of a design file. We're describing their published process in our own words, with a few additions for working designers and an update for Affinity 3.3. We haven't run it hands-on ourselves.
+
+The core idea is simple. Affinity exposes your open documents to Claude through an MCP connector, so instead of giving you advice about a file, Claude can actually reach in and change it. Jonker's main point is that this beats Affinity's older Macros feature, which can't do conditional logic or take variable inputs.
+
+## The steps
+
+1. **Turn on the connector in Affinity.** In Affinity's settings, find the Model Context Protocol tab and switch on the Affinity MCP option. Nothing is exposed until you do this.
+
+2. **Add Affinity as a connector in Claude for Desktop.** In Claude's connector settings, browse the connector directory, find Affinity, and install it. Jonker's setup used the desktop app, since the connector talks to Affinity running locally.
+
+3. **Check the permissions panel before you ask for anything.** Jonker notes that network access and file system access are off by default, and that you can configure permissions further from there. The exact controls weren't detailed in the walkthrough, so open the panel yourself and see what's on offer before your first real request.
+
+4. **Work on a duplicate.** Our addition, not the source's. Save a copy of the file first. Batch edits across dozens of layers are exactly the kind of change that's annoying to unpick if Claude reads your request differently than you meant it.
+
+5. **Start with a read-only request.** Our addition, not the source's. Ask Claude to list the layers or pages in the open document and describe how they're currently named. This confirms the connection works and shows you what Claude "sees" before it touches anything.
+
+6. **Run the tedious job.** The tasks Jonker used it for include renaming layers to a consistent convention, creating new documents at given dimensions, swapping colors across a whole document, and tidying spacing and alignment across multiple pages. Be specific: give the exact naming pattern or the exact old and new color values rather than describing them loosely.
+
+7. **Keep the good ones as scripts.** When a request works and you'll need it again, ask Claude to save it as a script. Jonker's scripts landed in Affinity's Scripts panel for reuse without Claude in the loop. In Affinity 3.3 (September 15, 2026) this now sits alongside a dedicated Scripting Studio workspace for JavaScript, so it's worth opening the script there and reading what it actually does before relying on it.
+
+## Why it matters for designers
+
+Handoff prep is where a lot of design time quietly disappears: renaming "Rectangle 47" layers, applying a last-minute palette change across forty pages, making sure every export frame follows the same naming scheme. None of it is hard, and all of it is slow.
+
+The bigger win is step 7. A one-off AI edit saves you time once. A script you can read, adjust, and rerun on the next client file keeps saving it, and it doesn't need a subscription or a network connection to run.
+
+## What to watch out for
+
+Since Jonker's piece was published, Affinity 3.3 has formalized scripting. CG Channel reports that 3.3 scripts are intended for automating repetitive tasks and can't add new tools or change how existing tools behave. If you're hoping Claude can build you a missing feature, it can't.
+
+The connector only covers Affinity itself. Jonker notes it can't reach Canva's AI features unless those are separately enabled, so don't expect generative fill or background removal through it.
+
+Check colors and contrast yourself. Claude will apply a color swap exactly as asked, including one that leaves text unreadable on its background.
+
+And again, this is someone else's documented workflow, not one we've tested. Treat the sidebar as unverified and try it on a throwaway file first.
