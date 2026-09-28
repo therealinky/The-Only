@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: 'The Only',
-  descriptor: 'AI for Working Designers',
+  descriptor: 'AI Guide for Working Designers',
   description:
     'A practical field guide to AI for working designers: what changed, why it matters, what is worth trying, and what to watch out for.',
   url:

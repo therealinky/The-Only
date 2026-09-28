@@ -22,7 +22,6 @@ function isActive(href: string): boolean {
   <div class="site-header__inner">
     <a class="site-header__brand" href="/">
       <span class="site-header__name">{SITE.name}</span>
-      <span class="site-header__descriptor">{SITE.descriptor}</span>
     </a>
 
     <nav class="site-nav" aria-label="Main">
@@ -65,4 +64,6 @@ function isActive(href: string): boolean {
       </details>
     </div>
   </div>
+
+  <p class="site-header__tagline">{SITE.descriptor}</p>
 </header>
