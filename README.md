@@ -137,17 +137,24 @@ indexed — listing and filter pages are deliberately excluded (see `data-pagefi
 `src/pages/articles/[slug].astro`) so search results land on the actual article, not a filtered view of it. Pagefind
 only works against a real build; running `npm run build && npm run preview` is how to test search locally.
 
-## Email digest (not yet built)
+## Email digest
 
-The Brief page has a spot for a weekly digest signup, and the config flag for it exists
-(`NEWSLETTER_PROVIDER` in `.env.example`), but **no signup form, email collection, or provider integration has been
-built** — the component in `src/components/NewsletterSignup.astro` renders nothing at all until that variable is
-set.
+The Brief page has a weekly digest signup wired to **Buttondown**. `NewsletterSignup.astro` renders nothing at
+all until both `NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME` are set (see
+`.env.example`) — until then it's a no-op, same as before this was wired up.
 
-Wiring up a real one later means: picking an RSS-to-email provider (services like Buttondown, ConvertKit, or
-Mailcoach all support "email me your RSS feed weekly" out of the box) or something with a subscribe API, then
-adding that provider's form fields/endpoint to `NewsletterSignup.astro` and setting `NEWSLETTER_PROVIDER`. None of
-that is decided here on purpose — it's a decision for whoever picks the provider.
+The form posts straight to Buttondown's public embeddable-subscribe endpoint
+(`https://buttondown.com/api/emails/embed-subscribe/<username>`); there's no API key or secret involved, and no
+email addresses ever touch this codebase or Cloudflare. To turn it on:
+
+1. Create a Buttondown account and note the username (that's also the site's `buttondown.com/<username>` URL).
+2. Buttondown needs something to actually send — either point its RSS-to-email feature at `/rss.xml` for an
+   automatic weekly digest, or send issues by hand.
+3. Set both env vars locally (`.env`) and in Cloudflare Pages (**Settings → Environment variables**, Production):
+   `NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME=<username>`.
+
+A different provider (ConvertKit, Mailcoach, etc.) would need its own branch in `NewsletterSignup.astro`, since
+each one's embeddable form shape differs — not built, since only Buttondown is in use.
 
 ## Analytics
 
