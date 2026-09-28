@@ -34,6 +34,36 @@ main > .page-hero:first-child {
   z-index: 0;
 }
 
+/* A soft, feathered streak in a complementary hue — depth on top of the
+   base gradient, like a cirrus cloud banking diagonally out of frame.
+   Screen-blended so it reads as a glow rather than a flat shape; drifts
+   very slowly for a sense of motion without competing with the headline. */
+.page-hero__swoosh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  animation: page-hero-swoosh-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes page-hero-swoosh-drift {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(-18px, 10px) rotate(-1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__swoosh {
+    animation: none;
+  }
+}
+
 .page-hero__grain {
   position: absolute;
   inset: 0;
@@ -166,6 +196,28 @@ main > .page-hero:first-child {
 
 /* Gradient compositions — one per main-nav page. Layered radial gradients
    for a soft, dream-like blend rather than a single flat direction. */
+
+/* Swoosh streak hue per variant — a complementary hero hue not already
+   used by that variant's own radial accents, for genuine contrast. */
+.page-hero--purple {
+  --hero-swoosh: var(--hero-gold);
+}
+
+.page-hero--rose {
+  --hero-swoosh: var(--hero-sage);
+}
+
+.page-hero--sage {
+  --hero-swoosh: var(--hero-rose);
+}
+
+.page-hero--blue {
+  --hero-swoosh: var(--hero-gold);
+}
+
+.page-hero--gold {
+  --hero-swoosh: var(--hero-blue);
+}
 
 .page-hero--purple .page-hero__gradient {
   background:
