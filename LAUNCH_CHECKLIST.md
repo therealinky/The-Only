@@ -21,16 +21,14 @@ Everything below needs your credentials or a decision — none of it can be done
       placeholder — it's the sentinel the build checks to catch an article that was never actually reviewed, so it
       shouldn't be set to a real name (see the comment in `site.ts`). Every `published` article still needs a real
       `reviewedBy` filled in by hand with the actual human who checked it; the build enforces this either way.
+- [x] **Analytics.** Cloudflare Web Analytics is live — cookieless, no visitor tracking, no consent banner needed.
+      See the README's [Analytics](README.md#analytics) section.
 
 ## Decisions, not blockers
 
 - [ ] **Newsletter provider.** Not chosen and nothing is built (see the README's
       [Email digest](README.md#email-digest-not-yet-built) section) — pick one when you're ready, or skip it
       indefinitely. `NEWSLETTER_PROVIDER` stays unset either way until then.
-- [ ] **Analytics.** None is wired up. If you want any, a cookieless option (Cloudflare Web Analytics is free and
-      built into Pages with no config file needed, or Plausible/Fathom if you want something more featured) fits
-      the site's "no third-party tracking by default" posture better than Google Analytics. Your call, and not
-      required to launch.
 
 ## Already done, nothing needed from you
 

@@ -149,6 +149,17 @@ Mailcoach all support "email me your RSS feed weekly" out of the box) or somethi
 adding that provider's form fields/endpoint to `NewsletterSignup.astro` and setting `NEWSLETTER_PROVIDER`. None of
 that is decided here on purpose — it's a decision for whoever picks the provider.
 
+## Analytics
+
+Cloudflare Web Analytics is wired up via the manual snippet in `src/layouts/BaseLayout.astro`, loaded only in
+production builds (`import.meta.env.PROD`) so local dev and previews don't skew the numbers. It's cookieless and
+doesn't track individual visitors — no consent banner needed. Dashboard: Cloudflare account →
+**Web Analytics** → `theonly.bemosu.com`.
+
+The site's custom domain is a subdomain of a zone on Cloudflare, so it didn't show up in Web Analytics'
+"select from your existing websites" dropdown (that only lists root zones); typing `theonly.bemosu.com` in
+manually and using the token it issued works the same way.
+
 ## Deploying to Cloudflare Pages
 
 This prepares the config; it does not deploy anything.

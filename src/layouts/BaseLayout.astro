@@ -80,6 +80,18 @@ const structuredDataList = structuredData
         <script type="application/ld+json" set:html={JSON.stringify(data)} />
       ))
     }
+
+    {
+      // Cloudflare Web Analytics — cookieless, no visitor tracking. Only loaded in
+      // production builds so local dev and previews don't pollute the numbers.
+      import.meta.env.PROD && (
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "a106b3dd127c406cbe9b06db48d510a7"}'
+        />
+      )
+    }
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
