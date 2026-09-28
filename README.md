@@ -52,9 +52,11 @@ Test/Workflow) a `summary` fails the build with a specific error; `evidence: tes
 `workflow`; `withdrawn` requires a `withdrawnNote`.
 
 Formats: **Brief** (a concise sourced update), **Test** (a hands-on assessment), **Workflow** (a repeatable
-tutorial). Evidence levels: **Announced** (reported by the maker), **Researched** (checked against sources),
-**Tested** (hands-on tested by us). Difficulty is a required effort-to-try rating, not a skill level: **Quick**
-(nothing to set up), **Moderate** (worth a focused session), **Involved** (a real time investment).
+tutorial), **Pulse** (a synthesis of real community discussion and sentiment, not tied to a single sourced
+change — evidence is always `researched` for this one, enforced in `content.config.ts`). Evidence levels:
+**Announced** (reported by the maker), **Researched** (checked against sources), **Tested** (hands-on tested by
+us). Difficulty is a required effort-to-try rating, not a skill level: **Quick** (nothing to set up), **Moderate**
+(worth a focused session), **Involved** (a real time investment).
 
 Every article's summary, effort rating, tools, and "before you use it" checklist render together in a single,
 visually distinct sidebar (see `ArticleSidebar.astro`), not inline in the article body.

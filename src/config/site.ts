@@ -49,19 +49,21 @@ export const DISCIPLINES = [
 
 export type Discipline = (typeof DISCIPLINES)[number];
 
-export const FORMATS = ['brief', 'test', 'workflow'] as const;
+export const FORMATS = ['brief', 'test', 'workflow', 'pulse'] as const;
 export type Format = (typeof FORMATS)[number];
 
 export const FORMAT_LABELS: Record<Format, string> = {
   brief: 'Brief',
   test: 'Test',
   workflow: 'Workflow',
+  pulse: 'Pulse',
 };
 
 export const FORMAT_DESCRIPTIONS: Record<Format, string> = {
   brief: 'A concise, sourced update on something that changed.',
   test: 'A hands-on assessment of a tool or feature.',
   workflow: 'A repeatable, step-by-step tutorial.',
+  pulse: 'A synthesis of real community discussion and sentiment, not a single sourced change.',
 };
 
 export const EVIDENCE_LEVELS = ['announced', 'researched', 'tested'] as const;

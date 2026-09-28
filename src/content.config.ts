@@ -52,11 +52,19 @@ const articleSchema = z
   .superRefine((data, ctx) => {
     const id = `"${data.title}"`;
 
-    if (data.evidence === 'tested' && data.format === 'brief') {
+    if (data.evidence === 'tested' && data.format !== 'test' && data.format !== 'workflow') {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['evidence'],
-        message: `${id}: evidence "tested" requires format "test" or "workflow", not "brief".`,
+        message: `${id}: evidence "tested" requires format "test" or "workflow", not "${data.format}".`,
+      });
+    }
+
+    if (data.format === 'pulse' && data.evidence !== 'researched') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['evidence'],
+        message: `${id}: format "pulse" is a synthesis of community sources, so evidence must be "researched", not "${data.evidence}".`,
       });
     }
 

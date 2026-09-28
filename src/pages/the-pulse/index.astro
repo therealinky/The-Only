@@ -1,0 +1,26 @@
+---
+import ArticleListing from '../../components/ArticleListing.astro';
+import PageHero from '../../components/PageHero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { filterByFormat, getListableArticles } from '../../lib/articles';
+
+const articles = filterByFormat(await getListableArticles(), 'pulse');
+---
+
+<BaseLayout
+  title="The Pulse"
+  description="What designers are actually saying about AI, gathered from real community discussion."
+>
+  <PageHero
+    eyebrow="The Pulse"
+    lines={['Reading', 'The Room']}
+    subtitle="What designers are actually saying about AI, gathered from real community discussion."
+    variant="blue"
+  />
+  <ArticleListing
+    articles={articles}
+    allHref="/the-pulse/"
+    disciplineBase="/the-pulse/"
+    emptyMessage="No Pulse articles match this filter yet."
+  />
+</BaseLayout>
