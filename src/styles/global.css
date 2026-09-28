@@ -197,7 +197,11 @@ main {
    with the actions for width — the crowding this used to cause on
    narrow phones (see git history) is gone structurally, not patched. */
 .site-header__tagline {
-  margin: 0;
+  /* margin-block only: the shared layout rule above sets margin-inline
+     to auto to center this row's max-width box like .site-header__inner;
+     a plain `margin: 0` here would win the cascade (later, same
+     specificity) and cancel that centering at wide viewports. */
+  margin-block: 0;
   padding-block: 0 var(--space-3);
   font-family: var(--font-body);
   font-weight: 500;
