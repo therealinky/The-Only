@@ -20,14 +20,20 @@ export const SITE = {
   defaultReviewedBy: 'Editor name (set in config)',
 } as const;
 
-// Weekly digest — intentionally not built. No signup form is shown, and no
-// email addresses are collected or stored, until this is set to a real
-// provider name. See NewsletterSignup.astro and the README for what wiring
-// a provider up would involve.
+// Weekly digest. No signup form is shown, and no email addresses are
+// collected or stored, until both of these are set to real values. See
+// NewsletterSignup.astro and the README's Email digest section.
 export const NEWSLETTER = {
   provider:
     import.meta.env?.NEWSLETTER_PROVIDER ||
     (typeof process !== 'undefined' ? process.env.NEWSLETTER_PROVIDER : undefined) ||
+    null,
+  // Buttondown's embeddable subscribe form posts straight to a public,
+  // per-account URL — not a secret, but it's still an env var rather than a
+  // literal here so the repo doesn't hardcode a specific person's account.
+  buttondownUsername:
+    import.meta.env?.NEWSLETTER_BUTTONDOWN_USERNAME ||
+    (typeof process !== 'undefined' ? process.env.NEWSLETTER_BUTTONDOWN_USERNAME : undefined) ||
     null,
 } as const;
 
