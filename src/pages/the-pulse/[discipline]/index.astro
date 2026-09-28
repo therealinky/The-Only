@@ -1,0 +1,28 @@
+---
+import ArticleListing from '../../../components/ArticleListing.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { DISCIPLINES, type Discipline } from '../../../config/site';
+import { filterByFormat, getListableArticles } from '../../../lib/articles';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { discipline: slugify(discipline) },
+    props: { discipline },
+  }));
+}
+
+const { discipline } = Astro.props as { discipline: Discipline };
+const articles = filterByFormat(await getListableArticles(), 'pulse');
+---
+
+<BaseLayout title={`${discipline} — The Pulse`} description={`Community sentiment on AI for ${discipline}.`}>
+  <h1>The Pulse: {discipline}</h1>
+  <ArticleListing
+    articles={articles}
+    allHref="/the-pulse/"
+    disciplineBase="/the-pulse/"
+    activeDiscipline={discipline}
+    emptyMessage="No Pulse articles match this filter yet."
+  />
+</BaseLayout>
