@@ -73,11 +73,11 @@ The core idea is simple. Affinity exposes your open documents to Claude through 
 
 2. **Add Affinity as a connector in Claude for Desktop.** In Claude's connector settings, browse the connector directory, find Affinity, and install it. Jonker's setup used the desktop app, since the connector talks to Affinity running locally.
 
-3. **Set permissions before you ask for anything.** The connector's tools are split into read-only and write/delete groups, and each can be set to always allow, ask first, or block. Our suggestion: leave write/delete tools on "ask" for your first few sessions so you see every change before it happens. Jonker also notes that network and file system access are off by default, which is a sensible default to keep.
+3. **Check the permissions panel before you ask for anything.** Jonker notes that network access and file system access are off by default, and that you can configure permissions further from there. The exact controls weren't detailed in the walkthrough, so open the panel yourself and see what's on offer before your first real request.
 
 4. **Work on a duplicate.** Our addition, not the source's. Save a copy of the file first. Batch edits across dozens of layers are exactly the kind of change that's annoying to unpick if Claude reads your request differently than you meant it.
 
-5. **Start with a read-only request.** Ask Claude to list the layers or pages in the open document and describe how they're currently named. This confirms the connection works and shows you what Claude "sees" before it touches anything.
+5. **Start with a read-only request.** Our addition, not the source's. Ask Claude to list the layers or pages in the open document and describe how they're currently named. This confirms the connection works and shows you what Claude "sees" before it touches anything.
 
 6. **Run the tedious job.** The tasks Jonker used it for include renaming layers to a consistent convention, creating new documents at given dimensions, swapping colors across a whole document, and tidying spacing and alignment across multiple pages. Be specific: give the exact naming pattern or the exact old and new color values rather than describing them loosely.
 
