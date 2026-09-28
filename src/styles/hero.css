@@ -192,31 +192,42 @@ main > .page-hero:first-child {
   color: #fff;
   font-size: var(--text-lg);
   line-height: var(--leading-snug);
+  text-shadow: 1px 2px 20px var(--hero-glow);
 }
 
 /* Gradient compositions — one per main-nav page. Layered radial gradients
    for a soft, dream-like blend rather than a single flat direction. */
 
 /* Swoosh streak hue per variant — a complementary hero hue not already
-   used by that variant's own radial accents, for genuine contrast. */
+   used by that variant's own radial accents, for genuine contrast.
+   --hero-glow is a separate per-variant color for the subtitle's glow
+   (see .page-hero__glass p below): purple's is the exact value picked by
+   eye off the rendered gradient; the rest follow it with the same
+   "brighten the hero hue toward white" logic rather than eyedropping
+   each one, so they're close but not pixel-sampled. */
 .page-hero--purple {
   --hero-swoosh: var(--hero-gold);
+  --hero-glow: rgb(118 109 208);
 }
 
 .page-hero--rose {
   --hero-swoosh: var(--hero-sage);
+  --hero-glow: color-mix(in srgb, var(--hero-rose) 90%, white);
 }
 
 .page-hero--sage {
   --hero-swoosh: var(--hero-rose);
+  --hero-glow: color-mix(in srgb, var(--hero-sage) 90%, white);
 }
 
 .page-hero--blue {
   --hero-swoosh: var(--hero-gold);
+  --hero-glow: color-mix(in srgb, var(--hero-blue) 90%, white);
 }
 
 .page-hero--gold {
   --hero-swoosh: var(--hero-blue);
+  --hero-glow: color-mix(in srgb, var(--hero-gold) 90%, white);
 }
 
 .page-hero--purple .page-hero__gradient {
