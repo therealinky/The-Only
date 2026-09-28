@@ -1,0 +1,75 @@
+---
+// Article hero art — see src/lib/hypergraphy.ts for how the motif + glyph
+// scatter is generated. Purely decorative (the title/dek already carry the
+// information), so it's hidden from assistive tech.
+import type { Discipline } from '../config/site';
+import { buildHypergraphicArt, GRADIENT_PAIRS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
+
+interface Props {
+  slug: string;
+  disciplines: readonly Discipline[];
+}
+
+const { slug, disciplines } = Astro.props;
+const { gradientVariant, motifPaths, glyphs } = buildHypergraphicArt(slug, disciplines);
+const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
+const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
+
+const motifScale = Math.min(motifBox.w, motifBox.h) / 100;
+const motifX = motifBox.x + (motifBox.w - 100 * motifScale) / 2;
+const motifY = motifBox.y + (motifBox.h - 100 * motifScale) / 2;
+
+let stepIndex = 0;
+const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
+---
+
+<div class="hg-art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
+  <div class="hg-art__wash"></div>
+  <div class="hg-art__grain"></div>
+  <svg class="hg-art__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
+    <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}>
+      {
+        motifPaths.map(({ d, filled }) => (
+          <path
+            d={d}
+            pathLength="1"
+            class={filled ? 'hg-path hg-path--fill' : 'hg-path hg-path--draw'}
+            style={`--hg-delay: ${nextDelay(130)}`}
+          />
+        ))
+      }
+    </g>
+    {
+      glyphs.map(({ d, kind, x, y, rotate, scale }) => (
+        <g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}>
+          <path
+            d={d}
+            pathLength="1"
+            class={kind === 'dot' ? 'hg-path hg-path--fill hg-glyph' : 'hg-path hg-path--draw hg-glyph'}
+            style={`--hg-delay: ${nextDelay(90)}`}
+          />
+        </g>
+      ))
+    }
+  </svg>
+</div>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('.hg-art');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    items.forEach((item) => observer.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add('is-in-view'));
+  }
+</script>

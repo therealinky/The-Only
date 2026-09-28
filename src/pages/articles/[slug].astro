@@ -4,6 +4,7 @@ import ArticleBanners from '../../components/ArticleBanners.astro';
 import ArticleSidebar from '../../components/ArticleSidebar.astro';
 import EvidenceBadge from '../../components/EvidenceBadge.astro';
 import FormatBadge from '../../components/FormatBadge.astro';
+import HypergraphicArt from '../../components/HypergraphicArt.astro';
 import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRenderableArticles } from '../../lib/articles';
@@ -58,6 +59,8 @@ const structuredData = {
       <p>{data.dek}</p>
       <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
     </header>
+
+    {!isWithdrawn && <HypergraphicArt slug={article.id} disciplines={data.disciplines} />}
 
     {
       isWithdrawn ? (
