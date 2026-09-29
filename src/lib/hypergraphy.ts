@@ -104,6 +104,13 @@ const GLYPHS: { d: string; kind: GlyphKind }[] = [
   { d: 'M-8,4 L-3,-4 L3,4 L8,-4', kind: 'stroke' }, // zigzag
   { d: 'M-7,3 A8,8 0 0 1 7,3', kind: 'stroke' }, // arc
   { d: 'M0,0 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0', kind: 'dot' }, // dot
+  // Script-like marks — loops and swashes reminiscent of handwriting
+  // texture, invented rather than legible letterforms, in keeping with
+  // "hypergraphy" as sign-making rather than actual text.
+  { d: 'M-6,4 C-6,-4 6,-4 6,2 C6,8 -2,6 -3,0 C-4,-4 2,-6 4,-2', kind: 'stroke' }, // loop
+  { d: 'M-8,-3 C-2,-8 2,6 8,3', kind: 'stroke' }, // swash
+  { d: 'M-7,2 C-4,-6 -1,6 2,-4 C4,-9 6,3 8,-2', kind: 'stroke' }, // scribble
+  { d: 'M-5,-6 C-8,0 -2,7 4,4 C7,2 6,-2 3,-1', kind: 'stroke' }, // hook
 ];
 
 interface GlyphInstance {
@@ -142,7 +149,7 @@ function createRandom(seed: number): () => number {
   };
 }
 
-const GLYPH_COUNT = 6;
+const GLYPH_COUNT = 22;
 const CANVAS_W = 800;
 const CANVAS_H = 300;
 // The motif occupies this box in canvas space; glyphs bias away from it.
@@ -175,7 +182,7 @@ export function buildHypergraphicArt(slug: string, disciplines: readonly Discipl
       x,
       y,
       rotate: Math.floor(random() * 360),
-      scale: 0.8 + random() * 0.9,
+      scale: 0.45 + random() * 0.75,
     };
   });
 

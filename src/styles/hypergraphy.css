@@ -1,7 +1,9 @@
-/* Article hero art ("hypergraphy") — a faded line-drawn motif plus a
-   scatter of small invented marks, tinted by a soft two-hue wash. Layers,
-   back to front: tinted wash -> grain texture -> line art. See
-   src/components/HypergraphicArt.astro and src/lib/hypergraphy.ts. */
+/* Article hero art ("hypergraphy") — a line-drawn motif plus a dense
+   scatter of small invented, script-like marks, rendered in an iridescent
+   gradient that slowly hue-shifts (a "catches the light" quality), over a
+   soft two-hue wash. Layers, back to front: tinted wash -> grain texture ->
+   line art. See src/components/HypergraphicArt.astro and
+   src/lib/hypergraphy.ts. */
 
 .hg-art {
   position: relative;
@@ -40,16 +42,29 @@
   display: block;
   width: 100%;
   height: 100%;
+  /* The gradient itself is static; this slow hue-rotate sweep is what gives
+     the linework its iridescent, catches-the-light quality. 360deg loops
+     back to 0deg seamlessly, so the cycle has no visible seam. */
+  animation: hg-shimmer 18s linear infinite;
 }
 
 .hg-path {
   fill: none;
-  stroke: var(--color-text);
-  stroke-opacity: 0.55;
+  stroke: var(--hg-gradient);
+  stroke-opacity: 0.85;
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+}
+
+@keyframes hg-shimmer {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
 }
 
 .hg-path--draw {
@@ -59,8 +74,8 @@
 }
 
 .hg-path--fill {
-  fill: var(--color-text);
-  fill-opacity: 0.55;
+  fill: var(--hg-gradient);
+  fill-opacity: 0.85;
   stroke: none;
   opacity: 0;
   transform-box: fill-box;
@@ -72,11 +87,11 @@
 }
 
 .hg-glyph.hg-path--draw {
-  stroke-opacity: 0.42;
+  stroke-opacity: 0.55;
 }
 
 .hg-glyph.hg-path--fill {
-  fill-opacity: 0.42;
+  fill-opacity: 0.55;
 }
 
 .hg-art.is-in-view .hg-path--draw {
@@ -98,5 +113,9 @@
     opacity: 1;
     transform: scale(1);
     transition: none;
+  }
+
+  .hg-art__svg {
+    animation: none;
   }
 }
