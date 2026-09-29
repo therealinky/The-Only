@@ -1,10 +1,9 @@
-// "Hypergraphy" article hero art — a simple drawn motif whose outline is
-// traced by the article's own words instead of a plain stroke, a nod to
-// microscript/word-portrait art (an image built from dense handwritten
-// text) without reproducing any specific existing artwork. Each article
-// gets one central motif, chosen by discipline, deterministically
-// generated from the article's slug so the same article always renders the
-// same art (no hydration mismatch, no need to store an actual image file).
+// "Hypergraphy" article hero art — an ASCII-art-style rendering of a simple
+// discipline motif, filled with characters pulled from the article's own
+// text (a nod to microscript/word-portrait art without reproducing any
+// specific existing artwork). Deterministically generated from the
+// article's slug so the same article always renders the same art (no
+// hydration mismatch, no need to store an actual image file).
 import type { Discipline } from '../config/site';
 
 export const GRADIENT_VARIANTS = ['purple', 'rose', 'sage', 'blue', 'gold'] as const;
@@ -21,69 +20,120 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
   gold: ['--hero-gold', '--hero-rose'],
 };
 
+interface Pt {
+  x: number;
+  y: number;
+}
+
 type MotifKey = 'face' | 'chart' | 'reel' | 'browser' | 'seal' | 'ribbon' | 'cube';
 
-// Every motif is authored in its own 0-100 unit box so it can be placed and
-// scaled into the master canvas with a single transform. Each entry in
-// `paths` becomes one outline traced by text; `fill` entries are small solid
-// accent shapes (a pupil, a play triangle) too small to usefully carry text.
-const MOTIFS: Record<MotifKey, { fill?: string[]; paths: string[] }> = {
-  // UI/UX — a loose, single-line face profile (forehead, nose, lips, chin).
+// Every motif is authored as plain polygons/polylines in a 0-100 unit box
+// (not SVG path strings): `fill` shapes are closed and get filled solid,
+// `stroke` shapes are open and get a thick "ink band" along their length.
+// Point-in-polygon and distance-to-polyline tests below turn these into an
+// ASCII-art ink mask. Slight faceting versus the old bezier curves is
+// invisible at character-grid resolution.
+const MOTIFS: Record<MotifKey, { fill: Pt[][]; stroke: Pt[][] }> = {
+  // UI/UX — a face profile (forehead, nose, lips, chin) plus a pupil. The
+  // front edge deliberately zigzags out-in-out-in (nose, philtrum, lips,
+  // chin) since that concave/convex alternation is what actually reads as
+  // "face" rather than "blob" at low resolution.
   face: {
-    paths: [
-      'M30,6 C44,4 54,8 58,18 C60,24 58,28 62,32 C74,36 82,40 78,46 C74,50 66,48 66,54 C66,58 60,58 62,62 C60,68 52,66 50,72 C44,80 32,80 26,74 C14,72 4,64 4,50 C4,32 12,12 30,6 Z',
-      'M20,52 C16,54 16,60 20,62',
+    fill: [
+      poly([
+        26, 6, 40, 6, 50, 12, 53, 20, 51, 26, 67, 34, 57, 38, 61, 44, 55, 48, 58, 56, 47, 62, 41, 66, 33, 80, 18, 78,
+        8, 58, 6, 30, 12, 14,
+      ]),
+      circle(40, 22, 2.6),
     ],
-    fill: ['M46,26 m-2.3,0 a2.3,2.3 0 1,0 4.6,0 a2.3,2.3 0 1,0 -4.6,0'],
+    stroke: [poly([16, 50, 13, 53, 13, 58, 16, 61])],
   },
-  // Creative Coding — an uneven bar chart with a trend line over the top.
+  // Creative Coding — a bar chart with a trend line over the top.
   chart: {
-    paths: [
-      'M16,85 L16,63',
-      'M35,85 L35,48',
-      'M54,85 L54,33',
-      'M73,85 L73,52',
-      'M92,85 L92,20',
-      'M14,58 C28,46 40,50 52,30 C62,15 78,34 94,16',
+    fill: [
+      rect(16, 63, 85, 7),
+      rect(35, 48, 85, 7),
+      rect(54, 33, 85, 7),
+      rect(73, 52, 85, 7),
+      rect(92, 20, 85, 7),
     ],
+    stroke: [poly([14, 58, 28, 46, 40, 50, 52, 30, 62, 15, 78, 34, 94, 16])],
   },
   // Motion & Video — a rounded frame, a play triangle, and film-tick marks.
   reel: {
-    paths: [
-      'M20,20 h52 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-52 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 Z',
-      'M9,26 L9,34',
-      'M9,46 L9,54',
-      'M9,66 L9,74',
-    ],
-    fill: ['M42,36 L42,64 L66,50 Z'],
+    fill: [rectBox(14, 20, 86, 72), poly([42, 36, 42, 64, 66, 50])],
+    stroke: [poly([9, 26, 9, 34]), poly([9, 46, 9, 54]), poly([9, 66, 9, 74])],
   },
   // Web — a browser frame, traffic-light dots, and a wandering content line.
   browser: {
-    paths: [
-      'M10,15 h80 a6,6 0 0 1 6,6 v64 a6,6 0 0 1 -6,6 h-80 a6,6 0 0 1 -6,-6 v-64 a6,6 0 0 1 6,-6 Z',
-      'M10,33 L96,33',
-      'M18,60 C28,44 38,76 48,58 C58,42 68,70 82,50',
-    ],
-    fill: [
-      'M22,24 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0',
-      'M30,24 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0',
-      'M38,24 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0',
-    ],
+    fill: [rectBox(10, 15, 96, 85), circle(22, 24, 2.4), circle(30, 24, 2.4), circle(38, 24, 2.4)],
+    stroke: [poly([10, 33, 96, 33]), poly([18, 60, 28, 44, 38, 76, 48, 58, 58, 42, 68, 70, 82, 50])],
   },
-  // Brand — a two-circle seal with a diagonal mark through the overlap.
+  // Brand — two overlapping circles with a diagonal mark through them.
   seal: {
-    paths: ['M38,50 m-26,0 a26,26 0 1,0 52,0 a26,26 0 1,0 -52,0', 'M62,50 m-26,0 a26,26 0 1,0 52,0 a26,26 0 1,0 -52,0', 'M36,26 L64,74'],
+    fill: [circle(38, 50, 26), circle(62, 50, 26)],
+    stroke: [poly([36, 26, 64, 74])],
   },
   // Illustration — a single flowing brush stroke with an ink-blot accent.
   ribbon: {
-    paths: ['M8,72 C24,18 46,92 60,38 C70,4 84,52 93,26'],
-    fill: ['M93,22 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0'],
+    fill: [circle(93, 22, 3.4)],
+    stroke: [poly([8, 72, 24, 18, 46, 92, 60, 38, 70, 4, 84, 52, 93, 26])],
   },
-  // 3D — an isometric wireframe cube, drawn face by face.
+  // 3D — an isometric wireframe cube, face by face.
   cube: {
-    paths: ['M50,15 L80,32 L50,49 L20,32 Z', 'M20,32 L20,68 L50,85 L50,49 Z', 'M50,49 L50,85 L80,68 L80,32 Z'],
+    fill: [poly([50, 15, 80, 32, 50, 49, 20, 32]), poly([20, 32, 20, 68, 50, 85, 50, 49]), poly([50, 49, 50, 85, 80, 68, 80, 32])],
+    stroke: [],
   },
 };
+
+function poly(flat: number[]): Pt[] {
+  const points: Pt[] = [];
+  for (let i = 0; i < flat.length; i += 2) points.push({ x: flat[i], y: flat[i + 1] });
+  return points;
+}
+
+function rect(cx: number, y1: number, y2: number, w: number): Pt[] {
+  const half = w / 2;
+  return poly([cx - half, y1, cx - half, y2, cx + half, y2, cx + half, y1]);
+}
+
+function rectBox(x1: number, y1: number, x2: number, y2: number): Pt[] {
+  return poly([x1, y1, x2, y1, x2, y2, x1, y2]);
+}
+
+function circle(cx: number, cy: number, r: number, segments = 14): Pt[] {
+  const points: Pt[] = [];
+  for (let i = 0; i < segments; i++) {
+    const angle = (i / segments) * Math.PI * 2;
+    points.push({ x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r });
+  }
+  return points;
+}
+
+function pointInPolygon(p: Pt, poly: Pt[]): boolean {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const { x: xi, y: yi } = poly[i];
+    const { x: xj, y: yj } = poly[j];
+    const intersects = yi > p.y !== yj > p.y && p.x < ((xj - xi) * (p.y - yi)) / (yj - yi) + xi;
+    if (intersects) inside = !inside;
+  }
+  return inside;
+}
+
+function distToSegment(p: Pt, a: Pt, b: Pt): number {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const lenSq = dx * dx + dy * dy;
+  const t = lenSq === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / lenSq));
+  return Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy));
+}
+
+function distToPolyline(p: Pt, line: Pt[]): number {
+  let min = Infinity;
+  for (let i = 0; i < line.length - 1; i++) min = Math.min(min, distToSegment(p, line[i], line[i + 1]));
+  return min;
+}
 
 const DISCIPLINE_MOTIFS: Record<Discipline, MotifKey> = {
   Brand: 'seal',
@@ -95,9 +145,13 @@ const DISCIPLINE_MOTIFS: Record<Discipline, MotifKey> = {
   'Creative Coding': 'chart',
 };
 
+export const GRID_COLS = 30;
+export const GRID_ROWS = 16;
+const STROKE_INK_RADIUS = 3.4;
+
 export interface HypergraphicArt {
   gradientVariant: GradientVariant;
-  motifPaths: { d: string; filled: boolean; text?: string }[];
+  rows: string[];
 }
 
 function hashString(value: string): number {
@@ -121,17 +175,7 @@ function createRandom(seed: number): () => number {
   };
 }
 
-const CANVAS_W = 800;
-const CANVAS_H = 300;
-const MOTIF_BOX = { x: 300, y: 40, w: 200, h: 220 };
-
-// How much of the cleaned article text to pull for one outline's worth of
-// text-on-path. Repeated below so a single excerpt comfortably covers even
-// a long path at a small font size, rather than running out partway round.
-const EXCERPT_LENGTH = 220;
-const EXCERPT_REPEATS = 8;
-
-/** Strips Markdown/MDX syntax down to plain prose, for tracing a path with. */
+/** Strips Markdown/MDX syntax down to plain prose, to fill the grid with. */
 function cleanArticleText(raw: string): string {
   return raw
     .replace(/^---[\s\S]*?---/, '') // stray frontmatter, if any slipped through
@@ -144,36 +188,55 @@ function cleanArticleText(raw: string): string {
     .trim();
 }
 
-export function buildHypergraphicArt(
-  slug: string,
-  disciplines: readonly Discipline[],
-  articleBody: string,
-): HypergraphicArt {
-  const random = createRandom(hashString(slug));
-
-  const motifKey = DISCIPLINE_MOTIFS[disciplines[0]] ?? 'seal';
-  const motif = MOTIFS[motifKey];
-  const cleaned = cleanArticleText(articleBody);
-
-  const motifPaths = [
-    ...motif.paths.map((d, i) => {
-      // Offset which slice of the article's text each outline starts from,
-      // so multiple outlines in one motif don't all repeat the same words
-      // from the same starting point.
-      const start = (i * 97) % Math.max(cleaned.length, 1);
-      const slice = cleaned.length > 0 ? cleaned.slice(start) + ' ' + cleaned.slice(0, start) : '';
-      const excerpt = slice.slice(0, EXCERPT_LENGTH) || 'the only';
-      // A middle dot marks the loop point between repeats, never an em dash
-      // (see the site's own voice guidance against them).
-      const text = `${excerpt} · `.repeat(EXCERPT_REPEATS);
-      return { d, filled: false, text };
-    }),
-    ...(motif.fill ?? []).map((d) => ({ d, filled: true })),
-  ];
-
-  const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
-
-  return { gradientVariant, motifPaths };
+function buildInkGrid(motif: { fill: Pt[][]; stroke: Pt[][] }): boolean[][] {
+  const grid: boolean[][] = [];
+  for (let row = 0; row < GRID_ROWS; row++) {
+    const y = (row + 0.5) * (100 / GRID_ROWS);
+    const rowInk: boolean[] = [];
+    for (let col = 0; col < GRID_COLS; col++) {
+      const x = (col + 0.5) * (100 / GRID_COLS);
+      const p = { x, y };
+      const ink =
+        motif.fill.some((region) => pointInPolygon(p, region)) ||
+        motif.stroke.some((line) => distToPolyline(p, line) < STROKE_INK_RADIUS);
+      rowInk.push(ink);
+    }
+    grid.push(rowInk);
+  }
+  return grid;
 }
+
+// Only consumes a source character for cells that are actually visible, so
+// more of the article's real words show up inside the shape instead of
+// being spent on cells that render blank anyway. A source space landing on
+// an ink cell becomes a middle dot rather than a literal gap, so word
+// breaks don't punch holes in the silhouette.
+function buildRows(grid: boolean[][], text: string): string[] {
+  const source = text.length > 0 ? text : 'the only';
+  let index = 0;
+  return grid.map((rowInk) =>
+    rowInk
+      .map((ink) => {
+        if (!ink) return ' ';
+        const char = source[index % source.length];
+        index += 1;
+        return /\s/.test(char) ? '·' : char;
+      })
+      .join(''),
+  );
+}
+
+export function buildHypergraphicArt(slug: string, disciplines: readonly Discipline[], articleBody: string): HypergraphicArt {
+  const random = createRandom(hashString(slug));
+  const motifKey = DISCIPLINE_MOTIFS[disciplines[0]] ?? 'seal';
+  const grid = buildInkGrid(MOTIFS[motifKey]);
+  const rows = buildRows(grid, cleanArticleText(articleBody));
+  const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
+  return { gradientVariant, rows };
+}
+
+const CANVAS_W = 800;
+const CANVAS_H = 300;
+const MOTIF_BOX = { x: 300, y: 40, w: 200, h: 220 };
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, motifBox: MOTIF_BOX };

@@ -1,9 +1,9 @@
 ---
-// Article hero art — see src/lib/hypergraphy.ts for how the motif + its
-// text-traced outline are generated. Purely decorative (the title/dek
-// already carry the information), so it's hidden from assistive tech.
+// Article hero art — see src/lib/hypergraphy.ts for how the motif's
+// character grid is generated. Purely decorative (the title/dek already
+// carry the information), so it's hidden from assistive tech.
 import type { Discipline } from '../config/site';
-import { buildHypergraphicArt, GRADIENT_PAIRS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
+import { buildHypergraphicArt, GRADIENT_PAIRS, GRID_ROWS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
 
 interface Props {
   slug: string;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { slug, disciplines, body } = Astro.props;
-const { gradientVariant, motifPaths } = buildHypergraphicArt(slug, disciplines, body);
+const { gradientVariant, rows } = buildHypergraphicArt(slug, disciplines, body);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
 const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
 const iridescentId = `hg-iridescent-${slug}`;
@@ -20,6 +20,7 @@ const iridescentId = `hg-iridescent-${slug}`;
 const motifScale = Math.min(motifBox.w, motifBox.h) / 100;
 const motifX = motifBox.x + (motifBox.w - 100 * motifScale) / 2;
 const motifY = motifBox.y + (motifBox.h - 100 * motifScale) / 2;
+const cellH = 100 / GRID_ROWS;
 
 let stepIndex = 0;
 const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
@@ -31,12 +32,12 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
   <svg class="hg-art__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" style={`--hg-gradient: url(#${iridescentId})`}>
     <defs>
       {
-        /* objectBoundingBox (the default) instead of userSpaceOnUse: each path is
-           nested inside its own translate/scale group, and userSpaceOnUse
-           coordinates are read in that local, already-transformed space, so a
-           global gradient ended up sampling near the same edge everywhere.
-           objectBoundingBox maps 0-1 to each element's own bounding box, so
-           every outline and accent shows its own color sweep. */
+        /* objectBoundingBox (the default): each row of text is nested inside the
+           motif's translate/scale group, and userSpaceOnUse coordinates are read
+           in that local, already-transformed space, so a global gradient ended
+           up sampling near the same edge for every row. objectBoundingBox maps
+           0-1 to each element's own bounding box, so every row shows its own
+           color sweep. */
       }
       <linearGradient id={iridescentId} x1="0" y1="0" x2="1" y2="0.6">
         <stop offset="0%" stop-color="var(--hero-purple)" />
@@ -47,24 +48,24 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
         <stop offset="100%" stop-color="var(--hero-purple)" />
       </linearGradient>
     </defs>
-    <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}>
+    <g
+      transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}
+      font-size={cellH * 0.92}
+      xml:space="preserve"
+    >
       {
-        motifPaths.map(({ d, filled, text }, i) => {
-          const pathId = `hg-outline-${slug}-${i}`;
-          if (filled) {
-            return <path d={d} class="hg-path hg-path--fill" style={`--hg-delay: ${nextDelay(130)}`} />;
-          }
-          return (
-            <>
-              <path id={pathId} d={d} class="hg-outline-guide" />
-              <text class="hg-text" style={`--hg-delay: ${nextDelay(130)}`}>
-                <textPath href={`#${pathId}`} startOffset="0">
-                  {text}
-                </textPath>
-              </text>
-            </>
-          );
-        })
+        rows.map((row, i) => (
+          <text
+            class="hg-text"
+            x="0"
+            y={(i + 0.82) * cellH}
+            textLength="100"
+            lengthAdjust="spacingAndGlyphs"
+            style={`--hg-delay: ${nextDelay(30)}`}
+          >
+            {row}
+          </text>
+        ))
       }
     </g>
   </svg>

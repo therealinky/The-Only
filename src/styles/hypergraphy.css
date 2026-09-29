@@ -1,9 +1,9 @@
-/* Article hero art ("hypergraphy") — a simple line motif whose outline is
-   traced by the article's own words (an invisible guide path plus text-on-
-   path), rendered in an iridescent gradient that slowly hue-shifts (a
-   "catches the light" quality), over a soft two-hue wash. Layers, back to
-   front: tinted wash -> grain texture -> text/line art. See
-   src/components/HypergraphicArt.astro and src/lib/hypergraphy.ts. */
+/* Article hero art ("hypergraphy") — an ASCII-art rendering of a simple
+   discipline motif, filled with the article's own words, rendered in an
+   iridescent gradient that slowly hue-shifts (a "catches the light"
+   quality), over a soft two-hue wash. Layers, back to front: tinted wash ->
+   grain texture -> character grid. See src/components/HypergraphicArt.astro
+   and src/lib/hypergraphy.ts. */
 
 .hg-art {
   position: relative;
@@ -57,54 +57,21 @@
   }
 }
 
-/* The actual outline path is never drawn — it only exists so <textPath>
-   has a shape to follow. The words are the line art. */
-.hg-outline-guide {
-  fill: none;
-  stroke: none;
-}
-
 .hg-text {
   fill: var(--hg-gradient);
-  fill-opacity: 0.9;
-  font-family: var(--font-mono);
-  font-size: 4.2px;
-  letter-spacing: -0.01em;
-  opacity: 0;
-  transition: opacity 900ms ease-out var(--hg-delay, 0ms);
-}
-
-.hg-path--fill {
-  fill: var(--hg-gradient);
   fill-opacity: 0.85;
-  stroke: none;
+  font-family: var(--font-mono);
   opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0.4);
-  transition:
-    opacity 500ms ease-out var(--hg-delay, 0ms),
-    transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--hg-delay, 0ms);
+  transition: opacity 700ms ease-out var(--hg-delay, 0ms);
 }
 
 .hg-art.is-in-view .hg-text {
   opacity: 1;
 }
 
-.hg-art.is-in-view .hg-path--fill {
-  opacity: 1;
-  transform: scale(1);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hg-text {
     opacity: 1;
-    transition: none;
-  }
-
-  .hg-path--fill {
-    opacity: 1;
-    transform: scale(1);
     transition: none;
   }
 
