@@ -1,0 +1,85 @@
+---
+title: A Workflow for Getting Figma Variables Into Production Without the Usual Chaos
+dek: >-
+  Designer Roberto Moreno Celta's published breakdown of why most Figma
+  variable setups collapse, and the naming and handoff workflow he uses
+  instead to keep design and code actually in sync.
+format: workflow
+evidence: researched
+difficulty: involved
+status: draft
+example: false
+publishedAt: 2026-09-29
+updatedAt: 2026-09-29
+lastVerified: 2026-09-29
+disciplines:
+  - Web
+  - UI/UX
+  - Brand
+tools:
+  - Figma
+  - Webflow
+sources:
+  - title: "Figma to Production: The Variables Workflow That Actually Saves Time, by Roberto Moreno Celta"
+    url: https://robertcelt95.medium.com/figma-to-production-the-variables-workflow-that-actually-saves-time-58a71315dce3
+    accessed: 2026-09-29
+  - title: "Guide to variables in Figma (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma
+    accessed: 2026-09-29
+summary:
+  whatChanged: >-
+    Not a product update, a published workflow: designer Roberto Moreno
+    Celta's breakdown of why most teams' Figma variable setups fail, and the
+    naming and handoff process he uses to actually keep Figma and code in
+    sync.
+  whyItMatters: >-
+    Figma variables promise "change it once, it updates everywhere," but a
+    disorganized setup can leave you worse off than not using them at all,
+    this gives you a structure that's held up across real design-system
+    rebuilds.
+  bestFor: >-
+    Anyone maintaining a design system across more than a handful of
+    components, especially where a designer and a developer both need to
+    stay in sync on color, type, and spacing values.
+  timeToTry: >-
+    A first pass on one component type (colors on your buttons, say) takes
+    an afternoon; rolling it across an existing design system is realistically
+    a multi-week, component-by-component migration.
+beforeYouUse:
+  clientData: "not applicable: this workflow only touches internal design-system values, not client data"
+  usageRights: "not applicable: no generated content is involved, this is a file-organization and handoff technique"
+  disclosure: "not applicable: nothing here needs to be disclosed to end users or clients"
+  accessibility: >-
+    not verified: the source doesn't address accessibility directly; a
+    semantic color system does make it easier to enforce contrast
+    consistently, but that's not something the workflow itself checks for you
+  cost: >-
+    known: it's free to set up if you're already paying for Figma, but the
+    plugin-based export step (see below) may require a paid plugin tier
+    depending on which one you use
+---
+This workflow comes from designer Roberto Moreno Celta's October 2025 write-up on Medium, "Figma to Production: The Variables Workflow That Actually Saves Time." He describes rebuilding design systems three separate times, once without variables, once with variables set up badly, and once with a structure that actually held together, and lays out what changed between the failures and the one that worked. This is a summary and reorganization of his published approach, not a workflow this publication has hands-on tested.
+
+## The problem he's solving
+
+Figma variables are supposed to mean you change a color once and every component updates. In practice, Celta argues, most setups fail in one of a few predictable ways: teams build a huge collection of variable groups before they've designed a single real component, name variables in a way that means nothing to the developer who eventually has to translate them into code, or build a beautiful variable system in Figma that never actually gets synced anywhere, so developers just build their own version from scratch and the two drift apart immediately.
+
+## The workflow
+
+1. **Start with a small set of collections, not an exhaustive one.** Celta recommends beginning with three or four variable collections total, typically raw color values, semantic colors (what a color means, like "primary text" or "card background"), typography, and spacing, and adding more only once you've actually run into a concrete need for them.
+2. **Separate raw values from meaning.** Keep one collection for literal, unchanging color values, and a second "semantic" collection that maps those raw values to what they're used for. Components should reference the semantic layer ("background-primary"), never the raw one directly, so a single remap in the semantic layer can repaint everything downstream of it.
+3. **Name variables the way your developers will write them in code**, not the way they read nicely in a design file. A name like "Brand Blue Primary" means nothing to someone writing CSS; a name like "background-primary" maps directly onto a CSS custom property with no translation step, and no room for a developer to quietly rename it into something else.
+4. **Use modes sparingly.** Light and dark mode is normally the only place a mode genuinely earns its complexity. Adding a mode for every breakpoint or brand variant on top of that, Celta warns, is what turns a variable system into something too tangled to actually maintain.
+5. **Apply the variables to your components**, replacing hard-coded fills and spacing values with references to the semantic collection, then confirm mode switching actually cascades correctly by toggling Light/Dark on a real component before you trust the system.
+6. **Build a documented "Variables Reference" page** inside the Figma file itself, showing every primitive and semantic value in one place, so it functions as a source of truth both designers and developers can point to.
+7. **Get the values out of Figma and into code.** Celta lays out three options depending on project size: manually copying values into a CSS file for a small project, using an export plugin to generate a JSON or CSS file that a developer pulls into the codebase, or, for larger teams, piping that export through Style Dictionary to generate platform-specific output (CSS, SCSS, iOS, Android) as part of a CI pipeline.
+8. **For a no-code or low-code target like Webflow**, which has no native Figma-variable import, he suggests either pasting the exported values in as CSS custom properties through Webflow's custom code panel, mirroring them manually as Webflow style-guide swatches, or a hybrid of both depending on how much of the system needs to stay visually editable inside Webflow itself.
+9. **Migrate an existing, variable-free design gradually**, component type by component type (buttons first, then cards, then forms), rather than attempting a single all-at-once conversion, which he says is what actually gets systems abandoned partway through.
+
+## Why it matters for designers
+
+The appeal here isn't variables themselves, Figma has had them for a while, it's the workflow around them that Celta says most teams skip. A design system where a single color change takes ten seconds in Figma and a couple of minutes to reach production is a fundamentally different working relationship with your developers than one where the same change means manually chasing down every instance across a dozen files and hoping nothing gets missed. If your team already has variables set up but still doesn't trust them, the naming-convention and semantic-layer split described here is probably the more useful part to borrow, even without redoing everything else.
+
+## What to watch out for
+
+This is one designer's account of what worked for him across his own projects, not an independently verified benchmark, and the specific time-savings figures he cites are his own estimates from his own work, not a controlled comparison. The export step also isn't a solved, standardized process: which plugin you use, and whether your team has the engineering setup to run something like Style Dictionary in CI, will shape how smooth this actually is in practice far more than the Figma side does. And a naming convention only pays off if developers agree to honor it, if they rename things their own way downstream, the sync breaks just as fast as it would without variables at all.
