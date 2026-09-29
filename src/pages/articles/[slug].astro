@@ -9,6 +9,7 @@ import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRenderableArticles } from '../../lib/articles';
 import { formatDate } from '../../lib/format-date';
+import { getReadingTime } from '../../lib/read-time';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -24,6 +25,7 @@ const { data } = article;
 const isWithdrawn = data.status === 'withdrawn';
 const { Content, headings } = await render(article);
 const hasTutorial = headings.some((h) => h.slug === 'tutorial');
+const readingTime = getReadingTime(article.body ?? data.dek);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -57,7 +59,7 @@ const structuredData = {
       </div>
       <h1>{data.title}</h1>
       <p>{data.dek}</p>
-      <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
+      <p class="article-card__disciplines">{data.disciplines.join(', ')} · {readingTime} min read</p>
     </header>
 
     {!isWithdrawn && <HypergraphicArt slug={article.id} disciplines={data.disciplines} body={article.body ?? data.dek} />}

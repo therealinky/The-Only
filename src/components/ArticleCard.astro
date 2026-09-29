@@ -1,6 +1,7 @@
 ---
 import type { Article } from '../lib/articles';
 import { formatDate } from '../lib/format-date';
+import { getReadingTime } from '../lib/read-time';
 import EvidenceBadge from './EvidenceBadge.astro';
 import FormatBadge from './FormatBadge.astro';
 
@@ -10,6 +11,7 @@ interface Props {
 
 const { article } = Astro.props;
 const { data } = article;
+const readingTime = getReadingTime(article.body ?? data.dek);
 ---
 
 <article class="article-card" data-format={data.format} data-disciplines={data.disciplines.join('|')}>
@@ -24,5 +26,6 @@ const { data } = article;
   <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
   <p class="article-card__date">
     <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
+    {' '}· {readingTime} min read
   </p>
 </article>
