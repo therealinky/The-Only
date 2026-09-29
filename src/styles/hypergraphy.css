@@ -1,9 +1,9 @@
-/* Article hero art ("hypergraphy") — a line-drawn motif plus a dense
-   scatter of small invented, script-like marks, rendered in an iridescent
-   gradient that slowly hue-shifts (a "catches the light" quality), over a
-   soft two-hue wash. Layers, back to front: tinted wash -> grain texture ->
-   line art. See src/components/HypergraphicArt.astro and
-   src/lib/hypergraphy.ts. */
+/* Article hero art ("hypergraphy") — a simple line motif whose outline is
+   traced by the article's own words (an invisible guide path plus text-on-
+   path), rendered in an iridescent gradient that slowly hue-shifts (a
+   "catches the light" quality), over a soft two-hue wash. Layers, back to
+   front: tinted wash -> grain texture -> text/line art. See
+   src/components/HypergraphicArt.astro and src/lib/hypergraphy.ts. */
 
 .hg-art {
   position: relative;
@@ -43,19 +43,9 @@
   width: 100%;
   height: 100%;
   /* The gradient itself is static; this slow hue-rotate sweep is what gives
-     the linework its iridescent, catches-the-light quality. 360deg loops
-     back to 0deg seamlessly, so the cycle has no visible seam. */
+     the piece its iridescent, catches-the-light quality. 360deg loops back
+     to 0deg seamlessly, so the cycle has no visible seam. */
   animation: hg-shimmer 18s linear infinite;
-}
-
-.hg-path {
-  fill: none;
-  stroke: var(--hg-gradient);
-  stroke-opacity: 0.85;
-  stroke-width: 2.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
 }
 
 @keyframes hg-shimmer {
@@ -67,10 +57,21 @@
   }
 }
 
-.hg-path--draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 900ms ease-out var(--hg-delay, 0ms);
+/* The actual outline path is never drawn — it only exists so <textPath>
+   has a shape to follow. The words are the line art. */
+.hg-outline-guide {
+  fill: none;
+  stroke: none;
+}
+
+.hg-text {
+  fill: var(--hg-gradient);
+  fill-opacity: 0.9;
+  font-family: var(--font-mono);
+  font-size: 4.2px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transition: opacity 900ms ease-out var(--hg-delay, 0ms);
 }
 
 .hg-path--fill {
@@ -86,16 +87,8 @@
     transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--hg-delay, 0ms);
 }
 
-.hg-glyph.hg-path--draw {
-  stroke-opacity: 0.55;
-}
-
-.hg-glyph.hg-path--fill {
-  fill-opacity: 0.55;
-}
-
-.hg-art.is-in-view .hg-path--draw {
-  stroke-dashoffset: 0;
+.hg-art.is-in-view .hg-text {
+  opacity: 1;
 }
 
 .hg-art.is-in-view .hg-path--fill {
@@ -104,8 +97,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hg-path--draw {
-    stroke-dashoffset: 0;
+  .hg-text {
+    opacity: 1;
     transition: none;
   }
 

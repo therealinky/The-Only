@@ -1,17 +1,18 @@
 ---
-// Article hero art — see src/lib/hypergraphy.ts for how the motif + glyph
-// scatter is generated. Purely decorative (the title/dek already carry the
-// information), so it's hidden from assistive tech.
+// Article hero art — see src/lib/hypergraphy.ts for how the motif + its
+// text-traced outline are generated. Purely decorative (the title/dek
+// already carry the information), so it's hidden from assistive tech.
 import type { Discipline } from '../config/site';
 import { buildHypergraphicArt, GRADIENT_PAIRS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
 
 interface Props {
   slug: string;
   disciplines: readonly Discipline[];
+  body: string;
 }
 
-const { slug, disciplines } = Astro.props;
-const { gradientVariant, motifPaths, glyphs } = buildHypergraphicArt(slug, disciplines);
+const { slug, disciplines, body } = Astro.props;
+const { gradientVariant, motifPaths } = buildHypergraphicArt(slug, disciplines, body);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
 const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
 const iridescentId = `hg-iridescent-${slug}`;
@@ -31,12 +32,11 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
     <defs>
       {
         /* objectBoundingBox (the default) instead of userSpaceOnUse: each path is
-           nested inside its own translate/rotate/scale group (motif, or one per
-           glyph), and userSpaceOnUse coordinates are read in that local,
-           already-transformed space, so every shape ended up sampling near the
-           same edge of one global gradient instead of showing its own sweep.
+           nested inside its own translate/scale group, and userSpaceOnUse
+           coordinates are read in that local, already-transformed space, so a
+           global gradient ended up sampling near the same edge everywhere.
            objectBoundingBox maps 0-1 to each element's own bounding box, so
-           every mark, however small, shows the full color sweep across itself. */
+           every outline and accent shows its own color sweep. */
       }
       <linearGradient id={iridescentId} x1="0" y1="0" x2="1" y2="0.6">
         <stop offset="0%" stop-color="var(--hero-purple)" />
@@ -49,28 +49,24 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
     </defs>
     <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}>
       {
-        motifPaths.map(({ d, filled }) => (
-          <path
-            d={d}
-            pathLength="1"
-            class={filled ? 'hg-path hg-path--fill' : 'hg-path hg-path--draw'}
-            style={`--hg-delay: ${nextDelay(130)}`}
-          />
-        ))
+        motifPaths.map(({ d, filled, text }, i) => {
+          const pathId = `hg-outline-${slug}-${i}`;
+          if (filled) {
+            return <path d={d} class="hg-path hg-path--fill" style={`--hg-delay: ${nextDelay(130)}`} />;
+          }
+          return (
+            <>
+              <path id={pathId} d={d} class="hg-outline-guide" />
+              <text class="hg-text" style={`--hg-delay: ${nextDelay(130)}`}>
+                <textPath href={`#${pathId}`} startOffset="0">
+                  {text}
+                </textPath>
+              </text>
+            </>
+          );
+        })
       }
     </g>
-    {
-      glyphs.map(({ d, kind, x, y, rotate, scale }) => (
-        <g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}>
-          <path
-            d={d}
-            pathLength="1"
-            class={kind === 'dot' ? 'hg-path hg-path--fill hg-glyph' : 'hg-path hg-path--draw hg-glyph'}
-            style={`--hg-delay: ${nextDelay(90)}`}
-          />
-        </g>
-      ))
-    }
   </svg>
 </div>
 

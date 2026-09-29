@@ -1,9 +1,10 @@
-// "Hypergraphy" article hero art — a nod to the Lettrist idea of combining
-// a simple drawn image with invented, sign-like marks scattered across it.
-// Each article gets one central motif (chosen by discipline) surrounded by
-// a scatter of small abstract glyphs, deterministically generated from the
-// article's slug so the same article always renders the same art (no
-// hydration mismatch, no need to store an actual image file).
+// "Hypergraphy" article hero art — a simple drawn motif whose outline is
+// traced by the article's own words instead of a plain stroke, a nod to
+// microscript/word-portrait art (an image built from dense handwritten
+// text) without reproducing any specific existing artwork. Each article
+// gets one central motif, chosen by discipline, deterministically
+// generated from the article's slug so the same article always renders the
+// same art (no hydration mismatch, no need to store an actual image file).
 import type { Discipline } from '../config/site';
 
 export const GRADIENT_VARIANTS = ['purple', 'rose', 'sage', 'blue', 'gold'] as const;
@@ -24,7 +25,8 @@ type MotifKey = 'face' | 'chart' | 'reel' | 'browser' | 'seal' | 'ribbon' | 'cub
 
 // Every motif is authored in its own 0-100 unit box so it can be placed and
 // scaled into the master canvas with a single transform. Each entry in
-// `paths` becomes one <path>/<circle>, drawn in on scroll, in order.
+// `paths` becomes one outline traced by text; `fill` entries are small solid
+// accent shapes (a pupil, a play triangle) too small to usefully carry text.
 const MOTIFS: Record<MotifKey, { fill?: string[]; paths: string[] }> = {
   // UI/UX — a loose, single-line face profile (forehead, nose, lips, chin).
   face: {
@@ -93,39 +95,9 @@ const DISCIPLINE_MOTIFS: Record<Discipline, MotifKey> = {
   'Creative Coding': 'chart',
 };
 
-type GlyphKind = 'stroke' | 'dot';
-
-const GLYPHS: { d: string; kind: GlyphKind }[] = [
-  { d: 'M0,-8 L0,8 M-7,-4 L7,4 M-7,4 L7,-4', kind: 'stroke' }, // asterisk
-  { d: 'M-8,0 C-4,-6 4,6 8,0', kind: 'stroke' }, // tilde
-  { d: 'M0,0 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0', kind: 'stroke' }, // ring
-  { d: 'M0,-7 L0,7 M-7,0 L7,0', kind: 'stroke' }, // cross
-  { d: 'M-6,6 L6,-6', kind: 'stroke' }, // slash
-  { d: 'M-8,4 L-3,-4 L3,4 L8,-4', kind: 'stroke' }, // zigzag
-  { d: 'M-7,3 A8,8 0 0 1 7,3', kind: 'stroke' }, // arc
-  { d: 'M0,0 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0', kind: 'dot' }, // dot
-  // Script-like marks — loops and swashes reminiscent of handwriting
-  // texture, invented rather than legible letterforms, in keeping with
-  // "hypergraphy" as sign-making rather than actual text.
-  { d: 'M-6,4 C-6,-4 6,-4 6,2 C6,8 -2,6 -3,0 C-4,-4 2,-6 4,-2', kind: 'stroke' }, // loop
-  { d: 'M-8,-3 C-2,-8 2,6 8,3', kind: 'stroke' }, // swash
-  { d: 'M-7,2 C-4,-6 -1,6 2,-4 C4,-9 6,3 8,-2', kind: 'stroke' }, // scribble
-  { d: 'M-5,-6 C-8,0 -2,7 4,4 C7,2 6,-2 3,-1', kind: 'stroke' }, // hook
-];
-
-interface GlyphInstance {
-  d: string;
-  kind: GlyphKind;
-  x: number;
-  y: number;
-  rotate: number;
-  scale: number;
-}
-
 export interface HypergraphicArt {
   gradientVariant: GradientVariant;
-  motifPaths: { d: string; filled: boolean }[];
-  glyphs: GlyphInstance[];
+  motifPaths: { d: string; filled: boolean; text?: string }[];
 }
 
 function hashString(value: string): number {
@@ -149,44 +121,59 @@ function createRandom(seed: number): () => number {
   };
 }
 
-const GLYPH_COUNT = 22;
 const CANVAS_W = 800;
 const CANVAS_H = 300;
-// The motif occupies this box in canvas space; glyphs bias away from it.
 const MOTIF_BOX = { x: 300, y: 40, w: 200, h: 220 };
 
-export function buildHypergraphicArt(slug: string, disciplines: readonly Discipline[]): HypergraphicArt {
+// How much of the cleaned article text to pull for one outline's worth of
+// text-on-path. Repeated below so a single excerpt comfortably covers even
+// a long path at a small font size, rather than running out partway round.
+const EXCERPT_LENGTH = 220;
+const EXCERPT_REPEATS = 8;
+
+/** Strips Markdown/MDX syntax down to plain prose, for tracing a path with. */
+function cleanArticleText(raw: string): string {
+  return raw
+    .replace(/^---[\s\S]*?---/, '') // stray frontmatter, if any slipped through
+    .replace(/^#+\s*/gm, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/`{1,3}(.*?)`{1,3}/g, '$1')
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function buildHypergraphicArt(
+  slug: string,
+  disciplines: readonly Discipline[],
+  articleBody: string,
+): HypergraphicArt {
   const random = createRandom(hashString(slug));
 
   const motifKey = DISCIPLINE_MOTIFS[disciplines[0]] ?? 'seal';
   const motif = MOTIFS[motifKey];
+  const cleaned = cleanArticleText(articleBody);
+
   const motifPaths = [
-    ...motif.paths.map((d) => ({ d, filled: false })),
+    ...motif.paths.map((d, i) => {
+      // Offset which slice of the article's text each outline starts from,
+      // so multiple outlines in one motif don't all repeat the same words
+      // from the same starting point.
+      const start = (i * 97) % Math.max(cleaned.length, 1);
+      const slice = cleaned.length > 0 ? cleaned.slice(start) + ' ' + cleaned.slice(0, start) : '';
+      const excerpt = slice.slice(0, EXCERPT_LENGTH) || 'the only';
+      // A middle dot marks the loop point between repeats, never an em dash
+      // (see the site's own voice guidance against them).
+      const text = `${excerpt} · `.repeat(EXCERPT_REPEATS);
+      return { d, filled: false, text };
+    }),
     ...(motif.fill ?? []).map((d) => ({ d, filled: true })),
   ];
 
   const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
 
-  const glyphs: GlyphInstance[] = Array.from({ length: GLYPH_COUNT }, () => {
-    const glyph = GLYPHS[Math.floor(random() * GLYPHS.length)];
-    // Bias positions toward the margins so glyphs scatter around the motif
-    // instead of sitting on top of it.
-    const onLeft = random() < 0.5;
-    const x = onLeft
-      ? random() * (MOTIF_BOX.x - 30) + 15
-      : random() * (CANVAS_W - MOTIF_BOX.x - MOTIF_BOX.w - 30) + MOTIF_BOX.x + MOTIF_BOX.w + 15;
-    const y = random() * (CANVAS_H - 40) + 20;
-    return {
-      d: glyph.d,
-      kind: glyph.kind,
-      x,
-      y,
-      rotate: Math.floor(random() * 360),
-      scale: 0.45 + random() * 0.75,
-    };
-  });
-
-  return { gradientVariant, motifPaths, glyphs };
+  return { gradientVariant, motifPaths };
 }
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, motifBox: MOTIF_BOX };

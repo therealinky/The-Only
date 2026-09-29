@@ -60,7 +60,7 @@ const structuredData = {
       <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
     </header>
 
-    {!isWithdrawn && <HypergraphicArt slug={article.id} disciplines={data.disciplines} />}
+    {!isWithdrawn && <HypergraphicArt slug={article.id} disciplines={data.disciplines} body={article.body ?? data.dek} />}
 
     {
       isWithdrawn ? (
