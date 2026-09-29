@@ -1,0 +1,13 @@
+---
+import { SENTIMENT_LABELS, type Sentiment } from '../config/site';
+
+interface Props {
+  sentiment: Sentiment;
+}
+
+const { sentiment } = Astro.props;
+---
+
+<span class="badge badge--sidebar" data-sentiment={sentiment}>
+  {SENTIMENT_LABELS[sentiment]}
+</span>

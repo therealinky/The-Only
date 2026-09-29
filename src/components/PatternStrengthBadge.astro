@@ -1,0 +1,13 @@
+---
+import { PATTERN_STRENGTH_DESCRIPTIONS, PATTERN_STRENGTH_LABELS, type PatternStrength } from '../config/site';
+
+interface Props {
+  patternStrength: PatternStrength;
+}
+
+const { patternStrength } = Astro.props;
+---
+
+<span class="badge badge--sidebar" data-pattern-strength={patternStrength} title={PATTERN_STRENGTH_DESCRIPTIONS[patternStrength]}>
+  {PATTERN_STRENGTH_LABELS[patternStrength]}
+</span>

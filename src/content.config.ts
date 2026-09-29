@@ -1,6 +1,15 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { DIFFICULTY_LEVELS, DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE, STATUSES } from './config/site';
+import {
+  DIFFICULTY_LEVELS,
+  DISCIPLINES,
+  EVIDENCE_LEVELS,
+  FORMATS,
+  PATTERN_STRENGTH_LEVELS,
+  SENTIMENT_LEVELS,
+  SITE,
+  STATUSES,
+} from './config/site';
 
 const sourceSchema = z.object({
   title: z.string().min(1, 'Source title is required.'),
@@ -43,6 +52,13 @@ const articleSchema = z
     reviewedBy: z.string().min(1).default(SITE.defaultReviewedBy),
     disciplines: z.array(z.enum(DISCIPLINES)).min(1, 'At least one discipline is required.'),
     tools: z.array(z.string().min(1)).default([]),
+    // Pulse-only fields. Keystatic's select field can't represent "unset"
+    // directly, so it writes '' for "not applicable"; preprocess that back
+    // to undefined before validating. Whether they're actually *required* is
+    // enforced in superRefine below, only for format "pulse".
+    sentiment: z.preprocess((v) => (v === '' ? undefined : v), z.enum(SENTIMENT_LEVELS).optional()),
+    patternStrength: z.preprocess((v) => (v === '' ? undefined : v), z.enum(PATTERN_STRENGTH_LEVELS).optional()),
+    communities: z.array(z.string().min(1)).default([]),
     sources: z.array(sourceSchema).default([]),
     summary: summarySchema.optional(),
     beforeYouUse: beforeYouUseSchema,
@@ -66,6 +82,30 @@ const articleSchema = z
         path: ['evidence'],
         message: `${id}: format "pulse" is a synthesis of community sources, so evidence must be "researched", not "${data.evidence}".`,
       });
+    }
+
+    if (data.format === 'pulse') {
+      if (!data.sentiment) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['sentiment'],
+          message: `${id}: format "pulse" requires a "sentiment" value, it's the sidebar's overall-mood read.`,
+        });
+      }
+      if (!data.patternStrength) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['patternStrength'],
+          message: `${id}: format "pulse" requires a "patternStrength" value, it's the sidebar's how-solid-is-this read.`,
+        });
+      }
+      if (data.communities.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['communities'],
+          message: `${id}: format "pulse" requires at least one entry in "communities" (where this discussion is happening).`,
+        });
+      }
     }
 
     const needsSummary = data.format === 'test' || data.format === 'workflow';

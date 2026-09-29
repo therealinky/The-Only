@@ -725,7 +725,10 @@ main {
   gap: var(--space-2);
 }
 
-.badge--difficulty {
+/* Any badge shown inside the inverted article-sidebar panel (effort,
+   sentiment, pattern strength): white-on-brand instead of the default
+   badge's light-page colors. */
+.badge--sidebar {
   color: var(--color-bg);
   border-color: var(--color-bg);
 }
