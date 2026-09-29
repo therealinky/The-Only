@@ -1,23 +1,26 @@
 ---
-// Article hero art — see src/lib/hypergraphy.ts for how the motif + glyph
-// scatter is generated. Purely decorative (the title/dek already carry the
-// information), so it's hidden from assistive tech.
+// Article hero art — see src/lib/hypergraphy.ts for how the motif's
+// character grid is generated. Purely decorative (the title/dek already
+// carry the information), so it's hidden from assistive tech.
 import type { Discipline } from '../config/site';
-import { buildHypergraphicArt, GRADIENT_PAIRS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
+import { buildHypergraphicArt, GRADIENT_PAIRS, GRID_ROWS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
 
 interface Props {
   slug: string;
   disciplines: readonly Discipline[];
+  body: string;
 }
 
-const { slug, disciplines } = Astro.props;
-const { gradientVariant, motifPaths, glyphs } = buildHypergraphicArt(slug, disciplines);
+const { slug, disciplines, body } = Astro.props;
+const { gradientVariant, rows } = buildHypergraphicArt(slug, disciplines, body);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
 const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
+const iridescentId = `hg-iridescent-${slug}`;
 
 const motifScale = Math.min(motifBox.w, motifBox.h) / 100;
 const motifX = motifBox.x + (motifBox.w - 100 * motifScale) / 2;
 const motifY = motifBox.y + (motifBox.h - 100 * motifScale) / 2;
+const cellH = 100 / GRID_ROWS;
 
 let stepIndex = 0;
 const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
@@ -26,31 +29,45 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
 <div class="hg-art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
   <div class="hg-art__wash"></div>
   <div class="hg-art__grain"></div>
-  <svg class="hg-art__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
-    <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}>
+  <svg class="hg-art__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" style={`--hg-gradient: url(#${iridescentId})`}>
+    <defs>
       {
-        motifPaths.map(({ d, filled }) => (
-          <path
-            d={d}
-            pathLength="1"
-            class={filled ? 'hg-path hg-path--fill' : 'hg-path hg-path--draw'}
-            style={`--hg-delay: ${nextDelay(130)}`}
-          />
+        /* objectBoundingBox (the default): each row of text is nested inside the
+           motif's translate/scale group, and userSpaceOnUse coordinates are read
+           in that local, already-transformed space, so a global gradient ended
+           up sampling near the same edge for every row. objectBoundingBox maps
+           0-1 to each element's own bounding box, so every row shows its own
+           color sweep. */
+      }
+      <linearGradient id={iridescentId} x1="0" y1="0" x2="1" y2="0.6">
+        <stop offset="0%" stop-color="var(--hero-purple)" />
+        <stop offset="20%" stop-color="var(--hero-blue)" />
+        <stop offset="40%" stop-color="var(--hero-sage)" />
+        <stop offset="60%" stop-color="var(--hero-gold)" />
+        <stop offset="80%" stop-color="var(--hero-rose)" />
+        <stop offset="100%" stop-color="var(--hero-purple)" />
+      </linearGradient>
+    </defs>
+    <g
+      transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}
+      font-size={cellH * 0.92}
+      xml:space="preserve"
+    >
+      {
+        rows.map((row, i) => (
+          <text
+            class="hg-text"
+            x="0"
+            y={(i + 0.82) * cellH}
+            textLength="100"
+            lengthAdjust="spacingAndGlyphs"
+            style={`--hg-delay: ${nextDelay(30)}`}
+          >
+            {row}
+          </text>
         ))
       }
     </g>
-    {
-      glyphs.map(({ d, kind, x, y, rotate, scale }) => (
-        <g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}>
-          <path
-            d={d}
-            pathLength="1"
-            class={kind === 'dot' ? 'hg-path hg-path--fill hg-glyph' : 'hg-path hg-path--draw hg-glyph'}
-            style={`--hg-delay: ${nextDelay(90)}`}
-          />
-        </g>
-      ))
-    }
   </svg>
 </div>
 
