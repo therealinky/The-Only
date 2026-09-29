@@ -1,6 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { EVIDENCE_DESCRIPTIONS, EVIDENCE_LABELS, EVIDENCE_LEVELS, SITE } from '../config/site';
+import {
+  DIFFICULTY_DESCRIPTIONS,
+  DIFFICULTY_LABELS,
+  DIFFICULTY_LEVELS,
+  EVIDENCE_DESCRIPTIONS,
+  EVIDENCE_LABELS,
+  EVIDENCE_LEVELS,
+  FORMAT_DESCRIPTIONS,
+  FORMAT_LABELS,
+  FORMATS,
+  PATTERN_STRENGTH_DESCRIPTIONS,
+  PATTERN_STRENGTH_LABELS,
+  PATTERN_STRENGTH_LEVELS,
+  SENTIMENT_LABELS,
+  SENTIMENT_LEVELS,
+  SITE,
+} from '../config/site';
 ---
 
 <BaseLayout title="Editorial Policy" description={`How ${SITE.name} sources, reviews, and labels its reporting.`}>
@@ -19,6 +35,35 @@ import { EVIDENCE_DESCRIPTIONS, EVIDENCE_LABELS, EVIDENCE_LEVELS, SITE } from '.
     The "Reviewed by" credit on each article is the real, accountable human who checked it before it went live.
   </p>
 
+  <h2>Content types</h2>
+  <p>We publish {FORMATS.length} kinds of articles:</p>
+  <dl>
+    {
+      FORMATS.map((format) => (
+        <div>
+          <dt>{FORMAT_LABELS[format]}</dt>
+          <dd>{FORMAT_DESCRIPTIONS[format]}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <h2>How we source a Workflow</h2>
+  <p>
+    A researched Workflow is never a rewording of one person's specific published process, however well credited.
+    It's a synthesis across multiple independent sources covering the same or closely related technique, written in
+    our own words, going beyond any single source by calling out where approaches disagree and adding depth from
+    documented tool knowledge those sources didn't individually cover. When a technique genuinely traces back to one
+    creator's write-up, we credit them and link to their original for the full step-by-step rather than reproducing
+    it here, so our coverage doesn't take the traffic a full rewrite would.
+  </p>
+  <p>
+    An idea Workflow is different again: it's an automation or combination we've assembled ourselves from tools'
+    real, documented capabilities, not lifted from any existing tutorial because nobody's published that exact
+    combination. We say so plainly near the top of the piece, source every individual capability it depends on, and
+    never claim it's been hands-on verified end to end.
+  </p>
+
   <h2>Evidence labels</h2>
   <p>Every article carries one of three evidence labels, shown on its card and at the top of the article:</p>
   <dl>
@@ -31,20 +76,69 @@ import { EVIDENCE_DESCRIPTIONS, EVIDENCE_LABELS, EVIDENCE_LEVELS, SITE } from '.
       ))
     }
   </dl>
+  <p>
+    Which levels actually apply depends on format. A Pulse is always <strong>Researched</strong>, enforced by the
+    schema, since it synthesizes public discussion rather than reporting one sourced change. A Brief is{' '}
+    <strong>Announced</strong> or <strong>Researched</strong>. A Workflow is, as a matter of current practice,
+    always <strong>Researched</strong> too, we haven't yet published one we hands-on tested ourselves, though the
+    schema allows it once we do. <strong>Tested</strong> is reserved for a genuine hands-on Test article.
+  </p>
 
   <h2>Effort to try</h2>
   <p>
-    Every article's sidebar carries an effort rating: <strong>Quick</strong>, <strong>Moderate</strong>, or <strong>Involved</strong>. It's
-    about time investment, not skill, a tool you already know well might be "Quick"
-    for you even if we rated it "Moderate" for a typical reader coming to it cold.
+    Every article's sidebar carries an effort rating, except a Pulse, which has nothing to "try" and shows an
+    overall-mood reading instead, see below. It's about time investment, not skill, a tool you already know well
+    might be "Quick" for you even if we rated it "Moderate" for a typical reader coming to it cold:
   </p>
+  <dl>
+    {
+      DIFFICULTY_LEVELS.map((level) => (
+        <div>
+          <dt>{DIFFICULTY_LABELS[level]}</dt>
+          <dd>{DIFFICULTY_DESCRIPTIONS[level]}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <h2>Pulse: aggregate sentiment, not individual quotes</h2>
+  <p>
+    A Pulse reports what designers, as a group, are actually saying, gathered from spaces like Reddit, Dribbble and
+    Behance comments, and Designer News, deliberately not from engineer-audience forums like Hacker News, which
+    would skew the read toward tech-industry opinion rather than design-practitioner opinion. It never names or
+    quotes anyone individually, even when a claim traces back to one specific comment, the body reads as a synthesis
+    of a pattern, not a transcript of who said what. We only call something a pattern once we've found more than one
+    independent source saying something similar, every one of them linked in the article's sources for a reader to
+    verify, even though none are named in the prose.
+  </p>
+  <p>
+    In place of an effort rating and the "before you use it" checklist below, a Pulse's sidebar shows two readings
+    of its own. The overall mood is one of{' '}
+    {SENTIMENT_LEVELS.map((level, i) => (
+      <>
+        {i > 0 && (i === SENTIMENT_LEVELS.length - 1 ? ', or ' : ', ')}
+        <strong>{SENTIMENT_LABELS[level]}</strong>
+      </>
+    ))}
+    . How solid the pattern is gets its own reading too:
+  </p>
+  <dl>
+    {
+      PATTERN_STRENGTH_LEVELS.map((level) => (
+        <div>
+          <dt>{PATTERN_STRENGTH_LABELS[level]}</dt>
+          <dd>{PATTERN_STRENGTH_DESCRIPTIONS[level]}</dd>
+        </div>
+      ))
+    }
+  </dl>
 
   <h2>Before you use it</h2>
   <p>
-    Every article's sidebar includes a "Before you use it" checklist covering client data handling, usage rights,
-    disclosure obligations, accessibility, and cost, alongside the tools it discusses and (for Test and Workflow
-    articles) a quick summary. Any field we haven't personally checked is marked <code>not verified</code> rather
-    than guessed at.
+    Every article's sidebar except a Pulse's includes a "Before you use it" checklist covering client data handling,
+    usage rights, disclosure obligations, accessibility, and cost, alongside the tools it discusses and (for Test
+    and Workflow articles) a quick summary. Any field we haven't personally checked is marked <code>not verified</code>{' '}
+    rather than guessed at.
   </p>
 
   <h2>Corrections and withdrawals</h2>
