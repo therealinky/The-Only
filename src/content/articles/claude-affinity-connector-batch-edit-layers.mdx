@@ -64,31 +64,23 @@ beforeYouUse:
     Affinity is free. The source walkthrough used Claude for Desktop on a
     paid Claude plan; we haven't confirmed whether the free plan works.
 ---
-This workflow comes from **Nolen Jonker's walkthrough on XDA Developers** (May 14, 2026), where they connected Claude to Affinity and handed it the fiddly, repetitive parts of a design file. We're describing their published process in our own words, with a few additions for working designers and an update for Affinity 3.3. We haven't run it hands-on ourselves.
+This workflow comes from **Nolen Jonker's walkthrough on XDA Developers** (May 14, 2026), where they connected Claude to Affinity and handed it the fiddly, repetitive parts of a design file. This is our take on why it's worth setting up, not a step-by-step reproduction, Jonker's own walkthrough already covers that in full. We haven't run it hands-on ourselves.
 
 The core idea is simple. Affinity exposes your open documents to Claude through an MCP connector, so instead of giving you advice about a file, Claude can actually reach in and change it. Jonker's main point is that this beats Affinity's older Macros feature, which can't do conditional logic or take variable inputs.
 
-## The steps
+## The shape of the workflow
 
-1. **Turn on the connector in Affinity.** In Affinity's settings, find the Model Context Protocol tab and switch on the Affinity MCP option. Nothing is exposed until you do this.
+Setup is two switches: turn on the Affinity MCP option in Affinity's own settings, then add Affinity as a connector from Claude for Desktop's connector directory. Jonker notes that network and file-system access are off by default in the permissions panel, worth checking yourself before your first real request. From there, the actual use is straightforward: point Claude at the tedious jobs, renaming layers to a consistent convention, swapping colors across a whole document, tidying spacing across multiple pages, being specific about the exact pattern or values rather than describing them loosely.
 
-2. **Add Affinity as a connector in Claude for Desktop.** In Claude's connector settings, browse the connector directory, find Affinity, and install it. Jonker's setup used the desktop app, since the connector talks to Affinity running locally.
+We'd add two habits Jonker doesn't mention: work on a duplicate of the file rather than the original, and start with a read-only request (ask Claude to list and describe the layers first) so you can confirm the connection actually understood the document before you let it change anything.
 
-3. **Check the permissions panel before you ask for anything.** Jonker notes that network access and file system access are off by default, and that you can configure permissions further from there. The exact controls weren't detailed in the walkthrough, so open the panel yourself and see what's on offer before your first real request.
+The real payoff is the last step in Jonker's piece: once a request works, ask Claude to save it as a script. A one-off edit saves you time once, a script you can read, adjust, and rerun on the next client file keeps saving it, and it doesn't need Claude or a network connection to run again. Affinity 3.3's new Scripting Studio workspace (added after Jonker's piece was published) makes those scripts easier to open and actually read before you trust them.
 
-4. **Work on a duplicate.** Our addition, not the source's. Save a copy of the file first. Batch edits across dozens of layers are exactly the kind of change that's annoying to unpick if Claude reads your request differently than you meant it.
-
-5. **Start with a read-only request.** Our addition, not the source's. Ask Claude to list the layers or pages in the open document and describe how they're currently named. This confirms the connection works and shows you what Claude "sees" before it touches anything.
-
-6. **Run the tedious job.** The tasks Jonker used it for include renaming layers to a consistent convention, creating new documents at given dimensions, swapping colors across a whole document, and tidying spacing and alignment across multiple pages. Be specific: give the exact naming pattern or the exact old and new color values rather than describing them loosely.
-
-7. **Keep the good ones as scripts.** When a request works and you'll need it again, ask Claude to save it as a script. Jonker's scripts landed in Affinity's Scripts panel for reuse without Claude in the loop. In Affinity 3.3 (September 15, 2026) this now sits alongside a dedicated Scripting Studio workspace for JavaScript, so it's worth opening the script there and reading what it actually does before relying on it.
+**Jonker walks through every step in detail, including the exact panels and settings involved, in the original piece**: [I connected Claude to Affinity, and now I batch-edit my designs without touching a single layer](https://www.xda-developers.com/connected-claude-to-affinity-batch-edit-designs-write-scripts/).
 
 ## Why it matters for designers
 
-Handoff prep is where a lot of design time quietly disappears: renaming "Rectangle 47" layers, applying a last-minute palette change across forty pages, making sure every export frame follows the same naming scheme. None of it is hard, and all of it is slow.
-
-The bigger win is step 7. A one-off AI edit saves you time once. A script you can read, adjust, and rerun on the next client file keeps saving it, and it doesn't need a subscription or a network connection to run.
+Handoff prep is where a lot of design time quietly disappears: renaming "Rectangle 47" layers, applying a last-minute palette change across forty pages, making sure every export frame follows the same naming scheme. None of it is hard, and all of it is slow, and turning the repeatable parts of it into a script you can rerun is a bigger win than any single AI edit.
 
 ## What to watch out for
 
