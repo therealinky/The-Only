@@ -1,0 +1,131 @@
+---
+title: "Photoshop's Generative Fill Does a Lot More Than Resize and Remove"
+dek: >-
+  Most people who use Firefly inside Photoshop know two moves: fill a resize,
+  erase an object. A look across Adobe's own documentation and independent
+  tutorials turns up a model picker, a free removal path, and a
+  reference-image workflow most people never open.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-09-29
+updatedAt: 2026-09-29
+lastVerified: 2026-09-29
+disciplines:
+  - Brand
+  - Illustration
+  - Web
+tools:
+  - Photoshop
+  - Adobe Firefly
+reviewedBy: Ana
+sources:
+  - title: "Use Generative Fill in Photoshop on desktop (Adobe Photoshop Help)"
+    url: https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/edit-images-with-generative-fill.html
+    accessed: 2026-09-29
+  - title: "Generate sharper variations with Enhance Detail (Adobe Photoshop Help)"
+    url: https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/generate-sharper-variations-with-enhance-detail.html
+    accessed: 2026-09-29
+  - title: "Explore beyond the canvas with Generative Expand (Adobe Photoshop Help)"
+    url: https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/explore-beyond-the-canvas-with-generative-expand.html
+    accessed: 2026-09-29
+  - title: "Use reference images for consistent results (Adobe Photoshop Help)"
+    url: https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/use-reference-images-for-consistent-results.html
+    accessed: 2026-09-29
+  - title: "Generative credits FAQ (Adobe Creative Cloud Help)"
+    url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html
+    accessed: 2026-09-29
+  - title: "Generative Fill in Photoshop: Remove People and Objects from Photos (Photoshop Essentials)"
+    url: https://www.photoshopessentials.com/photo-editing/generative-fill-in-photoshop-remove-people-and-objects-from-photos/
+    accessed: 2026-09-29
+  - title: "How to use Photoshop's Generative Fill tool to add or remove unwanted objects (Creative Bloq)"
+    url: https://www.creativebloq.com/photography/photo-editing-software/how-to-use-photoshops-generative-fill-tool-to-add-or-remove-unwanted-objects
+    accessed: 2026-09-29
+summary:
+  whatChanged: >-
+    Not a product update, a synthesized look at how much further Generative
+    Fill and Generative Expand actually go beyond the resize-and-remove
+    basics, drawn from Adobe's own documentation and independent tutorials
+    rather than any single write-up.
+  whyItMatters: >-
+    Most people default to one workflow and stop there, missing a free
+    removal path, a model picker that trades cost for quality, and a
+    reference-image workflow built for exactly the kind of consistency
+    production work actually needs.
+  bestFor: >-
+    Anyone who already uses Generative Fill occasionally for resizing or
+    cleanup and wants to know what else is sitting in the same panel.
+  timeToTry: >-
+    Trying each individual piece once (the Remove Tool, the model picker, one
+    reference-image generation, one Generative Expand) takes about 20 to 30
+    minutes. Getting fluent with reference images for consistent, on-brand
+    output is more of an ongoing practice than a one-time try.
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's own docs don't spell out whether generation
+    requests, or any image you upload as a reference, are used to train
+    models, or whether that differs between Adobe's own Firefly models and
+    the third-party partner models (Google Gemini, Black Forest Labs' FLUX)
+    offered through the same model picker. Check Adobe's generative AI data
+    policy directly before feeding client or NDA'd images through it,
+    especially with a partner model selected.
+  usageRights: >-
+    not verified: we didn't confirm Adobe's specific commercial-usage terms
+    for Firefly-generated output in this pass, and terms for partner-model
+    output may differ from Adobe's own. Check Adobe's Firefly terms of use
+    before shipping generated content in paid client work, especially
+    anything trademark-adjacent.
+  disclosure: >-
+    not verified: neither Adobe's documentation nor the independent
+    tutorials we found address whether a generated fill or expansion needs
+    to be disclosed to a client as AI-assisted. That's a question for your
+    own client agreements, not something the tool decides for you.
+  accessibility: >-
+    not applicable: this is an image-generation and retouching workflow, not
+    an interface or layout change with accessibility implications.
+  cost: >-
+    known: standard Generative Fill and Generative Expand using Adobe's own
+    Firefly models cost 1 credit per generation, and are actually unlimited
+    on Creative Cloud Pro, Pro Plus, and Firefly-plan subscriptions, per
+    Adobe's generative credits FAQ. The dedicated Remove Tool costs 0
+    credits, it's explicitly listed among the features that don't consume
+    credits at all. Switching to the Firefly Image 5 model inside Generative
+    Fill jumps to 10 credits per generation, and partner models like FLUX or
+    Gemini are billed as premium features at rates Adobe says vary by model.
+    Worth checking if you're on a Single App Photoshop plan specifically:
+    Adobe's own credit table shows subscribers who signed up on or after
+    June 17, 2025 get 25 monthly credits on that tier, against 500 for
+    people who subscribed earlier, a real difference worth confirming on
+    your own account.
+---
+This is a synthesis of how Generative Fill and Generative Expand actually work in Photoshop, drawn from Adobe's own documentation and independent tutorials, not any single person's write-up. Most people who've used the tool at all know two moves: select an area, leave the prompt blank or type a short description, and let it fill a resize or erase an object. That's genuinely useful, and it's also a fraction of what's sitting in the same panel.
+
+## The workflow
+
+1. **Know your two removal paths, and which one is free.** For a straightforward removal, Photoshop's dedicated Remove Tool does the job directly, and Adobe's own credits documentation lists it explicitly among the handful of features that don't consume generative credits at all. Generative Fill with a blank prompt does something similar but through the full Generative Fill flow, giving you three variations to choose between at a cost of 1 credit per generation on Adobe's own Firefly models. For a quick, uncomplicated removal, reach for the Remove Tool first.
+
+2. **Give automated selections room to work.** If you're using an automatic selection tool rather than manually drawing around an object, expand that selection by roughly 20 pixels (Select > Modify > Expand) before running Generative Fill. A tight selection gives the model no surrounding context to work from, and the result tends to come out visibly wrong rather than just imperfect. This matters more than most people expect: it's the difference between a clean fill and an obviously broken one.
+
+3. **Choose your model deliberately, it changes quality and cost together.** Generative Fill isn't locked to one engine. A model picker in the Contextual Task Bar lets you choose between Adobe's own Firefly Fill & Expand, the higher-fidelity Firefly Image 5, or third-party partner models including FLUX and Gemini. The default costs 1 credit (or nothing, on an unlimited-standard-generations plan); Firefly Image 5 costs 10 credits per generation; partner models are billed separately as premium features. If a fill keeps coming out muddy or generic, trying a different model before you give up on the whole approach is worth the extra credits.
+
+4. **Use reference images when you need consistency, not just a good result.** Beyond typing a prompt, Generative Fill accepts an uploaded reference image to guide generation, with two settings worth knowing: whether it references a single object in that image or the whole scene, and whether it swaps out what's in your selection or places something new into it while preserving the background. This is the tool to reach for when you need a new product shot to actually match an existing one, rather than just looking plausible on its own. Partner models support this too, with more reference images allowed per generation (up to 3 with FLUX, up to 8 with Gemini) than Adobe's own models currently take.
+
+5. **Reach for Generative Expand when the problem is the canvas, not the content.** Dragging the crop tool outward and running Generative Expand extends the image itself rather than filling a hole in it, useful for turning a portrait shot into a landscape crop, adding bleed for print, or reformatting one image across several social aspect ratios without starting over. It uses the same kind of model picker as Generative Fill, though the exact list of available models differs slightly between the two tools, worth a glance rather than assuming they match.
+
+6. **Don't settle for the first three variations, and finish the one you pick.** Every generation returns three options, and you can keep clicking Generate for fresh batches until one actually works, refining your prompt or reference as you go rather than accepting the first mediocre result. Once you've picked a favorite, Enhance Detail sharpens it into a second, higher-clarity version alongside the original, though it only works on variations larger than 1024 pixels.
+
+## Why it matters for designers
+
+The gap between "I use this for resizing" and what's actually available here is bigger than it looks from the default flow. Reference images solve a real production problem, keeping a new asset visually consistent with an established product line or brand look, that a plain text prompt genuinely struggles with. Generative Expand solves a different one: reformatting a single hero image across print, web, and social without commissioning a new shoot for every aspect ratio. And the free Remove Tool means a large share of everyday cleanup work doesn't need to touch your generative credit balance at all.
+
+The model picker is probably the most overlooked piece of the whole panel. It's easy to run Generative Fill dozens of times on the default model and quietly conclude "the AI can't do this," when switching models, at a real but modest credit cost, might have produced a usable result on the second try.
+
+## What to watch out for
+
+Credit costs vary more than a first glance suggests, and they're easy to burn through without noticing if you're switching models freely. Check your own plan's monthly allowance rather than assuming: Adobe's own numbers show a meaningful gap between older and newer subscribers on the same Single App tier, and premium models like Firefly Image 5 or the partner models cost several times what the default does.
+
+Enhance Detail silently does nothing on smaller generations, since it only works above 1024 pixels, so don't assume a low-res variation has been sharpened just because you clicked the button.
+
+This is synthesized from documentation and tutorials, not a workflow this publication has run start to finish ourselves. Test the reference-image and model-switching pieces specifically on a throwaway file before building a client deliverable around them, since exact output quality is the one thing no amount of reading substitutes for.
