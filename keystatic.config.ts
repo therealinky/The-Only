@@ -1,5 +1,15 @@
 import { collection, config, fields } from '@keystatic/core';
-import { DIFFICULTY_LEVELS, DISCIPLINES, EVIDENCE_LEVELS, FORMATS, SITE } from './src/config/site';
+import {
+  DIFFICULTY_LEVELS,
+  DISCIPLINES,
+  EVIDENCE_LEVELS,
+  FORMATS,
+  PATTERN_STRENGTH_LABELS,
+  PATTERN_STRENGTH_LEVELS,
+  SENTIMENT_LABELS,
+  SENTIMENT_LEVELS,
+  SITE,
+} from './src/config/site';
 
 // Keystatic runs in LOCAL MODE ONLY (storage: 'local'), as an optional
 // editing UI at /keystatic during `astro dev`. It is never wired up for
@@ -58,6 +68,25 @@ export default config({
           options: DIFFICULTY_LEVELS.map((value) => ({ label: value[0].toUpperCase() + value.slice(1), value })),
           defaultValue: 'quick',
         }),
+        sentiment: fields.select({
+          label: 'Sentiment (Pulse only)',
+          description: 'The sidebar\'s overall-mood read. Only used by, and required for, format "Pulse".',
+          options: [
+            { label: 'Not set', value: '' },
+            ...SENTIMENT_LEVELS.map((value) => ({ label: SENTIMENT_LABELS[value], value })),
+          ],
+          defaultValue: '',
+        }),
+        patternStrength: fields.select({
+          label: 'Pattern strength (Pulse only)',
+          description:
+            'How solid the sentiment pattern is. Only used by, and required for, format "Pulse".',
+          options: [
+            { label: 'Not set', value: '' },
+            ...PATTERN_STRENGTH_LEVELS.map((value) => ({ label: PATTERN_STRENGTH_LABELS[value], value })),
+          ],
+          defaultValue: '',
+        }),
         status: fields.select({
           label: 'Status',
           options: [
@@ -92,6 +121,11 @@ export default config({
         tools: fields.array(fields.text({ label: 'Tool name' }), {
           label: 'Tools discussed',
           itemLabel: (props) => props.value || 'Tool',
+        }),
+        communities: fields.array(fields.text({ label: 'Community/platform name' }), {
+          label: 'Communities (Pulse only)',
+          description: 'Where this discussion is happening (e.g. "Reddit", "Designer Twitter/X"). Required for format "Pulse".',
+          itemLabel: (props) => props.value || 'Community',
         }),
         sources: fields.array(
           fields.object({

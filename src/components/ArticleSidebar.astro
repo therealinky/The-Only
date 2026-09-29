@@ -1,7 +1,9 @@
 ---
-import type { Difficulty } from '../config/site';
+import type { Difficulty, Format, PatternStrength, Sentiment } from '../config/site';
 import { slugify } from '../lib/slugify';
 import DifficultyBadge from './DifficultyBadge.astro';
+import PatternStrengthBadge from './PatternStrengthBadge.astro';
+import SentimentBadge from './SentimentBadge.astro';
 
 interface Summary {
   whatChanged?: string;
@@ -19,19 +21,35 @@ interface BeforeYouUse {
 }
 
 interface Props {
+  format: Format;
   dek: string;
   difficulty: Difficulty;
   tools: string[];
   beforeYouUse: BeforeYouUse;
   summary?: Summary;
   hasTutorial: boolean;
+  sentiment?: Sentiment;
+  patternStrength?: PatternStrength;
+  communities?: string[];
 }
 
-const { dek, difficulty, tools, beforeYouUse, summary, hasTutorial } = Astro.props;
+const {
+  format,
+  dek,
+  difficulty,
+  tools,
+  beforeYouUse,
+  summary,
+  hasTutorial,
+  sentiment,
+  patternStrength,
+  communities = [],
+} = Astro.props;
 const hasSummary = Boolean(summary?.whatChanged);
+const isPulse = format === 'pulse';
 ---
 
-<aside class="article-sidebar" aria-label="At a glance: summary, effort, tools, and things to check before you use it">
+<aside class="article-sidebar" aria-label="At a glance">
   <div class="article-sidebar__section">
     <h2 class="article-sidebar__heading">At a glance</h2>
     {
@@ -61,10 +79,34 @@ const hasSummary = Boolean(summary?.whatChanged);
     {hasTutorial && <p class="article-sidebar__jump"><a href="#tutorial">Jump to the tutorial ↓</a></p>}
   </div>
 
-  <div class="article-sidebar__section">
-    <h2 class="article-sidebar__heading">Effort to try</h2>
-    <DifficultyBadge difficulty={difficulty} />
-  </div>
+  {
+    isPulse ? (
+      sentiment && (
+        <div class="article-sidebar__section">
+          <h2 class="article-sidebar__heading">The overall mood</h2>
+          <SentimentBadge sentiment={sentiment} />
+        </div>
+      )
+    ) : (
+      <div class="article-sidebar__section">
+        <h2 class="article-sidebar__heading">Effort to try</h2>
+        <DifficultyBadge difficulty={difficulty} />
+      </div>
+    )
+  }
+
+  {
+    isPulse && communities.length > 0 && (
+      <div class="article-sidebar__section">
+        <h2 class="article-sidebar__heading">Where it's happening</h2>
+        <ul class="article-sidebar__tools">
+          {communities.map((community) => (
+            <li>{community}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 
   {
     tools.length > 0 && (
@@ -81,29 +123,40 @@ const hasSummary = Boolean(summary?.whatChanged);
     )
   }
 
-  <div class="article-sidebar__section">
-    <h2 class="article-sidebar__heading">Before you use it</h2>
-    <dl>
-      <div>
-        <dt>Client data</dt>
-        <dd>{beforeYouUse.clientData}</dd>
+  {
+    isPulse ? (
+      patternStrength && (
+        <div class="article-sidebar__section">
+          <h2 class="article-sidebar__heading">How solid is this</h2>
+          <PatternStrengthBadge patternStrength={patternStrength} />
+        </div>
+      )
+    ) : (
+      <div class="article-sidebar__section">
+        <h2 class="article-sidebar__heading">Before you use it</h2>
+        <dl>
+          <div>
+            <dt>Client data</dt>
+            <dd>{beforeYouUse.clientData}</dd>
+          </div>
+          <div>
+            <dt>Usage rights</dt>
+            <dd>{beforeYouUse.usageRights}</dd>
+          </div>
+          <div>
+            <dt>Disclosure</dt>
+            <dd>{beforeYouUse.disclosure}</dd>
+          </div>
+          <div>
+            <dt>Accessibility</dt>
+            <dd>{beforeYouUse.accessibility}</dd>
+          </div>
+          <div>
+            <dt>Cost</dt>
+            <dd>{beforeYouUse.cost}</dd>
+          </div>
+        </dl>
       </div>
-      <div>
-        <dt>Usage rights</dt>
-        <dd>{beforeYouUse.usageRights}</dd>
-      </div>
-      <div>
-        <dt>Disclosure</dt>
-        <dd>{beforeYouUse.disclosure}</dd>
-      </div>
-      <div>
-        <dt>Accessibility</dt>
-        <dd>{beforeYouUse.accessibility}</dd>
-      </div>
-      <div>
-        <dt>Cost</dt>
-        <dd>{beforeYouUse.cost}</dd>
-      </div>
-    </dl>
-  </div>
+    )
+  }
 </aside>

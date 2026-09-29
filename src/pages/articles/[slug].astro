@@ -73,12 +73,16 @@ const structuredData = {
       ) : (
         <div class="article-layout">
           <ArticleSidebar
+            format={data.format}
             dek={data.dek}
             difficulty={data.difficulty}
             tools={data.tools}
             beforeYouUse={data.beforeYouUse}
             summary={data.summary}
             hasTutorial={hasTutorial}
+            sentiment={data.sentiment}
+            patternStrength={data.patternStrength}
+            communities={data.communities}
           />
 
           <div class="article-main">

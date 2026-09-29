@@ -100,3 +100,30 @@ export const DIFFICULTY_DESCRIPTIONS: Record<Difficulty, string> = {
   moderate: 'Worth a focused session: some setup, a new interface, or a workflow to get used to.',
   involved: 'A real time investment: new tooling, a multi-step process, or a skill that takes practice.',
 };
+
+// Pulse-only: the sidebar's overall-mood read, replacing effort-to-try for a
+// format that has nothing to "try".
+export const SENTIMENT_LEVELS = ['optimistic', 'mixed', 'skeptical', 'frustrated'] as const;
+export type Sentiment = (typeof SENTIMENT_LEVELS)[number];
+
+export const SENTIMENT_LABELS: Record<Sentiment, string> = {
+  optimistic: 'Optimistic',
+  mixed: 'Mixed',
+  skeptical: 'Skeptical',
+  frustrated: 'Frustrated',
+};
+
+// Pulse-only: how much to trust the pattern as real sentiment rather than a
+// single loud voice, surfaced in the sidebar instead of buried in prose.
+export const PATTERN_STRENGTH_LEVELS = ['emerging', 'established'] as const;
+export type PatternStrength = (typeof PATTERN_STRENGTH_LEVELS)[number];
+
+export const PATTERN_STRENGTH_LABELS: Record<PatternStrength, string> = {
+  emerging: 'Emerging pattern',
+  established: 'Widespread pattern',
+};
+
+export const PATTERN_STRENGTH_DESCRIPTIONS: Record<PatternStrength, string> = {
+  emerging: 'Just starting to show up in a few places, not yet a broad consensus.',
+  established: 'Showing up repeatedly and independently across multiple spaces.',
+};

@@ -8,6 +8,6 @@ interface Props {
 const { difficulty } = Astro.props;
 ---
 
-<span class="badge badge--difficulty" data-difficulty={difficulty} title={DIFFICULTY_DESCRIPTIONS[difficulty]}>
+<span class="badge badge--sidebar" data-difficulty={difficulty} title={DIFFICULTY_DESCRIPTIONS[difficulty]}>
   {DIFFICULTY_LABELS[difficulty]}
 </span>
