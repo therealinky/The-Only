@@ -1,9 +1,16 @@
 ---
 // Article hero art — see src/lib/hypergraphy.ts for how the motif's
-// character grid is generated. Purely decorative (the title/dek already
+// character layers are generated. Purely decorative (the title/dek already
 // carry the information), so it's hidden from assistive tech.
 import type { Discipline } from '../config/site';
-import { buildHypergraphicArt, GRADIENT_PAIRS, GRID_ROWS, HYPERGRAPHY_CANVAS } from '../lib/hypergraphy';
+import {
+  buildHypergraphicArt,
+  GRADIENT_PAIRS,
+  GRID_COLS,
+  GRID_ROWS,
+  HYPERGRAPHY_CANVAS,
+  type HgLayerKind,
+} from '../lib/hypergraphy';
 
 interface Props {
   slug: string;
@@ -12,7 +19,7 @@ interface Props {
 }
 
 const { slug, disciplines, body } = Astro.props;
-const { gradientVariant, rows } = buildHypergraphicArt(slug, disciplines, body);
+const { gradientVariant, layers } = buildHypergraphicArt(slug, disciplines, body);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
 const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
 const iridescentId = `hg-iridescent-${slug}`;
@@ -20,10 +27,38 @@ const iridescentId = `hg-iridescent-${slug}`;
 const motifScale = Math.min(motifBox.w, motifBox.h) / 100;
 const motifX = motifBox.x + (motifBox.w - 100 * motifScale) / 2;
 const motifY = motifBox.y + (motifBox.h - 100 * motifScale) / 2;
+const cellW = 100 / GRID_COLS;
 const cellH = 100 / GRID_ROWS;
 
-let stepIndex = 0;
-const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
+// Outline glyphs (box drawing, diagonals) aren't in the site's Latin-only
+// JetBrains Mono subset, so they render in a fallback font whose widths vary
+// by platform. Placing each one at its own cell keeps the lines on the grid
+// regardless; the word and shading rows are all Latin, so they can simply be
+// stretched to the grid width.
+interface ArtText {
+  kind: HgLayerKind;
+  rowIndex: number;
+  y: string;
+  x: string;
+  content: string;
+  fitted: boolean;
+}
+
+const texts = layers.flatMap((layer) =>
+  layer.rows.flatMap((row, rowIndex): ArtText[] => {
+    if (!row.trim()) return [];
+    const y = ((rowIndex + 0.82) * cellH).toFixed(3);
+    if (layer.kind !== 'line') return [{ kind: layer.kind, rowIndex, y, x: '0', content: row, fitted: true }];
+    const xs: string[] = [];
+    let content = '';
+    [...row].forEach((char, col) => {
+      if (char === ' ') return;
+      content += char;
+      xs.push((col * cellW).toFixed(3));
+    });
+    return [{ kind: layer.kind, rowIndex, y, x: xs.join(' '), content, fitted: false }];
+  }),
+);
 ---
 
 <div class="hg-art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
@@ -48,24 +83,26 @@ const nextDelay = (stepMs: number) => `${stepIndex++ * stepMs}ms`;
         <stop offset="100%" stop-color="var(--hero-purple)" />
       </linearGradient>
     </defs>
-    <g
-      transform={`translate(${motifX} ${motifY}) scale(${motifScale})`}
-      font-size={cellH * 0.92}
-      xml:space="preserve"
-    >
+    <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`} font-size={cellH * 0.92} xml:space="preserve">
       {
-        rows.map((row, i) => (
-          <text
-            class="hg-text"
-            x="0"
-            y={(i + 0.82) * cellH}
-            textLength="100"
-            lengthAdjust="spacingAndGlyphs"
-            style={`--hg-delay: ${nextDelay(30)}`}
-          >
-            {row}
-          </text>
-        ))
+        texts.map((t) =>
+          t.fitted ? (
+            <text
+              class={`hg-text hg-text--${t.kind}`}
+              x={t.x}
+              y={t.y}
+              textLength="100"
+              lengthAdjust="spacingAndGlyphs"
+              style={`--hg-delay: ${t.rowIndex * 25}ms`}
+            >
+              {t.content}
+            </text>
+          ) : (
+            <text class={`hg-text hg-text--${t.kind}`} x={t.x} y={t.y} style={`--hg-delay: ${t.rowIndex * 25}ms`}>
+              {t.content}
+            </text>
+          ),
+        )
       }
     </g>
   </svg>

@@ -1,9 +1,13 @@
-// "Hypergraphy" article hero art — an ASCII-art-style rendering of a simple
-// discipline motif, filled with characters pulled from the article's own
-// text (a nod to microscript/word-portrait art without reproducing any
-// specific existing artwork). Deterministically generated from the
-// article's slug so the same article always renders the same art (no
-// hydration mismatch, no need to store an actual image file).
+// "Hypergraphy" article hero art: a discipline motif drawn as a character
+// grid, deterministically generated from the article's slug so the same
+// article always renders the same art.
+//
+// Two techniques:
+// - hybrid: crisp line-drawing edges (glyphs chosen by edge direction, box
+//   corners where lines meet), with the article's own words filling each
+//   region at that region's tone.
+// - shading: every cell's coverage and region tone picks a glyph by visual
+//   weight, so faces read as solid and dimensional. Used for 3D.
 import type { Discipline } from '../config/site';
 
 export const GRADIENT_VARIANTS = ['purple', 'rose', 'sage', 'blue', 'gold'] as const;
@@ -26,109 +30,24 @@ interface Pt {
 }
 
 type MotifKey = 'face' | 'chart' | 'reel' | 'browser' | 'seal' | 'ribbon' | 'cube';
+type Technique = 'hybrid' | 'shading';
 
-// Every motif is authored as plain polygons/polylines in a 0-100 unit box
-// (not SVG path strings): `fill` shapes are closed and get filled solid,
-// `stroke` shapes are open and get a thick "ink band" along their length.
-// Point-in-polygon and distance-to-polyline tests below turn these into an
-// ASCII-art ink mask. Slight faceting versus the old bezier curves is
-// invisible at character-grid resolution.
-const MOTIFS: Record<MotifKey, { fill: Pt[][]; stroke: Pt[][] }> = {
-  // UI/UX — a face profile OUTLINE (forehead, nose, lips, chin) plus a
-  // small filled pupil and an ear mark. Used to be a solid-filled
-  // silhouette, which reads more like a blob than a face at a glance, a
-  // hollow outline (just the profile line itself, only the small eye dot
-  // filled) is what actually shows the nose/lips/chin zigzag as a
-  // recognizable line instead of burying it inside a solid shape.
-  face: {
-    fill: [circle(40, 22, 2.6)],
-    stroke: [
-      poly([
-        26, 6, 40, 6, 50, 12, 53, 20, 51, 26, 67, 34, 57, 38, 61, 44, 55, 48, 58, 56, 47, 62, 41, 66, 33, 80, 18, 78,
-        8, 58, 6, 30, 12, 14, 26, 6,
-      ]),
-      poly([16, 50, 13, 53, 13, 58, 16, 61]),
-    ],
-  },
-  // Creative Coding — a bar chart with a trend line over the top, on axes,
-  // the axis lines are what make it read as "a chart" instead of "some
-  // floating rectangles."
-  chart: {
-    fill: [
-      rect(16, 63, 85, 7),
-      rect(35, 48, 85, 7),
-      rect(54, 33, 85, 7),
-      rect(73, 52, 85, 7),
-      rect(92, 20, 85, 7),
-    ],
-    stroke: [
-      poly([14, 58, 28, 46, 40, 50, 52, 30, 62, 15, 78, 34, 94, 16]),
-      poly([8, 8, 8, 88, 96, 88]),
-    ],
-  },
-  // Motion & Video — a frame OUTLINE (not a solid block, see the note on
-  // `browser` below), a small filled play triangle, and film-tick marks on
-  // both edges (a filmstrip's sprocket holes, not just a decoration on one
-  // side).
-  reel: {
-    fill: [poly([40, 33, 40, 67, 68, 50])],
-    stroke: [
-      rectOutline(14, 20, 86, 72),
-      poly([9, 26, 9, 34]), poly([9, 46, 9, 54]), poly([9, 66, 9, 74]),
-      poly([91, 26, 91, 34]), poly([91, 46, 91, 54]), poly([91, 66, 91, 74]),
-    ],
-  },
-  // Web — a browser frame OUTLINE, traffic-light dots, an address-bar
-  // divider, and a wandering content line. The frame used to be a *solid
-  // filled* 86x70 rectangle, nearly the entire shape's canvas. A fill
-  // region is entirely ink, so the stroke lines and dots drawn "inside" it
-  // were redundant, already-ink cells, invisible against the solid block.
-  // This is likely the single biggest source of "it just looks like a
-  // rectangle": for Web articles, the motif genuinely was one. An outline
-  // frame with a hollow, mostly-blank interior is what actually reads as
-  // "a window" instead of "a filled box."
-  browser: {
-    fill: [circle(22, 24, 2.4), circle(30, 24, 2.4), circle(38, 24, 2.4)],
-    stroke: [
-      rectOutline(10, 15, 96, 85),
-      poly([10, 33, 96, 33]),
-      poly([18, 60, 28, 44, 38, 76, 48, 58, 58, 42, 68, 70, 82, 50]),
-    ],
-  },
-  // Brand — two clearly separate, only lightly overlapping circles (a real
-  // Venn-style seal mark), plus a diagonal mark through them. The old
-  // version had the centers closer together than the sum of the radii by a
-  // wide margin, so the two circles fully merged into one plain oval with
-  // no waist between them, this is the actual bug that made "Brand" read
-  // as a blob rather than a seal.
-  seal: {
-    fill: [circle(28, 50, 23), circle(72, 50, 23)],
-    stroke: [poly([30, 24, 70, 76])],
-  },
-  // Illustration — a single flowing brush stroke with an ink-blot accent.
-  ribbon: {
-    fill: [circle(93, 22, 3.4)],
-    stroke: [poly([8, 72, 24, 18, 46, 92, 60, 38, 70, 4, 84, 52, 93, 26])],
-  },
-  // 3D — an isometric wireframe cube: a hexagon outline plus a Y from the
-  // center to alternating vertices, the classic way to draw a cube in line
-  // art. This used to fill the three faces solid instead: fill is a pure
-  // boolean "ink here" test with no concept of which face, so a stroke
-  // drawn over an already-filled region is invisible, same cells, still
-  // ink either way. That merged the three faces into one solid hexagon
-  // blob with no internal lines at all. No fill at all here, the hexagon
-  // and the Y are both strokes, so the interior stays hollow and the
-  // dividing lines are the only ink there.
-  cube: {
-    fill: [],
-    stroke: [
-      poly([50, 15, 80, 32, 80, 68, 50, 85, 20, 68, 20, 32, 50, 15]),
-      poly([50, 49, 80, 32]),
-      poly([50, 49, 20, 32]),
-      poly([50, 49, 50, 85]),
-    ],
-  },
-};
+// How the hybrid technique draws a fill: a single mark, words packed inside
+// it, or its outline with words inside.
+type FillKind = 'dot' | 'solid' | 'outline';
+
+// Shapes are authored in a 0-100 unit box. `tone` (0-1) is how dark a region
+// reads: it drives the shading ramp directly, and in the hybrid it sets how
+// strongly the article's words show inside that region. Overlapping tones add.
+interface Motif {
+  fills: { points: Pt[]; kind: FillKind; tone: number }[];
+  strokes: Pt[][];
+  tones: { points: Pt[]; tone: number }[];
+  strokeTone?: number;
+  // Hybrid only: for a motif that's all line and no region (the ribbon), words
+  // run in a band this many cells either side of the stroke instead.
+  wordBand?: number;
+}
 
 function poly(flat: number[]): Pt[] {
   const points: Pt[] = [];
@@ -136,32 +55,173 @@ function poly(flat: number[]): Pt[] {
   return points;
 }
 
-function rect(cx: number, y1: number, y2: number, w: number): Pt[] {
+function box(x1: number, y1: number, x2: number, y2: number): Pt[] {
+  return poly([x1, y1, x2, y1, x2, y2, x1, y2]);
+}
+
+// Closed back to its start point, so it draws as four edges rather than three.
+function frame(x1: number, y1: number, x2: number, y2: number): Pt[] {
+  return poly([x1, y1, x2, y1, x2, y2, x1, y2, x1, y1]);
+}
+
+function bar(cx: number, y1: number, y2: number, w: number): Pt[] {
   const half = w / 2;
   return poly([cx - half, y1, cx - half, y2, cx + half, y2, cx + half, y1]);
 }
 
-// A closed rectangle outline as a stroke polyline: closes back to the
-// start point so distToPolyline sees a complete outline (four segments),
-// not a fillable region.
-function rectOutline(x1: number, y1: number, x2: number, y2: number): Pt[] {
-  return poly([x1, y1, x2, y1, x2, y2, x1, y2, x1, y1]);
-}
-
-function circle(cx: number, cy: number, r: number, segments = 14): Pt[] {
-  const points: Pt[] = [];
-  for (let i = 0; i < segments; i++) {
+function circle(cx: number, cy: number, r: number, segments = 32): Pt[] {
+  return Array.from({ length: segments }, (_, i) => {
     const angle = (i / segments) * Math.PI * 2;
-    points.push({ x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r });
-  }
-  return points;
+    return { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+  });
 }
 
-function pointInPolygon(p: Pt, poly: Pt[]): boolean {
+function closeLoop(points: Pt[]): Pt[] {
+  const first = points[0];
+  const last = points[points.length - 1];
+  return first.x === last.x && first.y === last.y ? points : [...points, first];
+}
+
+const FACE_PROFILE = poly([
+  26, 6, 40, 6, 50, 12, 53, 20, 51, 26, 67, 34, 57, 38, 61, 44, 55, 48, 58, 56, 47, 62, 41, 66, 33, 80, 18, 78, 8, 58,
+  6, 30, 12, 14, 26, 6,
+]);
+
+const MOTIFS: Record<MotifKey, Motif> = {
+  // UI/UX: a profile (forehead, nose, lips, chin), an eye, and an ear mark.
+  face: {
+    fills: [{ points: circle(40, 22, 2.6), kind: 'dot', tone: 1 }],
+    strokes: [FACE_PROFILE, poly([16, 50, 13, 53, 13, 58, 16, 61])],
+    tones: [{ points: FACE_PROFILE, tone: 0.16 }],
+  },
+  // Creative Coding: bars on axes with a trend line over the top.
+  chart: {
+    fills: [bar(16, 63, 85, 7), bar(35, 48, 85, 7), bar(54, 33, 85, 7), bar(73, 52, 85, 7), bar(92, 20, 85, 7)].map(
+      (points) => ({ points, kind: 'solid' as const, tone: 0.7 }),
+    ),
+    strokes: [poly([14, 58, 28, 46, 40, 50, 52, 30, 62, 15, 78, 34, 94, 16]), poly([8, 8, 8, 88, 96, 88])],
+    tones: [],
+  },
+  // Motion & Video: a frame with a play button and sprocket ticks both sides.
+  reel: {
+    fills: [{ points: poly([40, 33, 40, 67, 68, 50]), kind: 'solid', tone: 1 }],
+    strokes: [
+      frame(14, 20, 86, 72),
+      poly([9, 26, 9, 34]),
+      poly([9, 46, 9, 54]),
+      poly([9, 66, 9, 74]),
+      poly([91, 26, 91, 34]),
+      poly([91, 46, 91, 54]),
+      poly([91, 66, 91, 74]),
+    ],
+    tones: [{ points: box(14, 20, 86, 72), tone: 0.12 }],
+  },
+  // Web: a browser window with traffic-light dots, an address-bar divider,
+  // and a wandering content line.
+  browser: {
+    fills: [22, 30, 38].map((x) => ({ points: circle(x, 24, 2.4), kind: 'dot' as const, tone: 1 })),
+    strokes: [
+      frame(10, 15, 96, 85),
+      poly([10, 33, 96, 33]),
+      poly([18, 60, 28, 44, 38, 76, 48, 58, 58, 42, 68, 70, 82, 50]),
+    ],
+    tones: [
+      { points: box(10, 15, 96, 33), tone: 0.42 },
+      { points: box(10, 33, 96, 85), tone: 0.1 },
+    ],
+  },
+  // Brand: two overlapping circles and a diagonal mark. The overlap has to be
+  // several cells wide, or both arcs and the mark land in one noisy column.
+  seal: {
+    fills: [
+      { points: circle(34, 50, 23), kind: 'outline', tone: 0.4 },
+      { points: circle(66, 50, 23), kind: 'outline', tone: 0.6 },
+    ],
+    strokes: [poly([30, 24, 70, 76])],
+    tones: [],
+  },
+  // Illustration: a single flowing brush stroke with an ink-blot accent.
+  ribbon: {
+    fills: [{ points: circle(93, 22, 3.4), kind: 'dot', tone: 1 }],
+    strokes: [poly([8, 72, 24, 18, 46, 92, 60, 38, 70, 4, 84, 52, 93, 26])],
+    tones: [],
+    wordBand: 2.2,
+  },
+  // 3D: an isometric cube, lit from above, so each face gets its own tone.
+  cube: {
+    fills: [],
+    strokes: [
+      poly([50, 15, 80, 32, 80, 68, 50, 85, 20, 68, 20, 32, 50, 15]),
+      poly([50, 49, 80, 32]),
+      poly([50, 49, 20, 32]),
+      poly([50, 49, 50, 85]),
+    ],
+    tones: [
+      { points: poly([50, 15, 80, 32, 50, 49, 20, 32]), tone: 0.14 },
+      { points: poly([20, 32, 50, 49, 50, 85, 20, 68]), tone: 0.45 },
+      { points: poly([50, 49, 80, 32, 80, 68, 50, 85]), tone: 0.78 },
+    ],
+    strokeTone: 0.95,
+  },
+};
+
+const DISCIPLINE_ART: Record<Discipline, { motif: MotifKey; technique: Technique }> = {
+  Brand: { motif: 'seal', technique: 'hybrid' },
+  Web: { motif: 'browser', technique: 'hybrid' },
+  'UI/UX': { motif: 'face', technique: 'hybrid' },
+  'Motion & Video': { motif: 'reel', technique: 'hybrid' },
+  Illustration: { motif: 'ribbon', technique: 'hybrid' },
+  '3D': { motif: 'cube', technique: 'shading' },
+  'Creative Coding': { motif: 'chart', technique: 'hybrid' },
+};
+
+// Cells are tall (100/64 wide by 100/36 tall in the square motif), the same
+// proportion as a terminal cell, which is what box-drawing glyphs expect.
+export const GRID_COLS = 64;
+export const GRID_ROWS = 36;
+const CELL_W = 100 / GRID_COLS;
+const CELL_H = 100 / GRID_ROWS;
+
+// Ordered by visual weight, lightest to heaviest.
+const SHADE_RAMP = ' .:-=+*#%@';
+
+// Box-drawing glyph for each combination of neighbors a cell's lines connect
+// to (Left, Right, Up, Down).
+const BOX_GLYPHS: Record<string, string> = {
+  L: '─',
+  R: '─',
+  LR: '─',
+  U: '│',
+  D: '│',
+  UD: '│',
+  RD: '┌',
+  LD: '┐',
+  RU: '└',
+  LU: '┘',
+  LRD: '┬',
+  LRU: '┴',
+  RUD: '├',
+  LUD: '┤',
+  LRUD: '┼',
+};
+
+export type HgLayerKind = 'words-light' | 'words-mid' | 'words-strong' | 'shade' | 'line';
+
+export interface HgLayer {
+  kind: HgLayerKind;
+  rows: string[];
+}
+
+export interface HypergraphicArt {
+  gradientVariant: GradientVariant;
+  layers: HgLayer[];
+}
+
+function pointInPolygon(p: Pt, polygon: Pt[]): boolean {
   let inside = false;
-  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    const { x: xi, y: yi } = poly[i];
-    const { x: xj, y: yj } = poly[j];
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const { x: xi, y: yi } = polygon[i];
+    const { x: xj, y: yj } = polygon[j];
     const intersects = yi > p.y !== yj > p.y && p.x < ((xj - xi) * (p.y - yi)) / (yj - yi) + xi;
     if (intersects) inside = !inside;
   }
@@ -182,31 +242,205 @@ function distToPolyline(p: Pt, line: Pt[]): number {
   return min;
 }
 
-const DISCIPLINE_MOTIFS: Record<Discipline, MotifKey> = {
-  Brand: 'seal',
-  Web: 'browser',
-  'UI/UX': 'face',
-  'Motion & Video': 'reel',
-  Illustration: 'ribbon',
-  '3D': 'cube',
-  'Creative Coding': 'chart',
-};
+function regionTone(p: Pt, motif: Motif, skipDots: boolean): number {
+  let tone = 0;
+  for (const fill of motif.fills) {
+    if (skipDots && fill.kind === 'dot') continue;
+    if (pointInPolygon(p, fill.points)) tone += fill.tone;
+  }
+  for (const region of motif.tones) if (pointInPolygon(p, region.points)) tone += region.tone;
+  return Math.min(1, tone);
+}
 
-// 30x16 (480 cells) was nowhere near enough resolution to trace an actual
-// curve or feature, every motif just came out as a rounded blob no matter
-// how the shape itself was authored. 46x26 (1196 cells, ~2.5x) is enough to
-// show real silhouette detail (a face's profile zigzag, a cube's internal
-// edges) while each character is still large enough to read as a character.
-export const GRID_COLS = 46;
-export const GRID_ROWS = 26;
-// Scaled down from the old grid's 3.4 to roughly preserve stroke thickness
-// relative to the now-smaller cell pitch, a fixed radius over more, smaller
-// cells would otherwise render strokes visibly thicker than before.
-const STROKE_INK_RADIUS = 2.2;
+function blankGrid(): string[][] {
+  return Array.from({ length: GRID_ROWS }, () => Array<string>(GRID_COLS).fill(' '));
+}
 
-export interface HypergraphicArt {
-  gradientVariant: GradientVariant;
-  rows: string[];
+function toRows(grid: string[][]): string[] {
+  return grid.map((row) => row.join(''));
+}
+
+const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
+const clampIndex = (x: number, size: number) => clamp(x, 0, size - 1);
+
+// Returns the glyph for every cell an edge passes through ('' elsewhere).
+// Axis-aligned edges record which neighbors they connect to, so corners and
+// junctions come out as proper box corners and tees. Other edges get a glyph
+// for their direction: near-flat ones use ¯ ─ _ by where the line sits in the
+// cell, which smooths their stair-steps; steeper ones use ╱ ╲ where the line
+// crosses into the next column or row, and │ where it doesn't.
+function lineGlyphs(motif: Motif, solidKinds: readonly FillKind[]): string[][] {
+  const cells = Array.from({ length: GRID_ROWS }, () =>
+    Array.from({ length: GRID_COLS }, () => ({ links: '', glyph: '', dist: Infinity })),
+  );
+  const inGrid = (r: number, c: number) => r >= 0 && r < GRID_ROWS && c >= 0 && c < GRID_COLS;
+  const link = (r: number, c: number, side: string) => {
+    if (inGrid(r, c) && !cells[r][c].links.includes(side)) cells[r][c].links += side;
+  };
+  const mark = (r: number, c: number, glyph: string, a: Pt, b: Pt) => {
+    if (!inGrid(r, c)) return;
+    const cell = cells[r][c];
+    const dist = distToSegment({ x: c + 0.5, y: r + 0.5 }, a, b);
+    if (dist < cell.dist) {
+      cell.glyph = glyph;
+      cell.dist = dist;
+    }
+  };
+  const levelGlyph = (v: number) => {
+    const f = v - Math.floor(v);
+    return f < 0.34 ? '¯' : f > 0.66 ? '_' : '─';
+  };
+
+  const drawSegment = (from: Pt, to: Pt) => {
+    const a = { x: from.x / CELL_W, y: from.y / CELL_H };
+    const b = { x: to.x / CELL_W, y: to.y / CELL_H };
+
+    if (from.y === to.y) {
+      const r = clampIndex(Math.floor(a.y), GRID_ROWS);
+      const c0 = clampIndex(Math.floor(Math.min(a.x, b.x)), GRID_COLS);
+      const c1 = clampIndex(Math.floor(Math.max(a.x, b.x)), GRID_COLS);
+      for (let c = c0; c <= c1; c++) {
+        if (c > c0 || c0 === c1) link(r, c, 'L');
+        if (c < c1 || c0 === c1) link(r, c, 'R');
+      }
+      return;
+    }
+    if (from.x === to.x) {
+      const c = clampIndex(Math.floor(a.x), GRID_COLS);
+      const r0 = clampIndex(Math.floor(Math.min(a.y, b.y)), GRID_ROWS);
+      const r1 = clampIndex(Math.floor(Math.max(a.y, b.y)), GRID_ROWS);
+      for (let r = r0; r <= r1; r++) {
+        if (r > r0 || r0 === r1) link(r, c, 'U');
+        if (r < r1 || r0 === r1) link(r, c, 'D');
+      }
+      return;
+    }
+
+    const du = b.x - a.x;
+    const dv = b.y - a.y;
+    const slope = Math.abs(dv / du);
+    const diagonal = du * dv > 0 ? '╲' : '╱';
+    const vAt = (u: number) => a.y + ((u - a.x) * dv) / du;
+    const uAt = (v: number) => a.x + ((v - a.y) * du) / dv;
+    const u0 = Math.min(a.x, b.x);
+    const u1 = Math.max(a.x, b.x);
+    const v0 = Math.min(a.y, b.y);
+    const v1 = Math.max(a.y, b.y);
+
+    if (slope <= 1) {
+      for (let c = Math.floor(u0); c <= Math.floor(u1); c++) {
+        const v = vAt(clamp(c + 0.5, u0, u1));
+        const crossesRow = Math.floor(vAt(clamp(c, u0, u1))) !== Math.floor(vAt(clamp(c + 1, u0, u1)));
+        mark(Math.floor(v), c, slope >= 0.45 && crossesRow ? diagonal : levelGlyph(v), a, b);
+      }
+    } else {
+      for (let r = Math.floor(v0); r <= Math.floor(v1); r++) {
+        const u = uAt(clamp(r + 0.5, v0, v1));
+        const crossesCol = Math.floor(uAt(clamp(r, v0, v1))) !== Math.floor(uAt(clamp(r + 1, v0, v1)));
+        mark(r, Math.floor(u), crossesCol ? diagonal : '│', a, b);
+      }
+    }
+  };
+
+  const lines = [...motif.strokes, ...motif.fills.filter((f) => f.kind === 'outline').map((f) => closeLoop(f.points))];
+  for (const line of lines) for (let i = 0; i < line.length - 1; i++) drawSegment(line[i], line[i + 1]);
+
+  for (const row of cells) {
+    for (const cell of row) {
+      if (!cell.links) continue;
+      const key = ['L', 'R', 'U', 'D'].filter((side) => cell.links.includes(side)).join('');
+      // A lone link is just the end of a straight edge; if a sloped edge also
+      // passes through this cell, its glyph describes the corner better.
+      if (!(key.length === 1 && cell.glyph)) cell.glyph = BOX_GLYPHS[key];
+    }
+  }
+
+  for (const fill of motif.fills) {
+    if (!solidKinds.includes(fill.kind)) continue;
+    const hits: [number, number][] = [];
+    for (let r = 0; r < GRID_ROWS; r++) {
+      for (let c = 0; c < GRID_COLS; c++) {
+        if (pointInPolygon({ x: (c + 0.5) * CELL_W, y: (r + 0.5) * CELL_H }, fill.points)) hits.push([r, c]);
+      }
+    }
+    if (fill.kind === 'dot' && hits.length <= 12) {
+      const cx = fill.points.reduce((sum, p) => sum + p.x, 0) / fill.points.length;
+      const cy = fill.points.reduce((sum, p) => sum + p.y, 0) / fill.points.length;
+      cells[clampIndex(Math.floor(cy / CELL_H), GRID_ROWS)][clampIndex(Math.floor(cx / CELL_W), GRID_COLS)].glyph = '•';
+    } else {
+      for (const [r, c] of hits) cells[r][c].glyph = '•';
+    }
+  }
+
+  return cells.map((row) => row.map((cell) => cell.glyph));
+}
+
+function renderHybrid(motif: Motif, text: string): HgLayer[] {
+  const glyphs = lineGlyphs(motif, ['dot']);
+  const lines = blankGrid();
+  const words = [blankGrid(), blankGrid(), blankGrid()];
+  const strokesInCells = motif.strokes.map((line) => line.map((p) => ({ x: p.x / CELL_W, y: p.y / CELL_H })));
+  let index = 0;
+
+  for (let r = 0; r < GRID_ROWS; r++) {
+    for (let c = 0; c < GRID_COLS; c++) {
+      if (glyphs[r][c]) {
+        lines[r][c] = glyphs[r][c];
+        continue;
+      }
+      // A one-cell gutter either side of every line keeps it from being lost
+      // among the letters.
+      if ((c > 0 && glyphs[r][c - 1]) || (c < GRID_COLS - 1 && glyphs[r][c + 1])) continue;
+
+      let tone = regionTone({ x: (c + 0.5) * CELL_W, y: (r + 0.5) * CELL_H }, motif, true);
+      const band = motif.wordBand;
+      if (tone < 0.03 && band && strokesInCells.some((line) => distToPolyline({ x: c + 0.5, y: r + 0.5 }, line) < band)) {
+        tone = 0.5;
+      }
+      if (tone < 0.03) continue;
+
+      // Only visible cells consume a character, so more of the article's real
+      // words land inside the shape; a space becomes a middle dot rather than
+      // punching a hole in it.
+      const char = text[index % text.length];
+      index += 1;
+      words[tone < 0.3 ? 0 : tone < 0.62 ? 1 : 2][r][c] = /\s/.test(char) ? '·' : char;
+    }
+  }
+
+  return [
+    { kind: 'words-light', rows: toRows(words[0]) },
+    { kind: 'words-mid', rows: toRows(words[1]) },
+    { kind: 'words-strong', rows: toRows(words[2]) },
+    { kind: 'line', rows: toRows(lines) },
+  ];
+}
+
+function renderShading(motif: Motif): HgLayer[] {
+  const samples = 4;
+  const strokeHalfWidth = 0.42 * CELL_H;
+  const strokeTone = motif.strokeTone ?? 1;
+  const grid = blankGrid();
+
+  for (let r = 0; r < GRID_ROWS; r++) {
+    for (let c = 0; c < GRID_COLS; c++) {
+      let coverage = 0;
+      for (let sy = 0; sy < samples; sy++) {
+        for (let sx = 0; sx < samples; sx++) {
+          const p = { x: (c + (sx + 0.5) / samples) * CELL_W, y: (r + (sy + 0.5) / samples) * CELL_H };
+          let value = regionTone(p, motif, false);
+          if (value < strokeTone && motif.strokes.some((line) => distToPolyline(p, line) < strokeHalfWidth)) {
+            value = strokeTone;
+          }
+          coverage += value;
+        }
+      }
+      const level = Math.round((coverage / (samples * samples)) * (SHADE_RAMP.length - 1));
+      grid[r][c] = SHADE_RAMP[Math.min(SHADE_RAMP.length - 1, level)];
+    }
+  }
+
+  return [{ kind: 'shade', rows: toRows(grid) }];
 }
 
 function hashString(value: string): number {
@@ -218,7 +452,7 @@ function hashString(value: string): number {
   return hash >>> 0;
 }
 
-// mulberry32 — small, fast, deterministic PRNG seeded from the hash above.
+// mulberry32: small, fast, deterministic PRNG seeded from the hash above.
 function createRandom(seed: number): () => number {
   let state = seed;
   return () => {
@@ -233,7 +467,7 @@ function createRandom(seed: number): () => number {
 /** Strips Markdown/MDX syntax down to plain prose, to fill the grid with. */
 function cleanArticleText(raw: string): string {
   return raw
-    .replace(/^---[\s\S]*?---/, '') // stray frontmatter, if any slipped through
+    .replace(/^---[\s\S]*?---/, '')
     .replace(/^#+\s*/gm, '')
     .replace(/\*\*(.*?)\*\*/g, '$1')
     .replace(/\*(.*?)\*/g, '$1')
@@ -243,64 +477,21 @@ function cleanArticleText(raw: string): string {
     .trim();
 }
 
-function buildInkGrid(motif: { fill: Pt[][]; stroke: Pt[][] }): boolean[][] {
-  const grid: boolean[][] = [];
-  for (let row = 0; row < GRID_ROWS; row++) {
-    const y = (row + 0.5) * (100 / GRID_ROWS);
-    const rowInk: boolean[] = [];
-    for (let col = 0; col < GRID_COLS; col++) {
-      const x = (col + 0.5) * (100 / GRID_COLS);
-      const p = { x, y };
-      const ink =
-        motif.fill.some((region) => pointInPolygon(p, region)) ||
-        motif.stroke.some((line) => distToPolyline(p, line) < STROKE_INK_RADIUS);
-      rowInk.push(ink);
-    }
-    grid.push(rowInk);
-  }
-  return grid;
-}
-
-// Only consumes a source character for cells that are actually visible, so
-// more of the article's real words show up inside the shape instead of
-// being spent on cells that render blank anyway. A source space landing on
-// an ink cell becomes a middle dot rather than a literal gap, so word
-// breaks don't punch holes in the silhouette.
-function buildRows(grid: boolean[][], text: string): string[] {
-  const source = text.length > 0 ? text : 'the only';
-  let index = 0;
-  return grid.map((rowInk) =>
-    rowInk
-      .map((ink) => {
-        if (!ink) return ' ';
-        const char = source[index % source.length];
-        index += 1;
-        return /\s/.test(char) ? '·' : char;
-      })
-      .join(''),
-  );
-}
-
 export function buildHypergraphicArt(slug: string, disciplines: readonly Discipline[], articleBody: string): HypergraphicArt {
   const random = createRandom(hashString(slug));
-  const motifKey = DISCIPLINE_MOTIFS[disciplines[0]] ?? 'seal';
-  const grid = buildInkGrid(MOTIFS[motifKey]);
-  const rows = buildRows(grid, cleanArticleText(articleBody));
+  const { motif, technique } = DISCIPLINE_ART[disciplines[0]] ?? DISCIPLINE_ART.Brand;
+  const layers =
+    technique === 'shading'
+      ? renderShading(MOTIFS[motif])
+      : renderHybrid(MOTIFS[motif], cleanArticleText(articleBody) || 'the only');
   const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
-  return { gradientVariant, rows };
+  return { gradientVariant, layers };
 }
 
 const CANVAS_W = 800;
-// Taller than the old 800x300: a wide, short banner left the motif's own
-// square footprint (always min(motifBox.w, motifBox.h), see below) small
-// and centered in a lot of empty horizontal space, which read as "a
-// rectangle with a text pattern in it" rather than a shape. More height
-// gives the square room to actually grow.
 const CANVAS_H = 420;
-// The rendered motif is always a square (100x100 units scaled uniformly)
-// centered inside this box at size min(w, h), so keeping w === h here
-// means none of this box's area goes to wasted margin, the whole thing
-// becomes the shape.
+// The motif is always a square (100x100 units scaled uniformly) centered in
+// this box at min(w, h), so keeping w === h wastes none of it on margin.
 const MOTIF_BOX = { x: 230, y: 40, w: 340, h: 340 };
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, motifBox: MOTIF_BOX };

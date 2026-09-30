@@ -1,9 +1,9 @@
-/* Article hero art ("hypergraphy") — an ASCII-art rendering of a simple
-   discipline motif, filled with the article's own words, rendered in an
-   iridescent gradient that slowly hue-shifts (a "catches the light"
-   quality), over a soft two-hue wash. Layers, back to front: tinted wash ->
-   grain texture -> character grid. See src/components/HypergraphicArt.astro
-   and src/lib/hypergraphy.ts. */
+/* Article hero art ("hypergraphy") — a character-grid rendering of a simple
+   discipline motif (line-drawn edges with the article's own words inside, or
+   a shading ramp for 3D), in an iridescent gradient that slowly hue-shifts
+   (a "catches the light" quality), over a soft two-hue wash. Layers, back to
+   front: tinted wash -> grain texture -> character grid. See
+   src/components/HypergraphicArt.astro and src/lib/hypergraphy.ts. */
 
 .hg-art {
   position: relative;
@@ -13,10 +13,6 @@
   border: 1px solid var(--color-border);
   aspect-ratio: 800 / 420;
   margin-block-end: var(--space-7);
-  /* Fades the whole piece (wash, grain, border, and all) into the page
-     background toward the bottom edge, instead of ending in a hard line. */
-  mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
 }
 
 .hg-art__wash {
@@ -46,6 +42,10 @@
   display: block;
   width: 100%;
   height: 100%;
+  /* Only the illustration fades out toward the bottom edge; the wash, grain,
+     and border behind it stay solid all the way around. */
+  mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 92%);
   /* The gradient itself is static; this slow hue-rotate sweep is what gives
      the piece its iridescent, catches-the-light quality. 360deg loops back
      to 0deg seamlessly, so the cycle has no visible seam. */
@@ -65,8 +65,40 @@
   fill: var(--hg-gradient);
   fill-opacity: 0.85;
   font-family: var(--font-mono);
+  /* Each row's leading spaces are what position the shape. Browsers give SVG
+     <text> its own white-space: nowrap, which collapses them (xml:space on
+     the parent group doesn't override it), stretching every row edge to edge
+     into a solid block. */
+  white-space: pre;
   opacity: 0;
   transition: opacity 700ms ease-out var(--hg-delay, 0ms);
+}
+
+/* Box-drawing glyphs are hairline-thin in most fonts; a matching stroke
+   thickens them so the outline, not the words, carries the shape. */
+.hg-text--line {
+  fill-opacity: 1;
+  font-weight: 700;
+  stroke: var(--hg-gradient);
+  stroke-width: 0.2;
+}
+
+.hg-text--shade {
+  fill-opacity: 0.95;
+  font-weight: 600;
+}
+
+/* Article words sit behind the outline, as strong as their region's tone. */
+.hg-text--words-light {
+  fill-opacity: 0.34;
+}
+
+.hg-text--words-mid {
+  fill-opacity: 0.58;
+}
+
+.hg-text--words-strong {
+  fill-opacity: 0.85;
 }
 
 .hg-art.is-in-view .hg-text {
