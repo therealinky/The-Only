@@ -29,7 +29,7 @@ interface Pt {
   y: number;
 }
 
-type MotifKey = 'face' | 'chart' | 'reel' | 'browser' | 'seal' | 'ribbon' | 'cube';
+type MotifKey = 'face' | 'camera' | 'reel' | 'browser' | 'seal' | 'ribbon' | 'cube';
 type Technique = 'hybrid' | 'shading';
 
 // How the hybrid technique draws a fill: a single mark, words packed inside
@@ -64,11 +64,6 @@ function frame(x1: number, y1: number, x2: number, y2: number): Pt[] {
   return poly([x1, y1, x2, y1, x2, y2, x1, y2, x1, y1]);
 }
 
-function bar(cx: number, y1: number, y2: number, w: number): Pt[] {
-  const half = w / 2;
-  return poly([cx - half, y1, cx - half, y2, cx + half, y2, cx + half, y1]);
-}
-
 function circle(cx: number, cy: number, r: number, segments = 32): Pt[] {
   return Array.from({ length: segments }, (_, i) => {
     const angle = (i / segments) * Math.PI * 2;
@@ -87,6 +82,8 @@ const FACE_PROFILE = poly([
   6, 30, 12, 14, 26, 6,
 ]);
 
+const CAMERA_BODY = poly([8, 30, 30, 30, 36, 20, 58, 20, 64, 30, 92, 30, 92, 82, 8, 82, 8, 30]);
+
 const MOTIFS: Record<MotifKey, Motif> = {
   // UI/UX: a profile (forehead, nose, lips, chin), an eye, and an ear mark.
   face: {
@@ -94,13 +91,17 @@ const MOTIFS: Record<MotifKey, Motif> = {
     strokes: [FACE_PROFILE, poly([16, 50, 13, 53, 13, 58, 16, 61])],
     tones: [{ points: FACE_PROFILE, tone: 0.16 }],
   },
-  // Creative Coding: bars on axes with a trend line over the top.
-  chart: {
-    fills: [bar(16, 63, 85, 7), bar(35, 48, 85, 7), bar(54, 33, 85, 7), bar(73, 52, 85, 7), bar(92, 20, 85, 7)].map(
-      (points) => ({ points, kind: 'solid' as const, tone: 0.7 }),
-    ),
-    strokes: [poly([14, 58, 28, 46, 40, 50, 52, 30, 62, 15, 78, 34, 94, 16]), poly([8, 8, 8, 88, 96, 88])],
-    tones: [],
+  // Photo & Imaging: a camera body with a viewfinder hump, a flash window, a
+  // shutter button, and a two-ring lens whose words get denser toward the
+  // center.
+  camera: {
+    fills: [
+      { points: circle(50, 56, 19), kind: 'outline', tone: 0.35 },
+      { points: circle(50, 56, 10), kind: 'outline', tone: 0.4 },
+      { points: circle(80, 25, 2.4), kind: 'dot', tone: 1 },
+    ],
+    strokes: [CAMERA_BODY, frame(15, 37, 25, 43)],
+    tones: [{ points: CAMERA_BODY, tone: 0.12 }],
   },
   // Motion & Video: a frame with a play button and sprocket ticks both sides.
   reel: {
@@ -171,8 +172,8 @@ const DISCIPLINE_ART: Record<Discipline, { motif: MotifKey; technique: Technique
   'UI/UX': { motif: 'face', technique: 'hybrid' },
   'Motion & Video': { motif: 'reel', technique: 'hybrid' },
   Illustration: { motif: 'ribbon', technique: 'hybrid' },
+  'Photo & Imaging': { motif: 'camera', technique: 'hybrid' },
   '3D': { motif: 'cube', technique: 'shading' },
-  'Creative Coding': { motif: 'chart', technique: 'hybrid' },
 };
 
 // Cells are tall (100/64 wide by 100/36 tall in the square motif), the same

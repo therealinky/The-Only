@@ -42,9 +42,9 @@ export const DISCIPLINES = [
   'Web',
   'UI/UX',
   'Motion & Video',
+  'Photo & Imaging',
   'Illustration',
   '3D',
-  'Creative Coding',
 ] as const;
 
 export type Discipline = (typeof DISCIPLINES)[number];
