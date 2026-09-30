@@ -236,7 +236,16 @@ export function buildHypergraphicArt(slug: string, disciplines: readonly Discipl
 }
 
 const CANVAS_W = 800;
-const CANVAS_H = 300;
-const MOTIF_BOX = { x: 300, y: 40, w: 200, h: 220 };
+// Taller than the old 800x300: a wide, short banner left the motif's own
+// square footprint (always min(motifBox.w, motifBox.h), see below) small
+// and centered in a lot of empty horizontal space, which read as "a
+// rectangle with a text pattern in it" rather than a shape. More height
+// gives the square room to actually grow.
+const CANVAS_H = 420;
+// The rendered motif is always a square (100x100 units scaled uniformly)
+// centered inside this box at size min(w, h), so keeping w === h here
+// means none of this box's area goes to wasted margin, the whole thing
+// becomes the shape.
+const MOTIF_BOX = { x: 230, y: 40, w: 340, h: 340 };
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, motifBox: MOTIF_BOX };

@@ -11,8 +11,12 @@
   isolation: isolate;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  aspect-ratio: 800 / 300;
+  aspect-ratio: 800 / 420;
   margin-block-end: var(--space-7);
+  /* Fades the whole piece (wash, grain, border, and all) into the page
+     background toward the bottom edge, instead of ending in a hard line. */
+  mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
 }
 
 .hg-art__wash {
