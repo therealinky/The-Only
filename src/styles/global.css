@@ -463,6 +463,12 @@ main {
   display: flex;
 }
 
+/* The discipline filter hides cards with the hidden attribute, and the
+   display: flex above would otherwise override the browser's own hiding. */
+[data-article-item][hidden] {
+  display: none;
+}
+
 /* ---------- Cards ---------- */
 
 .article-card {
