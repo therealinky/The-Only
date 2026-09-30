@@ -1,0 +1,109 @@
+---
+title: "Wire Claude Code Straight Into Figma's Design Tokens With the Dev Mode MCP Server"
+dek: >-
+  Developer Vishwas Gopinath's write-up on connecting Claude Code to Figma's
+  MCP server still holds up as a technique, though Figma has since replaced
+  his exact setup steps with a plugin-based flow. Here's the workflow with
+  today's actual instructions.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-09-30
+updatedAt: 2026-09-30
+lastVerified: 2026-09-30
+disciplines:
+  - Web
+  - UI/UX
+  - Creative Coding
+tools:
+  - Figma
+  - Claude Code
+sources:
+  - title: "Claude Code + Figma MCP Server, by Vishwas Gopinath (Builder.io blog)"
+    url: https://www.builder.io/blog/claude-code-figma-mcp-server
+    accessed: 2026-09-30
+  - title: "Guide to the Dev Mode MCP Server (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server
+    accessed: 2026-09-30
+  - title: "Claude Code and Figma: Set up the MCP server (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/39888612464151-Claude-Code-and-Figma-Set-up-the-MCP-server
+    accessed: 2026-09-30
+summary:
+  whatChanged: >-
+    Not a new release, a researched write-up of an existing technique:
+    connecting Claude Code to Figma's Dev Mode MCP server so it can generate
+    code from a selected frame's real variables, components, and layout
+    data instead of a screenshot alone.
+  whyItMatters: >-
+    Design-to-code handoff usually loses the actual variable names, spacing
+    tokens, and component structure somewhere between the design file and
+    the pull request. Handing an AI coding agent direct, structured access to
+    that data closes a real part of that gap.
+  bestFor: >-
+    A developer or design-engineer working in Claude Code who already has
+    Figma access and wants generated code to reference real design tokens
+    instead of hardcoded values pulled from a screenshot.
+  timeToTry: >-
+    Initial setup takes under 10 minutes either way. Converting a single
+    frame into working code takes a few minutes per attempt; getting
+    comfortable with multi-frame flows and Code Connect mappings is more of
+    an ongoing practice.
+beforeYouUse:
+  clientData: >-
+    not verified: neither Gopinath's write-up nor Figma's own documentation
+    spells out what happens to design file content sent through the MCP
+    server, particularly with the newer hosted remote server at
+    mcp.figma.com rather than the fully local desktop option. If you work
+    with NDA'd or unreleased client designs, the local desktop server, which
+    runs entirely on your machine, is the more conservative starting point
+    until you've checked Figma's data-handling terms for the remote option.
+  usageRights: >-
+    not applicable: this generates code from your own design files using
+    your own Figma and Claude Code access, it isn't producing generated
+    creative assets with unclear usage rights.
+  disclosure: >-
+    not applicable: this is a developer tooling workflow, not client-facing
+    creative output that would need AI-disclosure.
+  accessibility: >-
+    not verified: neither source addresses whether code generated this way
+    reliably preserves semantic HTML, ARIA attributes, or other
+    accessibility markup from the original design, versus needing a manual
+    accessibility pass afterward. Treat generated markup as a draft to
+    audit, not a finished, accessible component.
+  cost: >-
+    known: per Figma's own help documentation, the remote MCP server is
+    available on all Figma seats and plans, and the desktop MCP server is
+    available on a Dev or Full seat on any paid plan. Figma's newer
+    "write to canvas" capability (pushing changes back into a Figma file,
+    not covered in this write-up) is free during its current beta but is
+    stated to become a usage-based paid feature eventually.
+---
+This workflow comes from developer Vishwas Gopinath's post on Builder.io's blog, connecting Claude Code directly to Figma's Dev Mode MCP server. His original write-up used Figma's first setup method, a local server reached over SSE. Figma has since changed the recommended setup to a plugin-based flow, and added a separate hosted remote server option, so the steps below follow Figma's own current documentation rather than reproducing Gopinath's now-outdated commands. The underlying idea, and the reason it's worth doing, is still his.
+
+## The workflow
+
+1. **Understand what this actually gets you.** A plain screenshot or pasted image only shows an AI coding agent what a design looks like. Figma's MCP server instead exposes the file's actual data: variables, components, and layout structure, so code generation can use your real design-token names and existing component mappings instead of guessing at hex values and spacing from a picture. That's the specific gap Gopinath's write-up is about closing.
+
+2. **Set up the remote server (the current recommended path).** In Claude Code, run `claude plugin install figma@claude-plugins-official`, then restart Claude Code. Type `/plugin`, arrow over to the Installed tab, select the Figma server, and press Enter to start authentication, then approve access on the page that opens. Running `/plugin` again should show the Figma server as connected. This route works on any Figma seat or plan, per Figma's own documentation.
+
+3. **Or set up the desktop server, if you'd rather keep everything local.** Open the Figma desktop app with a design file open, switch to Dev Mode, and enable the MCP server toggle in the right sidebar. Copy the server URL it displays, then in Claude Code run `claude mcp add --transport http figma-desktop http://127.0.0.1:3845/mcp` and restart. This needs a Dev or Full seat on a paid plan, per Figma's documentation, and keeps everything running on your machine rather than through Figma's hosted server.
+
+4. **Select a frame and ask for code, not a redesign.** Gopinath's core technique is simple: select a specific frame or component in Figma, or paste its Figma link into your prompt, and ask Claude Code to convert that selection into code. Because the agent can now pull the underlying variables and component data, the output should reference your actual design-system tokens instead of inventing new hardcoded values.
+
+5. **Work frame by frame, and expect to assemble multi-screen flows yourself.** Gopinath is specific about this limitation: the workflow doesn't handle an entire multi-frame user flow in one pass. Convert each frame individually, then assemble the resulting pieces into your actual application structure by hand.
+
+6. **Use a short recording instead of a long prompt when something's wrong.** For revisions or bug reports against generated output, Gopinath recommends a brief screen recording over a lengthy written description, on the reasoning that showing an interaction problem communicates it faster and more precisely than describing it in prose.
+
+## Why it matters for designers
+
+The persistent failure mode in design-to-code handoff isn't that developers can't read a design file, it's that the specific values (this spacing token, that semantic color name, this exact component variant) get silently reinvented somewhere between Figma and the codebase, quietly drifting the two out of sync. Giving a coding agent structured access to the same variables and component data a designer actually set up is a direct attack on that specific failure, not just a faster way to eyeball a screenshot.
+
+For a design-engineer or a developer working closely with design systems, this also raises the bar for what's worth maintaining in Figma itself: components and variables set up carefully now have a second, very literal consumer, since they aren't just documentation for humans anymore.
+
+## What to watch out for
+
+Gopinath's write-up is blunt about the rough edges, and they're still worth taking seriously even though his exact setup steps have moved on: there's no way to surgically patch previously generated code without a fresh regeneration, there's no visual refinement loop after code comes out the other end, and pulling together a multi-frame flow is still manual assembly work, not something the agent does end to end. This is also, as he points out, fundamentally a developer-facing workflow. A designer without a Claude Code environment set up can't run it themselves, which can turn it into another handoff bottleneck rather than removing one.
+
+Treat any generated markup as a draft, particularly for accessibility. Neither Gopinath's post nor Figma's documentation confirms that generated code reliably preserves accessible semantics from the original design, so a manual accessibility pass on generated components isn't optional. And if you're working with client work under an NDA, start with the fully local desktop server rather than the newer hosted remote option until you've separately confirmed how Figma's remote server handles the design data it processes.

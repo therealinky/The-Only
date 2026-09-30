@@ -1,0 +1,72 @@
+---
+title: "Adobe Firefly Can Now Strip a Video's Background Automatically, No Masking Required"
+dek: >-
+  A mid-September Firefly update adds automatic subject detection to
+  background removal for video, applying it across an entire clip instead of
+  frame by frame.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-09-30
+updatedAt: 2026-09-30
+lastVerified: 2026-09-30
+disciplines:
+  - Motion & Video
+  - Brand
+tools:
+  - Adobe Firefly
+sources:
+  - title: "What's new in Adobe Firefly - September 2026 (Adobe Community announcement)"
+    url: https://community.adobe.com/announcements-402/what-s-new-in-adobe-firefly-september-2026-1642552
+    accessed: 2026-09-30
+  - title: "Generative credits FAQ (Adobe Creative Cloud Help)"
+    url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html
+    accessed: 2026-09-30
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's own September announcement doesn't say whether
+    uploaded video clips are used to train Firefly's models, or whether that
+    differs for this feature specifically. Check Adobe's generative AI data
+    policy before running client or NDA'd footage through it.
+  usageRights: >-
+    not verified: we didn't confirm the commercial-usage terms for video
+    processed with this specific feature in this pass. Check Adobe's Firefly
+    terms of use before shipping output in paid client work.
+  disclosure: >-
+    not verified: neither Adobe's announcement nor its help documentation
+    address whether an automatically background-removed clip needs to be
+    disclosed to a client as AI-processed. That's a call for your own client
+    agreements.
+  accessibility: >-
+    not applicable: this is a video-editing feature, not an interface or
+    layout change with accessibility implications.
+  cost: >-
+    not verified: Adobe's September announcement doesn't state a credit cost
+    for this specific feature, and as of this writing it isn't broken out as
+    its own line item on Adobe's generative credits FAQ, which lists costs
+    for video generation, extension, translation, and other premium features
+    but not video background removal by name. Check your own account's
+    credit deduction the first time you run it rather than assuming it's
+    free just because Photoshop's still-image Remove Tool is.
+---
+Adobe's September Firefly update, announced September 18, adds a feature editors have been doing by hand for years: removing a video's background without touching a single frame manually.
+
+## What changed
+
+Per Adobe's own announcement, the tool "automatically detects the subjects in your clip and strips the background across the entire clip, no frame-by-frame masking required." That's a meaningful jump from the usual rotoscoping workflow, where isolating a moving subject typically means keyframing a mask, or at minimum reviewing and correcting an automated matte shot by shot as lighting and motion change.
+
+The same September update also increased the prompt length available for Firefly's image and video generation models on the web (Boards support is still in progress, per Adobe), added reference images for Kling 3.0 Omni in both the Video Generation tab and Boards, and tweaked the AI Assistant's tone. Firefly's GPT Image 2 aspect-ratio expansion, covered here separately, shipped in the same general window.
+
+## Why it matters for designers
+
+Background removal is one of the most repetitive tasks in video production, whether it's isolating a presenter for a green-screen-free talking-head clip, cutting a product out of a lifestyle shot for a template, or prepping social cutdowns that need a clean or replaceable backdrop. Doing that by hand, frame by frame, is exactly the kind of task worth automating, and Adobe positioning this as an entire-clip operation rather than a per-frame tool suggests it's aimed at that same daily-grind use case rather than one-off hero shots.
+
+If it holds up on real footage, this closes a real gap between Photoshop's mature still-image Remove Tool and what's been available for video, where automated mattes have historically needed more manual cleanup to look clean at final resolution.
+
+## What to watch out for
+
+Adobe's announcement doesn't specify accuracy limits: how it handles motion blur, fine detail like hair or fabric edges, or footage with a subject that partially leaves and re-enters frame. Test it on a real, representative clip before dropping it into a client deliverable's pipeline, the same way you would any new automated matte tool.
+
+The credit cost isn't confirmed either. Adobe's generative credits FAQ, current as of this writing, doesn't list video background removal as its own line item, so don't assume it's free just because Photoshop's equivalent still-image tool is unmetered. Check what your account actually gets charged the first time you run it.
