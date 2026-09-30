@@ -21,7 +21,7 @@ const readingTime = getReadingTime(article.body ?? data.dek);
     {data.example && <span class="badge badge--example">Example</span>}
     {data.status === 'draft' && <span class="badge badge--draft">Draft</span>}
   </div>
-  <h2><a href={`/articles/${article.id}/`}>{data.title}</a></h2>
+  <h2><a class="article-card__link" href={`/articles/${article.id}/`}>{data.title}</a></h2>
   <p>{data.dek}</p>
   <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
   <p class="article-card__date">
