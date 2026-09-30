@@ -116,6 +116,10 @@ main > .page-hero:first-child {
   line-height: 0.86;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+  /* A single long word with no space to wrap at (e.g. "Patterns") can be
+     wider than the viewport at this font size on narrow phones; let it
+     break rather than clip past the hero's overflow: hidden edge. */
+  overflow-wrap: anywhere;
 }
 
 .page-hero__line {
