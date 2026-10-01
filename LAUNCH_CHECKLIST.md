@@ -26,9 +26,10 @@ Everything below needs your credentials or a decision — none of it can be done
 
 ## Decisions, not blockers
 
-- [ ] **Newsletter provider.** Not chosen and nothing is built (see the README's
-      [Email digest](README.md#email-digest-not-yet-built) section) — pick one when you're ready, or skip it
-      indefinitely. `NEWSLETTER_PROVIDER` stays unset either way until then.
+- [ ] **The Brief email.** Buttondown (free plan, written and sent by hand every Wednesday) is chosen, and the site
+      side is built: the signup form and a link to Buttondown's archive of past issues, using the `theonly` account.
+      What's left is setting `NEWSLETTER_PROVIDER=buttondown` in Cloudflare Pages to switch the form on. See the
+      README's [Email digest](README.md#email-digest) section.
 
 ## Already done, nothing needed from you
 

@@ -1,8 +1,8 @@
 ---
 import { NEWSLETTER } from '../config/site';
 
-// Hidden entirely — no markup rendered at all — until both NEWSLETTER_PROVIDER
-// and NEWSLETTER_BUTTONDOWN_USERNAME are set (see .env.example). Only
+// Hidden entirely — no markup rendered at all — until NEWSLETTER_PROVIDER is
+// set to "buttondown" (see .env.example). Only
 // Buttondown is wired up; a different provider would need its own branch
 // here since each one's embeddable form shape differs.
 const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondownUsername;
@@ -11,8 +11,8 @@ const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondo
 {
   isButtondown && (
     <section aria-labelledby="newsletter-heading" class="newsletter-signup">
-      <h2 id="newsletter-heading">Get the weekly digest</h2>
-      <p>One email a week with everything published in The Brief.</p>
+      <h2 id="newsletter-heading">Get The Brief by email</h2>
+      <p>Every Wednesday, a short summary of the most interesting stories from the past seven days.</p>
       <form
         action={`https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER.buttondownUsername}`}
         method="post"
@@ -24,6 +24,9 @@ const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondo
         <input type="hidden" value="1" name="embed" />
         <button type="submit">Subscribe</button>
       </form>
+      <p class="newsletter-signup__archive">
+        <a href={`https://buttondown.com/${NEWSLETTER.buttondownUsername}/archive/`}>Read past issues</a>
+      </p>
     </section>
   )
 }

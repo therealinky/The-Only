@@ -842,3 +842,9 @@ main {
 .newsletter-signup button:hover {
   opacity: 0.85;
 }
+
+.newsletter-signup__archive {
+  margin-block: var(--space-4) 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
