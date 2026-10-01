@@ -465,8 +465,34 @@ main {
 
 /* The discipline filter hides cards with the hidden attribute, and the
    display: flex above would otherwise override the browser's own hiding. */
-[data-article-item][hidden] {
+[data-article-item][hidden],
+[data-article-item][data-paged-out] {
   display: none;
+}
+
+.see-more {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--space-6);
+}
+
+.see-more button {
+  font: inherit;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-6);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.see-more button:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
 }
 
 /* ---------- Cards ---------- */

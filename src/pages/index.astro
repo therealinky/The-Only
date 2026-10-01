@@ -16,5 +16,5 @@ const articles = await getListableArticles();
     variant="purple"
   />
   <p><a href="/search/">Search all articles</a></p>
-  <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" />
+  <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" pageSize={6} />
 </BaseLayout>
