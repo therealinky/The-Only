@@ -18,5 +18,11 @@ const articles = await getListableArticles();
 
 <BaseLayout title={`${discipline} — Latest`} description={`Latest articles for ${discipline}.`}>
   <h1>Latest: {discipline}</h1>
-  <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" activeDiscipline={discipline} />
+  <ArticleListing
+    articles={articles}
+    allHref="/"
+    disciplineBase="/discipline/"
+    activeDiscipline={discipline}
+    pageSize={6}
+  />
 </BaseLayout>
