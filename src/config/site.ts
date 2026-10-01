@@ -80,6 +80,24 @@ export const EVIDENCE_DESCRIPTIONS: Record<Evidence, string> = {
   tested: 'Hands-on tested by our editorial team.',
 };
 
+// "Before you use it" fields each open with one of these words (e.g.
+// "not verified: ..."). The sidebar turns it into an icon and label; see
+// src/lib/check-status.ts and CheckStatus.astro.
+export const CHECK_STATUSES = ['known', 'not-verified', 'not-applicable'] as const;
+export type CheckStatus = (typeof CHECK_STATUSES)[number];
+
+export const CHECK_STATUS_LABELS: Record<CheckStatus, string> = {
+  known: 'Known',
+  'not-verified': 'Not verified',
+  'not-applicable': 'Not applicable',
+};
+
+export const CHECK_STATUS_DESCRIPTIONS: Record<CheckStatus, string> = {
+  known: "Confirmed from the maker's own terms or docs, or a reliable source we cite.",
+  'not-verified': "We couldn't confirm this. Check it yourself before you rely on it.",
+  'not-applicable': "This question doesn't apply to what the article covers.",
+};
+
 export const STATUSES = ['draft', 'published', 'withdrawn'] as const;
 export type Status = (typeof STATUSES)[number];
 

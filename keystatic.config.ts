@@ -164,7 +164,7 @@ export default config({
             accessibility: fields.text({ label: 'Accessibility', multiline: true, defaultValue: 'not verified' }),
             cost: fields.text({ label: 'Cost', multiline: true, defaultValue: 'not verified' }),
           },
-          { label: 'Before you use it', description: 'Use "not verified" for anything not checked.' }
+          { label: 'Before you use it', description: 'Start each field with "known:", "not verified:", or "not applicable:". The sidebar shows it as an icon and label.' }
         ),
         withdrawnNote: fields.text({
           label: 'Withdrawn note',
