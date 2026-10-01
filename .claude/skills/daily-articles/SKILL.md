@@ -39,6 +39,7 @@ Cover working designers across disciplines: Brand, Web, UI/UX, Motion & Video, P
 
 Follow `src/content.config.ts` exactly, it's the schema's source of truth. For each article:
 
+- **Title**: sentence case. Capitalize only the first word and proper nouns: companies, products, and official feature names (Generative Fill, Brand Kit, Prompt to Edit). Everything else is lowercase, e.g. "Canva will now build your Brand Kit from just a URL," not "Canva Will Now Build Your Brand Kit From Just a URL."
 - **Disciplines**: tag what the piece is actually about, not every audience that might find it useful, and list the most central one first, since the first discipline picks the article's hero illustration.
   - **Brand**: identity, logos, brand systems and kits, brand and marketing collateral. Not a catch-all for any tool that makes images.
   - **Web**: websites and site builders, design-to-code and developer handoff (design tokens, MCP and agent integrations that generate front-end code), and code-driven or creative-coding work.
