@@ -581,13 +581,10 @@ const CELL_H = CANVAS_H / GRID_ROWS;
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, cellW: CELL_W, cellH: CELL_H };
 
-// Where the motif sits on the banner (left of center, center, or right of
-// center); picked per slug.
-const PLACEMENTS: Box[] = [
-  { x: 130, y: 20, size: 380 },
-  { x: 210, y: 20, size: 380 },
-  { x: 290, y: 20, size: 380 },
-];
+// How large a motif's 0-100 square is drawn on the canvas.
+const MOTIF_SIZE = 380;
+// Breathing room between the drawing and its crop marks, in canvas units.
+const CROP_PADDING = 18;
 
 // Each cell's darkness is averaged over SAMPLES x SAMPLES points, so curves
 // and diagonals come out smooth at any angle instead of stair-stepping.
@@ -713,12 +710,30 @@ function darknessAt(p: Pt, motif: Motif, at: Box): { area: number; mark: number 
   return { area: Math.min(1, area * light), mark };
 }
 
-function boxCells(at: Box) {
+interface Rect {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+}
+
+// The extent of everything a motif draws, in whatever space its points are in.
+function motifBounds(motif: Motif): Rect {
+  const points = [...motif.fills.flatMap((f) => f.points), ...motif.strokes.flat(), ...motif.tones.flatMap((t) => t.points)];
   return {
-    r0: clampIndex(Math.floor(at.y / CELL_H) - 1, GRID_ROWS),
-    r1: clampIndex(Math.ceil((at.y + at.size) / CELL_H), GRID_ROWS),
-    c0: clampIndex(Math.floor(at.x / CELL_W) - 1, GRID_COLS),
-    c1: clampIndex(Math.ceil((at.x + at.size) / CELL_W), GRID_COLS),
+    x0: Math.min(...points.map((p) => p.x)),
+    y0: Math.min(...points.map((p) => p.y)),
+    x1: Math.max(...points.map((p) => p.x)),
+    y1: Math.max(...points.map((p) => p.y)),
+  };
+}
+
+function rectCells(rect: Rect) {
+  return {
+    r0: clampIndex(Math.floor(rect.y0 / CELL_H), GRID_ROWS),
+    r1: clampIndex(Math.ceil(rect.y1 / CELL_H), GRID_ROWS),
+    c0: clampIndex(Math.floor(rect.x0 / CELL_W), GRID_COLS),
+    c1: clampIndex(Math.ceil(rect.x1 / CELL_W), GRID_COLS),
   };
 }
 
@@ -732,7 +747,9 @@ function runThreshold(r: number, c: number): number {
 
 function renderScene(motif: Motif, at: Box, text: string): HgLayer[] {
   const darkness = Array.from({ length: GRID_ROWS }, () => new Float32Array(GRID_COLS));
-  const bounds = boxCells(at);
+  const drawn = motifBounds(motif);
+  const reach = STROKE_CORE + STROKE_SOFT + CELL_H;
+  const bounds = rectCells({ x0: drawn.x0 - reach, y0: drawn.y0 - reach, x1: drawn.x1 + reach, y1: drawn.y1 + reach });
   for (let r = bounds.r0; r <= bounds.r1; r++) {
     for (let c = bounds.c0; c <= bounds.c1; c++) {
       // Areas are averaged across the cell so their edges fade smoothly.
@@ -779,7 +796,12 @@ function renderScene(motif: Motif, at: Box, text: string): HgLayer[] {
       if (c % 24 === 12 && r % 12 === 6 && !occupied(r, c)) detail[r][c] = '+';
     }
   }
-  const { r0, r1, c0, c1 } = bounds;
+  const { r0, r1, c0, c1 } = rectCells({
+    x0: drawn.x0 - CROP_PADDING,
+    y0: drawn.y0 - CROP_PADDING,
+    x1: drawn.x1 + CROP_PADDING,
+    y1: drawn.y1 + CROP_PADDING,
+  });
   const crop: [number, number, string][] = [
     [r0, c0, '┌'], [r0, c0 + 1, '─'], [r0 + 1, c0, '│'],
     [r0, c1, '┐'], [r0, c1 - 1, '─'], [r0 + 1, c1, '│'],
@@ -840,7 +862,15 @@ export function artGradientVariant(slug: string): GradientVariant {
 export function buildHypergraphicArt(slug: string, articleBody: string, motif: ArtMotif): HypergraphicArt {
   const random = createRandom(hashString(slug));
   const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
-  const at = PLACEMENTS[Math.floor(random() * PLACEMENTS.length)];
+  // Centers what the motif actually draws, not its 0-100 square, since many
+  // motifs don't fill their square evenly (the blend is a short, wide strip).
+  const drawn = motifBounds(MOTIFS[motif]);
+  const scale = MOTIF_SIZE / 100;
+  const at: Box = {
+    x: CANVAS_W / 2 - ((drawn.x0 + drawn.x1) / 2) * scale,
+    y: CANVAS_H / 2 - ((drawn.y0 + drawn.y1) / 2) * scale,
+    size: MOTIF_SIZE,
+  };
   const layers = renderScene(place(MOTIFS[motif], at), at, cleanArticleText(articleBody) || 'the only');
   return { gradientVariant, layers };
 }
