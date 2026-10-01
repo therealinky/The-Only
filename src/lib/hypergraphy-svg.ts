@@ -25,25 +25,26 @@ const DARK_HUES: Record<string, string> = {
   '--hero-gold': '#d9be8f',
 };
 
-// Cards show the art at under half the hero's size, so lines are thicker and
-// words a little stronger than the hero's equivalents in hypergraphy.css.
+// Cards show the art at under half the hero's size, so text is a little
+// stronger than the hero's equivalents in hypergraphy.css.
 const LAYER_STYLE: Record<HgLayer['kind'], string> = {
-  detail: 'fill-opacity:0.3',
-  'words-light': 'fill-opacity:0.45',
-  'words-mid': 'fill-opacity:0.68',
-  'words-strong': 'fill-opacity:0.92',
-  shade: 'fill-opacity:1;font-weight:700',
-  line: 'fill-opacity:1;font-weight:700;stroke:url(#g);stroke-width:1.5',
+  detail: 'fill-opacity:0.35',
+  'words-light': 'fill-opacity:0.6;font-weight:500',
+  'words-mid': 'fill-opacity:0.85;font-weight:600',
+  'words-strong': 'fill-opacity:1;font-weight:800',
 };
+
+// Crop marks are box-drawing characters, outside the site's Latin-only font
+// subset, so they're placed at exact cells; every other layer is Latin.
+const POSITIONED: readonly HgLayer['kind'][] = ['detail'];
 
 function escapeXml(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// Line glyphs (box drawing, diagonals) fall outside the site's Latin-only
-// JetBrains Mono subset, and a standalone file can't load web fonts at all,
-// so their widths vary by font. Placing each at its own cell keeps lines on
-// the grid; the other layers are all Latin and are simply stretched to width.
+// Positioned layers place each character at its own cell, which keeps
+// characters from fallback fonts (widths vary by platform) on the grid; the
+// others are stretched to the full width.
 function textElements(layers: HgLayer[], classFor: (kind: HgLayer['kind']) => string, animate: boolean): string {
   const { width, cellW, cellH } = HYPERGRAPHY_CANVAS;
   const out: string[] = [];
@@ -52,7 +53,7 @@ function textElements(layers: HgLayer[], classFor: (kind: HgLayer['kind']) => st
       if (!row.trim()) return;
       const y = ((rowIndex + 0.82) * cellH).toFixed(2);
       const delay = animate ? ` style="--hg-delay: ${rowIndex * 25}ms"` : '';
-      if (layer.kind === 'line') {
+      if (POSITIONED.includes(layer.kind)) {
         const xs: string[] = [];
         let content = '';
         [...row].forEach((char, col) => {

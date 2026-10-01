@@ -3,12 +3,11 @@
 // across the full banner and deterministically generated from the slug, so
 // the same article always renders the same art.
 //
-// Two techniques:
-// - hybrid: crisp line-drawing edges (glyphs chosen by edge direction, box
-//   corners where lines meet), with the article's own words filling each
-//   region at that region's tone.
-// - shading: every cell's coverage and region tone picks a glyph by visual
-//   weight, so faces read as solid and dimensional. Used for the cube.
+// It's drawn like a typographic portrait: the article's own text runs in
+// rows across the whole grid, and each cell's darkness decides whether its
+// letter shows. Dark areas read as solid words, mid-tones as short
+// fragments, and highlights as empty space, with no outlines anywhere, so
+// edges fade into the background instead of stair-stepping.
 import type { Discipline } from '../config/site';
 
 export const GRADIENT_VARIANTS = ['purple', 'rose', 'sage', 'blue', 'gold'] as const;
@@ -77,25 +76,18 @@ interface Box {
   size: number;
 }
 
-type Technique = 'hybrid' | 'shading';
-
-// How the hybrid technique draws a fill: a single mark, words packed inside
-// it, or its outline with words inside.
+// How a fill is drawn: a soft round mark, a shaded area, or a shaded area
+// with a darker edge line around it.
 type FillKind = 'dot' | 'solid' | 'outline';
 
-// Motifs are authored in a 0-100 unit square. `tone` (0-1) is how dark a
-// region reads: it drives the shading ramp directly, and in the hybrid it
-// sets how strongly the article's words show inside that region. Overlapping
-// tones add.
+// Motifs are authored in a 0-100 unit square. `tone` (0-1) is how dark an
+// area reads, which sets how densely the text shows inside it; overlapping
+// tones add. Strokes are lines, darkest at their core.
 interface Motif {
   fills: { points: Pt[]; kind: FillKind; tone: number }[];
   strokes: Pt[][];
   tones: { points: Pt[]; tone: number }[];
   strokeTone?: number;
-  technique?: Technique;
-  // Hybrid only: for a motif that's all line and no region (the ribbon), words
-  // run in a band this many cells either side of the stroke instead.
-  wordBand?: number;
 }
 
 function poly(flat: number[]): Pt[] {
@@ -174,7 +166,9 @@ const CLOUD = poly([
   14, 72, 8, 62, 10, 52, 20, 46, 26, 46, 28, 36, 36, 28, 48, 24, 60, 28, 68, 36, 72, 42, 80, 40, 88, 44, 94, 54, 92, 64,
   84, 72,
 ]);
-const WAVE_HEIGHTS = [10, 22, 34, 18, 42, 30, 46, 26, 38, 14, 30, 44, 20, 28, 12];
+// Nine bars, ten units apart: closer than that and the soft edges of
+// neighboring bars merge into one blob at secondary-motif size.
+const WAVE_HEIGHTS = [14, 30, 20, 42, 26, 38, 18, 32, 12];
 const WHEEL_TONES = [0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84, 0.96];
 
 function card(x: number): Motif {
@@ -320,7 +314,6 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(poly([50, 49, 80, 32, 80, 68, 50, 85]), 0.78),
     ],
     strokeTone: 0.95,
-    technique: 'shading',
   },
   // A page with a folded corner and a headline block.
   document: {
@@ -429,7 +422,6 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [dot(93, 22, 3.4)],
     strokes: [poly([8, 72, 24, 18, 46, 92, 60, 38, 70, 4, 84, 52, 93, 26])],
     tones: [],
-    wordBand: 2.2,
   },
   // Two overlapping circles and a diagonal mark: a brand seal. The overlap
   // has to be several cells wide, or both arcs and the mark land in one
@@ -493,7 +485,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   // An audio waveform.
   waveform: {
     fills: [],
-    strokes: WAVE_HEIGHTS.map((h, i) => poly([8 + i * 6, 50 - h, 8 + i * 6, 50 + h])),
+    strokes: WAVE_HEIGHTS.map((h, i) => poly([10 + i * 10, 50 - h, 10 + i * 10, 50 + h])),
     tones: [],
   },
   // A color wheel: eight wedges, light to dark, between two rings.
@@ -532,10 +524,10 @@ const DISCIPLINE_DEFAULTS: Record<Discipline, ArtMotif> = {
 
 const CANVAS_W = 800;
 const CANVAS_H = 420;
-// Cells are tall (5.56 x 10 canvas units), the proportion of a terminal cell,
-// which is what box-drawing glyphs expect.
-export const GRID_COLS = 144;
-export const GRID_ROWS = 42;
+// Cells keep a monospace character's proportions (3.9 x 7 canvas units). Rows
+// are what limit how smoothly a curve can step, so there are plenty of them.
+export const GRID_COLS = 206;
+export const GRID_ROWS = 60;
 const CELL_W = CANVAS_W / GRID_COLS;
 const CELL_H = CANVAS_H / GRID_ROWS;
 
@@ -549,30 +541,29 @@ const LAYOUTS: { primary: Box; secondary: Box }[] = [
 ];
 const SOLO_LAYOUT: Box = { x: 230, y: 40, size: 340 };
 
-// Ordered by visual weight, lightest to heaviest.
-const SHADE_RAMP = ' .:-=+*#%@';
+// Each cell's darkness is averaged over SAMPLES x SAMPLES points, so curves
+// and diagonals come out smooth at any angle instead of stair-stepping.
+const SAMPLES = 2;
+// Lines are fully dark within STROKE_CORE canvas units of their path, then
+// fade to nothing over STROKE_SOFT, so they dissolve into the background.
+const STROKE_CORE = 2.8;
+const STROKE_SOFT = 5;
+// A region's darkness ramps up over this distance in from its edge.
+const EDGE_FADE = 16;
+// Text shows in runs whose length follows darkness, repeating every
+// RUN_PERIOD cells, like typographic halftone. Each row's runs start at a
+// pseudo-random offset; a regular stagger lines them up into diagonal
+// stripes.
+const RUN_PERIOD = 8;
+function rowOffset(r: number): number {
+  let h = Math.imul(r ^ 0x9e3779b9, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) % RUN_PERIOD;
+}
 
-// Box-drawing glyph for each combination of neighbors a cell's lines connect
-// to (Left, Right, Up, Down).
-const BOX_GLYPHS: Record<string, string> = {
-  L: '─',
-  R: '─',
-  LR: '─',
-  U: '│',
-  D: '│',
-  UD: '│',
-  RD: '┌',
-  LD: '┐',
-  RU: '└',
-  LU: '┘',
-  LRD: '┬',
-  LRU: '┴',
-  RUD: '├',
-  LUD: '┤',
-  LRUD: '┼',
-};
-
-export type HgLayerKind = 'detail' | 'words-light' | 'words-mid' | 'words-strong' | 'shade' | 'line';
+export type HgLayerKind = 'detail' | 'words-light' | 'words-mid' | 'words-strong';
 
 export interface HgLayer {
   kind: HgLayerKind;
@@ -620,16 +611,6 @@ function place(motif: Motif, at: Box): Motif {
   };
 }
 
-function regionTone(p: Pt, motif: Motif, skipDots: boolean): number {
-  let tone = 0;
-  for (const fill of motif.fills) {
-    if (skipDots && fill.kind === 'dot') continue;
-    if (pointInPolygon(p, fill.points)) tone += fill.tone;
-  }
-  for (const r of motif.tones) if (pointInPolygon(p, r.points)) tone += r.tone;
-  return Math.min(1, tone);
-}
-
 function blankGrid(): string[][] {
   return Array.from({ length: GRID_ROWS }, () => Array<string>(GRID_COLS).fill(' '));
 }
@@ -640,118 +621,48 @@ function toRows(grid: string[][]): string[] {
 
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
 const clampIndex = (x: number, size: number) => clamp(x, 0, size - 1);
-const cellCenter = (r: number, c: number): Pt => ({ x: (c + 0.5) * CELL_W, y: (r + 0.5) * CELL_H });
 
-// Returns the glyph for every cell an edge passes through ('' elsewhere).
-// Axis-aligned edges record which neighbors they connect to, so corners and
-// junctions come out as proper box corners and tees. Other edges get a glyph
-// for their direction: near-flat ones use ¯ ─ _ by where the line sits in the
-// cell, which smooths their stair-steps; steeper ones use ╱ ╲ where the line
-// crosses into the next column or row, and │ where it doesn't.
-function lineGlyphs(motif: Motif, solidKinds: readonly FillKind[]): string[][] {
-  const cells = Array.from({ length: GRID_ROWS }, () =>
-    Array.from({ length: GRID_COLS }, () => ({ links: '', glyph: '', dist: Infinity })),
-  );
-  const inGrid = (r: number, c: number) => r >= 0 && r < GRID_ROWS && c >= 0 && c < GRID_COLS;
-  const link = (r: number, c: number, side: string) => {
-    if (inGrid(r, c) && !cells[r][c].links.includes(side)) cells[r][c].links += side;
+function smoothstep(edge0: number, edge1: number, x: number): number {
+  const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
+function centroid(points: Pt[]): Pt {
+  return {
+    x: points.reduce((sum, p) => sum + p.x, 0) / points.length,
+    y: points.reduce((sum, p) => sum + p.y, 0) / points.length,
   };
-  const mark = (r: number, c: number, glyph: string, a: Pt, b: Pt) => {
-    if (!inGrid(r, c)) return;
-    const cell = cells[r][c];
-    const dist = distToSegment({ x: c + 0.5, y: r + 0.5 }, a, b);
-    if (dist < cell.dist) {
-      cell.glyph = glyph;
-      cell.dist = dist;
-    }
-  };
-  const levelGlyph = (v: number) => {
-    const f = v - Math.floor(v);
-    return f < 0.34 ? '¯' : f > 0.66 ? '_' : '─';
-  };
+}
 
-  const drawSegment = (from: Pt, to: Pt) => {
-    const a = { x: from.x / CELL_W, y: from.y / CELL_H };
-    const b = { x: to.x / CELL_W, y: to.y / CELL_H };
+// Darkness (0-1) at one point of a placed motif, kept as two parts. Areas
+// get their tone, lit from the top left so they have highlights and shadows,
+// and fade in from their edges; marks (lines and dots) are dark at their
+// core and fade out.
+function darknessAt(p: Pt, motif: Motif, at: Box): { area: number; mark: number } {
+  const light = 0.7 + (0.6 * (p.x - at.x + (p.y - at.y))) / (2 * at.size);
+  let area = 0;
+  for (const shape of [...motif.fills.filter((f) => f.kind !== 'dot'), ...motif.tones]) {
+    if (!pointInPolygon(p, shape.points)) continue;
+    area += shape.tone * (0.3 + 0.7 * smoothstep(0, EDGE_FADE, distToPolyline(p, closeLoop(shape.points))));
+  }
 
-    if (Math.abs(from.y - to.y) < 1e-9) {
-      const r = clampIndex(Math.floor(a.y), GRID_ROWS);
-      const c0 = clampIndex(Math.floor(Math.min(a.x, b.x)), GRID_COLS);
-      const c1 = clampIndex(Math.floor(Math.max(a.x, b.x)), GRID_COLS);
-      for (let c = c0; c <= c1; c++) {
-        if (c > c0 || c0 === c1) link(r, c, 'L');
-        if (c < c1 || c0 === c1) link(r, c, 'R');
-      }
-      return;
-    }
-    if (Math.abs(from.x - to.x) < 1e-9) {
-      const c = clampIndex(Math.floor(a.x), GRID_COLS);
-      const r0 = clampIndex(Math.floor(Math.min(a.y, b.y)), GRID_ROWS);
-      const r1 = clampIndex(Math.floor(Math.max(a.y, b.y)), GRID_ROWS);
-      for (let r = r0; r <= r1; r++) {
-        if (r > r0 || r0 === r1) link(r, c, 'U');
-        if (r < r1 || r0 === r1) link(r, c, 'D');
-      }
-      return;
-    }
-
-    const du = b.x - a.x;
-    const dv = b.y - a.y;
-    const slope = Math.abs(dv / du);
-    const diagonal = du * dv > 0 ? '╲' : '╱';
-    const vAt = (u: number) => a.y + ((u - a.x) * dv) / du;
-    const uAt = (v: number) => a.x + ((v - a.y) * du) / dv;
-    const u0 = Math.min(a.x, b.x);
-    const u1 = Math.max(a.x, b.x);
-    const v0 = Math.min(a.y, b.y);
-    const v1 = Math.max(a.y, b.y);
-
-    if (slope <= 1) {
-      for (let c = Math.floor(u0); c <= Math.floor(u1); c++) {
-        const v = vAt(clamp(c + 0.5, u0, u1));
-        const crossesRow = Math.floor(vAt(clamp(c, u0, u1))) !== Math.floor(vAt(clamp(c + 1, u0, u1)));
-        mark(Math.floor(v), c, slope >= 0.45 && crossesRow ? diagonal : levelGlyph(v), a, b);
-      }
-    } else {
-      for (let r = Math.floor(v0); r <= Math.floor(v1); r++) {
-        const u = uAt(clamp(r + 0.5, v0, v1));
-        const crossesCol = Math.floor(uAt(clamp(r, v0, v1))) !== Math.floor(uAt(clamp(r + 1, v0, v1)));
-        mark(r, Math.floor(u), crossesCol ? diagonal : '│', a, b);
-      }
-    }
-  };
-
+  const reach = STROKE_CORE + STROKE_SOFT;
+  const strokeTone = motif.strokeTone ?? 1;
   const lines = [...motif.strokes, ...motif.fills.filter((f) => f.kind === 'outline').map((f) => closeLoop(f.points))];
-  for (const line of lines) for (let i = 0; i < line.length - 1; i++) drawSegment(line[i], line[i + 1]);
-
-  for (const row of cells) {
-    for (const cell of row) {
-      if (!cell.links) continue;
-      const key = ['L', 'R', 'U', 'D'].filter((side) => cell.links.includes(side)).join('');
-      // A lone link is just the end of a straight edge; if a sloped edge also
-      // passes through this cell, its glyph describes the corner better.
-      if (!(key.length === 1 && cell.glyph)) cell.glyph = BOX_GLYPHS[key];
-    }
+  let mark = 0;
+  for (const line of lines) {
+    const d = distToPolyline(p, line);
+    if (d < reach) mark = Math.max(mark, strokeTone * (1 - smoothstep(STROKE_CORE, reach, d)));
   }
-
   for (const fill of motif.fills) {
-    if (!solidKinds.includes(fill.kind)) continue;
-    const hits: [number, number][] = [];
-    for (let r = 0; r < GRID_ROWS; r++) {
-      for (let c = 0; c < GRID_COLS; c++) {
-        if (pointInPolygon(cellCenter(r, c), fill.points)) hits.push([r, c]);
-      }
-    }
-    if (fill.kind === 'dot' && hits.length <= 12) {
-      const cx = fill.points.reduce((sum, p) => sum + p.x, 0) / fill.points.length;
-      const cy = fill.points.reduce((sum, p) => sum + p.y, 0) / fill.points.length;
-      cells[clampIndex(Math.floor(cy / CELL_H), GRID_ROWS)][clampIndex(Math.floor(cx / CELL_W), GRID_COLS)].glyph = '•';
-    } else {
-      for (const [r, c] of hits) cells[r][c].glyph = '•';
-    }
+    if (fill.kind !== 'dot') continue;
+    const center = centroid(fill.points);
+    const radius = Math.hypot(fill.points[0].x - center.x, fill.points[0].y - center.y);
+    const d = Math.hypot(p.x - center.x, p.y - center.y);
+    mark = Math.max(mark, 1 - smoothstep(radius, radius + STROKE_SOFT, d));
   }
 
-  return cells.map((row) => row.map((cell) => cell.glyph));
+  return { area: Math.min(1, area * light), mark };
 }
 
 function boxCells(at: Box) {
@@ -763,98 +674,64 @@ function boxCells(at: Box) {
   };
 }
 
-function renderShading(motif: Motif, at: Box, grid: string[][]) {
-  const samples = 4;
-  const strokeHalfWidth = 0.42 * CELL_H;
-  const strokeTone = motif.strokeTone ?? 1;
-  const { r0, r1, c0, c1 } = boxCells(at);
-
-  for (let r = r0; r <= r1; r++) {
-    for (let c = c0; c <= c1; c++) {
-      let coverage = 0;
-      for (let sy = 0; sy < samples; sy++) {
-        for (let sx = 0; sx < samples; sx++) {
-          const p = { x: (c + (sx + 0.5) / samples) * CELL_W, y: (r + (sy + 0.5) / samples) * CELL_H };
-          let value = regionTone(p, motif, false);
-          if (value < strokeTone && motif.strokes.some((line) => distToPolyline(p, line) < strokeHalfWidth)) {
-            value = strokeTone;
-          }
-          coverage += value;
-        }
-      }
-      const level = Math.round((coverage / (samples * samples)) * (SHADE_RAMP.length - 1));
-      const glyph = SHADE_RAMP[Math.min(SHADE_RAMP.length - 1, level)];
-      if (glyph !== ' ') grid[r][c] = glyph;
-    }
-  }
+// Within each run period a cell's threshold rises from the middle outward,
+// so darker areas show longer runs of text and lighter ones short
+// fragments: spacing, not outlines, does the shading.
+function runThreshold(r: number, c: number): number {
+  const u = (((c + rowOffset(r)) % RUN_PERIOD) + 0.5) / RUN_PERIOD;
+  return Math.abs(2 * u - 1);
 }
 
 function renderScene(placed: { motif: Motif; at: Box }[], text: string, primary: Box): HgLayer[] {
-  const hybrid = placed.filter((p) => p.motif.technique !== 'shading');
-  const merged: Motif = {
-    fills: hybrid.flatMap((p) => p.motif.fills),
-    strokes: hybrid.flatMap((p) => p.motif.strokes),
-    tones: hybrid.flatMap((p) => p.motif.tones),
-  };
-
-  const shade = blankGrid();
-  for (const p of placed) if (p.motif.technique === 'shading') renderShading(p.motif, p.at, shade);
-
-  const glyphs = lineGlyphs(merged, ['dot']);
-  const lines = blankGrid();
-  const words = [blankGrid(), blankGrid(), blankGrid()];
-  const bands = hybrid
-    .filter((p) => p.motif.wordBand)
-    .map((p) => ({
-      band: p.motif.wordBand as number,
-      strokes: p.motif.strokes.map((line) => line.map((pt) => ({ x: pt.x / CELL_W, y: pt.y / CELL_H }))),
-    }));
-  const isLine = (r: number, c: number) => c >= 0 && c < GRID_COLS && glyphs[r][c] !== '';
-  let index = 0;
-
-  for (let r = 0; r < GRID_ROWS; r++) {
-    for (let c = 0; c < GRID_COLS; c++) {
-      if (shade[r][c] !== ' ') continue;
-      if (isLine(r, c)) {
-        lines[r][c] = glyphs[r][c];
-        continue;
+  const darkness = Array.from({ length: GRID_ROWS }, () => new Float32Array(GRID_COLS));
+  for (const { motif, at } of placed) {
+    const { r0, r1, c0, c1 } = boxCells(at);
+    for (let r = r0; r <= r1; r++) {
+      for (let c = c0; c <= c1; c++) {
+        // Areas are averaged across the cell so their edges fade smoothly.
+        // Marks take the cell's darkest point, curved upward, so thin lines
+        // stay solid instead of averaging away into a scatter. That contrast
+        // between solid lines and sparse areas keeps the shapes legible.
+        let area = 0;
+        let mark = 0;
+        for (let sy = 0; sy < SAMPLES; sy++) {
+          for (let sx = 0; sx < SAMPLES; sx++) {
+            const p = { x: (c + (sx + 0.5) / SAMPLES) * CELL_W, y: (r + (sy + 0.5) / SAMPLES) * CELL_H };
+            const d = darknessAt(p, motif, at);
+            area += d.area;
+            mark = Math.max(mark, d.mark);
+          }
+        }
+        // Pale areas drop to nothing so highlights are blank paper, as in a
+        // typographic portrait; mid and dark areas keep their halftone.
+        const shaded = smoothstep(0.1, 0.9, (1.8 * area) / (SAMPLES * SAMPLES));
+        const value = Math.max(shaded, 1 - (1 - mark) ** 2);
+        darkness[r][c] = Math.max(darkness[r][c], value);
       }
-      // A one-cell gutter either side of every line keeps it from being lost
-      // among the letters.
-      if (isLine(r, c - 1) || isLine(r, c + 1)) continue;
-
-      let tone = regionTone(cellCenter(r, c), merged, true);
-      if (
-        tone < 0.03 &&
-        bands.some(({ band, strokes }) => strokes.some((line) => distToPolyline({ x: c + 0.5, y: r + 0.5 }, line) < band))
-      ) {
-        tone = 0.5;
-      }
-      if (tone < 0.03) continue;
-
-      // Only visible cells consume a character, so more of the article's real
-      // words land inside the shapes; a space becomes a middle dot rather than
-      // punching a hole in them.
-      const char = text[index % text.length];
-      index += 1;
-      words[tone < 0.3 ? 0 : tone < 0.62 ? 1 : 2][r][c] = /\s/.test(char) ? '·' : char;
     }
   }
 
-  // Graph-paper dots and crosses behind everything, plus crop marks at the
-  // primary motif's corners, for a faint technical-drawing texture.
-  const detail = blankGrid();
-  const occupied = (r: number, c: number) =>
-    c < 0 ||
-    c >= GRID_COLS ||
-    shade[r][c] !== ' ' ||
-    lines[r][c] !== ' ' ||
-    words.some((w) => w[r][c] !== ' ');
+  // The article's text runs continuously across the whole grid and darkness
+  // decides which stretches show, so dark areas read as whole words and
+  // light ones as fragments. A space becomes a middle dot so it doesn't
+  // punch a hole in a dark run.
+  const words = [blankGrid(), blankGrid(), blankGrid()];
   for (let r = 0; r < GRID_ROWS; r++) {
     for (let c = 0; c < GRID_COLS; c++) {
-      if (occupied(r, c) || isLine(r, c - 1) || isLine(r, c + 1)) continue;
-      if (c % 24 === 12 && r % 12 === 6) detail[r][c] = '+';
-      else if (c % 6 === 0 && r % 3 === 0) detail[r][c] = '·';
+      const d = darkness[r][c];
+      if (d <= runThreshold(r, c)) continue;
+      const char = text[(r * GRID_COLS + c) % text.length];
+      words[d < 0.4 ? 0 : d < 0.75 ? 1 : 2][r][c] = /\s/.test(char) ? '·' : char;
+    }
+  }
+
+  // Faint registration crosses, plus crop marks at the primary motif's
+  // corners, for a quiet technical-drawing texture around the art.
+  const detail = blankGrid();
+  const occupied = (r: number, c: number) => words.some((w) => w[r][c] !== ' ');
+  for (let r = 0; r < GRID_ROWS; r++) {
+    for (let c = 0; c < GRID_COLS; c++) {
+      if (c % 24 === 12 && r % 12 === 6 && !occupied(r, c)) detail[r][c] = '+';
     }
   }
   const { r0, r1, c0, c1 } = boxCells(primary);
@@ -871,10 +748,9 @@ function renderScene(placed: { motif: Motif; at: Box }[], text: string, primary:
     { kind: 'words-light', rows: toRows(words[0]) },
     { kind: 'words-mid', rows: toRows(words[1]) },
     { kind: 'words-strong', rows: toRows(words[2]) },
-    { kind: 'shade', rows: toRows(shade) },
-    { kind: 'line', rows: toRows(lines) },
   ];
 }
+
 
 function hashString(value: string): number {
   let hash = 2166136261;
