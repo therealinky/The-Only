@@ -38,7 +38,7 @@ Copy `.env.example` to `.env` and adjust. All are optional with sensible default
 | --- | --- | --- |
 | `SITE_URL` | `http://localhost:4321` | Canonical site URL — used for canonical tags, sitemap, RSS, and Open Graph/JSON-LD URLs |
 | `SHOW_EXAMPLES` | `false` | Set to `true` to include `example: true` placeholder articles in a build. Leave unset for a real production build |
-| `NEWSLETTER_PROVIDER` | unset | Weekly digest signup. See [Email digest](#email-digest); the form stays hidden until this is `buttondown` |
+| `NEWSLETTER_PROVIDER` | unset | The Brief email signup. See [Email digest](#email-digest); the form stays hidden until this is `buttondown` |
 
 `astro dev` always shows `draft` and `example` articles regardless of these flags, since local dev is where you
 preview unpublished work.
@@ -141,9 +141,14 @@ only works against a real build; running `npm run build && npm run preview` is h
 
 ## Email digest
 
-The Brief page has a weekly digest signup wired to **Buttondown**. `NewsletterSignup.astro` renders nothing at
-all until both `NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME` are set (see
-`.env.example`) — until then it's a no-op, same as before this was wired up.
+The Brief is also an email: every Wednesday, a hand-written summary of the most interesting stories from the past
+seven days, composed and sent manually from **Buttondown's free plan**. (Its RSS-to-email feature needs a paid plan,
+so it isn't used.) The site's only job is the signup form and a **Read past issues** link to Buttondown's public
+archive at `buttondown.com/<username>/archive/`; past issues live there, not on this site. Keep the web archive
+switched on in Buttondown's settings, or that link breaks.
+
+Both live in `NewsletterSignup.astro` on The Brief page, which renders nothing at all until both
+`NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME` are set (see `.env.example`).
 
 The form posts straight to Buttondown's public embeddable-subscribe endpoint
 (`https://buttondown.com/api/emails/embed-subscribe/<username>`); there's no API key or secret involved, and no
@@ -152,21 +157,6 @@ email addresses ever touch this codebase or Cloudflare. To turn it on:
 1. Create a Buttondown account and note the username (that's also the site's `buttondown.com/<username>` URL).
 2. Set both env vars locally (`.env`) and in Cloudflare Pages (**Settings → Environment variables**, Production):
    `NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME=<username>`.
-
-### Sending each week's digest
-
-Issues are sent by hand on Buttondown's free plan. Its RSS-to-email feature needs a paid plan, so it isn't used.
-The site does the composing instead: every published Brief is grouped into Monday-to-Sunday weeks (`src/lib/digest.ts`),
-and each week gets:
-
-- a public digest page at `/the-brief/digest/<monday's date>/`, listed on the archive at `/the-brief/digest/`, with
-  the latest week also shown at the top of The Brief page;
-- an unlisted email view at `/the-brief/digest/<monday's date>/email/`, kept out of search engines and the sitemap.
-
-To send: open that week's email view on the live site, click **Copy subject** and paste it into a new Buttondown
-email, then click **Copy email** and paste it into the body. The copy carries both formatted HTML and Markdown, so
-headings and links survive whichever editor mode Buttondown is in. Links point at `SITE_URL`, so copy from the live
-site, not a local preview.
 
 A different provider (ConvertKit, Mailcoach, etc.) would need its own branch in `NewsletterSignup.astro`, since
 each one's embeddable form shape differs — not built, since only Buttondown is in use.

@@ -26,9 +26,9 @@ Everything below needs your credentials or a decision — none of it can be done
 
 ## Decisions, not blockers
 
-- [ ] **Weekly digest.** Buttondown (free plan, sent by hand) is chosen and the site side is built: the signup
-      form, the digest pages, and a copy-ready email view for each week. What's left is creating the Buttondown
-      account and setting its two env vars. See the README's [Email digest](README.md#email-digest) section.
+- [ ] **The Brief email.** Buttondown (free plan, written and sent by hand every Wednesday) is chosen, and the site
+      side is built: the signup form and a link to Buttondown's archive of past issues. What's left is creating the
+      Buttondown account and setting its two env vars. See the README's [Email digest](README.md#email-digest) section.
 
 ## Already done, nothing needed from you
 

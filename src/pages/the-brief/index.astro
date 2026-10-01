@@ -1,6 +1,5 @@
 ---
 import ArticleListing from '../../components/ArticleListing.astro';
-import DigestPreview from '../../components/DigestPreview.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -16,7 +15,6 @@ const articles = filterByFormat(await getListableArticles(), 'brief');
     subtitle="Concise, sourced updates: what changed and why it matters."
     variant="gold"
   />
-  <DigestPreview />
   <NewsletterSignup />
   <ArticleListing
     articles={articles}
