@@ -74,31 +74,25 @@
   transition: opacity 700ms ease-out var(--hg-delay, 0ms);
 }
 
-/* Box-drawing glyphs are hairline-thin in most fonts; a matching stroke
-   thickens them so the outline, not the words, carries the shape. */
-.hg-text--line {
-  fill-opacity: 1;
-  font-weight: 700;
-  stroke: var(--hg-gradient);
-  stroke-width: 0.2;
+/* Registration crosses and crop marks around the art. */
+.hg-text--detail {
+  fill-opacity: 0.3;
 }
 
-.hg-text--shade {
-  fill-opacity: 0.95;
-  font-weight: 600;
-}
-
-/* Article words sit behind the outline, as strong as their region's tone. */
+/* Spacing does most of the shading; weight and opacity add a little more
+   depth, darkest where the text runs solid. */
 .hg-text--words-light {
-  fill-opacity: 0.34;
+  fill-opacity: 0.5;
 }
 
 .hg-text--words-mid {
-  fill-opacity: 0.58;
+  fill-opacity: 0.78;
+  font-weight: 500;
 }
 
 .hg-text--words-strong {
-  fill-opacity: 0.85;
+  fill-opacity: 1;
+  font-weight: 700;
 }
 
 .hg-art.is-in-view .hg-text {
