@@ -65,8 +65,9 @@ visually distinct sidebar (see `ArticleSidebar.astro`), not inline in the articl
 
 1. Copy the frontmatter shape from any existing file in `src/content/articles/` (or see the schema directly).
 2. Set `status: draft` while you work — draft articles render only in `astro dev`, never in a build.
-3. Fill in `beforeYouUse` honestly; use the literal string `"not verified"` for anything you haven't checked, rather
-   than guessing.
+3. Fill in `beforeYouUse` honestly, starting each field with `known:`, `not verified:`, or `not applicable:` (the
+   sidebar shows that word as an icon and label). Use `not verified` for anything you haven't checked, rather than
+   guessing.
 4. Leave `author` unset — it defaults to the house byline in [`src/config/site.ts`](src/config/site.ts) and should
    stay that way; articles here are AI-drafted and human-reviewed, not written by a named individual. Leave
    `reviewedBy` unset while drafting too (it defaults to a placeholder). Before you set `status: published`, replace

@@ -1,6 +1,9 @@
 ---
+import CheckStatus from '../components/CheckStatus.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
+  CHECK_STATUS_DESCRIPTIONS,
+  CHECK_STATUSES,
   DIFFICULTY_DESCRIPTIONS,
   DIFFICULTY_LABELS,
   DIFFICULTY_LEVELS,
@@ -133,13 +136,25 @@ import {
     }
   </dl>
 
-  <h2>Before you use it</h2>
+  <h2 id="before-you-use-it">Before you use it</h2>
   <p>
     Every article's sidebar except a Pulse's includes a "Before you use it" checklist covering client data handling,
     usage rights, disclosure obligations, accessibility, and cost, alongside the tools it discusses and (for Test
-    and Workflow articles) a quick summary. Any field we haven't personally checked is marked <code>not verified</code>{' '}
-    rather than guessed at.
+    and Workflow articles) a quick summary. Each item is marked with one of three labels, so you can tell at a
+    glance what we confirmed and what we didn't. We never guess to fill a gap.
   </p>
+  <dl>
+    {
+      CHECK_STATUSES.map((status) => (
+        <div>
+          <dt>
+            <CheckStatus status={status} />
+          </dt>
+          <dd>{CHECK_STATUS_DESCRIPTIONS[status]}</dd>
+        </div>
+      ))
+    }
+  </dl>
 
   <h2>Corrections and withdrawals</h2>
   <p>

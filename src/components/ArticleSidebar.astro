@@ -1,6 +1,8 @@
 ---
 import type { Difficulty, Format, PatternStrength, Sentiment } from '../config/site';
+import { parseCheckStatus } from '../lib/check-status';
 import { slugify } from '../lib/slugify';
+import CheckStatus from './CheckStatus.astro';
 import DifficultyBadge from './DifficultyBadge.astro';
 import PatternStrengthBadge from './PatternStrengthBadge.astro';
 import SentimentBadge from './SentimentBadge.astro';
@@ -47,6 +49,15 @@ const {
 } = Astro.props;
 const hasSummary = Boolean(summary?.whatChanged);
 const isPulse = format === 'pulse';
+const checks = (
+  [
+    ['Client data', beforeYouUse.clientData],
+    ['Usage rights', beforeYouUse.usageRights],
+    ['Disclosure', beforeYouUse.disclosure],
+    ['Accessibility', beforeYouUse.accessibility],
+    ['Cost', beforeYouUse.cost],
+  ] as const
+).map(([label, value]) => ({ label, ...parseCheckStatus(value) }));
 ---
 
 <aside class="article-sidebar" aria-label="At a glance">
@@ -135,27 +146,19 @@ const isPulse = format === 'pulse';
       <div class="article-sidebar__section">
         <h2 class="article-sidebar__heading">Before you use it</h2>
         <dl>
-          <div>
-            <dt>Client data</dt>
-            <dd>{beforeYouUse.clientData}</dd>
-          </div>
-          <div>
-            <dt>Usage rights</dt>
-            <dd>{beforeYouUse.usageRights}</dd>
-          </div>
-          <div>
-            <dt>Disclosure</dt>
-            <dd>{beforeYouUse.disclosure}</dd>
-          </div>
-          <div>
-            <dt>Accessibility</dt>
-            <dd>{beforeYouUse.accessibility}</dd>
-          </div>
-          <div>
-            <dt>Cost</dt>
-            <dd>{beforeYouUse.cost}</dd>
-          </div>
+          {checks.map(({ label, status, text }) => (
+            <div>
+              <dt class="check-status__row">
+                <span>{label}</span>
+                <CheckStatus status={status} />
+              </dt>
+              {text && <dd>{text}</dd>}
+            </div>
+          ))}
         </dl>
+        <p class="check-status__key">
+          <a href="/editorial-policy/#before-you-use-it">What these labels mean</a>
+        </p>
       </div>
     )
   }
