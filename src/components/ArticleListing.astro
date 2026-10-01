@@ -13,6 +13,8 @@ interface Props {
   disciplineBase: string;
   activeDiscipline?: Discipline;
   emptyMessage?: string;
+  /** Show this many matching articles at first, with a "See more" button for the rest. */
+  pageSize?: number;
 }
 
 const {
@@ -21,11 +23,12 @@ const {
   disciplineBase,
   activeDiscipline,
   emptyMessage = 'No articles match this filter yet.',
+  pageSize,
 } = Astro.props;
 
-const visibleCount = activeDiscipline
-  ? articles.filter((a) => a.data.disciplines.includes(activeDiscipline)).length
-  : articles.length;
+const matches = (article: Article) => !activeDiscipline || article.data.disciplines.includes(activeDiscipline);
+const visibleCount = articles.filter(matches).length;
+let matchIndex = 0;
 ---
 
 <nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase}>
@@ -55,15 +58,17 @@ const visibleCount = activeDiscipline
   {visibleCount} {visibleCount === 1 ? 'article' : 'articles'}
 </p>
 
-<div data-article-grid>
+<div data-article-grid data-page-size={pageSize}>
   {
     articles.map((article) => {
-      const hiddenByFilter = !!activeDiscipline && !article.data.disciplines.includes(activeDiscipline);
+      const isMatch = matches(article);
+      const pagedOut = isMatch && pageSize !== undefined && matchIndex++ >= pageSize;
       return (
         <div
           data-article-item
           data-disciplines={article.data.disciplines.join('|')}
-          hidden={hiddenByFilter || undefined}
+          hidden={!isMatch || undefined}
+          data-paged-out={pagedOut || undefined}
         >
           <ArticleCard article={article} />
         </div>
@@ -71,6 +76,23 @@ const visibleCount = activeDiscipline
     })
   }
 </div>
+
+{
+  pageSize !== undefined && (
+    <div class="see-more">
+      <button type="button" data-see-more hidden={visibleCount <= pageSize || undefined}>
+        See more
+      </button>
+    </div>
+  )
+}
+{
+  pageSize !== undefined && (
+    <noscript>
+      <style>{'[data-article-item][data-paged-out] { display: flex; } [data-see-more] { display: none; }'}</style>
+    </noscript>
+  )
+}
 
 {articles.length === 0 && <p>{emptyMessage}</p>}
 
@@ -82,6 +104,20 @@ const visibleCount = activeDiscipline
     const allHref = bar.dataset.allHref ?? '/';
     const items = Array.from(grid.querySelectorAll<HTMLElement>('[data-article-item]'));
     const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>('a[data-discipline]'));
+    const seeMore = document.querySelector<HTMLButtonElement>('[data-see-more]');
+    const pageSize = Number(grid.dataset.pageSize) || Infinity;
+    let shown = pageSize;
+
+    function matchingItems() {
+      return items.filter((item) => !item.hidden);
+    }
+
+    // Reveals the first `shown` matching cards and pages out the rest.
+    function applyPaging() {
+      const matching = matchingItems();
+      matching.forEach((item, index) => item.toggleAttribute('data-paged-out', index >= shown));
+      if (seeMore) seeMore.hidden = matching.length <= shown;
+    }
 
     function applyFilter(discipline: string, href: string, push: boolean) {
       let visible = 0;
@@ -89,8 +125,11 @@ const visibleCount = activeDiscipline
         const disciplines = (item.dataset.disciplines ?? '').split('|');
         const matches = discipline === '' || disciplines.includes(discipline);
         item.hidden = !matches;
+        if (!matches) item.removeAttribute('data-paged-out');
         if (matches) visible += 1;
       }
+      shown = pageSize;
+      applyPaging();
       for (const link of links) {
         if ((link.dataset.discipline ?? '') === discipline) {
           link.setAttribute('aria-current', 'page');
@@ -105,6 +144,14 @@ const visibleCount = activeDiscipline
         history.pushState({ discipline }, '', href);
       }
     }
+
+    seeMore?.addEventListener('click', () => {
+      const firstNew = matchingItems()[shown];
+      shown += pageSize;
+      applyPaging();
+      // Keeps keyboard and screen-reader users at the start of what was revealed.
+      firstNew?.querySelector<HTMLAnchorElement>('a.article-card__link')?.focus();
+    });
 
     for (const link of links) {
       link.addEventListener('click', (event) => {
