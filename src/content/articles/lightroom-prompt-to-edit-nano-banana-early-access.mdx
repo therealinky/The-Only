@@ -1,0 +1,79 @@
+---
+title: "Lightroom Gets Prompt to Edit, and It Regenerates Your Photo Instead of Moving Sliders"
+dek: >-
+  Lightroom desktop's September 29 update adds an early access Prompt to
+  Edit tool powered by Google's Nano Banana model. It's handy for restoration
+  and big changes, but it produces a new generated image, not an edit you can
+  dial back.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-01
+updatedAt: 2026-10-01
+lastVerified: 2026-10-01
+disciplines:
+  - Photo & Imaging
+tools:
+  - Adobe Lightroom
+sources:
+  - title: "Lightroom v9.6 Is Live! Transform Photos with Prompt to Edit and Enhanced Reflection Removal (Adobe Community announcement)"
+    url: https://community.adobe.com/announcements-678/lightroom-v9-6-is-live-transform-photos-with-prompt-to-edit-and-enhanced-reflection-removal-1644292
+    accessed: 2026-10-01
+  - title: "What's New in Lightroom Classic 15.6, Mobile & Desktop (September 2026) (The Lightroom Queen)"
+    url: https://www.lightroomqueen.com/whats-new-in-lightroom-2026-09/
+    accessed: 2026-10-01
+  - title: "Nano Banana is now inside Lightroom (Digital Camera World)"
+    url: https://www.digitalcameraworld.com/photography/photo-editing/nano-banana-is-now-inside-lightroom-adobe-has-quietly-added-an-experimental-prompt-to-edit-tool-that-regenerates-images-inside-lightroom
+    accessed: 2026-10-01
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's announcement doesn't say how photos sent through
+    Prompt to Edit are handled, and because it runs on Google's Nano Banana
+    model rather than a Firefly model, the data path may differ from
+    Lightroom's other AI tools. Check Adobe's partner-model terms before
+    running client or NDA'd shoots through it.
+  usageRights: >-
+    not verified: we didn't confirm commercial-use terms for images generated
+    by a partner model inside Lightroom in this pass. Check Adobe's
+    generative AI terms before delivering Prompt to Edit output in paid work.
+  disclosure: >-
+    not verified: Adobe doesn't address disclosure, but since the whole image
+    is regenerated rather than adjusted, it's reasonable to treat the result
+    as AI-generated imagery for client and editorial disclosure purposes,
+    especially in documentary or journalistic contexts where that matters.
+  accessibility: >-
+    not applicable: this is a photo-editing feature, not an interface or
+    layout change with accessibility implications.
+  cost: >-
+    known, per The Lightroom Queen's write-up: 20 generative credits for 2K
+    output and 30 generative credits for 4K output. Adobe's own announcement
+    doesn't list credit costs, so confirm on your account the first time you
+    run it.
+---
+Adobe pushed Lightroom v9.6 on September 29, and the headline feature is Prompt to Edit: type what you want changed about a photo and Lightroom hands back a new version. It's an early access tool, which is Adobe's label for a feature still in testing.
+
+## What changed
+
+Prompt to Edit lives in Lightroom desktop only for now, not Lightroom Classic or mobile. Per The Lightroom Queen, you open it from a new icon in the right-hand toolstrip, just above Versions. Lightroom suggests sample prompts to get you started, and you can write your own.
+
+Adobe says it's powered by Google's Nano Banana model, and its demos lean on restoration jobs (cleaning dust and scratches off an old scan, colorizing a black-and-white photo) alongside bigger creative changes like swapping a sky or adding fog.
+
+The important detail is how it works. It doesn't move your sliders to match a description. Per Adobe's own demo, "the entire photo is regenerated," and the result is added to your library as a new image. Output comes in 2K or 4K.
+
+The same update also improves Reflection Removal on glass, windows, and water, adds a Check All / Check None option to the Masking panel's landscape and people mask lists, and expands camera and lens support.
+
+## Why it matters for designers
+
+For anyone doing restoration or quick comps, getting a prompt-driven generative edit without a round trip to Photoshop or Firefly is a real convenience. Old-photo cleanup in particular has always been slow, careful work, and a "fix the scratches" prompt is a decent first pass to judge before deciding whether a manual retouch is still needed.
+
+It also blurs a line Lightroom has mostly kept: its edits have traditionally been parametric and non-destructive. Prompt to Edit is a different kind of tool living in the same app, and it's worth knowing which one you're reaching for.
+
+## What to watch out for
+
+Because the whole image is regenerated, expect details you didn't ask to change to drift: faces, text, textures, and fine edges are the usual suspects with generative models. Compare the result against the original at 100% before trusting it, and don't use it where the photo needs to stay an accurate record.
+
+Output tops out at 4K, which may be smaller than your camera's original files, so check the resolution before it goes anywhere near print.
+
+It isn't free either. Each generation costs generative credits (see the sidebar), and iterating on prompts adds up quickly. And since it's early access, Adobe may change how it works, what it costs, or which apps get it.

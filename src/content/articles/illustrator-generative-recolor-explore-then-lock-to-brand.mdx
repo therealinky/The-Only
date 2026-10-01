@@ -1,0 +1,111 @@
+---
+title: "Illustrator's Generative Recolor Works Best as a Starting Point, Not a Final Palette"
+dek: >-
+  Most people try Generative Recolor once, get a random palette, and move on.
+  Pulling together several tutorials, here's a fuller workflow: prep the art
+  so the AI can actually see your colors, explore broadly, save what works,
+  then snap it back to a real brand palette.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-01
+updatedAt: 2026-10-01
+lastVerified: 2026-10-01
+disciplines:
+  - Illustration
+  - Brand
+tools:
+  - Adobe Illustrator
+sources:
+  - title: "Using Generative Recolor in Illustrator (CreativePro)"
+    url: https://creativepro.com/using-generative-recolor-in-illustrator/
+    accessed: 2026-10-01
+  - title: "How to Use Generative Recolor in Illustrator (Envato Tuts+)"
+    url: https://design.tutsplus.com/tutorials/how-to-use-generative-recolor-in-illustrator--cms-108064
+    accessed: 2026-10-01
+  - title: "How to Use Generative Recolor Tool in Adobe Illustrator (IllustratorHow)"
+    url: https://illustratorhow.com/generative-recolor-tool/
+    accessed: 2026-10-01
+  - title: "How To Use The New Generative Recolor In Adobe Illustrator (Amber Design)"
+    url: https://www.amberddesign.com/generative-recolor/
+    accessed: 2026-10-01
+  - title: "Generate stunning color themes using text prompts with Generative Recolor (Adobe Community)"
+    url: https://community.adobe.com/t5/illustrator-discussions/generate-stunning-color-themes-using-text-prompts-with-generative-recolor/td-p/13861873
+    accessed: 2026-10-01
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of several published tutorials on
+    Illustrator's Generative Recolor, which has been generally available
+    since 2023, assembled into one workflow from prep to brand-safe final.
+  whyItMatters: >-
+    Generative Recolor is fast at producing palette ideas but bad at hitting
+    exact colors. Treating it as an exploration step and then constraining
+    the result manually gets you the speed without giving up control.
+  bestFor: >-
+    Illustrators and brand designers making colorway variations of vector
+    artwork: illustrations, patterns, icon sets, or campaign graphics that
+    need several seasonal or audience-specific versions.
+  timeToTry: >-
+    About 30 minutes to work through on a real piece of art, including prep.
+    After that, a round of exploration takes a few minutes.
+beforeYouUse:
+  clientData: >-
+    not verified: Generative Recolor needs an internet connection, so your
+    artwork's color data is sent to Adobe to generate results. We didn't
+    confirm exactly what is transmitted or retained. Check Adobe's generative
+    AI terms before using it on unreleased client work.
+  usageRights: >-
+    not verified: the output is your own vector artwork with new colors
+    applied, which is a much lower-risk case than generated imagery, but we
+    didn't confirm Adobe's terms for this feature specifically.
+  disclosure: >-
+    not verified: a palette suggested by AI and applied to your own artwork
+    is unlikely to need disclosure in most client contexts, but none of the
+    sources address it. Follow your own client agreements.
+  accessibility: >-
+    not verified: Generative Recolor doesn't check contrast. Any palette it
+    suggests can produce low-contrast combinations, so check text and key
+    shapes against contrast guidelines before shipping.
+  cost: >-
+    not verified: Generative Recolor is one of Illustrator's Firefly-powered
+    generative features, which can draw on your plan's generative credits,
+    but we couldn't confirm a per-generation cost for it in this pass.
+    Check your credit balance before and after a session.
+---
+Generative Recolor is the Illustrator feature where you type something like "foggy harbor at dawn" and get back recolored versions of your selected vector art. It's been around since 2023, and a lot of designers have tried it once and shrugged.
+
+This workflow is synthesized from several independent tutorials plus general Illustrator knowledge, not any one person's process, and we haven't tested it hands-on end to end. The pattern across sources is consistent, though: the tool is great at breaking you out of a color rut and unreliable at hitting specific colors, so the trick is to use it for exploring and finish by hand.
+
+1. **Prep the artwork so the AI sees distinct colors.** Generative Recolor works on vector art only. If your selection mixes vectors and placed images, only the vectors change. Several sources stress one gotcha in particular: grays built with the Grayscale color mode all read as the same color, so the tool can't assign them different hues. If you rough in your composition in neutrals first (a genuinely good way to use this tool), build those grays in RGB, CMYK, or HSB so each one counts as its own color. Grouping the artwork before you start makes reselecting easier.
+
+2. **Open it and start with the sample prompts.** Select the art and go to Edit > Edit Colors > Generative Recolor, or use the Recolor button in the Properties panel or Contextual Task Bar. The sample prompts are a quick way to see how the tool interprets mood language before you write your own.
+
+3. **Write prompts that combine a mood with concrete color words.** Sources agree on being specific, and the more useful advice is to name things that have real-world colors ("rusted copper and sea glass") rather than abstract qualities alone. Sources split a bit on modifiers: some suggest mood-first prompts, while others found that words like "muted" or "pastel" behave inconsistently. Negative prompts like "no green" aren't supported, per one tutorial. Run the same prompt more than once, since results vary, and try small wording changes rather than assuming synonyms behave the same.
+
+4. **Add guide colors when you have anchors.** You can add up to five colors alongside the prompt. Treat them as a hint, not a rule. Multiple sources note the output won't necessarily contain those exact values. This is useful for "something that works with our existing navy" rather than "use our navy."
+
+5. **Save anything promising before you leave the panel.** This is the step people miss. Variations don't stick around: only the one you've applied remains when you close the panel. If you want to compare several directions, save each one you like as a color group in the Swatches panel as you go.
+
+6. **Unlock blacks, whites, and grays if you want a full recolor.** By default, the recolor preserves certain neutrals. That setting lives in Color Reduction Options inside Recolor Artwork's advanced options. Uncheck the preserved colors if you want the AI's palette applied across everything, or leave them if your line work and type should stay black.
+
+7. **Finish in Recolor Artwork, not in Generative Recolor.** This is where our synthesis goes past most of the individual tutorials. Once you've picked a direction, switch over to the regular Recolor Artwork controls. From there you can adjust individual colors, or limit the color group to a swatch library, which pulls the AI's palette onto your actual brand colors. Save your brand palette as its own swatch library ahead of time so this is one click. The AI gets you the mood and the color relationships, and the swatch library makes the final values exact.
+
+8. **Check contrast and print.** Before calling it done, check any text and key shapes for contrast, and if it's going to print, check how the final swatches behave in CMYK. Nothing in Generative Recolor accounts for either.
+
+## Why it matters for designers
+
+Colorways are one of the most repetitive jobs in illustration and brand work: seasonal versions of a pattern, campaign variations, a product illustration in three audience palettes. Generative Recolor makes the "what if it were warmer?" step take seconds instead of minutes of manual swatch shuffling, which is where it's genuinely useful.
+
+Several tutorials also point out a client-side benefit: showing three quick colorways is easier than asking a client to describe a palette in words. Pairing that exploration with a locked brand swatch library means the version they approve can be exact rather than "close enough."
+
+## What to watch out for
+
+The tool doesn't hit exact colors, even with guide colors. If you need specific values, you have to finish by hand (step 7).
+
+Thumbnails can mislead. One source notes that gradients and type may not preview accurately in the variation thumbnails even though they recolor correctly on the artboard, so judge on the artboard itself.
+
+Most published tutorials date from 2023 and 2024, and the interface has moved around since. Menu locations and panel layouts in your version may differ from screenshots you find elsewhere.
+
+It needs an internet connection, and the credit cost isn't confirmed (see the sidebar), so it isn't a tool for offline work, and it's worth checking your balance before a long exploration session.
