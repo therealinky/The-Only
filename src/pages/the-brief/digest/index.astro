@@ -1,0 +1,29 @@
+---
+import NewsletterSignup from '../../../components/NewsletterSignup.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { digestPath, getDigestWeeks, weekLabel } from '../../../lib/digest';
+
+const weeks = await getDigestWeeks();
+---
+
+<BaseLayout title="Weekly digest — The Brief" description="Every Brief we publish, collected week by week.">
+  <h1>The Brief: weekly digest</h1>
+  <p>Every Brief we publish, collected week by week, newest first.</p>
+  {
+    weeks.length > 0 ? (
+      <ul class="digest-archive">
+        {weeks.map((week) => (
+          <li>
+            <a href={digestPath(week)}>{weekLabel(week)}</a>
+            <span class="digest-archive__count">
+              {week.articles.length} {week.articles.length === 1 ? 'Brief' : 'Briefs'}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>No digests yet. The first one appears once a Brief is published.</p>
+    )
+  }
+  <NewsletterSignup />
+</BaseLayout>

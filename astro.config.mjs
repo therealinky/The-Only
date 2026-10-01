@@ -10,7 +10,9 @@ const SITE_URL = process.env.SITE_URL || 'http://localhost:4321';
 // callback argument.
 const isDevCommand = process.argv.slice(2).includes('dev');
 
-const integrations = [mdx(), sitemap()];
+// Digest email views are an unlisted helper for sending the newsletter, not
+// pages for readers.
+const integrations = [mdx(), sitemap({ filter: (page) => !/\/the-brief\/digest\/[^/]+\/email\/$/.test(page) })];
 
 // Keystatic (and its React dependency) is a local-mode editing UI only.
 // It is imported dynamically, and only for `astro dev`, so it is never

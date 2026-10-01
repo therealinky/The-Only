@@ -26,9 +26,9 @@ Everything below needs your credentials or a decision — none of it can be done
 
 ## Decisions, not blockers
 
-- [ ] **Newsletter provider.** Not chosen and nothing is built (see the README's
-      [Email digest](README.md#email-digest-not-yet-built) section) — pick one when you're ready, or skip it
-      indefinitely. `NEWSLETTER_PROVIDER` stays unset either way until then.
+- [ ] **Weekly digest.** Buttondown (free plan, sent by hand) is chosen and the site side is built: the signup
+      form, the digest pages, and a copy-ready email view for each week. What's left is creating the Buttondown
+      account and setting its two env vars. See the README's [Email digest](README.md#email-digest) section.
 
 ## Already done, nothing needed from you
 

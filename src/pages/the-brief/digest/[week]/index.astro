@@ -1,0 +1,41 @@
+---
+import ArticleCard from '../../../../components/ArticleCard.astro';
+import NewsletterSignup from '../../../../components/NewsletterSignup.astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { digestPath, getDigestWeeks, weekLabel, type DigestWeek } from '../../../../lib/digest';
+import { formatDate } from '../../../../lib/format-date';
+
+export async function getStaticPaths() {
+  const weeks = await getDigestWeeks();
+  return weeks.map((week, i) => ({
+    params: { week: week.slug },
+    props: { week, newer: weeks[i - 1], older: weeks[i + 1] },
+  }));
+}
+
+const { week, newer, older } = Astro.props as { week: DigestWeek; newer?: DigestWeek; older?: DigestWeek };
+const count = week.articles.length;
+---
+
+<BaseLayout
+  title={`${weekLabel(week)} — The Brief digest`}
+  description={`Every Brief published the week of ${formatDate(week.start)}.`}
+>
+  <p class="digest-eyebrow"><a href="/the-brief/digest/">The Brief: weekly digest</a></p>
+  <h1>{weekLabel(week)}</h1>
+  <p>{count} {count === 1 ? 'Brief' : 'Briefs'} published this week.</p>
+  <div data-article-grid>
+    {
+      week.articles.map((article) => (
+        <div data-article-item>
+          <ArticleCard article={article} />
+        </div>
+      ))
+    }
+  </div>
+  <nav class="digest-nav" aria-label="Other weeks">
+    {older && <a href={digestPath(older)} rel="prev">Earlier: {weekLabel(older)}</a>}
+    {newer && <a href={digestPath(newer)} rel="next">Later: {weekLabel(newer)}</a>}
+  </nav>
+  <NewsletterSignup />
+</BaseLayout>

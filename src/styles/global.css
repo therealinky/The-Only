@@ -842,3 +842,132 @@ main {
 .newsletter-signup button:hover {
   opacity: 0.85;
 }
+
+/* ---------- Weekly digest ---------- */
+
+.digest-preview {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  margin-block-end: var(--space-6);
+}
+
+.digest-preview__eyebrow,
+.digest-eyebrow {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.digest-preview h2 {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.digest-preview__list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-inline-start: 1.25em;
+}
+
+.digest-preview__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin-block: var(--space-4) 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.digest-archive {
+  display: grid;
+  gap: var(--space-3);
+  padding-inline-start: 1.25em;
+  margin-block-end: var(--space-6);
+}
+
+.digest-archive__count {
+  margin-inline-start: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.digest-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-block: var(--space-6);
+  font-weight: 600;
+}
+
+.digest-nav a[rel='next'] {
+  margin-inline-start: auto;
+}
+
+.digest-email {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.digest-email__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.digest-email__label {
+  min-width: 4.5rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.digest-email__subject {
+  font-weight: 600;
+}
+
+.digest-email button {
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.digest-email button:hover {
+  opacity: 0.85;
+}
+
+.digest-email__status {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.digest-email__preview {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.digest-email__preview h2 {
+  font-size: var(--text-lg);
+}
+
+.digest-email pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--text-sm);
+}
