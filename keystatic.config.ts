@@ -10,6 +10,7 @@ import {
   SENTIMENT_LEVELS,
   SITE,
 } from './src/config/site';
+import { ART_MOTIFS } from './src/lib/hypergraphy';
 
 // Keystatic runs in LOCAL MODE ONLY (storage: 'local'), as an optional
 // editing UI at /keystatic during `astro dev`. It is never wired up for
@@ -118,6 +119,24 @@ export default config({
           label: 'Disciplines',
           options: DISCIPLINES.map((value) => ({ label: value, value })),
         }),
+        art: fields.object(
+          {
+            primary: fields.select({
+              label: 'Primary motif',
+              options: ART_MOTIFS.map((value) => ({ label: value, value })),
+              defaultValue: 'browser',
+            }),
+            secondary: fields.select({
+              label: 'Secondary motif',
+              options: [{ label: 'None', value: '' }, ...ART_MOTIFS.map((value) => ({ label: value, value }))],
+              defaultValue: '',
+            }),
+          },
+          {
+            label: 'Article art',
+            description: 'Two motifs that relate to what this article is about. See the daily-articles skill for what each one means.',
+          },
+        ),
         tools: fields.array(fields.text({ label: 'Tool name' }), {
           label: 'Tools discussed',
           itemLabel: (props) => props.value || 'Tool',

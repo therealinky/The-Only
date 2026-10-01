@@ -1,111 +1,27 @@
 ---
-// Article hero art — see src/lib/hypergraphy.ts for how the motif's
-// character layers are generated. Purely decorative (the title/dek already
-// carry the information), so it's hidden from assistive tech.
+// Article hero art — see src/lib/hypergraphy.ts for how the composition is
+// generated and src/lib/hypergraphy-svg.ts for how it becomes SVG. Purely
+// decorative (the title/dek already carry the information), so it's hidden
+// from assistive tech.
 import type { Discipline } from '../config/site';
-import {
-  buildHypergraphicArt,
-  GRADIENT_PAIRS,
-  GRID_COLS,
-  GRID_ROWS,
-  HYPERGRAPHY_CANVAS,
-  type HgLayerKind,
-} from '../lib/hypergraphy';
+import { GRADIENT_PAIRS, type ArticleArt } from '../lib/hypergraphy';
+import { renderInlineArt } from '../lib/hypergraphy-svg';
 
 interface Props {
   slug: string;
   disciplines: readonly Discipline[];
   body: string;
+  art?: ArticleArt;
 }
 
-const { slug, disciplines, body } = Astro.props;
-const { gradientVariant, layers } = buildHypergraphicArt(slug, disciplines, body);
+const { gradientVariant, svg } = renderInlineArt(Astro.props);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
-const { width, height, motifBox } = HYPERGRAPHY_CANVAS;
-const iridescentId = `hg-iridescent-${slug}`;
-
-const motifScale = Math.min(motifBox.w, motifBox.h) / 100;
-const motifX = motifBox.x + (motifBox.w - 100 * motifScale) / 2;
-const motifY = motifBox.y + (motifBox.h - 100 * motifScale) / 2;
-const cellW = 100 / GRID_COLS;
-const cellH = 100 / GRID_ROWS;
-
-// Outline glyphs (box drawing, diagonals) aren't in the site's Latin-only
-// JetBrains Mono subset, so they render in a fallback font whose widths vary
-// by platform. Placing each one at its own cell keeps the lines on the grid
-// regardless; the word and shading rows are all Latin, so they can simply be
-// stretched to the grid width.
-interface ArtText {
-  kind: HgLayerKind;
-  rowIndex: number;
-  y: string;
-  x: string;
-  content: string;
-  fitted: boolean;
-}
-
-const texts = layers.flatMap((layer) =>
-  layer.rows.flatMap((row, rowIndex): ArtText[] => {
-    if (!row.trim()) return [];
-    const y = ((rowIndex + 0.82) * cellH).toFixed(3);
-    if (layer.kind !== 'line') return [{ kind: layer.kind, rowIndex, y, x: '0', content: row, fitted: true }];
-    const xs: string[] = [];
-    let content = '';
-    [...row].forEach((char, col) => {
-      if (char === ' ') return;
-      content += char;
-      xs.push((col * cellW).toFixed(3));
-    });
-    return [{ kind: layer.kind, rowIndex, y, x: xs.join(' '), content, fitted: false }];
-  }),
-);
 ---
 
 <div class="hg-art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
   <div class="hg-art__wash"></div>
   <div class="hg-art__grain"></div>
-  <svg class="hg-art__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" style={`--hg-gradient: url(#${iridescentId})`}>
-    <defs>
-      {
-        /* objectBoundingBox (the default): each row of text is nested inside the
-           motif's translate/scale group, and userSpaceOnUse coordinates are read
-           in that local, already-transformed space, so a global gradient ended
-           up sampling near the same edge for every row. objectBoundingBox maps
-           0-1 to each element's own bounding box, so every row shows its own
-           color sweep. */
-      }
-      <linearGradient id={iridescentId} x1="0" y1="0" x2="1" y2="0.6">
-        <stop offset="0%" stop-color="var(--hero-purple)" />
-        <stop offset="20%" stop-color="var(--hero-blue)" />
-        <stop offset="40%" stop-color="var(--hero-sage)" />
-        <stop offset="60%" stop-color="var(--hero-gold)" />
-        <stop offset="80%" stop-color="var(--hero-rose)" />
-        <stop offset="100%" stop-color="var(--hero-purple)" />
-      </linearGradient>
-    </defs>
-    <g transform={`translate(${motifX} ${motifY}) scale(${motifScale})`} font-size={cellH * 0.92} xml:space="preserve">
-      {
-        texts.map((t) =>
-          t.fitted ? (
-            <text
-              class={`hg-text hg-text--${t.kind}`}
-              x={t.x}
-              y={t.y}
-              textLength="100"
-              lengthAdjust="spacingAndGlyphs"
-              style={`--hg-delay: ${t.rowIndex * 25}ms`}
-            >
-              {t.content}
-            </text>
-          ) : (
-            <text class={`hg-text hg-text--${t.kind}`} x={t.x} y={t.y} style={`--hg-delay: ${t.rowIndex * 25}ms`}>
-              {t.content}
-            </text>
-          ),
-        )
-      }
-    </g>
-  </svg>
+  <Fragment set:html={svg} />
 </div>
 
 <script>

@@ -10,6 +10,7 @@ import {
   SITE,
   STATUSES,
 } from './config/site';
+import { ART_MOTIFS } from './lib/hypergraphy';
 
 const sourceSchema = z.object({
   title: z.string().min(1, 'Source title is required.'),
@@ -63,6 +64,14 @@ const articleSchema = z
     summary: summarySchema.optional(),
     beforeYouUse: beforeYouUseSchema,
     withdrawnNote: z.string().min(1).optional(),
+    // The hero and card art: two motifs chosen for what the article is about.
+    // Keystatic writes '' for "no secondary"; preprocess that to undefined.
+    art: z
+      .object({
+        primary: z.enum(ART_MOTIFS),
+        secondary: z.preprocess((v) => (v === '' ? undefined : v), z.enum(ART_MOTIFS).optional()),
+      })
+      .optional(),
   })
   // --- Build rules enforced here (not just in documentation) ---
   .superRefine((data, ctx) => {

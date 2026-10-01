@@ -1,6 +1,7 @@
 ---
 import type { Article } from '../lib/articles';
 import { formatDate } from '../lib/format-date';
+import { artGradientVariant, GRADIENT_PAIRS } from '../lib/hypergraphy';
 import { getReadingTime } from '../lib/read-time';
 import EvidenceBadge from './EvidenceBadge.astro';
 import FormatBadge from './FormatBadge.astro';
@@ -12,9 +13,13 @@ interface Props {
 const { article } = Astro.props;
 const { data } = article;
 const readingTime = getReadingTime(article.body ?? data.dek);
+const [hueA, hueB] = GRADIENT_PAIRS[artGradientVariant(article.id)];
 ---
 
 <article class="article-card" data-format={data.format} data-disciplines={data.disciplines.join('|')}>
+  <div class="article-card__art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
+    <img src={`/art/${article.id}.svg`} alt="" width="800" height="420" loading="lazy" decoding="async" />
+  </div>
   <div class="article-card__meta">
     <FormatBadge format={data.format} />
     <EvidenceBadge evidence={data.evidence} />

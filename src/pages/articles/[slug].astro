@@ -62,7 +62,11 @@ const structuredData = {
       <p class="article-card__disciplines">{data.disciplines.join(', ')} · {readingTime} min read</p>
     </header>
 
-    {!isWithdrawn && <HypergraphicArt slug={article.id} disciplines={data.disciplines} body={article.body ?? data.dek} />}
+    {
+      !isWithdrawn && (
+        <HypergraphicArt slug={article.id} disciplines={data.disciplines} body={article.body ?? data.dek} art={data.art} />
+      )
+    }
 
     {
       isWithdrawn ? (

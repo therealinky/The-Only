@@ -80,7 +80,12 @@
   fill-opacity: 1;
   font-weight: 700;
   stroke: var(--hg-gradient);
-  stroke-width: 0.2;
+  stroke-width: 0.6;
+}
+
+/* Graph-paper dots, crosses, and crop marks behind the motifs. */
+.hg-text--detail {
+  fill-opacity: 0.3;
 }
 
 .hg-text--shade {
