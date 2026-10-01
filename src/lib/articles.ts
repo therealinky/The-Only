@@ -9,14 +9,31 @@ function isExampleHidden(entry: Article): boolean {
   return entry.data.example && !showExamples;
 }
 
+// Every article's illustration must be its own, so two articles sharing an
+// `art` motif fails the build (and the dev server) with both named.
+function assertUniqueArt(entries: Article[]) {
+  const owners = new Map<string, string>();
+  for (const entry of entries) {
+    const owner = owners.get(entry.data.art);
+    if (owner) {
+      throw new Error(
+        `"${entry.id}" and "${owner}" both use the "${entry.data.art}" art motif. Each article needs its own: pick an unused motif or add a new one (see src/lib/hypergraphy.ts).`,
+      );
+    }
+    owners.set(entry.data.art, entry.id);
+  }
+}
+
 /** Articles whose page may exist at all: published + withdrawn always, draft only in local dev. */
 export async function getRenderableArticles(): Promise<Article[]> {
   const all = await getCollection('articles');
-  return all.filter((entry) => {
+  const renderable = all.filter((entry) => {
     if (isExampleHidden(entry)) return false;
     if (entry.data.status === 'draft' && !import.meta.env.DEV) return false;
     return true;
   });
+  assertUniqueArt(renderable);
+  return renderable;
 }
 
 /** Articles that may appear in listings, the tools index, the search index, and RSS. */

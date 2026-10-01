@@ -3,15 +3,13 @@
 // generated and src/lib/hypergraphy-svg.ts for how it becomes SVG. Purely
 // decorative (the title/dek already carry the information), so it's hidden
 // from assistive tech.
-import type { Discipline } from '../config/site';
-import { GRADIENT_PAIRS, type ArticleArt } from '../lib/hypergraphy';
+import { GRADIENT_PAIRS, type ArtMotif } from '../lib/hypergraphy';
 import { renderInlineArt } from '../lib/hypergraphy-svg';
 
 interface Props {
   slug: string;
-  disciplines: readonly Discipline[];
   body: string;
-  art?: ArticleArt;
+  motif: ArtMotif;
 }
 
 const { gradientVariant, svg } = renderInlineArt(Astro.props);

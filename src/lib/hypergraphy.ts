@@ -1,14 +1,16 @@
-// "Hypergraphy" article art: a character-grid composition of two motifs
-// chosen for the article's subject (its frontmatter `art` field), drawn
-// across the full banner and deterministically generated from the slug, so
-// the same article always renders the same art.
+// "Hypergraphy" article art: one motif chosen for the article's subject
+// (its frontmatter `art` field), unique to that article, deterministically
+// generated from the slug so the same article always renders the same art.
 //
 // It's drawn like a typographic portrait: the article's own text runs in
 // rows across the whole grid, and each cell's darkness decides whether its
 // letter shows. Dark areas read as solid words, mid-tones as short
 // fragments, and highlights as empty space, with no outlines anywhere, so
 // edges fade into the background instead of stair-stepping.
-import type { Discipline } from '../config/site';
+//
+// To add a motif: author it in MOTIFS below in a 0-100 square, add its key
+// to ART_MOTIFS, and preview it with
+// `node --experimental-strip-types --no-warnings scripts/preview-art.mjs <key>`.
 
 export const GRADIENT_VARIANTS = ['purple', 'rose', 'sage', 'blue', 'gold'] as const;
 export type GradientVariant = (typeof GRADIENT_VARIANTS)[number];
@@ -26,6 +28,7 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
 
 export const ART_MOTIFS = [
   'agent',
+  'blend',
   'bolt',
   'browser',
   'bubbles',
@@ -52,18 +55,15 @@ export const ART_MOTIFS = [
   'seal',
   'sliders',
   'sparkle',
+  'sphere',
   'swatches',
   'timeline',
+  'tokens',
   'wand',
   'waveform',
   'wheel',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
-
-export interface ArticleArt {
-  primary: ArtMotif;
-  secondary?: ArtMotif;
-}
 
 interface Pt {
   x: number;
@@ -114,6 +114,26 @@ function circle(cx: number, cy: number, r: number, segments = 36): Pt[] {
 
 function ring(cx: number, cy: number, r: number): Pt[] {
   return closeLoop(circle(cx, cy, r));
+}
+
+function ellipse(cx: number, cy: number, rx: number, ry: number, segments = 36): Pt[] {
+  return Array.from({ length: segments }, (_, i) => {
+    const angle = (i / segments) * Math.PI * 2;
+    return { x: cx + Math.cos(angle) * rx, y: cy + Math.sin(angle) * ry };
+  });
+}
+
+// A shape partway between a circle (t = 0) and a square (t = 1), for the
+// blend motif. Each circle point is pushed out toward the square's edge
+// along the same angle.
+function circleToSquare(cx: number, cy: number, r: number, t: number, segments = 36): Pt[] {
+  return Array.from({ length: segments }, (_, i) => {
+    const angle = (i / segments) * Math.PI * 2;
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const scale = 1 + t * (1 / Math.max(Math.abs(cos), Math.abs(sin)) - 1);
+    return { x: cx + cos * r * scale, y: cy + sin * r * scale };
+  });
 }
 
 // A four-pointed sparkle: long points at the compass directions, pinched in
@@ -197,6 +217,14 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       outline(circle(50, 12, 4, 16), 0.9),
     ],
     strokes: [poly([50, 30, 50, 16]), poly([38, 68, 62, 68]), frame(14, 46, 22, 66), frame(78, 46, 86, 66)],
+    tones: [],
+  },
+  // A blend between two shapes: a circle stepping into a square, a little
+  // darker at each step, like Affinity's Blend Tool. The steps must not
+  // touch, or they merge into one block.
+  blend: {
+    fills: [0, 1 / 3, 2 / 3, 1].map((t, i) => outline(circleToSquare(14 + i * 24, 50, 10, t), 0.25 + 0.2 * i)),
+    strokes: [],
     tones: [],
   },
   // A lightning bolt with spark marks: speed.
@@ -450,6 +478,19 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [],
     tones: [],
   },
+  // A shaded sphere over its shadow, with an equator and a meridian: 3D
+  // surfaces and textures.
+  sphere: {
+    fills: [],
+    strokes: [closeLoop(ellipse(50, 46, 36, 9)), closeLoop(ellipse(50, 46, 13, 36))],
+    tones: [
+      region(circle(50, 46, 36), 0.3),
+      region(circle(58, 54, 28), 0.3),
+      region(circle(64, 60, 18), 0.3),
+      region(ellipse(52, 90, 30, 5), 0.5),
+    ],
+    strokeTone: 0.7,
+  },
   // A palette of six color chips, light to dark.
   swatches: {
     fills: [16, 52].flatMap((y, row) =>
@@ -475,6 +516,23 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(box(58, 47, 88, 57), 0.3),
       region(box(22, 69, 70, 79), 0.4),
     ],
+  },
+  // A design-token table: header labels over a rule, then rows of a color
+  // chip, a token name, and its value.
+  tokens: {
+    fills: [0.35, 0.55, 0.75, 0.95].map((tone, i) => ({
+      points: box(10, 20 + i * 20, 22, 30 + i * 20),
+      kind: 'solid' as const,
+      tone,
+    })),
+    strokes: [
+      poly([10, 6, 30, 6]),
+      poly([70, 6, 84, 6]),
+      poly([10, 12, 90, 12]),
+      ...[58, 50, 56, 46].map((end, i) => poly([30, 25 + i * 20, end, 25 + i * 20])),
+      ...[88, 82, 86, 80].map((end, i) => poly([70, 25 + i * 20, end, 25 + i * 20])),
+    ],
+    tones: [],
   },
   // A magic wand with sparkles at the tip.
   wand: {
@@ -511,16 +569,6 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   },
 };
 
-// Used only when an article has no `art` set.
-const DISCIPLINE_DEFAULTS: Record<Discipline, ArtMotif> = {
-  Brand: 'seal',
-  Web: 'browser',
-  'UI/UX': 'face',
-  'Motion & Video': 'reel',
-  'Photo & Imaging': 'camera',
-  Illustration: 'ribbon',
-  '3D': 'cube',
-};
 
 const CANVAS_W = 800;
 const CANVAS_H = 420;
@@ -533,13 +581,13 @@ const CELL_H = CANVAS_H / GRID_ROWS;
 
 export const HYPERGRAPHY_CANVAS = { width: CANVAS_W, height: CANVAS_H, cellW: CELL_W, cellH: CELL_H };
 
-// Where the primary and secondary motif sit on the banner; picked per slug.
-const LAYOUTS: { primary: Box; secondary: Box }[] = [
-  { primary: { x: 70, y: 40, size: 340 }, secondary: { x: 500, y: 75, size: 200 } },
-  { primary: { x: 390, y: 40, size: 340 }, secondary: { x: 110, y: 150, size: 200 } },
-  { primary: { x: 230, y: 40, size: 340 }, secondary: { x: 590, y: 200, size: 170 } },
+// Where the motif sits on the banner (left of center, center, or right of
+// center); picked per slug.
+const PLACEMENTS: Box[] = [
+  { x: 130, y: 20, size: 380 },
+  { x: 210, y: 20, size: 380 },
+  { x: 290, y: 20, size: 380 },
 ];
-const SOLO_LAYOUT: Box = { x: 230, y: 40, size: 340 };
 
 // Each cell's darkness is averaged over SAMPLES x SAMPLES points, so curves
 // and diagonals come out smooth at any angle instead of stair-stepping.
@@ -682,32 +730,29 @@ function runThreshold(r: number, c: number): number {
   return Math.abs(2 * u - 1);
 }
 
-function renderScene(placed: { motif: Motif; at: Box }[], text: string, primary: Box): HgLayer[] {
+function renderScene(motif: Motif, at: Box, text: string): HgLayer[] {
   const darkness = Array.from({ length: GRID_ROWS }, () => new Float32Array(GRID_COLS));
-  for (const { motif, at } of placed) {
-    const { r0, r1, c0, c1 } = boxCells(at);
-    for (let r = r0; r <= r1; r++) {
-      for (let c = c0; c <= c1; c++) {
-        // Areas are averaged across the cell so their edges fade smoothly.
-        // Marks take the cell's darkest point, curved upward, so thin lines
-        // stay solid instead of averaging away into a scatter. That contrast
-        // between solid lines and sparse areas keeps the shapes legible.
-        let area = 0;
-        let mark = 0;
-        for (let sy = 0; sy < SAMPLES; sy++) {
-          for (let sx = 0; sx < SAMPLES; sx++) {
-            const p = { x: (c + (sx + 0.5) / SAMPLES) * CELL_W, y: (r + (sy + 0.5) / SAMPLES) * CELL_H };
-            const d = darknessAt(p, motif, at);
-            area += d.area;
-            mark = Math.max(mark, d.mark);
-          }
+  const bounds = boxCells(at);
+  for (let r = bounds.r0; r <= bounds.r1; r++) {
+    for (let c = bounds.c0; c <= bounds.c1; c++) {
+      // Areas are averaged across the cell so their edges fade smoothly.
+      // Marks take the cell's darkest point, curved upward, so thin lines
+      // stay solid instead of averaging away into a scatter. That contrast
+      // between solid lines and sparse areas keeps the shapes legible.
+      let area = 0;
+      let mark = 0;
+      for (let sy = 0; sy < SAMPLES; sy++) {
+        for (let sx = 0; sx < SAMPLES; sx++) {
+          const p = { x: (c + (sx + 0.5) / SAMPLES) * CELL_W, y: (r + (sy + 0.5) / SAMPLES) * CELL_H };
+          const d = darknessAt(p, motif, at);
+          area += d.area;
+          mark = Math.max(mark, d.mark);
         }
-        // Pale areas drop to nothing so highlights are blank paper, as in a
-        // typographic portrait; mid and dark areas keep their halftone.
-        const shaded = smoothstep(0.1, 0.9, (1.8 * area) / (SAMPLES * SAMPLES));
-        const value = Math.max(shaded, 1 - (1 - mark) ** 2);
-        darkness[r][c] = Math.max(darkness[r][c], value);
       }
+      // Pale areas drop to nothing so highlights are blank paper, as in a
+      // typographic portrait; mid and dark areas keep their halftone.
+      const shaded = smoothstep(0.1, 0.9, (1.8 * area) / (SAMPLES * SAMPLES));
+      darkness[r][c] = Math.max(shaded, 1 - (1 - mark) ** 2);
     }
   }
 
@@ -725,8 +770,8 @@ function renderScene(placed: { motif: Motif; at: Box }[], text: string, primary:
     }
   }
 
-  // Faint registration crosses, plus crop marks at the primary motif's
-  // corners, for a quiet technical-drawing texture around the art.
+  // Faint registration crosses, plus crop marks at the motif's corners, for
+  // a quiet technical-drawing texture around the art.
   const detail = blankGrid();
   const occupied = (r: number, c: number) => words.some((w) => w[r][c] !== ' ');
   for (let r = 0; r < GRID_ROWS; r++) {
@@ -734,7 +779,7 @@ function renderScene(placed: { motif: Motif; at: Box }[], text: string, primary:
       if (c % 24 === 12 && r % 12 === 6 && !occupied(r, c)) detail[r][c] = '+';
     }
   }
-  const { r0, r1, c0, c1 } = boxCells(primary);
+  const { r0, r1, c0, c1 } = bounds;
   const crop: [number, number, string][] = [
     [r0, c0, '┌'], [r0, c0 + 1, '─'], [r0 + 1, c0, '│'],
     [r0, c1, '┐'], [r0, c1 - 1, '─'], [r0 + 1, c1, '│'],
@@ -792,22 +837,10 @@ export function artGradientVariant(slug: string): GradientVariant {
   return GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
 }
 
-export function buildHypergraphicArt(
-  slug: string,
-  disciplines: readonly Discipline[],
-  articleBody: string,
-  art?: ArticleArt,
-): HypergraphicArt {
+export function buildHypergraphicArt(slug: string, articleBody: string, motif: ArtMotif): HypergraphicArt {
   const random = createRandom(hashString(slug));
   const gradientVariant = GRADIENT_VARIANTS[Math.floor(random() * GRADIENT_VARIANTS.length)];
-  const layout = LAYOUTS[Math.floor(random() * LAYOUTS.length)];
-  const primaryKey = art?.primary ?? DISCIPLINE_DEFAULTS[disciplines[0]] ?? 'seal';
-  const secondaryKey = art?.secondary;
-
-  const primaryBox = secondaryKey ? layout.primary : SOLO_LAYOUT;
-  const placed = [{ motif: place(MOTIFS[primaryKey], primaryBox), at: primaryBox }];
-  if (secondaryKey) placed.push({ motif: place(MOTIFS[secondaryKey], layout.secondary), at: layout.secondary });
-
-  const layers = renderScene(placed, cleanArticleText(articleBody) || 'the only', primaryBox);
+  const at = PLACEMENTS[Math.floor(random() * PLACEMENTS.length)];
+  const layers = renderScene(place(MOTIFS[motif], at), at, cleanArticleText(articleBody) || 'the only');
   return { gradientVariant, layers };
 }

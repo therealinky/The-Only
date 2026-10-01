@@ -3,8 +3,7 @@
 //   animation from src/styles/hypergraphy.css.
 // - standalone: a self-contained .svg file for article cards, loaded as an
 //   <img>, which can't see the page's CSS, so colors are written in.
-import type { Discipline } from '../config/site';
-import { buildHypergraphicArt, HYPERGRAPHY_CANVAS, type ArticleArt, type GradientVariant, type HgLayer } from './hypergraphy';
+import { buildHypergraphicArt, HYPERGRAPHY_CANVAS, type ArtMotif, type GradientVariant, type HgLayer } from './hypergraphy';
 
 const STOP_TOKENS = ['--hero-purple', '--hero-blue', '--hero-sage', '--hero-gold', '--hero-rose', '--hero-purple'];
 
@@ -74,13 +73,12 @@ function textElements(layers: HgLayer[], classFor: (kind: HgLayer['kind']) => st
 
 export interface ArtInput {
   slug: string;
-  disciplines: readonly Discipline[];
   body: string;
-  art?: ArticleArt;
+  motif: ArtMotif;
 }
 
 export function renderInlineArt(input: ArtInput): { gradientVariant: GradientVariant; svg: string } {
-  const { gradientVariant, layers } = buildHypergraphicArt(input.slug, input.disciplines, input.body, input.art);
+  const { gradientVariant, layers } = buildHypergraphicArt(input.slug, input.body, input.motif);
   const { width, height, cellH } = HYPERGRAPHY_CANVAS;
   const id = `hg-iridescent-${input.slug}`;
   const stops = STOP_TOKENS.map(
@@ -98,7 +96,7 @@ export function renderInlineArt(input: ArtInput): { gradientVariant: GradientVar
 }
 
 export function renderStandaloneArt(input: ArtInput): string {
-  const { layers } = buildHypergraphicArt(input.slug, input.disciplines, input.body, input.art);
+  const { layers } = buildHypergraphicArt(input.slug, input.body, input.motif);
   const { width, height, cellH } = HYPERGRAPHY_CANVAS;
   const stops = STOP_TOKENS.map((_, i) => `<stop offset="${(i * 100) / (STOP_TOKENS.length - 1)}%" class="s${i}"/>`).join('');
   const stopRules = (hues: Record<string, string>) =>

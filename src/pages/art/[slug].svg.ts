@@ -14,9 +14,8 @@ export const GET: APIRoute = ({ props }) => {
   const { article } = props as Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];
   const svg = renderStandaloneArt({
     slug: article.id,
-    disciplines: article.data.disciplines,
     body: article.body ?? article.data.dek,
-    art: article.data.art,
+    motif: article.data.art,
   });
   return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml' } });
 };

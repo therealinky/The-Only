@@ -119,24 +119,13 @@ export default config({
           label: 'Disciplines',
           options: DISCIPLINES.map((value) => ({ label: value, value })),
         }),
-        art: fields.object(
-          {
-            primary: fields.select({
-              label: 'Primary motif',
-              options: ART_MOTIFS.map((value) => ({ label: value, value })),
-              defaultValue: 'browser',
-            }),
-            secondary: fields.select({
-              label: 'Secondary motif',
-              options: [{ label: 'None', value: '' }, ...ART_MOTIFS.map((value) => ({ label: value, value }))],
-              defaultValue: '',
-            }),
-          },
-          {
-            label: 'Article art',
-            description: 'Two motifs that relate to what this article is about. See the daily-articles skill for what each one means.',
-          },
-        ),
+        art: fields.select({
+          label: 'Article art',
+          description:
+            'The motif for this article\'s illustration. It must relate to the article and not be used by any other article (the build fails on a repeat). See the daily-articles skill for what each motif means.',
+          options: ART_MOTIFS.map((value) => ({ label: value, value })),
+          defaultValue: 'browser',
+        }),
         tools: fields.array(fields.text({ label: 'Tool name' }), {
           label: 'Tools discussed',
           itemLabel: (props) => props.value || 'Tool',
