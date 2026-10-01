@@ -20,21 +20,20 @@ export const SITE = {
   defaultReviewedBy: 'Editor name (set in config)',
 } as const;
 
-// Weekly digest. No signup form is shown, and no email addresses are
-// collected or stored, until both of these are set to real values. See
+// The Brief email. No signup form is shown, and no email addresses are
+// collected, until NEWSLETTER_PROVIDER is set to "buttondown". See
 // NewsletterSignup.astro and the README's Email digest section.
 export const NEWSLETTER = {
   provider:
     import.meta.env?.NEWSLETTER_PROVIDER ||
     (typeof process !== 'undefined' ? process.env.NEWSLETTER_PROVIDER : undefined) ||
     null,
-  // Buttondown's embeddable subscribe form posts straight to a public,
-  // per-account URL — not a secret, but it's still an env var rather than a
-  // literal here so the repo doesn't hardcode a specific person's account.
+  // The Only Brief's own Buttondown account. Its subscribe form posts to a
+  // public, per-account URL, so this isn't a secret.
   buttondownUsername:
     import.meta.env?.NEWSLETTER_BUTTONDOWN_USERNAME ||
     (typeof process !== 'undefined' ? process.env.NEWSLETTER_BUTTONDOWN_USERNAME : undefined) ||
-    null,
+    'theonly',
 } as const;
 
 export const DISCIPLINES = [

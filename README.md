@@ -144,19 +144,17 @@ only works against a real build; running `npm run build && npm run preview` is h
 The Brief is also an email: every Wednesday, a hand-written summary of the most interesting stories from the past
 seven days, composed and sent manually from **Buttondown's free plan**. (Its RSS-to-email feature needs a paid plan,
 so it isn't used.) The site's only job is the signup form and a **Read past issues** link to Buttondown's public
-archive at `buttondown.com/<username>/archive/`; past issues live there, not on this site. Keep the web archive
-switched on in Buttondown's settings, or that link breaks.
+archive at [buttondown.com/theonly/archive](https://buttondown.com/theonly/archive/); past issues live there, not on
+this site. Keep the web archive switched on in Buttondown's settings, or that link breaks.
 
-Both live in `NewsletterSignup.astro` on The Brief page, which renders nothing at all until both
-`NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME` are set (see `.env.example`).
+Both live in `NewsletterSignup.astro` on The Brief page. The Buttondown account is **`theonly`** ("The Only Brief"),
+the default in `src/config/site.ts`; `NEWSLETTER_BUTTONDOWN_USERNAME` only needs setting to override it.
 
 The form posts straight to Buttondown's public embeddable-subscribe endpoint
-(`https://buttondown.com/api/emails/embed-subscribe/<username>`); there's no API key or secret involved, and no
-email addresses ever touch this codebase or Cloudflare. To turn it on:
-
-1. Create a Buttondown account and note the username (that's also the site's `buttondown.com/<username>` URL).
-2. Set both env vars locally (`.env`) and in Cloudflare Pages (**Settings → Environment variables**, Production):
-   `NEWSLETTER_PROVIDER=buttondown` and `NEWSLETTER_BUTTONDOWN_USERNAME=<username>`.
+(`https://buttondown.com/api/emails/embed-subscribe/theonly`); there's no API key or secret involved, and no email
+addresses ever touch this codebase or Cloudflare. The form and link render nothing at all until it's switched on:
+set `NEWSLETTER_PROVIDER=buttondown` in Cloudflare Pages (**Settings → Environment variables**, Production), and in
+`.env` to see it locally.
 
 A different provider (ConvertKit, Mailcoach, etc.) would need its own branch in `NewsletterSignup.astro`, since
 each one's embeddable form shape differs — not built, since only Buttondown is in use.
@@ -186,7 +184,9 @@ This prepares the config; it does not deploy anything.
    - `SITE_URL` = `https://theonly.bemosu.com` (or whatever domain is live)
    - `NODE_VERSION` = `22` (Cloudflare's build image should also pick this up from `.nvmrc`, but setting it
      explicitly avoids relying on that)
-   - Leave `SHOW_EXAMPLES` and `NEWSLETTER_PROVIDER` unset.
+   - `NEWSLETTER_PROVIDER` = `buttondown` once The Brief's email signup should go live (see
+     [Email digest](#email-digest)); leave it unset until then.
+   - Leave `SHOW_EXAMPLES` unset.
 5. Deploy. Cloudflare gives every PR its own preview URL automatically once the project is connected — that's the
    preview URL referenced in the Publishing workflow's Approve step above.
 6. Custom domain: **Custom domains → Set up a custom domain** → `theonly.bemosu.com`, and add the DNS record

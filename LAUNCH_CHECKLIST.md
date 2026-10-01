@@ -27,8 +27,9 @@ Everything below needs your credentials or a decision — none of it can be done
 ## Decisions, not blockers
 
 - [ ] **The Brief email.** Buttondown (free plan, written and sent by hand every Wednesday) is chosen, and the site
-      side is built: the signup form and a link to Buttondown's archive of past issues. What's left is creating the
-      Buttondown account and setting its two env vars. See the README's [Email digest](README.md#email-digest) section.
+      side is built: the signup form and a link to Buttondown's archive of past issues, using the `theonly` account.
+      What's left is setting `NEWSLETTER_PROVIDER=buttondown` in Cloudflare Pages to switch the form on. See the
+      README's [Email digest](README.md#email-digest) section.
 
 ## Already done, nothing needed from you
 

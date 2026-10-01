@@ -1,8 +1,8 @@
 ---
 import { NEWSLETTER } from '../config/site';
 
-// Hidden entirely — no markup rendered at all — until both NEWSLETTER_PROVIDER
-// and NEWSLETTER_BUTTONDOWN_USERNAME are set (see .env.example). Only
+// Hidden entirely — no markup rendered at all — until NEWSLETTER_PROVIDER is
+// set to "buttondown" (see .env.example). Only
 // Buttondown is wired up; a different provider would need its own branch
 // here since each one's embeddable form shape differs.
 const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondownUsername;
