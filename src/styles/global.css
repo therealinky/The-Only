@@ -505,12 +505,6 @@ main {
   color: var(--color-footer-text);
 }
 
-.site-footer__trust a {
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
 .site-footer__group {
   display: grid;
   gap: var(--space-3);
