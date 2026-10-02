@@ -1,0 +1,85 @@
+---
+title: "Shopify's new Canvas lets you design a whole store by chatting with Sidekick"
+dek: >-
+  Canvas lays out every page of a Shopify store on one zoomable workspace and
+  has Sidekick, Shopify's AI agent, write the theme code as you talk. It's
+  early, and the fine print matters a lot if you build stores for clients.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+example: false
+publishedAt: 2026-10-02
+updatedAt: 2026-10-02
+lastVerified: 2026-10-02
+reviewedBy: Ana M. Rivas
+disciplines:
+  - Web
+art: bag
+tools:
+  - Shopify
+sources:
+  - title: "Introducing Canvas: Opening the aperture on online store design (Shopify News)"
+    url: https://www.shopify.com/news/introducing-canvas
+    accessed: 2026-10-02
+  - title: "Canvas requirements and limitations (Shopify Help Center)"
+    url: https://help.shopify.com/en/manual/online-store/themes/canvas/requirements
+    accessed: 2026-10-02
+  - title: "Meet Canvas: a new way for merchants to design their online store with Sidekick (Shopify Developer Community)"
+    url: https://community.shopify.dev/t/meet-canvas-a-new-way-for-merchants-to-design-their-online-store-with-sidekick/38212
+    accessed: 2026-10-02
+beforeYouUse:
+  clientData: >-
+    not verified: Canvas runs inside the merchant's own Shopify admin, so the
+    store content is already on Shopify. We didn't find anything specific to
+    how Sidekick's design conversations are stored or used. Check Shopify's
+    AI terms before working in a client's store.
+  usageRights: >-
+    not verified: Shopify says Sidekick writes custom theme code for the
+    store, but we didn't confirm who owns that generated code. Note that
+    theme files edited in Canvas can't be downloaded, per Shopify's help
+    docs, which limits what you can take elsewhere.
+  disclosure: >-
+    not applicable: this is a tool for building the store itself, not for
+    generating customer-facing content that would normally need labeling.
+  accessibility: >-
+    not verified: Shopify doesn't say whether Sidekick checks contrast,
+    alt text, or keyboard behavior in the code it writes. Audit a
+    Canvas-built store the same way you would any custom theme.
+  cost: >-
+    known: Shopify's help docs say Canvas needs a plan that includes theme
+    customization. No separate charge for Canvas is mentioned in the
+    announcement.
+---
+Shopify just launched Canvas, a new place to design an online store where you talk to Sidekick, Shopify's AI agent, and watch the actual store change as you go. It's rolling out to merchants over the coming days, and Shopify is clear that it's early. For now its help docs list Canvas as early access, available only to certain stores.
+
+## What changed
+
+Instead of clicking through settings panels one template at a time, Canvas puts every page of the store on one big workspace. You can pan across them, zoom in on a detail, and preview pages with real interactivity, swapping in different products, collections, and screen sizes.
+
+The design work happens in a chat with Sidekick. Shopify says Sidekick asks questions, proposes directions, and remembers earlier decisions so you're not repeating yourself. What you see isn't a mockup. Shopify describes it as a render of the real code behind the store, with Sidekick writing custom theme code as you go. You can also click directly on elements to edit them.
+
+Canvas isn't replacing the existing theme editor yet. Both live side by side for now.
+
+## Why it matters for designers
+
+This is a big shift in how store design happens. If you design Shopify stores for clients, a lot of the work has been bending a theme with settings panels and custom sections. Canvas still starts from a theme, one of Shopify's own or a custom one, but the work moves from configuring it to describing what you want, with Sidekick writing the custom code.
+
+The everything-on-one-board view is also familiar territory. It's closer to how designers already lay out a site in Figma than to Shopify's page-by-page editor, which could make it a decent place for working out layout and visual direction with a client in the room.
+
+Shopify's own framing is aimed at merchants doing this themselves, though. Expect some clients to arrive having already built a first version in Canvas and wanting it polished, rather than starting from a blank brief.
+
+## What to watch out for
+
+The limitations are the real story for anyone doing professional work. According to Shopify's help docs:
+
+- Canvas is desktop only, and only on plans that include theme customization.
+- It works only with Shopify's own themes and custom themes. Themes made by third-party developers aren't supported.
+- A theme edited in Canvas stops getting theme updates, and you can't download its files.
+- You can't add a new block by hand. You have to ask Sidekick to add it.
+- App blocks and app embeds can't be added or configured, and themes can't be customized per market.
+- Staff need the permission to edit theme code to open Canvas.
+
+That combination means stepping into Canvas is a one-way door for a given theme: no upstream updates and no file export. Duplicate the theme and experiment on the copy, not the live one.
+
+Reaction on Shopify's developer forum has been rough, mostly from app developers worried that the apps merchants rely on for things like reviews won't work in Canvas-built themes, plus some concern about what Canvas means for agencies that sell themes. Shopify staff there say support for theme app extensions is coming within the next few weeks, and that apps keep working in the regular theme editor in the meantime. Until then, a store that leans on apps for reviews, subscriptions, or similar features is better off staying in the theme editor, with Canvas as a place to experiment.

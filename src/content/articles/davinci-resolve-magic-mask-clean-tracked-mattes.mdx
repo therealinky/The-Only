@@ -1,0 +1,119 @@
+---
+title: "Getting clean, trackable mattes out of DaVinci Resolve's Magic Mask"
+dek: >-
+  Magic Mask can isolate a moving person or object without rotoscoping, but
+  most frustration comes from over-guiding it and fixing the wrong frame.
+  Pulling together several guides, here's a workflow from first click to a
+  cached matte you can grade against in real time.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-10-02
+updatedAt: 2026-10-02
+lastVerified: 2026-10-02
+reviewedBy: Ana M. Rivas
+disciplines:
+  - Motion & Video
+  - Photo & Imaging
+art: face
+tools:
+  - DaVinci Resolve
+sources:
+  - title: "What's new in DaVinci Resolve 21 (Blackmagic Design)"
+    url: https://www.blackmagicdesign.com/products/davinciresolve/whatsnew
+    accessed: 2026-10-02
+  - title: "DaVinci Resolve Studio (Blackmagic Design)"
+    url: https://www.blackmagicdesign.com/products/davinciresolve/studio
+    accessed: 2026-10-02
+  - title: "Resolve 20.1: Apple Vision Pro, Magic Mask V2, and a few more reasons to backup (Digital Production)"
+    url: https://digitalproduction.com/2025/08/07/davinci-resolve-20-1-apple-vision-pro-magic-mask-v2-and-a-few-more-reasons-to-backup/
+    accessed: 2026-10-02
+  - title: "DaVinci Resolve AI Magic Mask v2 explained (JayAreTV)"
+    url: https://jayaretv.com/color/davinci-resolve-ai-magic-mask-2-explained/
+    accessed: 2026-10-02
+  - title: "DaVinci Resolve Magic Mask: Resolve 21 guide (DaVinci Resolve Club)"
+    url: https://davinciresolveclub.com/davinci-resolve-magic-mask/
+    accessed: 2026-10-02
+  - title: "How to use Magic Mask in DaVinci Resolve (DaVinci Resolve 21 blog)"
+    url: https://davinciresolve21.com/blog/magic-mask
+    accessed: 2026-10-02
+  - title: "How to use Magic Mask Render in Place in DaVinci Resolve 21 (Cutsio)"
+    url: https://cutsio.com/blog/davinci-resolve-21-magic-mask-render-in-place
+    accessed: 2026-10-02
+  - title: "DaVinci Resolve AI Magic Mask: a complete guide (Focal Crafters)"
+    url: https://focalcrafters.com/ai-magic-mask-davinci-resolve/
+    accessed: 2026-10-02
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of several published guides on Magic
+    Mask, which has changed a lot since it first appeared, including the
+    Render in Place option Blackmagic added in Resolve 21.
+  whyItMatters: >-
+    Isolating a subject used to mean a green screen or hours of roto.
+    Magic Mask gets you most of the way in minutes, as long as you guide it
+    sparingly and repair it in the right place.
+  bestFor: >-
+    Editors and colorists grading people, products, or vehicles separately
+    from their background, and motion designers who need a quick matte for
+    a localized effect.
+  timeToTry: >-
+    About 30 minutes to work through on a real clip. Once it clicks, a
+    typical shot takes a few minutes plus tracking time.
+beforeYouUse:
+  clientData: >-
+    not verified: Magic Mask is part of Resolve's Neural Engine tools and
+    runs on your own GPU, and none of the sources describe footage being
+    uploaded anywhere. We didn't find a Blackmagic statement confirming
+    that, though.
+  usageRights: >-
+    not applicable: Magic Mask builds a matte from your own footage. It
+    doesn't generate new imagery, so there's no new content to clear.
+  disclosure: >-
+    not applicable: isolating a subject for a grade or effect is the same
+    kind of edit as a hand-drawn mask, not generated content.
+  accessibility: >-
+    not applicable: this is a masking technique and doesn't change
+    anything a viewer relies on for accessibility.
+  cost: >-
+    known: Magic Mask runs on Resolve's Neural Engine, which Blackmagic says
+    is exclusive to the paid DaVinci Resolve Studio ($295), not the free
+    version. It's also GPU-heavy, so slower cards will feel it on long or
+    high-resolution clips.
+---
+Magic Mask is DaVinci Resolve's AI masking tool: give it a hint about what you want, and it builds a matte for a person or object and tracks it through the shot. It's one of those features many people try once, get a jittery edge on the first hard frame, and go back to Power Windows.
+
+This workflow is synthesized from several independent guides plus general Resolve knowledge, not any one person's process, and we haven't tested it hands-on end to end. The sources agree on the big idea, though: give Magic Mask as little guidance as possible, track from a good frame, and spend your effort on repairs rather than on a perfect first pass.
+
+1. **Check that Magic Mask is the right tool.** It earns its processing cost on moving, irregular subjects: people, hands, animals, products, vehicles. For a simple shape, a Power Window is lighter on your GPU, and for footage shot on a green or blue screen, a chroma key still gives the cleanest edge. Several guides make this point, and it saves a lot of waiting on tracks you didn't need.
+
+2. **Give it its own node and start on a clean frame.** On the Color page, add a dedicated node for the mask so you can grade inside and outside it separately later. Park the playhead on a frame where the subject is sharp, fully visible, and not motion blurred. That's your reference frame, and everything gets tracked out from it.
+
+3. **Guide it once, lightly.** Mark the middle of the subject with a single positive hint, look at the overlay, and only add a subtract hint where the mask bleeds into the background. This is where older and newer guides genuinely differ: earlier guides describe drawing strokes and choosing between separate Person and Object modes, while guides for the newer version of Magic Mask describe clicks and a single mode that handles both. What you see depends on your Resolve version, so follow your interface rather than any one screenshot. The principle holds either way: more hints usually make things worse, not better.
+
+4. **Pick quality to match the job.** Use the faster setting for a rough garbage matte or while you're checking whether the shot will work, and the better setting for anything final. If the edge shimmers from frame to frame, the Consistency control adds smoothing over time.
+
+5. **Track both directions, then repair from the first failure.** Track forward and backward from your reference frame. When the mask slips, the advice that comes up again and again is to scrub back to the *first* frame where it goes wrong, not the frame where it's most obviously broken, and fix the guidance there before re-tracking. If a subject goes behind something or moves erratically, track in shorter chunks. Paint is handy for a few one-off frames, but it doesn't track, so don't rely on it for a whole shot.
+
+6. **Clean the edge in Matte Finesse.** Use Clean Black and Clean White to remove stray specks inside and outside the subject, In/Out Ratio to grow or shrink the edge, and only a little Blur Radius at the end. One guide suggests exactly that order, and it's a good habit: blurring first hides problems you'd rather fix. Toggle the black-and-white matte view to judge it rather than the colored overlay.
+
+7. **Lock it with Render in Place (Resolve 21).** Once the mask is final, use Render in Place in the Magic Mask palette. Blackmagic says it caches the tracked mask as a traveling matte node linked to your active node, so you can keep grading in real time without the AI recalculating every time you scrub. Keep the live mask while you're still fixing tracking, and switch once it's done. One guide notes you can delete the cached node and re-run the analysis if you need to change it later, and that cached mattes take up disk space.
+
+8. **Use the matte for more than isolation.** This is where our synthesis goes past most of the individual guides, which mostly stop at "the subject is selected." With the mask on its own node, add an Outside node to get the inverse, and you now have two independently gradable regions from one track. That opens up a lot: lift a face without touching the room, desaturate or soften a busy background so a product reads first, or confine a glow or texture to one object. If you composite in Fusion, Magic Mask works on the Fusion page too, which picked up the newer version of the tool in Resolve 20.1, per coverage of that release.
+
+## Why it matters for designers
+
+Isolating a subject is the step that most often stands between "this shot is fine" and "this shot looks finished": a presenter who's a little underexposed, a product that blends into its set, a brand color that needs to pop in one place only. Before AI masking, that meant reshooting on green screen or rotoscoping frame by frame. Magic Mask makes it a few minutes of work on most shots.
+
+The repair-first mindset (one hint, track, fix from the first bad frame) also carries over to other AI tracking and masking tools. They tend to reward minimal guidance and punish overcorrection in the same way.
+
+## What to watch out for
+
+Hair, motion blur, low-contrast frames, repetitive textures, and objects passing in front of the subject are the consistent trouble spots across every guide. Budget extra time for those shots, and check fine edges at full resolution, not just in the viewer.
+
+Many published guides were written for earlier versions, and the interface has changed meaningfully (strokes versus clicks, separate versus unified modes). If a tutorial's steps don't match your screen, check its date before assuming you're doing something wrong.
+
+Tracking is GPU-heavy. On a modest machine, long 4K clips can get slow enough to break your flow, which is another reason to use Render in Place as soon as a mask is final.
+
+Availability depends on your edition: see the sidebar.

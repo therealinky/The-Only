@@ -28,6 +28,7 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
 
 export const ART_MOTIFS = [
   'agent',
+  'bag',
   'blend',
   'bolt',
   'browser',
@@ -217,6 +218,13 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       outline(circle(50, 12, 4, 16), 0.9),
     ],
     strokes: [poly([50, 30, 50, 16]), poly([38, 68, 62, 68]), frame(14, 46, 22, 66), frame(78, 46, 86, 66)],
+    tones: [],
+  },
+  // A shopping bag: a tapered body, a looped handle, and two rivets where
+  // the handle meets the bag. Online stores and commerce.
+  bag: {
+    fills: [outline(poly([20, 38, 80, 38, 88, 92, 12, 92]), 0.35), dot(36, 50), dot(64, 50)],
+    strokes: [cubic({ x: 36, y: 50 }, { x: 34, y: 8 }, { x: 66, y: 8 }, { x: 64, y: 50 })],
     tones: [],
   },
   // A blend between two shapes: a circle stepping into a square, a little
