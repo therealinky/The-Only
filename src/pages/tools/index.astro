@@ -1,10 +1,30 @@
 ---
 import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllTools } from '../../lib/articles';
+import { getListableArticles } from '../../lib/articles';
 import { slugify } from '../../lib/slugify';
 
-const tools = await getAllTools();
+// Every tool with how many published articles discuss it, grouped under
+// its first letter (anything not A–Z goes under "#").
+const counts = new Map<string, number>();
+for (const article of await getListableArticles()) {
+  for (const tool of article.data.tools) counts.set(tool, (counts.get(tool) ?? 0) + 1);
+}
+const tools = [...counts.keys()].sort((a, b) => a.localeCompare(b));
+
+const letterOf = (tool: string) => {
+  const first = tool.charAt(0).toUpperCase();
+  return first >= 'A' && first <= 'Z' ? first : '#';
+};
+const groups = new Map<string, string[]>();
+for (const tool of tools) {
+  const letter = letterOf(tool);
+  groups.set(letter, [...(groups.get(letter) ?? []), tool]);
+}
+
+const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ', ...(groups.has('#') ? ['#'] : [])];
+const anchor = (letter: string) => `tools-${letter === '#' ? 'other' : letter.toLowerCase()}`;
+const plural = (n: number) => `${n} ${n === 1 ? 'article' : 'articles'}`;
 ---
 
 <BaseLayout title="The Toolkit" description="Every tool discussed on The Only, linked to the articles that cover it.">
@@ -18,13 +38,63 @@ const tools = await getAllTools();
     tools.length === 0 ? (
       <p>No tools indexed yet.</p>
     ) : (
-      <ul>
-        {tools.map((tool) => (
-          <li>
-            <a href={`/tools/${slugify(tool)}/`}>{tool}</a>
-          </li>
-        ))}
-      </ul>
+      <>
+        <nav class="az-bar" aria-label="Jump to letter">
+          <ol class="az-bar__list">
+            {alphabet.map((letter) => (
+              <li>
+                {groups.has(letter) ? (
+                  <a href={`#${anchor(letter)}`}>{letter}</a>
+                ) : (
+                  <span aria-hidden="true">{letter}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <p class="tool-index__total">
+          {tools.length} tools, A to Z. The number beside each is how many articles cover it.
+        </p>
+
+        <div class="tool-index">
+          {[...groups].map(([letter, letterTools]) => (
+            <section class="tool-index__group" id={anchor(letter)} aria-labelledby={`${anchor(letter)}-heading`}>
+              <h2 class="tool-index__letter" id={`${anchor(letter)}-heading`}>
+                {letter}
+              </h2>
+              <ul class="tool-index__list">
+                {letterTools.map((tool) => (
+                  <li>
+                    <a href={`/tools/${slugify(tool)}/`}>
+                      <span class="tool-index__name">{tool}</span>
+                      <span class="tool-index__count" aria-label={plural(counts.get(tool)!)}>
+                        {counts.get(tool)}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </>
     )
   }
 </BaseLayout>
+
+<script>
+  // The letter bar sticks just under the site header, and a jumped-to letter
+  // has to land just under the bar. Both heights change with the viewport
+  // (the bar is two rows on phones), so measure them.
+  const root = document.documentElement;
+  const measure = (selector: string, property: string) => {
+    const element = document.querySelector<HTMLElement>(selector);
+    if (!element) return;
+    const set = () => root.style.setProperty(property, `${element.offsetHeight}px`);
+    new ResizeObserver(set).observe(element);
+    set();
+  };
+  measure('.site-header', '--site-header-height');
+  measure('.az-bar', '--az-bar-height');
+</script>
