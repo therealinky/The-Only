@@ -198,11 +198,11 @@ main {
   color: var(--color-brand);
 }
 
-/* A plum strip under the logo/nav row (the footer's color, so the top and
-   bottom of the page match): the five newest article titles in a
-   sideways-scrolling track with caret buttons. */
+/* A plum strip under the logo/nav row (the footer's color in light mode,
+   so the top and bottom of the page match): the five newest article
+   titles in a sideways-scrolling track with caret buttons. */
 .latest-strip {
-  background: var(--color-footer-bg);
+  background: var(--color-strip-bg);
   color: var(--color-footer-text);
 }
 
