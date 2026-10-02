@@ -239,6 +239,11 @@ main > .page-hero:first-child {
   --hero-glow: color-mix(in srgb, var(--hero-gold) 90%, white);
 }
 
+.page-hero--copper {
+  --hero-swoosh: var(--hero-blue);
+  --hero-glow: color-mix(in srgb, var(--hero-copper) 90%, white);
+}
+
 .page-hero--purple .page-hero__gradient {
   background:
     radial-gradient(120% 140% at 15% -10%, var(--hero-blue) 0%, transparent 55%),
@@ -272,4 +277,13 @@ main > .page-hero:first-child {
     radial-gradient(120% 140% at 0% -10%, var(--hero-rose) 0%, transparent 55%),
     radial-gradient(120% 140% at 100% 110%, var(--hero-sage) 0%, transparent 55%),
     linear-gradient(160deg, var(--hero-gold), color-mix(in srgb, var(--hero-gold) 55%, var(--hero-rose)));
+}
+
+/* The Toolkit: warm workshop copper, deepening into plum at the top right
+   with a little gold catching the light at the bottom left. */
+.page-hero--copper .page-hero__gradient {
+  background:
+    radial-gradient(120% 140% at 100% -10%, var(--hero-purple) 0%, transparent 55%),
+    radial-gradient(120% 140% at 0% 110%, var(--hero-gold) 0%, transparent 55%),
+    linear-gradient(160deg, var(--hero-copper), color-mix(in srgb, var(--hero-copper) 55%, var(--hero-rose)));
 }
