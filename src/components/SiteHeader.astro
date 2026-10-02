@@ -72,7 +72,9 @@ function isActive(href: string): boolean {
             <ol class="latest-strip__track" data-latest-track>
               {latest.map((article) => (
                 <li class="latest-strip__item">
-                  <a href={`/articles/${article.id}/`}>{article.data.title}</a>
+                  <a href={`/articles/${article.id}/`}>
+                    <span class="latest-strip__title">{article.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ol>

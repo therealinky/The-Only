@@ -286,9 +286,23 @@ main {
   text-decoration: none;
 }
 
-.latest-strip__item a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+/* The underline draws in from the left on hover (and keyboard focus) and
+   slides back out, rather than snapping on. It's a 1px background line
+   under the title's own text, so it follows the text, not the whole slot. */
+.latest-strip__title {
+  padding-block-end: 2px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 0% 1px no-repeat;
+  transition: background-size 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.latest-strip__item a:is(:hover, :focus-visible) .latest-strip__title {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .latest-strip__title {
+    transition: none;
+  }
 }
 
 .latest-strip__controls {
