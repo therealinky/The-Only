@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-02
 updatedAt: 2026-10-02
 lastVerified: 2026-10-02
+reviewedBy: Ana M. Rivas
 disciplines:
   - Motion & Video
   - Photo & Imaging
@@ -22,6 +23,9 @@ tools:
 sources:
   - title: "What's new in DaVinci Resolve 21 (Blackmagic Design)"
     url: https://www.blackmagicdesign.com/products/davinciresolve/whatsnew
+    accessed: 2026-10-02
+  - title: "DaVinci Resolve Studio (Blackmagic Design)"
+    url: https://www.blackmagicdesign.com/products/davinciresolve/studio
     accessed: 2026-10-02
   - title: "Resolve 20.1: Apple Vision Pro, Magic Mask V2, and a few more reasons to backup (Digital Production)"
     url: https://digitalproduction.com/2025/08/07/davinci-resolve-20-1-apple-vision-pro-magic-mask-v2-and-a-few-more-reasons-to-backup/
@@ -73,11 +77,10 @@ beforeYouUse:
     not applicable: this is a masking technique and doesn't change
     anything a viewer relies on for accessibility.
   cost: >-
-    not verified: several guides say Magic Mask is only in the paid
-    DaVinci Resolve Studio, not the free version, but we didn't confirm
-    that on Blackmagic's own feature comparison in this pass. It's also
-    GPU-heavy, so slower cards will feel it on long or high-resolution
-    clips.
+    known: Magic Mask runs on Resolve's Neural Engine, which Blackmagic says
+    is exclusive to the paid DaVinci Resolve Studio ($295), not the free
+    version. It's also GPU-heavy, so slower cards will feel it on long or
+    high-resolution clips.
 ---
 Magic Mask is DaVinci Resolve's AI masking tool: give it a hint about what you want, and it builds a matte for a person or object and tracks it through the shot. It's one of those features many people try once, get a jittery edge on the first hard frame, and go back to Power Windows.
 
@@ -97,7 +100,7 @@ This workflow is synthesized from several independent guides plus general Resolv
 
 7. **Lock it with Render in Place (Resolve 21).** Once the mask is final, use Render in Place in the Magic Mask palette. Blackmagic says it caches the tracked mask as a traveling matte node linked to your active node, so you can keep grading in real time without the AI recalculating every time you scrub. Keep the live mask while you're still fixing tracking, and switch once it's done. One guide notes you can delete the cached node and re-run the analysis if you need to change it later, and that cached mattes take up disk space.
 
-8. **Use the matte for more than isolation.** This is where our synthesis goes past most of the individual guides, which mostly stop at "the subject is selected." With the mask on its own node, add an Outside node to get the inverse, and you now have two independently gradable regions from one track. That opens up a lot: lift a face without touching the room, desaturate or soften a busy background so a product reads first, or confine a glow or texture to one object. If you composite in Fusion, Magic Mask is available on the Fusion page too as of Resolve 20.1, per coverage of that release.
+8. **Use the matte for more than isolation.** This is where our synthesis goes past most of the individual guides, which mostly stop at "the subject is selected." With the mask on its own node, add an Outside node to get the inverse, and you now have two independently gradable regions from one track. That opens up a lot: lift a face without touching the room, desaturate or soften a busy background so a product reads first, or confine a glow or texture to one object. If you composite in Fusion, Magic Mask works on the Fusion page too, which picked up the newer version of the tool in Resolve 20.1, per coverage of that release.
 
 ## Why it matters for designers
 
