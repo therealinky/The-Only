@@ -160,6 +160,10 @@ main {
 main {
   padding-block: var(--space-7);
   min-height: 60vh;
+  /* main is a body grid item with auto side margins (to center it), which
+     would otherwise size it to fit its content: a wide, sideways-scrolling
+     row would then stretch the page past the viewport. Fill the track. */
+  width: 100%;
 }
 
 /* ---------- Header ---------- */
@@ -690,6 +694,153 @@ main {
   .site-footer .site-footer__wordmark {
     --wordmark-gutter: var(--space-6);
   }
+}
+
+/* ---------- The Toolkit index ---------- */
+
+/* A–Z jump bar, stuck just under the site header (whose measured height
+   tools/index.astro sets as --site-header-height). Letters with no tools
+   stay visible but greyed, so the spread of the alphabet is readable. */
+.az-bar {
+  position: sticky;
+  top: var(--site-header-height, 6.5rem);
+  z-index: 10;
+  margin-block-end: var(--space-5);
+  padding-block: var(--space-2);
+  background: var(--color-bg);
+  border-block-end: 1px solid var(--color-border);
+}
+
+/* Two rows of 13 on phones so every letter is visible; one row from
+   tablet width up. */
+.az-bar__list {
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  gap: var(--space-1) 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .az-bar__list {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+}
+
+.az-bar__list :is(a, span) {
+  display: grid;
+  place-items: center;
+  height: 1.9rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.az-bar__list a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.az-bar__list a:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.az-bar__list span {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.tool-index__total {
+  margin-block: 0 var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Letter groups flow down columns like a printed index, never splitting a
+   group across two columns. */
+.tool-index {
+  columns: 2;
+  column-gap: var(--space-5);
+}
+
+@media (min-width: 48rem) {
+  .tool-index {
+    columns: 3;
+    column-gap: var(--space-6);
+  }
+}
+
+@media (min-width: 64rem) {
+  .tool-index {
+    columns: 4;
+  }
+}
+
+.tool-index__group {
+  break-inside: avoid;
+  margin-block-end: var(--space-5);
+  /* Clears the sticky header and letter bar when jumped to. */
+  scroll-margin-top: calc(var(--site-header-height, 6.5rem) + var(--az-bar-height, 3rem) + var(--space-3));
+}
+
+.tool-index__letter {
+  margin: 0 0 var(--space-2);
+  padding-block-end: var(--space-1);
+  border-block-end: 2px solid var(--color-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-accent);
+}
+
+.tool-index__list {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-index__list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block: var(--space-1);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.tool-index__list a:hover .tool-index__name {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.tool-index__name {
+  min-width: 0;
+}
+
+.tool-index__count {
+  flex: none;
+  min-width: 1.6em;
+  padding-inline: 0.45em;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
 }
 
 /* ---------- Card grid ---------- */
