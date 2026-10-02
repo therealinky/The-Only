@@ -39,6 +39,9 @@
   --color-footer-muted: #b0a8c3;
   --color-footer-rule: rgb(255 255 255 / 14%);
   --color-footer-wordmark: rgb(255 255 255 / 22%);
+  /* Latest-articles strip under the nav: the footer's plum in light mode,
+     a lighter plum-tinted step up from the nav in dark mode. */
+  --color-strip-bg: #2a2550;
 
   /* Decorative-only hero hues (backgrounds/gradients, never used as text) */
   --hero-purple: #6d5fc7;
@@ -122,6 +125,7 @@
     --color-footer-muted: #a49cba;
     --color-footer-rule: rgb(255 255 255 / 10%);
     --color-footer-wordmark: rgb(255 255 255 / 16%);
+    --color-strip-bg: #2a2543;
     --color-header-bg: rgb(30 27 41 / 78%);
     --color-header-border: rgb(255 255 255 / 10%);
     --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);
@@ -157,6 +161,7 @@
   --color-footer-muted: #a49cba;
   --color-footer-rule: rgb(255 255 255 / 10%);
   --color-footer-wordmark: rgb(255 255 255 / 16%);
+  --color-strip-bg: #2a2543;
   --color-header-bg: rgb(30 27 41 / 78%);
   --color-header-border: rgb(255 255 255 / 10%);
   --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);

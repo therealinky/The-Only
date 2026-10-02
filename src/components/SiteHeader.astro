@@ -1,8 +1,10 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { NAV_ITEMS, SITE } from '../config/site';
+import { getListableArticles } from '../lib/articles';
 
 const navItems = NAV_ITEMS;
+const latest = (await getListableArticles()).slice(0, 5);
 
 const currentPath = Astro.url.pathname;
 
@@ -59,5 +61,72 @@ function isActive(href: string): boolean {
     </div>
   </div>
 
-  <p class="site-header__tagline">{SITE.descriptor}</p>
+  <div class="latest-strip">
+    <div class="latest-strip__inner">
+      {
+        latest.length > 0 && (
+          <section class="latest-strip__ticker" aria-label="Latest articles" data-latest-strip>
+            <span class="latest-strip__label" aria-hidden="true">
+              Latest
+            </span>
+            <ol class="latest-strip__track" data-latest-track>
+              {latest.map((article) => (
+                <li class="latest-strip__item">
+                  <a href={`/articles/${article.id}/`}>{article.data.title}</a>
+                </li>
+              ))}
+            </ol>
+            <div class="latest-strip__controls">
+              <button type="button" class="latest-strip__button" data-latest-prev aria-label="Previous article" disabled>
+                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                  <path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button type="button" class="latest-strip__button" data-latest-next aria-label="Next article">
+                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                  <path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </div>
 </header>
+
+<script>
+  // The carets step the latest-articles track one title at a time. Without
+  // JS the track still scrolls sideways natively; the buttons just do
+  // nothing.
+  for (const strip of document.querySelectorAll<HTMLElement>('[data-latest-strip]')) {
+    const track = strip.querySelector<HTMLElement>('[data-latest-track]')!;
+    const prev = strip.querySelector<HTMLButtonElement>('[data-latest-prev]')!;
+    const next = strip.querySelector<HTMLButtonElement>('[data-latest-next]')!;
+    const items = [...track.children] as HTMLElement[];
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const update = () => {
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    };
+
+    // The first item whose start is past (or before) the current scroll
+    // position, so each click lands cleanly on the next or previous title.
+    const step = (direction: 1 | -1) => {
+      const left = track.scrollLeft;
+      const offsets = items.map((item) => item.offsetLeft - track.offsetLeft);
+      const target =
+        direction === 1
+          ? offsets.find((offset) => offset > left + 1)
+          : [...offsets].reverse().find((offset) => offset < left - 1);
+      track.scrollTo({ left: target ?? (direction === 1 ? track.scrollWidth : 0), behavior: smooth ? 'smooth' : 'auto' });
+    };
+
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

@@ -140,7 +140,7 @@ dd {
 /* ---------- Layout ---------- */
 
 .site-header__inner,
-.site-header__tagline,
+.latest-strip__inner,
 .site-footer__inner,
 main {
   max-width: 72rem;
@@ -150,7 +150,7 @@ main {
 
 @media (min-width: 48rem) {
   .site-header__inner,
-  .site-header__tagline,
+  .latest-strip__inner,
   .site-footer__inner,
   main {
     padding-inline: var(--space-6);
@@ -168,7 +168,6 @@ main {
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid var(--color-header-border);
   background: var(--color-header-bg);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
@@ -180,7 +179,7 @@ main {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-4) var(--space-6);
-  padding-block: var(--space-3) var(--space-2);
+  padding-block: var(--space-3);
 }
 
 .site-header__brand {
@@ -199,22 +198,128 @@ main {
   color: var(--color-brand);
 }
 
-/* Its own full-width row below the logo/nav/actions row, rather than
-   stacked under the wordmark, so a longer tagline never has to compete
-   with the actions for width — the crowding this used to cause on
-   narrow phones (see git history) is gone structurally, not patched. */
-.site-header__tagline {
-  /* margin-block only: the shared layout rule above sets margin-inline
-     to auto to center this row's max-width box like .site-header__inner;
-     a plain `margin: 0` here would win the cascade (later, same
-     specificity) and cancel that centering at wide viewports. */
-  margin-block: 0;
-  padding-block: 0 var(--space-3);
-  font-family: var(--font-body);
-  font-weight: 500;
+/* A plum strip under the logo/nav row (the footer's color in light mode,
+   so the top and bottom of the page match): the five newest article
+   titles in a sideways-scrolling track with caret buttons. */
+.latest-strip {
+  background: var(--color-strip-bg);
+  color: var(--color-footer-text);
+}
+
+.latest-strip__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 2.5rem;
   font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  letter-spacing: 0.02em;
+}
+
+.latest-strip__ticker {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.latest-strip__label {
+  flex: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-footer-muted);
+}
+
+.latest-strip__track {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* Titles fade out at the right edge instead of being cut off hard. */
+  mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+}
+
+.latest-strip__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* One title per step on phones; on wider screens several sit side by
+   side, each capped so a long title truncates rather than hogging the row. */
+.latest-strip__item {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 48rem) {
+  .latest-strip__item {
+    flex: 0 0 auto;
+    max-width: 24rem;
+  }
+
+  .latest-strip__item + .latest-strip__item {
+    padding-inline-start: var(--space-5);
+    border-inline-start: 1px solid var(--color-footer-rule);
+  }
+}
+
+.latest-strip__item a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-block: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-footer-text);
+  text-decoration: none;
+}
+
+.latest-strip__item a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.latest-strip__controls {
+  flex: none;
+  display: flex;
+  gap: var(--space-1);
+}
+
+.latest-strip__button {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--color-footer-rule);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-footer-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.latest-strip__button:hover:not(:disabled) {
+  background: var(--color-footer-rule);
+}
+
+.latest-strip__button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.latest-strip a:focus-visible,
+.latest-strip__button:focus-visible {
+  outline: 2px solid var(--color-footer-text);
+  outline-offset: 2px;
 }
 
 .site-nav {
