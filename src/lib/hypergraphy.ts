@@ -177,9 +177,14 @@ const outline = (points: Pt[], tone: number) => ({ points, kind: 'outline' as co
 const dot = (cx: number, cy: number, r = 2.2) => ({ points: circle(cx, cy, r, 12), kind: 'dot' as const, tone: 1 });
 const region = (points: Pt[], tone: number) => ({ points, tone });
 
-const FACE_PROFILE = poly([
-  26, 6, 40, 6, 50, 12, 53, 20, 51, 26, 67, 34, 57, 38, 61, 44, 55, 48, 58, 56, 47, 62, 41, 66, 33, 80, 18, 78, 8, 58,
-  6, 30, 12, 14, 26, 6,
+// A front-facing head: an oval, slightly narrower toward the chin.
+const FACE_HEAD = poly([
+  50, 12, 63, 15, 72, 25, 75, 40, 73, 55, 67, 67, 58, 75, 50, 77, 42, 75, 33, 67, 27, 55, 25, 40, 28, 25, 37, 15, 50, 12,
+]);
+// Hair sitting on top of the head. The fringe stays high so there's a clear
+// forehead gap above the brows; lower, and the brows merge into the hair.
+const FACE_HAIR = poly([
+  24, 44, 23, 28, 30, 15, 42, 8, 56, 8, 68, 13, 76, 25, 77, 44, 73, 30, 64, 21, 50, 19, 38, 21, 30, 27, 24, 44,
 ]);
 const CAMERA_BODY = poly([8, 30, 30, 30, 36, 20, 58, 20, 64, 30, 92, 30, 92, 82, 8, 82, 8, 30]);
 const PAGE = poly([18, 6, 66, 6, 84, 24, 84, 94, 18, 94]);
@@ -357,11 +362,41 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [closeLoop(PAGE), poly([66, 6, 66, 24, 84, 24])],
     tones: [region(PAGE, 0.18), region(box(26, 32, 62, 40), 0.6)],
   },
-  // A profile (forehead, nose, lips, chin), an eye, and an ear mark.
+  // A front-facing face: hair, eyes, brows, nose, lips, ears, and a neck
+  // into shoulders.
   face: {
-    fills: [dot(40, 22, 2.6)],
-    strokes: [FACE_PROFILE, poly([16, 50, 13, 53, 13, 58, 16, 61]), poly([33, 16, 46, 15])],
-    tones: [region(FACE_PROFILE, 0.16)],
+    fills: [
+      outline(FACE_HAIR, 0.45),
+      // Eyes, brows, and lips as filled shapes so they hold up at banner
+      // size, where single lines inside the pale face drop out. Brows sit
+      // well above the eyes: closer, and the two merge into one dark
+      // socket-like block.
+      outline(ellipse(39, 48, 6.5, 2.4), 1),
+      outline(ellipse(61, 48, 6.5, 2.4), 1),
+      outline(poly([31, 36, 38, 33, 46, 34, 46, 36.5, 38, 35.5, 31, 38]), 0.85),
+      outline(poly([69, 36, 62, 33, 54, 34, 54, 36.5, 62, 35.5, 69, 38]), 0.85),
+      outline(
+        [
+          ...cubic({ x: 41, y: 66 }, { x: 46, y: 64.5 }, { x: 54, y: 64.5 }, { x: 59, y: 66 }, 12),
+          ...cubic({ x: 59, y: 66 }, { x: 55, y: 71 }, { x: 45, y: 71 }, { x: 41, y: 66 }, 12),
+        ],
+        0.8,
+      ),
+    ],
+    strokes: [
+      FACE_HEAD,
+      // Nose.
+      poly([51, 49, 48, 58, 52, 59]),
+      // Ears.
+      poly([25, 44, 21, 46, 21, 53, 26, 56]),
+      poly([75, 44, 79, 46, 79, 53, 74, 56]),
+      // Neck into shoulders.
+      poly([43, 75, 43, 84, 16, 92, 10, 100]),
+      poly([57, 75, 57, 84, 84, 92, 90, 100]),
+    ],
+    // No tone inside the head: the face stays blank like a highlight, so
+    // only the hair, outline, and features carry text.
+    tones: [region(poly([10, 100, 16, 92, 43, 84, 57, 84, 84, 92, 90, 100]), 0.3)],
   },
   // A 3x3 icon grid with a few small marks.
   grid: {
