@@ -48,7 +48,7 @@ export const NAV_ITEMS = [
 ] as const;
 
 export const DISCIPLINES = [
-  'Brand',
+  'Brand & Graphic',
   'Web',
   'UI/UX',
   'Motion & Video',
