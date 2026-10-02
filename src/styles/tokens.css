@@ -33,6 +33,13 @@
   --color-header-bg: rgb(255 255 255 / 82%);
   --color-header-border: rgb(255 255 255 / 55%);
 
+  /* Footer panel: deep plum in both themes, so it always grounds the page. */
+  --color-footer-bg: #2a2550;
+  --color-footer-text: #f5f3fa;
+  --color-footer-muted: #b0a8c3;
+  --color-footer-rule: rgb(255 255 255 / 14%);
+  --color-footer-wordmark: rgb(255 255 255 / 22%);
+
   /* Decorative-only hero hues (backgrounds/gradients, never used as text) */
   --hero-purple: #6d5fc7;
   --hero-rose: #c1618c;
@@ -110,6 +117,11 @@
     --hero-blue: #7fa3e0;
     --hero-gold: #d9be8f;
     --hero-copper: #e08a63;
+    --color-footer-bg: #201b38;
+    --color-footer-text: #edeaf5;
+    --color-footer-muted: #a49cba;
+    --color-footer-rule: rgb(255 255 255 / 10%);
+    --color-footer-wordmark: rgb(255 255 255 / 16%);
     --color-header-bg: rgb(30 27 41 / 78%);
     --color-header-border: rgb(255 255 255 / 10%);
     --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);
@@ -140,6 +152,11 @@
   --hero-blue: #7fa3e0;
   --hero-gold: #d9be8f;
   --hero-copper: #e08a63;
+  --color-footer-bg: #201b38;
+  --color-footer-text: #edeaf5;
+  --color-footer-muted: #a49cba;
+  --color-footer-rule: rgb(255 255 255 / 10%);
+  --color-footer-wordmark: rgb(255 255 255 / 16%);
   --color-header-bg: rgb(30 27 41 / 78%);
   --color-header-border: rgb(255 255 255 / 10%);
   --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);

@@ -1,15 +1,8 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-import { SITE } from '../config/site';
+import { NAV_ITEMS, SITE } from '../config/site';
 
-const navItems = [
-  { href: '/', label: 'Latest' },
-  { href: '/try-it/', label: 'Try It' },
-  { href: '/workflows/', label: 'Workflows' },
-  { href: '/the-pulse/', label: 'The Pulse' },
-  { href: '/the-brief/', label: 'The Brief' },
-  { href: '/tools/', label: 'The Toolkit' },
-];
+const navItems = NAV_ITEMS;
 
 const currentPath = Astro.url.pathname;
 
