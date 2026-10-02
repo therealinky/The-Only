@@ -36,6 +36,17 @@ export const NEWSLETTER = {
     'theonly',
 } as const;
 
+// The main sections, in nav order. Shared by the header and the footer so
+// the two can't drift apart.
+export const NAV_ITEMS = [
+  { href: '/', label: 'Latest' },
+  { href: '/try-it/', label: 'Try It' },
+  { href: '/workflows/', label: 'Workflows' },
+  { href: '/the-pulse/', label: 'The Pulse' },
+  { href: '/the-brief/', label: 'The Brief' },
+  { href: '/tools/', label: 'The Toolkit' },
+] as const;
+
 export const DISCIPLINES = [
   'Brand',
   'Web',

@@ -1,18 +1,77 @@
 ---
-import { SITE } from '../config/site';
+import { DISCIPLINES, NAV_ITEMS, NEWSLETTER, SITE } from '../config/site';
+import { getAllTools, getListableArticles } from '../lib/articles';
+import { slugify } from '../lib/slugify';
 
 const year = new Date().getFullYear();
+const articleCount = (await getListableArticles()).length;
+const toolCount = (await getAllTools()).length;
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <p>&copy; {year} {SITE.name}.</p>
-    <nav aria-label="Footer">
-      <ul class="site-footer__list">
+    <div class="site-footer__columns">
+      <section class="site-footer__about" aria-labelledby="footer-about">
+        <h2 id="footer-about" class="site-footer__name">{SITE.name}</h2>
+        <p class="site-footer__descriptor">{SITE.descriptor}</p>
+        <p>{SITE.description}</p>
+        <p class="site-footer__trust">
+          Every article is AI-drafted and reviewed by a human editor before it's published.{' '}
+          <a href="/editorial-policy/">How we work</a>
+        </p>
+      </section>
+
+      <nav class="site-footer__group" aria-labelledby="footer-read">
+        <h2 id="footer-read" class="site-footer__heading">Read</h2>
+        <ul>
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav class="site-footer__group" aria-labelledby="footer-disciplines">
+        <h2 id="footer-disciplines" class="site-footer__heading">By discipline</h2>
+        <ul>
+          {
+            DISCIPLINES.map((discipline) => (
+              <li>
+                <a href={`/discipline/${slugify(discipline)}/`}>{discipline}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <section class="site-footer__group" aria-labelledby="footer-email">
+        <h2 id="footer-email" class="site-footer__heading">The Brief by email</h2>
+        <p>Every Wednesday, a short summary of the week's most interesting stories.</p>
+        <ul>
+          <li><a href="/the-brief/">Get The Brief</a></li>
+          <li>
+            <a href={`https://buttondown.com/${NEWSLETTER.buttondownUsername}/archive/`}>Read past issues</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="site-footer__bar">
+      <p>
+        &copy; {year} {SITE.name} · {articleCount} articles · {toolCount} tools covered
+      </p>
+      <ul class="site-footer__links">
         <li><a href="/about/">About</a></li>
         <li><a href="/editorial-policy/">Editorial Policy</a></li>
+        <li><a href="/search/">Search</a></li>
         <li><a href="/rss.xml">RSS</a></li>
+        <li><a href="#top">Back to top ↑</a></li>
       </ul>
-    </nav>
+    </div>
   </div>
+
+  <p class="site-footer__wordmark" aria-hidden="true">{SITE.name}</p>
 </footer>
