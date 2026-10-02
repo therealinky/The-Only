@@ -4,3 +4,16 @@
 /workflows/creative-coding*   /workflows/web/   301
 /try-it/creative-coding*      /try-it/web/      301
 /the-pulse/creative-coding*   /the-pulse/web/   301
+
+# Brand was renamed Brand & Graphic. Exact paths only: a "brand*" splat
+# would also match the new brand-and-graphic URLs and loop.
+/discipline/brand    /discipline/brand-and-graphic/  301
+/discipline/brand/   /discipline/brand-and-graphic/  301
+/the-brief/brand     /the-brief/brand-and-graphic/   301
+/the-brief/brand/    /the-brief/brand-and-graphic/   301
+/workflows/brand     /workflows/brand-and-graphic/   301
+/workflows/brand/    /workflows/brand-and-graphic/   301
+/try-it/brand        /try-it/brand-and-graphic/      301
+/try-it/brand/       /try-it/brand-and-graphic/      301
+/the-pulse/brand     /the-pulse/brand-and-graphic/   301
+/the-pulse/brand/    /the-pulse/brand-and-graphic/   301
