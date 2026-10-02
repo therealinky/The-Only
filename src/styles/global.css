@@ -199,8 +199,8 @@ main {
 }
 
 /* A plum strip under the logo/nav row (the footer's color, so the top and
-   bottom of the page match): the site descriptor, then the five newest
-   article titles in a sideways-scrolling track with caret buttons. */
+   bottom of the page match): the five newest article titles in a
+   sideways-scrolling track with caret buttons. */
 .latest-strip {
   background: var(--color-footer-bg);
   color: var(--color-footer-text);
@@ -212,24 +212,6 @@ main {
   gap: var(--space-4);
   min-height: 2.5rem;
   font-size: var(--text-xs);
-}
-
-.latest-strip__descriptor {
-  display: none;
-  flex: none;
-  margin: 0;
-  max-width: none;
-  padding-inline-end: var(--space-4);
-  border-inline-end: 1px solid var(--color-footer-rule);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--color-footer-text);
-}
-
-@media (min-width: 64rem) {
-  .latest-strip__descriptor {
-    display: block;
-  }
 }
 
 .latest-strip__ticker {
