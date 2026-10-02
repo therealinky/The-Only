@@ -39,6 +39,7 @@
   --hero-sage: #4a9172;
   --hero-blue: #5f84c9;
   --hero-gold: #c4a874;
+  --hero-copper: #c56a43;
 
   /* Fonts */
   --font-display: 'Unbounded Variable', ui-sans-serif, system-ui, sans-serif;
@@ -108,6 +109,7 @@
     --hero-sage: #5fb98c;
     --hero-blue: #7fa3e0;
     --hero-gold: #d9be8f;
+    --hero-copper: #e08a63;
     --color-header-bg: rgb(30 27 41 / 78%);
     --color-header-border: rgb(255 255 255 / 10%);
     --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);
@@ -137,6 +139,7 @@
   --hero-sage: #5fb98c;
   --hero-blue: #7fa3e0;
   --hero-gold: #d9be8f;
+  --hero-copper: #e08a63;
   --color-header-bg: rgb(30 27 41 / 78%);
   --color-header-border: rgb(255 255 255 / 10%);
   --shadow-sm: 0 1px 2px rgb(10 8 16 / 0.4);

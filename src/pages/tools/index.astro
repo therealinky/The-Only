@@ -7,12 +7,12 @@ import { slugify } from '../../lib/slugify';
 const tools = await getAllTools();
 ---
 
-<BaseLayout title="Tools" description="Every tool discussed on The Only, linked to the articles that cover it.">
+<BaseLayout title="The Toolkit" description="Every tool discussed on The Only, linked to the articles that cover it.">
   <PageHero
-    eyebrow="Tools"
-    lines={['The', 'Toolkit']}
+    eyebrow="The Toolkit"
+    lines={['Tools of', 'The Trade']}
     subtitle="Every tool we've covered, linked to the articles that discuss it."
-    variant="blue"
+    variant="copper"
   />
   {
     tools.length === 0 ? (
