@@ -1,0 +1,85 @@
+---
+title: "Figma Motion adds custom animation styles, audio, text animation, and Lottie export"
+dek: >-
+  Three months into its open beta, Figma Motion picked up the features that
+  take it from something to experiment with to something a team can
+  standardize on: reusable styles you publish to a library, audio on the
+  timeline, and Lottie output.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+example: false
+publishedAt: 2026-10-03
+updatedAt: 2026-10-03
+lastVerified: 2026-10-03
+reviewedBy: Ana M. Rivas
+disciplines:
+  - UI/UX
+  - Motion & Video
+art: waveform
+tools:
+  - Figma
+  - Figma Motion
+sources:
+  - title: "Figma release notes (Motion adds custom styles, audio, text animations and Lottie export, Sep 30, 2026)"
+    url: https://www.figma.com/release-notes/
+    accessed: 2026-10-03
+  - title: "Introducing Figma Motion: Your canvas now has a timeline (Figma blog)"
+    url: https://www.figma.com/blog/introducing-figma-motion/
+    accessed: 2026-10-03
+  - title: "Quickly add motion with preset animation styles (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/41307886266135-Quickly-add-motion-with-preset-animation-styles
+    accessed: 2026-10-03
+  - title: "Figma Motion export (LottieFiles docs)"
+    url: https://docs.lottiefiles.com/en/integrations/figma/04_figma-to-lottie/figma-motion-export
+    accessed: 2026-10-03
+beforeYouUse:
+  clientData: >-
+    not applicable: Motion works inside your existing Figma files, so client
+    work stays under whatever agreement already covers your Figma account.
+    The release notes don't describe anything new being sent elsewhere.
+  usageRights: >-
+    not verified: the release notes don't say where audio added to the
+    timeline is expected to come from. Any music or sound effects you drop in
+    still need their own license, same as in any video tool.
+  disclosure: >-
+    not applicable: these are animation and export features, not generated
+    content.
+  accessibility: >-
+    not verified: Figma doesn't mention reduced-motion handling in the new
+    exports. If you ship exported Lottie or CSS animation in a product,
+    respecting a user's reduced-motion setting is still on you.
+  cost: >-
+    not verified: the September 30 entry doesn't mention plans. Figma's
+    launch post said Starter users get limited exports while full seats on
+    all plans get motion primitives and export, and that design system
+    integration and agent features need paid plans. Check how that applies
+    to publishing styles before you plan around it.
+---
+Figma Motion, the timeline Figma added to the canvas at Config in June, got a substantial update on September 30. It's still an open beta, but the new pieces are the ones teams kept asking for: animation styles you can define once and reuse, audio on the timeline, finer text animation, and Lottie export.
+
+## What changed
+
+Per Figma's release notes, there are four main additions:
+
+- **Custom animation styles.** You can now save your own style with custom easing, duration, and variable-backed properties, then publish it to a library so every file draws from the same set. At launch, Figma only offered built-in presets like fade, move, and scale, and its launch post listed custom styles as coming soon.
+- **Audio on the timeline.** You can trim, split, and reposition audio alongside your animation, and it comes along when you export MP4 or WebM.
+- **Text animation by character, word, or line.** Text stays editable after you animate it. Figma's help docs still list text animation styles as coming soon, so expect them to catch up.
+- **Lottie and dotLottie export.** Before this, the usual route to Lottie was the LottieFiles plugin, which added Figma Motion support of its own.
+
+Figma also says animation styles can be applied automatically by the Figma agent and by coding agents through MCP or Skills.
+
+## Why it matters for designers
+
+Publishable styles are the big one. Interface motion tends to drift because every designer picks their own easing and duration. Putting those decisions in a library, backed by variables, treats motion like color and type: a shared system rather than a per-file judgment call. If your team already keeps tokens in Figma variables, motion can now sit in the same system.
+
+Native Lottie export closes the gap between what you design and what ships in apps that already use Lottie, with one less plugin in the chain. And audio means you can cut a short product demo or social clip without leaving Figma for a video editor, as long as the edit stays simple.
+
+## What to watch out for
+
+It's a beta, and Figma says features may change and performance may suffer. Don't build a production pipeline around exact export behavior yet, and check exported Lottie files in the player your developers actually use before handing them off.
+
+The agent and MCP angle is promising but sparse on detail. The release notes say agents can apply animation styles, not how much control you get over the result, so treat it as something to try rather than something to rely on.
+
+Plan details for the new features aren't spelled out in the update itself: see the sidebar.
