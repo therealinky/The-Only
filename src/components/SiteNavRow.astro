@@ -1,0 +1,67 @@
+---
+// The logo, main nav, search, theme toggle, and phone menu. Rendered twice:
+// once at the top of the page inside the header, and once in the floating
+// bar that slides in on scroll-up further down the page (see SiteHeader).
+import ThemeToggle from './ThemeToggle.astro';
+import { NAV_ITEMS, SITE } from '../config/site';
+
+interface Props {
+  /** The copy in the floating bar: its landmarks get distinct labels. */
+  floating?: boolean;
+}
+
+const { floating = false } = Astro.props;
+const currentPath = Astro.url.pathname;
+const suffix = floating ? ', floating bar' : '';
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<div class="site-header__inner">
+  <a class="site-header__brand" href="/">
+    <span class="site-header__name">{SITE.name}</span>
+  </a>
+
+  <nav class="site-nav" aria-label={`Main${suffix}`}>
+    <ul class="site-nav__list">
+      {
+        NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="site-header__actions">
+    <a class="site-header__search" href="/search/">Search</a>
+    <ThemeToggle />
+    <details class="mobile-nav">
+      <summary class="mobile-nav__trigger" aria-label="Menu">
+        <span class="mobile-nav__icon" aria-hidden="true">
+          <span class="mobile-nav__line"></span>
+          <span class="mobile-nav__line"></span>
+        </span>
+      </summary>
+      <nav class="mobile-nav__panel" aria-label={`Main (mobile)${suffix}`}>
+        <ul>
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</div>

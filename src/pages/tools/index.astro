@@ -84,9 +84,9 @@ const plural = (n: number) => `${n} ${n === 1 ? 'article' : 'articles'}`;
 </BaseLayout>
 
 <script>
-  // The letter bar sticks just under the site header, and a jumped-to letter
-  // has to land just under the bar. Both heights change with the viewport
-  // (the bar is two rows on phones), so measure them.
+  // A jumped-to letter has to land just under the letter bar, whose height
+  // changes with the viewport (it's two rows on phones), so measure it. The
+  // header's own height is measured in SiteHeader.astro.
   const root = document.documentElement;
   const measure = (selector: string, property: string) => {
     const element = document.querySelector<HTMLElement>(selector);
@@ -95,6 +95,5 @@ const plural = (n: number) => `${n} ${n === 1 ? 'article' : 'articles'}`;
     new ResizeObserver(set).observe(element);
     set();
   };
-  measure('.site-header', '--site-header-height');
   measure('.az-bar', '--az-bar-height');
 </script>

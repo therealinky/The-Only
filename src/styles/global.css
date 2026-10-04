@@ -169,13 +169,59 @@ main {
 /* ---------- Header ---------- */
 
 .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
   background: var(--color-header-bg);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
   box-shadow: var(--shadow-sm);
+}
+
+/* The floating copy of the nav row: off screen above the top edge until the
+   reader scrolls up past the 30% mark (see SiteHeader.astro). */
+.site-header-float {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  /* Frosted glass: translucent, with the page blurred behind it. */
+  background: var(--color-header-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(calc(-100% - 8px));
+  visibility: hidden;
+  transition:
+    transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s linear 280ms;
+}
+
+/* Older Safari only understands the prefixed blur. It sits behind a feature
+   check because the CSS minifier keeps just one of the two properties when
+   it can merge them, and the prefixed one does nothing in Chrome. */
+@supports not (backdrop-filter: blur(1px)) {
+  .site-header-float {
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+}
+
+.site-header-float.is-shown {
+  transform: none;
+  visibility: visible;
+  transition:
+    transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header-float,
+  .site-header-float.is-shown {
+    transition: none;
+  }
+}
+
+/* Whatever is pinned under the header slides up with it. */
+@media (prefers-reduced-motion: no-preference) {
+  .az-bar,
+  .article-sidebar {
+    transition: top 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
 }
 
 .site-header__inner {
@@ -497,8 +543,14 @@ main {
   background: var(--color-header-bg);
   border: 1px solid var(--color-header-border);
   backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
   box-shadow: var(--shadow-md);
+}
+
+/* Older Safari's prefixed blur; see .site-header-float for why it's here. */
+@supports not (backdrop-filter: blur(1px)) {
+  .mobile-nav__panel {
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
 }
 
 .mobile-nav__panel ul {
@@ -712,12 +764,12 @@ main {
 
 /* ---------- The Toolkit index ---------- */
 
-/* A–Z jump bar, stuck just under the site header (whose measured height
-   tools/index.astro sets as --site-header-height). Letters with no tools
+/* A–Z jump bar, stuck at the top of the window, and just under the floating
+   nav bar while that's showing (--header-offset). Letters with no tools
    stay visible but greyed, so the spread of the alphabet is readable. */
 .az-bar {
   position: sticky;
-  top: var(--site-header-height, 6.5rem);
+  top: var(--header-offset, 0px);
   z-index: 10;
   margin-block-end: var(--space-5);
   padding-block: var(--space-2);
@@ -801,7 +853,7 @@ main {
   break-inside: avoid;
   margin-block-end: var(--space-5);
   /* Clears the sticky header and letter bar when jumped to. */
-  scroll-margin-top: calc(var(--site-header-height, 6.5rem) + var(--az-bar-height, 3rem) + var(--space-3));
+  scroll-margin-top: calc(var(--az-bar-height, 3rem) + var(--space-3));
 }
 
 .tool-index__letter {
@@ -1135,7 +1187,9 @@ main {
     grid-column: 2;
     grid-row: 1;
     position: sticky;
-    top: 5rem;
+    /* Near the top of the window, or just under the floating nav bar while
+       that's showing (--header-offset, set in SiteHeader.astro). */
+    top: calc(var(--header-offset, 0px) + var(--space-4));
   }
 
   .article-main {

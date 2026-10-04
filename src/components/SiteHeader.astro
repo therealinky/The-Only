@@ -1,65 +1,12 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
-import { NAV_ITEMS, SITE } from '../config/site';
+import SiteNavRow from './SiteNavRow.astro';
 import { getListableArticles } from '../lib/articles';
 
-const navItems = NAV_ITEMS;
 const latest = (await getListableArticles()).slice(0, 5);
-
-const currentPath = Astro.url.pathname;
-
-function isActive(href: string): boolean {
-  if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
-}
 ---
 
 <header class="site-header">
-  <div class="site-header__inner">
-    <a class="site-header__brand" href="/">
-      <span class="site-header__name">{SITE.name}</span>
-    </a>
-
-    <nav class="site-nav" aria-label="Main">
-      <ul class="site-nav__list">
-        {
-          navItems.map((item) => (
-            <li>
-              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-
-    <div class="site-header__actions">
-      <a class="site-header__search" href="/search/">Search</a>
-      <ThemeToggle />
-      <details class="mobile-nav">
-        <summary class="mobile-nav__trigger" aria-label="Menu">
-          <span class="mobile-nav__icon" aria-hidden="true">
-            <span class="mobile-nav__line"></span>
-            <span class="mobile-nav__line"></span>
-          </span>
-        </summary>
-        <nav class="mobile-nav__panel" aria-label="Main (mobile)">
-          <ul>
-            {
-              navItems.map((item) => (
-                <li>
-                  <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-      </details>
-    </div>
-  </div>
+  <SiteNavRow />
 
   <div class="latest-strip">
     <div class="latest-strip__inner">
@@ -97,7 +44,68 @@ function isActive(href: string): boolean {
   </div>
 </header>
 
+<div class="site-header-float" data-header-float inert>
+  <SiteNavRow floating />
+</div>
+
 <script>
+  // The header (nav and Latest strip) scrolls away with the page like any
+  // other content. Once the reader is about 30% of the way down, scrolling up
+  // slides in a floating copy of just the nav row; scrolling down slides it
+  // away again. It also tucks away once the real header is back in view near
+  // the top. Below the 30% mark, scrolling up never brings it in fresh, but
+  // if it's already showing it stays while the reader keeps going up.
+  // Things pinned under it (the Toolkit's A-Z bar, the article sidebar)
+  // follow --header-offset: the bar's height while it's showing, else 0.
+  {
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const bar = document.querySelector<HTMLElement>('[data-header-float]');
+    if (header && bar) {
+      const root = document.documentElement;
+      const menu = bar.querySelector<HTMLDetailsElement>('details');
+      const THRESHOLD = 0.3;
+      // Ignore tiny movements (trackpad jitter, momentum settling).
+      const NUDGE = 6;
+      let lastY = window.scrollY;
+      let shown = false;
+      let queued = false;
+
+      const setShown = (value: boolean) => {
+        if (shown === value) return;
+        shown = value;
+        bar.classList.toggle('is-shown', value);
+        bar.inert = !value;
+        if (!value && menu) menu.open = false;
+        root.style.setProperty('--header-offset', value ? `${bar.offsetHeight}px` : '0px');
+      };
+      root.style.setProperty('--header-offset', '0px');
+
+      const update = () => {
+        queued = false;
+        const y = window.scrollY;
+        const delta = y - lastY;
+        if (Math.abs(delta) < NUDGE) return;
+        lastY = y;
+        // Keep it while its phone menu is open or it has keyboard focus.
+        if (shown && (menu?.open || bar.contains(document.activeElement))) return;
+        const pastThreshold = y > (root.scrollHeight - window.innerHeight) * THRESHOLD;
+        if (y <= header.offsetHeight) setShown(false);
+        else if (delta > 0) setShown(false);
+        else if (pastThreshold || shown) setShown(true);
+      };
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true },
+      );
+    }
+  }
+
   // The carets step the latest-articles track one title at a time. Without
   // JS the track still scrolls sideways natively; the buttons just do
   // nothing.
