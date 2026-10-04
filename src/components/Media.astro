@@ -1,0 +1,260 @@
+---
+// One piece of media inside an article body: an image, a GIF, a YouTube
+// video, or a Lottie/dotLottie animation, with optional caption and credit.
+// Articles use it as <Media ... /> (Keystatic inserts it as a "Media" block),
+// usually at the end of a section. See the README's "Adding media" section.
+import { readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { Image, Picture } from 'astro:assets';
+import { resolveImage, resolveLottie, youTubeId } from '../lib/media';
+
+type MediaType = 'image' | 'gif' | 'youtube' | 'lottie';
+
+interface Props {
+  type: MediaType;
+  /** Image or GIF: the uploaded file (path or just its filename). */
+  image?: string | null;
+  /** Lottie: the uploaded .json or .lottie file. */
+  file?: string | null;
+  /** YouTube: the video's link. */
+  youtube?: string | null;
+  /** Required. Describes the image or animation; for YouTube, the video's title. */
+  alt: string;
+  caption?: string | null;
+  credit?: string | null;
+}
+
+const { type, image, file, youtube, alt, caption, credit } = Astro.props;
+const where = image || file || youtube || type;
+
+if (!alt?.trim()) {
+  throw new Error(`Media block (${where}): alt text is required. Describe what it shows, or give the video's title.`);
+}
+
+// Above this, a GIF noticeably slows the page; an MP4 or animated WebP of
+// the same clip is usually a fraction of the size.
+const GIF_WARN_BYTES = 2 * 1024 * 1024;
+// The article text column tops out around 46rem.
+const sizes = '(min-width: 64rem) 46rem, 100vw';
+
+let picture: Awaited<ReturnType<typeof resolveImage>> | undefined;
+let isAnimatedGif = false;
+let videoId: string | undefined;
+let lottie: (ReturnType<typeof resolveLottie> & { ratio?: string }) | undefined;
+
+if (type === 'image' || type === 'gif') {
+  if (!image) throw new Error(`Media block: type "${type}" needs an image file.`);
+  picture = resolveImage(image);
+  if (type === 'gif' || picture.isGif) {
+    const bytes = statSync(join(process.cwd(), picture.key)).size;
+    if (bytes > GIF_WARN_BYTES) {
+      console.warn(
+        `[media] ${picture.key} is ${(bytes / 1024 / 1024).toFixed(1)} MB. Consider an MP4 or animated WebP for a lighter page.`,
+      );
+    }
+    // Served as-is: converting a GIF would drop its animation.
+    isAnimatedGif = true;
+  }
+} else if (type === 'youtube') {
+  if (!youtube) throw new Error('Media block: type "youtube" needs a YouTube link.');
+  videoId = youTubeId(youtube);
+} else if (type === 'lottie') {
+  if (!file) throw new Error('Media block: type "lottie" needs a .json or .lottie file.');
+  lottie = resolveLottie(file);
+  // Lottie JSON carries its own canvas size, so the space can be reserved
+  // before the player loads. A .lottie is a zip, so it settles once loaded.
+  if (lottie.isJson) {
+    const { w, h } = JSON.parse(readFileSync(join(process.cwd(), lottie.key), 'utf8'));
+    if (w && h) lottie.ratio = `${w} / ${h}`;
+  }
+} else {
+  throw new Error(`Media block: unknown type "${type}". Use image, gif, youtube, or lottie.`);
+}
+
+const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : undefined;
+---
+
+<figure class={`media media--${isAnimatedGif ? 'gif' : type}`}>
+  {
+    picture && !isAnimatedGif && (
+      <Picture
+        src={picture.image}
+        alt={alt}
+        formats={['avif', 'webp']}
+        widths={[480, 800, 1200, 1600].filter((w) => w <= picture!.image.width)}
+        sizes={sizes}
+        loading="lazy"
+        decoding="async"
+        class="media__frame"
+      />
+    )
+  }
+  {
+    picture && isAnimatedGif && (
+      <div class="media__frame media__gif" data-media-gif>
+        <img
+          src={picture.image.src}
+          width={picture.image.width}
+          height={picture.image.height}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <canvas aria-hidden="true"></canvas>
+        <button type="button" class="media__toggle" data-media-gif-toggle hidden>
+          Play animation
+        </button>
+      </div>
+    )
+  }
+  {
+    videoId && (
+      <div class="media__frame media__video" data-media-youtube={videoId} data-title={alt}>
+        <a class="media__poster" href={watchUrl} aria-label={`Play video: ${alt}`}>
+          <Image
+            src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+            alt=""
+            width={480}
+            height={360}
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="media__play" aria-hidden="true">
+            <svg viewBox="0 0 68 48" width="68" height="48">
+              <path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="currentColor" />
+              <path d="M27 34V14l18 10z" fill="var(--media-play-glyph)" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    )
+  }
+  {
+    lottie && (
+      <div
+        class="media__frame media__lottie"
+        data-media-lottie={lottie.url}
+        role="img"
+        aria-label={alt}
+        style={lottie.ratio ? `aspect-ratio: ${lottie.ratio}` : undefined}
+      >
+        <canvas></canvas>
+        <button type="button" class="media__toggle" data-media-lottie-toggle hidden>
+          Pause animation
+        </button>
+      </div>
+    )
+  }
+  {
+    (caption || credit) && (
+      <figcaption class="media__caption">
+        {caption && <span>{caption}</span>}
+        {credit && <span class="media__credit">{credit}</span>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // GIFs play for everyone except visitors who ask for reduced motion: they
+  // see a still frame, drawn onto a canvas over the GIF, and a play button.
+  // Pausing redraws whatever frame is showing, so it freezes in place.
+  if (reduceMotion.matches) {
+    for (const gif of document.querySelectorAll<HTMLElement>('[data-media-gif]')) {
+      const img = gif.querySelector('img')!;
+      const canvas = gif.querySelector('canvas')!;
+      const toggle = gif.querySelector<HTMLButtonElement>('[data-media-gif-toggle]')!;
+      gif.classList.add('is-still');
+      const freeze = () => {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.getContext('2d')?.drawImage(img, 0, 0);
+        gif.classList.add('is-still');
+        toggle.textContent = 'Play animation';
+      };
+      if (img.complete && img.naturalWidth) freeze();
+      else img.addEventListener('load', freeze, { once: true });
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        if (gif.classList.contains('is-still')) {
+          gif.classList.remove('is-still');
+          toggle.textContent = 'Pause animation';
+        } else {
+          freeze();
+        }
+      });
+    }
+  }
+
+  // YouTube stays a thumbnail and a link until someone presses play, so no
+  // YouTube code loads (or tracks) before then. Uses the no-cookie player.
+  for (const video of document.querySelectorAll<HTMLElement>('[data-media-youtube]')) {
+    video.querySelector('a')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${video.dataset.mediaYoutube}?autoplay=1&rel=0`;
+      iframe.title = video.dataset.title ?? 'YouTube video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      video.replaceChildren(iframe);
+      iframe.focus();
+    });
+  }
+
+  // Lottie: the player (and its WebAssembly engine, served from this site)
+  // only loads once an animation scrolls near view. Loops with a pause
+  // button; starts paused for visitors who ask for reduced motion.
+  const lotties = document.querySelectorAll<HTMLElement>('[data-media-lottie]');
+  if (lotties.length) {
+    const loadPlayer = (async () => {
+      const [{ DotLottie }, { default: wasmUrl }] = await Promise.all([
+        import('@lottiefiles/dotlottie-web'),
+        import('@lottiefiles/dotlottie-web/dotlottie-player.wasm?url'),
+      ]);
+      DotLottie.setWasmUrl(wasmUrl);
+      return DotLottie;
+    });
+    let player: ReturnType<typeof loadPlayer> | undefined;
+
+    const start = async (frame: HTMLElement) => {
+      const DotLottie = await (player ??= loadPlayer());
+      const canvas = frame.querySelector('canvas')!;
+      const toggle = frame.querySelector<HTMLButtonElement>('[data-media-lottie-toggle]')!;
+      const animation = new DotLottie({
+        canvas,
+        src: frame.dataset.mediaLottie,
+        loop: true,
+        autoplay: !reduceMotion.matches,
+      });
+      const label = () => {
+        toggle.textContent = animation.isPlaying ? 'Pause animation' : 'Play animation';
+      };
+      animation.addEventListener('load', () => {
+        if (!frame.style.aspectRatio) {
+          const { width, height } = animation.animationSize();
+          if (width && height) frame.style.aspectRatio = `${width} / ${height}`;
+        }
+        toggle.hidden = false;
+        label();
+      });
+      animation.addEventListener('play', label);
+      animation.addEventListener('pause', label);
+      toggle.addEventListener('click', () => (animation.isPlaying ? animation.pause() : animation.play()));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          start(entry.target as HTMLElement);
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    lotties.forEach((frame) => observer.observe(frame));
+  }
+</script>

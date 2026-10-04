@@ -82,6 +82,46 @@ by hand. It runs in **local mode only**: it reads and writes files on your machi
 Cloud or GitHub, and the integration that serves it is only loaded for `astro dev` (see `astro.config.mjs`), so it
 adds nothing to a production build.
 
+### Adding media
+
+Articles can include an image (PNG, JPG, WEBP), a GIF, a YouTube video, or a Lottie/dotLottie animation as a
+**Media** block. The usual place is the end of a section (after "What changed", "Why it matters for designers",
+and so on), but a block works anywhere in the body, e.g. inside a Workflow step. Sections without media just don't
+get a block.
+
+- **In Keystatic:** in the article's Content field, use the insert menu to add a **Media** block, pick its type, and
+  upload the file (or paste the YouTube link). Keystatic saves uploads to the article's own folder,
+  `src/assets/articles/<article-slug>/`, and writes the path into the block.
+- **By hand:** put the file in `src/assets/articles/<article-slug>/` and add a block where it should appear:
+
+  ```mdx
+  <Media type="image" image="figma-motion-timeline.png" alt="The Motion timeline with three keyframed layers." caption="Styles applied from a shared library." credit="Image: Figma" />
+  <Media type="gif" image="recolor-demo.gif" alt="…" />
+  <Media type="youtube" youtube="https://www.youtube.com/watch?v=VIDEO_ID" alt="The video's title" />
+  <Media type="lottie" file="loader.lottie" alt="…" />
+  ```
+
+  A bare filename works as long as no other article has a file with the same name; otherwise use the full path,
+  e.g. `/src/assets/articles/<article-slug>/name.png`.
+
+Every block needs `alt`: what the image or animation shows, for people who can't see it (for YouTube, the video's
+title). `caption` and `credit` are optional, but give a credit whenever the media came from someone else. Only use
+media we made, have permission for, or are allowed to embed (a YouTube video's own embed is fine; someone else's
+screenshot isn't, unless they say so).
+
+How each type behaves (`src/components/Media.astro`):
+
+- **Images** are converted to AVIF/WebP and resized for each screen at build time, and lazy-loaded.
+- **GIFs** are served as-is (converting would drop the animation), and the build warns over 2 MB. Visitors who ask
+  their device for reduced motion see a still frame with a play button.
+- **YouTube** shows a thumbnail (downloaded at build time, so readers never fetch it from YouTube) and only loads
+  YouTube's privacy-enhanced (no-cookie) player when someone presses play.
+- **Lottie/dotLottie** loads LottieFiles' player, and its WebAssembly engine served from this site, only when the
+  animation scrolls near view. It loops with a pause button, and starts paused for reduced-motion visitors.
+
+The build fails on a missing file, a missing alt text, or a link that isn't a YouTube video, so mistakes show up
+before anything ships.
+
 ## Publishing workflow
 
 Everything below happens through Git, VS Code (or any editor), and GitHub pull requests. **Merging a pull request
@@ -208,9 +248,9 @@ run against every page type in a live browser, including the withdrawn-article s
 after one fix (a heading-order jump on listing pages, `h1` straight to `h3` — article cards now use `h2`). See the
 project's audit notes for the full pass/fail list per page type.
 
-Known gaps to check again as real content and images are added: alt text isn't yet exercised anywhere (there are no
-images in the current placeholder content — Astro/MDX pass through standard Markdown `alt` text as-is, so this is a
-process reminder for writers, not a code gap), and Keystatic's own admin UI at `/keystatic` was not audited (it's a
+Known gaps to check again as real content and images are added: Media blocks require alt text (the build fails
+without it), but whether a given alt text is actually useful is a review step, not something the build can check.
+Keystatic's own admin UI at `/keystatic` was not audited (it's a
 vendored local-only tool, not part of the public site).
 
 ## Project structure
