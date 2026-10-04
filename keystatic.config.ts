@@ -21,7 +21,28 @@ import { ART_MOTIFS } from './src/lib/hypergraphy';
 // Keystatic stores each article's media in its own folder,
 // src/assets/articles/<slug>/, and writes that full path into the block.
 // Media.astro resolves it and optimizes images at build time.
-const mediaAsset = { directory: 'src/assets/articles', publicPath: '/src/assets/articles/' };
+// Uploaded filenames are cleaned into lowercase-and-hyphens: a Mac
+// screenshot name ("Screenshot 2026-10-03 at 3.43.41 PM.png") carries spaces
+// and an invisible narrow no-break space, which make for fragile URLs.
+function cleanFilename(original: string): string {
+  const dot = original.lastIndexOf('.');
+  const base = dot > 0 ? original.slice(0, dot) : original;
+  const extension = dot > 0 ? original.slice(dot + 1).toLowerCase() : '';
+  const slug =
+    base
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'media';
+  return extension ? `${slug}.${extension}` : slug;
+}
+
+const mediaAsset = {
+  directory: 'src/assets/articles',
+  publicPath: '/src/assets/articles/',
+  transformFilename: cleanFilename,
+};
 
 // The "Media" block for article bodies, usually inserted at the end of a
 // section. Rendered by src/components/Media.astro, which checks the fields
