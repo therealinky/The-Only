@@ -98,6 +98,66 @@ function isActive(href: string): boolean {
 </header>
 
 <script>
+  // The header (nav and Latest strip) stays pinned at the top for the first
+  // third of the page. Past that, it slides away while the reader scrolls
+  // down and slides back as soon as they scroll up. Things pinned beneath it
+  // (the Toolkit's A-Z bar, the article sidebar) follow --header-offset,
+  // which is the header's height while it's showing and 0 while it's hidden.
+  {
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (header) {
+      const root = document.documentElement;
+      const menu = header.querySelector<HTMLDetailsElement>('details');
+      // Ignore tiny movements (trackpad jitter, momentum settling).
+      const NUDGE = 6;
+      let lastY = window.scrollY;
+      let hidden = false;
+      let queued = false;
+
+      const setHidden = (value: boolean) => {
+        hidden = value;
+        header.classList.toggle('is-hidden', value);
+        root.style.setProperty('--header-offset', value ? '0px' : `${header.offsetHeight}px`);
+      };
+
+      const update = () => {
+        queued = false;
+        const y = window.scrollY;
+        const threshold = (root.scrollHeight - window.innerHeight) / 3;
+        // Never hide while the mobile menu is open or something in the
+        // header has keyboard focus.
+        const pinned = y < threshold || menu?.open || header.contains(document.activeElement);
+        if (pinned) {
+          if (hidden) setHidden(false);
+        } else if (y > lastY + NUDGE) {
+          if (!hidden) setHidden(true);
+        } else if (y < lastY - NUDGE) {
+          if (hidden) setHidden(false);
+        } else {
+          return;
+        }
+        lastY = y;
+      };
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true },
+      );
+      header.addEventListener('focusin', () => setHidden(false));
+      const measure = () => {
+        root.style.setProperty('--site-header-height', `${header.offsetHeight}px`);
+        if (!hidden) root.style.setProperty('--header-offset', `${header.offsetHeight}px`);
+      };
+      measure();
+      new ResizeObserver(measure).observe(header);
+    }
+  }
+
   // The carets step the latest-articles track one title at a time. Without
   // JS the track still scrolls sideways natively; the buttons just do
   // nothing.
