@@ -4,7 +4,7 @@ export const SITE = {
   name: 'The Only',
   descriptor: 'AI Guide for Working Designers',
   description:
-    'A practical field guide to AI for working designers: what changed, why it matters, what is worth trying, and what to watch out for.',
+    "A practical field guide to AI for working designers: what changed, why it matters, what's worth trying, and what could go wrong.",
   url:
     import.meta.env?.SITE_URL ||
     (typeof process !== 'undefined' ? process.env.SITE_URL : undefined) ||
