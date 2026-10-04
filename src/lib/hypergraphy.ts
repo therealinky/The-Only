@@ -44,6 +44,7 @@ export const ART_MOTIFS = [
   'document',
   'face',
   'grid',
+  'halftone',
   'image',
   'layers',
   'nodes',
@@ -504,6 +505,21 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   seal: {
     fills: [outline(circle(34, 50, 23), 0.4), outline(circle(66, 50, 23), 0.6)],
     strokes: [poly([30, 24, 70, 76])],
+    tones: [],
+  },
+  // A halftone screen: dots that grow from tiny in one corner to nearly
+  // touching in the other, the way a shader effect turns tone into pattern.
+  // The size range has to be dramatic to read as halftone at banner size;
+  // the largest (radius 10.6 on a 25-unit pitch) still leave a clear gap.
+  halftone: {
+    fills: [12, 37, 62, 87].flatMap((y, row) =>
+      [12, 37, 62, 87].map((x, col) => ({
+        points: circle(x, y, 2.2 + (row + col) * 1.4, 24),
+        kind: 'solid' as const,
+        tone: 1,
+      })),
+    ),
+    strokes: [],
     tones: [],
   },
   // Three slider tracks with knobs: editing controls.
