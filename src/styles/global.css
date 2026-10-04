@@ -181,12 +181,8 @@ main {
   position: fixed;
   inset: 0 0 auto;
   z-index: 60;
-  /* Nearly opaque, so article text never shows through the nav, even where
-     the blur isn't supported. */
-  background: color-mix(in srgb, var(--color-bg-elevated) 94%, transparent);
-  /* Prefixed first: the CSS minifier keeps only the last of the pair, and
-     Chrome needs the unprefixed one. */
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  /* Frosted glass: translucent, with the page blurred behind it. */
+  background: var(--color-header-bg);
   backdrop-filter: blur(16px) saturate(160%);
   box-shadow: var(--shadow-sm);
   transform: translateY(calc(-100% - 8px));
@@ -194,6 +190,15 @@ main {
   transition:
     transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
     visibility 0s linear 280ms;
+}
+
+/* Older Safari only understands the prefixed blur. It sits behind a feature
+   check because the CSS minifier keeps just one of the two properties when
+   it can merge them, and the prefixed one does nothing in Chrome. */
+@supports not (backdrop-filter: blur(1px)) {
+  .site-header-float {
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
 }
 
 .site-header-float.is-shown {
@@ -537,11 +542,15 @@ main {
   border-radius: var(--radius-md);
   background: var(--color-header-bg);
   border: 1px solid var(--color-header-border);
-  /* Prefixed first: the CSS minifier keeps only the last of the pair, and
-     Chrome needs the unprefixed one. */
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
   backdrop-filter: blur(16px) saturate(160%);
   box-shadow: var(--shadow-md);
+}
+
+/* Older Safari's prefixed blur; see .site-header-float for why it's here. */
+@supports not (backdrop-filter: blur(1px)) {
+  .mobile-nav__panel {
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
 }
 
 .mobile-nav__panel ul {
