@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-04
 updatedAt: 2026-10-04
 lastVerified: 2026-10-04
+reviewedBy: Ana M. Rivas
 disciplines:
   - UI/UX
   - Web
@@ -24,8 +25,8 @@ sources:
   - title: "Quick start guide to generative plugins and shaders (Figma Help Center)"
     url: https://help.figma.com/hc/en-us/articles/41147702210071
     accessed: 2026-10-04
-  - title: "Use shaders in designs (Figma Help Center)"
-    url: https://help.figma.com/hc/en-us/articles/41175721167767-Use-shaders-in-designs
+  - title: "Find and use shaders (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/41175721167767-Find-and-use-shaders
     accessed: 2026-10-04
   - title: "Prompting tips for generative plugins and shaders (Figma Help Center)"
     url: https://help.figma.com/hc/en-us/articles/41408020198935-Prompting-tips-for-generative-plugins-and-shaders
@@ -45,7 +46,7 @@ sources:
   - title: "Figma Config 2026: Code layers challenge Cursor as GPU shaders hit paid plans (Tech Times, June 25, 2026)"
     url: https://www.techtimes.com/articles/319041/20260625/figma-config-2026-code-layers-challenge-cursor-gpu-shaders-hit-paid-plans.htm
     accessed: 2026-10-04
-  - title: "Shaders from Figma Motion don't translate to Figma Make (Figma Forum, June 2026)"
+  - title: "Shaders from Figma Motion don't translate to Figma Make (Figma Forum, June 2026, since superseded)"
     url: https://forum.figma.com/suggest-a-feature-11/shaders-from-figma-motion-don-t-translate-to-figma-make-55432
     accessed: 2026-10-04
   - title: "Shaders doesn't work (Figma Forum, June 2026)"
@@ -93,17 +94,17 @@ beforeYouUse:
     over a busy shader fill can also lose contrast. Check both, especially
     if the shader ships to production.
   cost: >-
-    known in part: Figma's help center says shaders don't cost AI credits to
-    build and iterate while in beta, and never cost credits to run. Figma's
-    September blog post said the agent would begin consuming AI credits a
-    few weeks later, so building may not stay free. Who can build them is
-    described inconsistently across sources (see step 1).
+    known: per Figma's help center, using shaders, applying them, and running
+    animated or interactive ones on the canvas cost no AI credits. Building
+    or editing a shader by prompting the Figma agent does use AI credits.
+    Who can build them is described inconsistently across sources (see
+    step 1).
 ---
 If you haven't come across Figma's shaders yet, you're not alone. They launched at Config in June, mostly overshadowed by Motion and code layers, and got a big but quiet update on September 1. The short version: you describe a visual effect to the Figma agent in plain language, and it builds a GPU shader you can apply to any layer as a fill or an effect, with real controls in the Design panel. Since September, shaders can also animate and react to the cursor.
 
 This workflow is synthesized from Figma's documentation, several independent write-ups, and Figma forum threads, plus general Figma knowledge, not from any one person's process, and we haven't tested it hands-on end to end. Shaders are still in open beta, so expect some of this to change.
 
-1. **Check that you can actually see and build them.** Shaders render with WebGPU, so your browser and machine need to support it. Firefox doesn't enable WebGPU by default, and Firefox users won't see shader effects render at all. On access, sources disagree. Write-ups from Config described shaders as a paid-plan, Full seat feature. Figma's current help center says shaders are available in Figma Design on all plans to anyone with access to the Figma agent, and Figma's blog describes the agent as open to Full seat users on all plans. One independent write-up splits the difference: anyone can apply Figma-made shaders, while building new ones takes more. If the agent isn't available to you, start with step 2.
+1. **Check that you can actually see and build them.** Shaders render with WebGPU, so your browser and machine need to support it. Browser support for WebGPU is still uneven and changing, so check Figma's minimum requirements if shaders don't appear. On access, sources disagree. Write-ups from Config described shaders as a paid-plan, Full seat feature. Figma's current help center says shaders are available in Figma Design on all plans to anyone with access to the Figma agent, and Figma's blog describes the agent as open to Full seat users on all plans. Figma's help center also says anyone with edit access to a file can find and use shaders, which matches one independent write-up's split: anyone can apply Figma-made shaders, while building new ones takes agent access. If the agent isn't available to you, start with step 2.
 
 2. **Start with the built-in shaders before you prompt anything.** Figma ships its own shaders, and you'll find them in the Tools tab by filtering the source to From Figma. They're the fastest way to understand the two types: shader fills generate patterns, gradients, and textures from scratch, while shader effects change how an existing layer renders, with things like grain, halftone, distortion, color shifts, or blur. Apply one through the Fill section (or Stroke) or through Add effect in the Effects section, then play with its controls.
 
@@ -113,7 +114,7 @@ This workflow is synthesized from Figma's documentation, several independent wri
 
 5. **Stack and combine.** Multiple shader fills can sit on top of each other in the Fill and Stroke sections, and the independent write-ups lean on this heavily: a gradient map over noise, a print-style texture over a photo. Treat shaders like layer styles you can mix rather than finished looks.
 
-6. **Add motion and interaction when it earns its place.** Since the September update, the agent can build shaders that move on their own or respond to the mouse. Select the layer and click Play to run them on the canvas. If you're working in Figma Motion, you can keyframe individual shader settings, which turns a static effect into an animated transition.
+6. **Add motion and interaction when it earns its place.** Since the September update, the agent can build shaders that move on their own or respond to the mouse. Select the layer and click Play to run them on the canvas. Only one animated or interactive shader can run on a page at a time. If you're working in Figma Motion, you can keyframe individual shader settings, which turns a static effect into an animated transition.
 
 7. **Save the good ones as styles.** Any shader fill or effect can be saved as a style and published to a team library, which is the natural home for a signature brand texture. You can also publish a shader to the Figma Community, and on Organization and Enterprise plans, share it privately within your org.
 
@@ -129,7 +130,7 @@ They also blur a line designers are used to. A shader is real code running on th
 
 It's a beta, and the forum shows it. Several threads describe shaders that appear in the panel but don't render on the canvas, and others report a "Shaders having issues" warning that Figma staff logged as a reproducible bug. If a shader doesn't show up, check browser and GPU support first.
 
-Shaders don't carry over to Figma Make. Figma's moderators confirmed this as expected behavior, and the suggested workaround is exporting the shader as video and uploading that instead.
+Figma Make support is newer than most write-ups. Early forum threads said shaders didn't carry over to Make at all, but Figma's help center now says you can export shaders to Make through its MCP server to use them in a coded prototype. The catch: exported copies don't stay linked to the original shader, so changes you make later in Figma Design won't follow them.
 
 Performance matters once it ships. A full-screen animated shader is GPU work on every frame, on every visitor's device. Test the generated code on modest hardware, and plan for a reduced-motion fallback, which nothing in Figma's docs handles for you.
 
