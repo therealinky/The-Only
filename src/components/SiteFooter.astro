@@ -12,7 +12,10 @@ const toolCount = (await getAllTools()).length;
   <div class="site-footer__inner">
     <div class="site-footer__columns">
       <section class="site-footer__about" aria-labelledby="footer-about">
-        <h2 id="footer-about" class="site-footer__name">{SITE.name}</h2>
+        <h2 id="footer-about" class="site-footer__name">
+          <img class="site-footer__mark" src="/favicon.svg" alt="" width="40" height="40" />
+          {SITE.name}
+        </h2>
         <p class="site-footer__descriptor">{SITE.descriptor}</p>
         <p>{SITE.description}</p>
       </section>

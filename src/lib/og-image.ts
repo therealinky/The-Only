@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import satori, { type Font } from 'satori';
 import { Resvg } from '@resvg/resvg-js';
+import { SITE } from '../config/site';
 
 // Mirrors the --hero-purple / --hero-blue gradient in hero.css. Satori can't
 // read CSS custom properties, so these are duplicated here as literal values.
@@ -14,6 +15,17 @@ const COLORS = {
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+
+// The site's icon (public/favicon.svg): a white ring on the purple-to-blue
+// tile. These images sit on that same gradient, so the tile gets a thin
+// white edge to keep its shape from blending into the background.
+const MARK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="${COLORS.purple}"/><stop offset="1" stop-color="${COLORS.blue}"/></linearGradient></defs><rect x="1" y="1" width="62" height="62" rx="15" fill="url(#g)" stroke="rgba(255,255,255,0.55)" stroke-width="2"/><circle cx="32" cy="32" r="15" fill="none" stroke="#ffffff" stroke-width="9"/></svg>`;
+const MARK_SRC = `data:image/svg+xml;base64,${Buffer.from(MARK_SVG).toString('base64')}`;
+
+const mark = (size: number) => ({
+  type: 'img',
+  props: { src: MARK_SRC, width: size, height: size, style: { borderRadius: size / 4 } },
+});
 
 let fontsPromise: Promise<Font[]> | null = null;
 
@@ -65,7 +77,9 @@ function buildTemplate({ eyebrow, title, subtitle }: OgTemplateOptions) {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        // The site-wide card has no footer row, so it's centered instead of
+        // pinned to the top over an empty bottom half.
+        justifyContent: title === SITE.name ? 'center' : 'space-between',
         backgroundImage: `linear-gradient(155deg, ${COLORS.purple}, ${COLORS.blue})`,
         padding: '64px',
         fontFamily: 'Inter',
@@ -84,6 +98,7 @@ function buildTemplate({ eyebrow, title, subtitle }: OgTemplateOptions) {
               border: `1px solid ${COLORS.border}`,
             },
             children: [
+              title === SITE.name ? mark(88) : null,
               eyebrow
                 ? {
                     type: 'div',
@@ -139,7 +154,7 @@ function buildTemplate({ eyebrow, title, subtitle }: OgTemplateOptions) {
             ].filter(Boolean),
           },
         },
-        title === 'The Only'
+        title === SITE.name
           ? null
           : {
               type: 'div',
@@ -153,15 +168,24 @@ function buildTemplate({ eyebrow, title, subtitle }: OgTemplateOptions) {
                   {
                     type: 'div',
                     props: {
-                      style: {
-                        display: 'flex',
-                        fontFamily: 'Unbounded',
-                        fontWeight: 800,
-                        fontSize: 28,
-                        textTransform: 'uppercase',
-                        color: '#ffffff',
-                      },
-                      children: 'The Only',
+                      style: { display: 'flex', alignItems: 'center', gap: '16px' },
+                      children: [
+                        mark(48),
+                        {
+                          type: 'div',
+                          props: {
+                            style: {
+                              display: 'flex',
+                              fontFamily: 'Unbounded',
+                              fontWeight: 800,
+                              fontSize: 28,
+                              textTransform: 'uppercase',
+                              color: '#ffffff',
+                            },
+                            children: SITE.name,
+                          },
+                        },
+                      ],
                     },
                   },
                   {
@@ -174,7 +198,7 @@ function buildTemplate({ eyebrow, title, subtitle }: OgTemplateOptions) {
                         fontSize: 20,
                         color: COLORS.textMuted,
                       },
-                      children: 'AI for Working Designers',
+                      children: SITE.descriptor,
                     },
                   },
                 ],
