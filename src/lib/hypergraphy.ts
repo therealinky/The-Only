@@ -44,6 +44,7 @@ export const ART_MOTIFS = [
   'document',
   'face',
   'grid',
+  'halftone',
   'image',
   'layers',
   'nodes',
@@ -504,6 +505,19 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   seal: {
     fills: [outline(circle(34, 50, 23), 0.4), outline(circle(66, 50, 23), 0.6)],
     strokes: [poly([30, 24, 70, 76])],
+    tones: [],
+  },
+  // A halftone screen: dots that grow from one corner to the other, the
+  // way a shader effect turns tone into pattern.
+  halftone: {
+    fills: [12, 37, 62, 87].flatMap((y, row) =>
+      [12, 37, 62, 87].map((x, col) => ({
+        points: circle(x, y, 3.6 + (row + col) * 0.9, 24),
+        kind: 'solid' as const,
+        tone: 1,
+      })),
+    ),
+    strokes: [],
     tones: [],
   },
   // Three slider tracks with knobs: editing controls.
