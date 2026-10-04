@@ -17,3 +17,9 @@
 /try-it/brand/       /try-it/brand-and-graphic/      301
 /the-pulse/brand     /the-pulse/brand-and-graphic/   301
 /the-pulse/brand/    /the-pulse/brand-and-graphic/   301
+
+# Adobe tools are listed as "Adobe <tool>" in The Toolkit.
+/tools/photoshop       /tools/adobe-photoshop/      301
+/tools/photoshop/      /tools/adobe-photoshop/      301
+/tools/after-effects   /tools/adobe-after-effects/  301
+/tools/after-effects/  /tools/adobe-after-effects/  301

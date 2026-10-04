@@ -226,6 +226,8 @@ export default config({
         }),
         tools: fields.array(fields.text({ label: 'Tool name' }), {
           label: 'Tools discussed',
+          description:
+            'Use the full product name so each tool has one Toolkit listing, e.g. "Adobe Photoshop", not "Photoshop".',
           itemLabel: (props) => props.value || 'Tool',
         }),
         communities: fields.array(fields.text({ label: 'Community/platform name' }), {
