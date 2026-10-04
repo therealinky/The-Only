@@ -1,0 +1,86 @@
+---
+title: "Webflow Localize can now keep translated pages in sync on its own"
+dek: >-
+  Webflow added agentic translation to Localize: a one-time pass you review,
+  or a continuous mode that retranslates every change to your primary
+  content, plus rules for keeping some content out of AI's hands entirely.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-04
+updatedAt: 2026-10-04
+lastVerified: 2026-10-04
+disciplines:
+  - Web
+art: document
+tools:
+  - Webflow
+  - Webflow Localize
+sources:
+  - title: "Agentic translation in Webflow Localize (Webflow Updates, September 29, 2026)"
+    url: https://webflow.com/updates/agentic-translation
+    accessed: 2026-10-04
+  - title: "Set tone and formality for each target language (Webflow Updates, July 22, 2026)"
+    url: https://webflow.com/updates/set-tone-and-formality-for-each-target-language
+    accessed: 2026-10-04
+beforeYouUse:
+  clientData: >-
+    known in part: Webflow says content covered by an exclusion rule is
+    "never passed to a model for translation." Everything else in a
+    translated locale is sent to AI. Not verified: which model provider
+    does the translating, and how that content is retained. Check Webflow's
+    terms before turning this on for a client site with sensitive copy.
+  usageRights: >-
+    not verified: Webflow's announcement doesn't address ownership of
+    machine-translated copy. In practice the translations are derived from
+    your own content, but if a client contract specifies human translation,
+    this doesn't satisfy it.
+  disclosure: >-
+    not verified: nothing in the announcement says translated pages are
+    labeled as machine-translated. Some markets and clients expect that to
+    be stated, so decide whether to say so yourself.
+  accessibility: >-
+    not verified: the announcement doesn't mention whether translated
+    content like alt text and form labels is covered. Spot-check those in
+    each locale, since a missed alt text translation is easy to overlook.
+  cost: >-
+    known: Webflow says agentic translation is included on all Localize
+    plans, translated words count toward your plan's word limits (pooled
+    across locales), and you can use AI credits for translations beyond
+    those limits. Per-language tone and formality settings are listed as
+    an Advanced Localize add-on or Enterprise feature.
+---
+If you run a multilingual site in Webflow, keeping every locale current has mostly meant noticing what changed and pushing it through translation by hand. Webflow's new agentic translation for Localize, launched September 29, is meant to take that chore off your plate.
+
+## What changed
+
+You turn on agentic translation in a target language's settings, and then pick one of two modes.
+
+**One-time translation** has the agents do a single pass over your content for you to review. Webflow is clear that this content won't update automatically if the original changes later.
+
+**Continuous translation** translates your primary content on a first pass, and then automatically translates and applies every later change to that locale. Webflow says it uses your site's tone, formality, and glossary settings to keep translations on-brand.
+
+Two governance features come with it:
+
+- **Exclusion rules** let you mark specific pages, components, CMS fields, and component props to skip entirely. Webflow's examples are things like SKUs, reference codes, and internal-only fields. Excluded content is filtered out and never sent to a model.
+- **Translation memory** reuses an existing translation when the source text, language, and settings haven't changed, so an edit elsewhere on a page doesn't retranslate everything around it.
+
+It's rolling out now and is included on all Localize plans.
+
+## Why it matters for designers
+
+For designers who build and hand off Webflow sites, localization has quietly been one of the most tedious parts of maintenance. Every copy tweak on the primary site was another thing that could drift out of sync in other languages. Continuous mode turns that into something closer to a setting than a task.
+
+The exclusion rules are the part worth thinking about at setup, not later. Product names, legal copy, component props that hold codes or URLs, and anything a client has had professionally translated are good candidates to exclude before you flip continuous mode on. It's much easier to define those boundaries up front than to find a mistranslated product name on a live page.
+
+Translation memory also matters for cost, since translated words count against your plan's limits. Reusing existing translations instead of rerunning them should keep small edits from eating into that.
+
+## What to watch out for
+
+Continuous means changes go live in other languages without a human reading them first. That's the convenience, and also the risk. For brand-sensitive pages, one-time mode with a review step is the safer pick, at least until you trust the output in each language.
+
+The tone and formality controls that continuous mode leans on are listed separately as an Advanced Localize add-on or Enterprise feature. On other plans, it isn't clear from the announcement how much control you have over register, which matters for languages like German or Japanese where formal and informal address differ.
+
+Webflow's announcement doesn't name the translation model or say how translated content is handled, and we didn't verify either. The sidebar covers what is and isn't confirmed.
