@@ -1,0 +1,17 @@
+---
+// "Latest, Workflows, The Pulse, The Brief, or The Toolkit": the main
+// sections as an inline list of links, for pages like the 404 that point
+// readers somewhere useful. Uses the same list as the nav.
+import { getNavItems } from '../lib/articles';
+
+const items = await getNavItems();
+---
+
+{
+  items.map((item, index) => (
+    <>
+      {index > 0 && (index === items.length - 1 ? (items.length > 2 ? ', or ' : ' or ') : ', ')}
+      <a href={item.href}>{item.label}</a>
+    </>
+  ))
+}

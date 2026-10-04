@@ -10,6 +10,7 @@ const articles = filterByFormat(await getListableArticles(), 'test');
 <BaseLayout
   title="Try It"
   description="Hands-on assessments of AI tools and features for working designers."
+  noindex={articles.length === 0}
 >
   <PageHero
     eyebrow="Try It"

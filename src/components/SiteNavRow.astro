@@ -3,7 +3,8 @@
 // once at the top of the page inside the header, and once in the floating
 // bar that slides in on scroll-up further down the page (see SiteHeader).
 import ThemeToggle from './ThemeToggle.astro';
-import { NAV_ITEMS, SITE } from '../config/site';
+import { SITE } from '../config/site';
+import { getNavItems } from '../lib/articles';
 
 interface Props {
   /** The copy in the floating bar: its landmarks get distinct labels. */
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { floating = false } = Astro.props;
+const navItems = await getNavItems();
 const currentPath = Astro.url.pathname;
 const suffix = floating ? ', floating bar' : '';
 
@@ -28,7 +30,7 @@ function isActive(href: string): boolean {
   <nav class="site-nav" aria-label={`Main${suffix}`}>
     <ul class="site-nav__list">
       {
-        NAV_ITEMS.map((item) => (
+        navItems.map((item) => (
           <li>
             <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
@@ -52,7 +54,7 @@ function isActive(href: string): boolean {
       <nav class="mobile-nav__panel" aria-label={`Main (mobile)${suffix}`}>
         <ul>
           {
-            NAV_ITEMS.map((item) => (
+            navItems.map((item) => (
               <li>
                 <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
                   {item.label}
