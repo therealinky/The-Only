@@ -683,7 +683,8 @@ main {
   flex: none;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 0.6rem;
+  /* The favicon in one color: white tile, the O cut out to the footer. */
+  color: #fff;
 }
 
 .site-footer .site-footer__descriptor {
