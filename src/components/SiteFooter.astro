@@ -14,7 +14,13 @@ const toolCount = (await getAllTools()).length;
     <div class="site-footer__columns">
       <section class="site-footer__about" aria-labelledby="footer-about">
         <h2 id="footer-about" class="site-footer__name">
-          <img class="site-footer__mark" src="/favicon.svg" alt="" width="40" height="40" />
+          <svg class="site-footer__mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true" focusable="false">
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M16 0h32a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16A16 16 0 0 1 0 48V16A16 16 0 0 1 16 0ZM32 12.5a19.5 19.5 0 1 0 0 39a19.5 19.5 0 1 0 0-39ZM32 21.5a10.5 10.5 0 1 1 0 21a10.5 10.5 0 1 1 0-21Z"
+            />
+          </svg>
           {SITE.name}
         </h2>
         <p class="site-footer__descriptor">{SITE.descriptor}</p>
