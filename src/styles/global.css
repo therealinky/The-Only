@@ -665,6 +665,9 @@ main {
 }
 
 .site-footer__name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
@@ -672,6 +675,15 @@ main {
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--color-footer-text);
+}
+
+/* The site icon (the favicon) beside the footer wordmark. Decorative: the
+   heading's text already says the name. */
+.site-footer__mark {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
 }
 
 .site-footer .site-footer__descriptor {
