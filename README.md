@@ -82,6 +82,17 @@ by hand. It runs in **local mode only**: it reads and writes files on your machi
 Cloud or GitHub, and the integration that serves it is only loaded for `astro dev` (see `astro.config.mjs`), so it
 adds nothing to a production build.
 
+If Keystatic (or a page with a Lottie) opens as a blank page, the dev server's cache of pre-bundled dependencies has
+gone stale, usually after a config or dependency change. The browser console shows `504 (Outdated Optimize Dep)`.
+Stop the server (Control + C) and restart it with the cache cleared:
+
+```sh
+npx astro dev --force
+```
+
+If `localhost:4321` won't connect at all, try `http://127.0.0.1:4321/keystatic`: the dev server listens on that address,
+and some browsers try a different form of `localhost` first.
+
 ### Adding media
 
 Articles can include an image (PNG, JPG, WEBP), a GIF, a YouTube video, or a Lottie/dotLottie animation as a
