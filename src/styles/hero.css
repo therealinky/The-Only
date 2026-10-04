@@ -180,14 +180,36 @@ main > .page-hero:first-child {
   }
 }
 
+/* The frosted panel is drawn by ::before so it can run past the text to
+   the hero's bottom edge and fade out there (tint, blur, and side outlines
+   together), meeting the page instead of ending in a bottom border. */
 .page-hero__glass {
+  position: relative;
   max-width: 34rem;
   padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
+}
+
+.page-hero__glass::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 calc(-1 * var(--space-8)) 0;
+  z-index: -1;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   background: rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 0;
   backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  pointer-events: none;
+}
+
+/* Older Safari's prefixed blur; see .site-header-float in global.css for
+   why it's in its own block. */
+@supports not (backdrop-filter: blur(1px)) {
+  .page-hero__glass::before {
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
 }
 
 .page-hero__glass p {
