@@ -98,7 +98,7 @@ get a block.
   <Media type="image" image="figma-motion-timeline.png" alt="The Motion timeline with three keyframed layers." caption="Styles applied from a shared library." credit="Image: Figma" />
   <Media type="gif" image="recolor-demo.gif" alt="…" />
   <Media type="youtube" youtube="https://www.youtube.com/watch?v=VIDEO_ID" alt="The video's title" />
-  <Media type="lottie" file="loader.lottie" alt="…" />
+  <Media type="lottie" file="loader.lottie" alt="…" trigger="click" />
   ```
 
   A bare filename works as long as no other article has a file with the same name; otherwise use the full path,
@@ -117,7 +117,18 @@ How each type behaves (`src/components/Media.astro`):
 - **YouTube** shows a thumbnail (downloaded at build time, so readers never fetch it from YouTube) and only loads
   YouTube's privacy-enhanced (no-cookie) player when someone presses play.
 - **Lottie/dotLottie** loads LottieFiles' player, and its WebAssembly engine served from this site, only when the
-  animation scrolls near view. It loops with a pause button, and starts paused for reduced-motion visitors.
+  animation scrolls near view. It's half the column width by default (`size="full"` for the full column; phones
+  always get full width), and `trigger` sets what plays it:
+  - `loop` (default): plays continuously, with a pause button.
+  - `view`: plays once when it scrolls into view and stops on the last frame. Add `replay` to replay it each time.
+  - `hover`: plays while hovered, rewinds when the pointer leaves. On touch screens a tap plays it and the next tap
+    rewinds.
+  - `click`: plays from the start on each click, tap, Enter, or Space.
+  - `scroll`: its frame follows the page's scroll position.
+
+  Hover and click Lotties are keyboard-focusable buttons with a small "Click to play" / "Hover to play" / "Tap to
+  play" hint. For reduced-motion visitors, `loop` and `view` start paused and `scroll` shows the final frame; `hover`
+  and `click` still work, since the reader starts them.
 
 The build fails on a missing file, a missing alt text, or a link that isn't a YouTube video, so mistakes show up
 before anything ships.
