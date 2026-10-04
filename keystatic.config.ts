@@ -21,7 +21,28 @@ import { ART_MOTIFS } from './src/lib/hypergraphy';
 // Keystatic stores each article's media in its own folder,
 // src/assets/articles/<slug>/, and writes that full path into the block.
 // Media.astro resolves it and optimizes images at build time.
-const mediaAsset = { directory: 'src/assets/articles', publicPath: '/src/assets/articles/' };
+// Uploaded filenames are cleaned into lowercase-and-hyphens: a Mac
+// screenshot name ("Screenshot 2026-10-03 at 3.43.41 PM.png") carries spaces
+// and an invisible narrow no-break space, which make for fragile URLs.
+function cleanFilename(original: string): string {
+  const dot = original.lastIndexOf('.');
+  const base = dot > 0 ? original.slice(0, dot) : original;
+  const extension = dot > 0 ? original.slice(dot + 1).toLowerCase() : '';
+  const slug =
+    base
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'media';
+  return extension ? `${slug}.${extension}` : slug;
+}
+
+const mediaAsset = {
+  directory: 'src/assets/articles',
+  publicPath: '/src/assets/articles/',
+  transformFilename: cleanFilename,
+};
 
 // The "Media" block for article bodies, usually inserted at the end of a
 // section. Rendered by src/components/Media.astro, which checks the fields
@@ -59,6 +80,32 @@ const mediaBlock = block({
       description:
         'Required. Describe what the image or animation shows for people who can\'t see it. For YouTube, the video\'s title.',
       validation: { length: { min: 1 } },
+    }),
+    size: fields.select({
+      label: 'Lottie size',
+      description: 'For the Lottie type. Half the column (centered) or the full column. Phones always show it full width.',
+      options: [
+        { label: 'Half width', value: 'half' },
+        { label: 'Full width', value: 'full' },
+      ],
+      defaultValue: 'half',
+    }),
+    trigger: fields.select({
+      label: 'Lottie trigger',
+      description: 'For the Lottie type. What plays the animation.',
+      options: [
+        { label: 'Loop (plays continuously, with a pause button)', value: 'loop' },
+        { label: 'Play on view (plays once when it scrolls into view)', value: 'view' },
+        { label: 'Hover (plays on hover, rewinds when the pointer leaves; tap on phones)', value: 'hover' },
+        { label: 'Click (plays once per click or tap)', value: 'click' },
+        { label: 'Scroll (moves with the page as you scroll)', value: 'scroll' },
+      ],
+      defaultValue: 'loop',
+    }),
+    replay: fields.checkbox({
+      label: 'Replay each time it scrolls into view',
+      description: 'For the "Play on view" trigger only.',
+      defaultValue: false,
     }),
     caption: fields.text({ label: 'Caption', description: 'Optional, shown under the media.', multiline: true }),
     credit: fields.text({

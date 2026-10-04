@@ -1295,6 +1295,30 @@ img.media__frame {
   aspect-ratio: 16 / 9;
 }
 
+/* Lotties default to half the column, centered, with the caption matching
+   that width. Phones get the full width, where half would be too small. */
+@media (min-width: 36rem) {
+  .media--half {
+    width: 50%;
+    margin-inline: auto;
+  }
+}
+
+/* Hover and click Lotties are buttons the reader operates, with a small
+   "Click to play" style hint so it's clear they do something. */
+.media__lottie.is-interactive {
+  cursor: pointer;
+}
+
+.media__hint {
+  pointer-events: none;
+}
+
+.media__lottie.is-interactive:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 .media__lottie canvas {
   display: block;
   width: 100%;

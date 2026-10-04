@@ -33,4 +33,13 @@ export default defineConfig({
   image: {
     domains: ['i.ytimg.com'],
   },
+  vite: {
+    // The Lottie player is only loaded by a dynamic import when an animation
+    // scrolls into view. Without this, the dev server discovers it late and
+    // rejects that first request ("Outdated Optimize Dep"), so the Lottie
+    // never loads in `astro dev`. Production builds aren't affected.
+    optimizeDeps: {
+      include: ['@lottiefiles/dotlottie-web'],
+    },
+  },
 });
