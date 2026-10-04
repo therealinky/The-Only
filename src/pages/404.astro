@@ -1,4 +1,5 @@
 ---
+import SectionLinks from '../components/SectionLinks.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -6,7 +7,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <h1>Page not found</h1>
   <p>The page you're looking for doesn't exist or may have moved.</p>
   <p>
-    Try <a href="/">Latest</a>, <a href="/try-it/">Try It</a>, <a href="/workflows/">Workflows</a>,
-    <a href="/tools/">Tools</a>, or <a href="/the-brief/">The Brief</a>.
+    Try <SectionLinks />.
   </p>
 </BaseLayout>

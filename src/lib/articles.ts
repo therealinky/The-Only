@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import type { Discipline, Format } from '../config/site';
+import { NAV_ITEMS, type Discipline, type Format } from '../config/site';
 
 export type Article = CollectionEntry<'articles'>;
 
@@ -71,4 +71,19 @@ export async function getAllTools(): Promise<string[]> {
 export async function getArticlesByTool(tool: string): Promise<Article[]> {
   const listable = await getListableArticles();
   return listable.filter((entry) => entry.data.tools.includes(tool));
+}
+
+/** Whether any hands-on Test article is published yet (Try It's only content). */
+export async function hasTryIt(): Promise<boolean> {
+  return (await getListableArticles()).some((entry) => entry.data.format === 'test');
+}
+
+/**
+ * The main sections for the nav, footer, and other section lists. Try It is
+ * left out until its first Test article is published, so readers don't land
+ * on an empty section; it comes back on its own after that.
+ */
+export async function getNavItems() {
+  const showTryIt = await hasTryIt();
+  return NAV_ITEMS.filter((item) => item.href !== '/try-it/' || showTryIt);
 }

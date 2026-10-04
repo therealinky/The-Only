@@ -1,9 +1,10 @@
 ---
-import { DISCIPLINES, NAV_ITEMS, NEWSLETTER, SITE } from '../config/site';
-import { getAllTools, getListableArticles } from '../lib/articles';
+import { DISCIPLINES, NEWSLETTER, SITE } from '../config/site';
+import { getAllTools, getListableArticles, getNavItems } from '../lib/articles';
 import { slugify } from '../lib/slugify';
 
 const year = new Date().getFullYear();
+const navItems = await getNavItems();
 const articleCount = (await getListableArticles()).length;
 const toolCount = (await getAllTools()).length;
 ---
@@ -24,7 +25,7 @@ const toolCount = (await getAllTools()).length;
         <h2 id="footer-read" class="site-footer__heading">Read</h2>
         <ul>
           {
-            NAV_ITEMS.map((item) => (
+            navItems.map((item) => (
               <li>
                 <a href={item.href}>{item.label}</a>
               </li>
