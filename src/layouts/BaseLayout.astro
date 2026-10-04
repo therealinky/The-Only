@@ -50,6 +50,17 @@ const structuredDataList = structuredData
       } catch (e) {
         /* private browsing or blocked storage: falls back to prefers-color-scheme */
       }
+      // Article cards start hidden and fade in row by row (ArticleListing.astro).
+      // Set here, before first paint, so cards never flash in then vanish. Skipped
+      // for reduced motion; and if the reveal script hasn't started within a few
+      // seconds (blocked, or failed), the cards are simply shown.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var root = document.documentElement;
+        root.classList.add('reveal-cards');
+        setTimeout(function () {
+          if (!root.hasAttribute('data-cards-ready')) root.classList.remove('reveal-cards');
+        }, 3000);
+      }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="-vO2BxmBrhJbNCj5xhP-5m4M4ye1f6TYX6CA9ADlAjg" />

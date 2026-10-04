@@ -97,6 +97,36 @@ let matchIndex = 0;
 {articles.length === 0 && <p>{emptyMessage}</p>}
 
 <script>
+  // Cards fade up row by row: the rows on screen at load one after another,
+  // then each further row as it scrolls into view (including cards shown by
+  // "See more"). Only active when BaseLayout's head script set .reveal-cards
+  // (not for reduced motion).
+  {
+    const root = document.documentElement;
+    const revealGrid = document.querySelector<HTMLElement>('[data-article-grid]');
+    if (revealGrid && root.classList.contains('reveal-cards')) {
+      const ROW_STAGGER = 110;
+      const MAX_DELAY = 440;
+      const reveal = new IntersectionObserver(
+        (entries) => {
+          const arriving = entries.filter((entry) => entry.isIntersecting).map((entry) => entry.target as HTMLElement);
+          // Cards sharing a top edge are one row; rows arriving together are
+          // staggered top to bottom.
+          const rows = [...new Set(arriving.map((card) => Math.round(card.getBoundingClientRect().top)))].sort((a, b) => a - b);
+          for (const card of arriving) {
+            const row = rows.indexOf(Math.round(card.getBoundingClientRect().top));
+            card.style.setProperty('--reveal-delay', `${Math.min(row * ROW_STAGGER, MAX_DELAY)}ms`);
+            card.classList.add('is-revealed');
+            reveal.unobserve(card);
+          }
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -4% 0px' },
+      );
+      revealGrid.querySelectorAll('[data-article-item]').forEach((card) => reveal.observe(card));
+      root.setAttribute('data-cards-ready', '');
+    }
+  }
+
   const bar = document.querySelector<HTMLElement>('[data-filter-bar]');
   const grid = document.querySelector<HTMLElement>('[data-article-grid]');
   const count = document.querySelector<HTMLElement>('[data-filter-count]');
