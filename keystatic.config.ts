@@ -1,4 +1,5 @@
 import { collection, config, fields } from '@keystatic/core';
+import { block } from '@keystatic/core/content-components';
 import {
   DIFFICULTY_LEVELS,
   DISCIPLINES,
@@ -17,6 +18,56 @@ import { ART_MOTIFS } from './src/lib/hypergraphy';
 // GitHub mode or Keystatic Cloud, and the integration that serves it is
 // only loaded for the dev command (see astro.config.mjs) — so this file,
 // and everything it depends on, never ships in a production build.
+// Keystatic stores each article's media in its own folder,
+// src/assets/articles/<slug>/, and writes that full path into the block.
+// Media.astro resolves it and optimizes images at build time.
+const mediaAsset = { directory: 'src/assets/articles', publicPath: '/src/assets/articles/' };
+
+// The "Media" block for article bodies, usually inserted at the end of a
+// section. Rendered by src/components/Media.astro, which checks the fields
+// at build time (e.g. a missing file or alt text fails the build).
+const mediaBlock = block({
+  label: 'Media',
+  description: 'An image, GIF, YouTube video, or Lottie animation, with optional caption and credit.',
+  schema: {
+    type: fields.select({
+      label: 'Type',
+      options: [
+        { label: 'Image (PNG, JPG, WEBP)', value: 'image' },
+        { label: 'GIF', value: 'gif' },
+        { label: 'YouTube video', value: 'youtube' },
+        { label: 'Lottie or dotLottie animation', value: 'lottie' },
+      ],
+      defaultValue: 'image',
+    }),
+    image: fields.image({
+      label: 'Image or GIF file',
+      description: 'For the Image and GIF types. Saved to this article\'s own media folder.',
+      ...mediaAsset,
+    }),
+    file: fields.file({
+      label: 'Lottie file (.json or .lottie)',
+      description: 'For the Lottie type.',
+      ...mediaAsset,
+    }),
+    youtube: fields.url({
+      label: 'YouTube link',
+      description: 'For the YouTube type. Any normal video link works (watch, youtu.be, shorts).',
+    }),
+    alt: fields.text({
+      label: 'Alt text (or video title)',
+      description:
+        'Required. Describe what the image or animation shows for people who can\'t see it. For YouTube, the video\'s title.',
+      validation: { length: { min: 1 } },
+    }),
+    caption: fields.text({ label: 'Caption', description: 'Optional, shown under the media.', multiline: true }),
+    credit: fields.text({
+      label: 'Credit',
+      description: 'Optional, e.g. "Image: Figma". Use it whenever the media comes from someone else.',
+    }),
+  },
+});
+
 export default config({
   storage: { kind: 'local' },
   collections: {
@@ -171,7 +222,7 @@ export default config({
           description: 'Required when status is "Withdrawn".',
           multiline: true,
         }),
-        content: fields.mdx({ label: 'Content', extension: 'mdx' }),
+        content: fields.mdx({ label: 'Content', extension: 'mdx', components: { Media: mediaBlock } }),
       },
     }),
   },

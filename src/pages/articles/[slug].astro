@@ -5,6 +5,7 @@ import ArticleSidebar from '../../components/ArticleSidebar.astro';
 import EvidenceBadge from '../../components/EvidenceBadge.astro';
 import FormatBadge from '../../components/FormatBadge.astro';
 import HypergraphicArt from '../../components/HypergraphicArt.astro';
+import Media from '../../components/Media.astro';
 import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRenderableArticles } from '../../lib/articles';
@@ -93,7 +94,7 @@ const structuredData = {
 
           <div class="article-main">
             <div class="article-body">
-              <Content />
+              <Content components={{ Media }} />
             </div>
 
             <SourcesList sources={data.sources} />

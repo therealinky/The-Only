@@ -28,4 +28,9 @@ export default defineConfig({
   site: SITE_URL,
   output: 'static',
   integrations,
+  // YouTube thumbnails for Media blocks are downloaded and optimized at
+  // build time, so readers never load them from YouTube.
+  image: {
+    domains: ['i.ytimg.com'],
+  },
 });
