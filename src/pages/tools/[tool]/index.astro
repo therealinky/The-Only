@@ -1,5 +1,5 @@
 ---
-import ArticleCard from '../../../components/ArticleCard.astro';
+import ArticleListing from '../../../components/ArticleListing.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getAllTools, getArticlesByTool } from '../../../lib/articles';
 import { slugify } from '../../../lib/slugify';
@@ -20,5 +20,5 @@ const { tool, articles } = Astro.props as { tool: string; articles: Awaited<Retu
 <BaseLayout title={tool} description={`Articles that discuss ${tool}.`}>
   <p><a href="/tools/">← All tools</a></p>
   <h1>{tool}</h1>
-  {articles.map((article) => <ArticleCard article={article} />)}
+  <ArticleListing articles={articles} showFilters={false} />
 </BaseLayout>
