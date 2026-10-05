@@ -6,11 +6,27 @@ import { SITE } from '../config/site';
 import { getListableArticles } from '../lib/articles';
 
 const articles = await getListableArticles();
+
+// The eyebrow is the newest article date (publish or update), so it changes
+// on its own with every deploy that adds or updates an article. The year
+// only shows once that date is from an earlier year than the build.
+const lastUpdated = articles.reduce<Date | undefined>(
+  (latest, { data }) => (!latest || data.updatedAt > latest ? data.updatedAt : latest),
+  undefined,
+);
+const eyebrow = lastUpdated
+  ? `Updated ${lastUpdated.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      ...(lastUpdated.getUTCFullYear() !== new Date().getUTCFullYear() && { year: 'numeric' }),
+      timeZone: 'UTC',
+    })}`
+  : 'Latest';
 ---
 
 <BaseLayout title={SITE.name} description={SITE.description}>
   <PageHero
-    eyebrow="Latest"
+    eyebrow={eyebrow}
     lines={["What's", 'New']}
     subtitle={SITE.description}
     variant="purple"
