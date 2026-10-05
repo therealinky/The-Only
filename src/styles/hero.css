@@ -218,10 +218,9 @@ main > .page-hero:first-child {
   color: #fff;
   /* var(--text-lg) alone doesn't shrink on narrow viewports, unlike the
      stacked headline above it (which uses --text-hero's own clamp), so it
-     read as proportionally oversized on mobile. This eases from ~15px on
-     small phones up to the original 20px (--text-lg) from roughly tablet
-     width up. */
-  font-size: clamp(0.9375rem, 0.75rem + 1.2vw, 1.25rem);
+     read as proportionally oversized on mobile. This eases from 14px on
+     small phones (up to ~370px wide) to 18px from ~700px wide up. */
+  font-size: clamp(0.875rem, 0.6rem + 1.2vw, 1.125rem);
   line-height: var(--leading-snug);
   text-shadow: 1px 2px 20px var(--hero-glow);
 }
