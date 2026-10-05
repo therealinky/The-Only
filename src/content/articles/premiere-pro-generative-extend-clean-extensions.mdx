@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: quick
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-05
 updatedAt: 2026-10-05
 lastVerified: 2026-10-05
+reviewedBy: Ana M. Rivas
 disciplines:
   - Motion & Video
 art: filmstrip
@@ -25,7 +26,7 @@ sources:
   - title: "New AI innovation in industry-leading Adobe Premiere Pro (Adobe newsroom, April 2, 2025)"
     url: https://news.adobe.com/news/2025/04/new-ai-innovation-in-industry
     accessed: 2026-10-05
-  - title: "Burning questions about Generative Extend in Premiere Pro (beta), by Scott Simmons (ProVideo Coalition)"
+  - title: "Burning questions about Generative Extend in Premiere Pro (beta), by Scott Simmons (ProVideo Coalition, October 14, 2024)"
     url: https://www.provideocoalition.com/burning-questions-about-generative-extend-in-premiere-pro-beta/
     accessed: 2026-10-05
   - title: "Premiere Pro's AI Generative Extend is surprisingly good and actually useful (PetaPixel, February 12, 2025)"
@@ -33,6 +34,9 @@ sources:
     accessed: 2026-10-05
   - title: "Generative Extend: Premiere Pro feature review (Music Radio Creative)"
     url: https://producer.musicradiocreative.com/generative-extend-review/
+    accessed: 2026-10-05
+  - title: "Generative credits FAQ (Adobe Help Center)"
+    url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html
     accessed: 2026-10-05
 summary:
   whatChanged: >-
@@ -69,21 +73,21 @@ beforeYouUse:
     that yourself.
   accessibility: "not applicable: this is a video editing technique."
   cost: >-
-    not verified: Generative Extend uses generative credits, and search
-    results attribute per-second rates that vary with resolution and frame
-    rate to Adobe's credits FAQ, but we couldn't open that page to confirm
-    current numbers. Check your plan's credit allowance before using it at
-    volume.
+    known: Generative Extend uses generative credits, charged per second of
+    generated video. Adobe's credits FAQ lists 50 credits per second at
+    720p and 24 fps, rising to 175 credits per second at 4K and 30 fps. A
+    full 2-second 4K extension is 350 credits, so check your plan's
+    allowance before using it at volume.
 ---
 Every editor knows the shot that's almost long enough. The take ends a beat before the music hits, or there's no handle left for a dissolve. Generative Extend in Adobe Premiere Pro is built for exactly that: drag the edge of a clip and AI generates the missing frames. It's useful, and it's also easy to get a result that looks fine in the timeline and wrong on a big screen.
 
 This workflow is synthesized from Adobe's own notes and several independent hands-on reviews, plus general Premiere Pro knowledge, not from any one person's process, and we haven't tested it hands-on end to end. One thing to keep in mind: some of the reviews date from the beta, before Adobe added 4K and vertical support, so we've flagged where older limits no longer apply.
 
-1. **Pick the right job for it.** The sources agree on what Generative Extend is good at: adding a handle for a transition, holding a shot a little longer to land on a beat, and extending ambient sound. It's not a way to invent new action. Simple, steady shots with natural motion, like someone walking or a slow push-in, hold up best. Reviewers consistently found busy pans and low-light footage with camera movement the most likely to show jitter and a visible drop in sharpness.
+1. **Pick the right job for it.** The sources agree on what Generative Extend is good at: adding a handle for a transition, holding a shot a little longer to land on a beat, and extending ambient sound. It's not a way to invent new action. In PetaPixel's tests, a simple walking shot held up best, while a busy pan and a low-light shot with a tilt showed visible jitter and a drop in sharpness. ProVideo Coalition's reviewer came away more impressed with how it handled camera movement and imperfect lighting, so results vary by shot: try it on the clip you actually have before planning around it.
 
 2. **Check the clip is eligible before you plan around it.** Adobe's current notes say it supports clips at 12 to 30 fps in 8-bit SDR. Adobe added 4K and vertical video support when the feature became generally available, so the 1080p limit mentioned in early reviews no longer applies. An early review also found log footage wasn't supported, so if you shoot log, test it on one clip before you count on it.
 
-3. **Extend only what you need.** Grab the Generative Extend tool from the Tools panel, then drag the head or tail of the clip. Adobe's current limit is up to 2 seconds for video. In practice, the reviews agree you rarely want the full 2 seconds: a handful of frames for a transition blends in far better than a long tail, and quality issues tend to become more noticeable the longer the generated section runs.
+3. **Extend only what you need.** Grab the Generative Extend tool from the Tools panel, then drag the head or tail of the clip. Like the Rate Stretch tool, it needs empty space on that side of the clip, so move or trim the neighboring clip out of the way first. Adobe's current limit is up to 2 seconds for video. In practice, the reviews agree you rarely want the full 2 seconds: a handful of frames for a transition blends in far better than a long tail, and quality issues tend to become more noticeable the longer the generated section runs.
 
 4. **Use the longer audio limit for ambience, not dialogue or music.** Audio can be extended up to 10 seconds, which is great for stretching room tone or natural sound under a cut. It won't generate spoken dialogue, and it doesn't extend music. For a music bed that needs to be longer or shorter, Premiere's Remix tool, which rearranges the track to a target length, is the better fit, as one review points out.
 
@@ -91,11 +95,11 @@ This workflow is synthesized from Adobe's own notes and several independent hand
 
 6. **Check it at full resolution, against the original.** This is the step most likely to be skipped. Reviewers reported a noticeable brightness bump at the join in some clips, occasional flicker, softened skin, smoke and fine texture losing crispness, and artifacts around moving mouths. Play the cut at full resolution and scrub the join frame by frame. Text or a logo that's partly hidden in the original can't be reconstructed, since the model has nothing to work from.
 
-7. **Work around the one-end-per-clip rule.** You can extend the head or the tail of a clip, not both. The workaround that comes up across sources is to split the clip and extend each piece, or to duplicate the clip on another track so you can extend the other end from the copy.
+7. **Know what happens after the first extension.** Once you extend a clip, Premiere wraps the original clip and its new frames into a nested sequence so they act as one clip in the timeline. You can still extend the other end, but you have to step into that nest to reach the original source. ProVideo Coalition's reviewer keeps a duplicate of the clip on the track above so the untouched original is always one click away.
 
 8. **Be careful about stacking extensions.** One review describes nesting a generated extension and extending it again to get past the 2-second limit. It works, but every pass builds on generated frames, so any softness or drift compounds. From general editing practice, a cutaway, a speed ramp, or a frame hold on the last clean frame is often a cleaner fix for a gap longer than a second or two.
 
-9. **Plan for handoff and conform.** Generated media is saved as separate files, and one reviewer found that getting extensions out cleanly for an offline-to-online conform took extra manual work. If footage is going to a colorist or finishing house, tell them which shots contain generated frames, and keep a note of it in your project.
+9. **Plan for handoff and conform.** Generated media is saved as separate files, and during the beta, one reviewer found that getting extensions out cleanly for an offline-to-online conform took extra manual work. If footage is going to a colorist or finishing house, tell them which shots contain generated frames, and keep a note of it in your project.
 
 ## Why it matters for designers
 
