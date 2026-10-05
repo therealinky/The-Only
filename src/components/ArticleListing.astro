@@ -7,10 +7,12 @@ import ArticleCard from './ArticleCard.astro';
 interface Props {
   /** All articles for this locked format (or all published articles), unfiltered by discipline. */
   articles: Article[];
-  /** Link for the "All disciplines" filter. */
-  allHref: string;
+  /** Link for the "All disciplines" filter. Required when the filter bar shows. */
+  allHref?: string;
   /** Prefix that a discipline slug is appended to, e.g. "/discipline/" or "/try-it/". */
-  disciplineBase: string;
+  disciplineBase?: string;
+  /** Show the discipline filter bar. Off for lists that aren't a section, like a tool's page. */
+  showFilters?: boolean;
   activeDiscipline?: Discipline;
   emptyMessage?: string;
   /** Show this many matching articles at first, with a "See more" button for the rest. */
@@ -19,8 +21,9 @@ interface Props {
 
 const {
   articles,
-  allHref,
-  disciplineBase,
+  allHref = '/',
+  disciplineBase = '/discipline/',
+  showFilters = true,
   activeDiscipline,
   emptyMessage = 'No articles match this filter yet.',
   pageSize,
@@ -31,28 +34,32 @@ const visibleCount = articles.filter(matches).length;
 let matchIndex = 0;
 ---
 
-<nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase}>
-  <ul class="filter-bar__list">
-    <li>
-      <a href={allHref} aria-current={!activeDiscipline ? 'page' : undefined} data-discipline="">
-        All disciplines
-      </a>
-    </li>
-    {
-      DISCIPLINES.map((d) => (
+{
+  showFilters && (
+    <nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase}>
+      <ul class="filter-bar__list">
         <li>
-          <a
-            href={`${disciplineBase}${slugify(d)}/`}
-            aria-current={activeDiscipline === d ? 'page' : undefined}
-            data-discipline={d}
-          >
-            {d}
+          <a href={allHref} aria-current={!activeDiscipline ? 'page' : undefined} data-discipline="">
+            All disciplines
           </a>
         </li>
-      ))
-    }
-  </ul>
-</nav>
+        {
+          DISCIPLINES.map((d) => (
+            <li>
+              <a
+                href={`${disciplineBase}${slugify(d)}/`}
+                aria-current={activeDiscipline === d ? 'page' : undefined}
+                data-discipline={d}
+              >
+                {d}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  )
+}
 
 <p data-filter-count>
   {visibleCount} {visibleCount === 1 ? 'article' : 'articles'}
