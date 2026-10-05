@@ -1,0 +1,89 @@
+---
+title: "Ideogram 4.5 is an edit model built to survive edit after edit"
+dek: >-
+  Ideogram's new model is aimed at the stage after generation: changing one
+  part of an image, over and over, without the rest of it slowly drifting,
+  softening, or shifting color.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+example: false
+publishedAt: 2026-10-05
+updatedAt: 2026-10-05
+lastVerified: 2026-10-05
+reviewedBy: Ana M. Rivas
+disciplines:
+  - Photo & Imaging
+  - Brand & Graphic
+art: marquee
+tools:
+  - Ideogram
+sources:
+  - title: "Ideogram 4.5 (Ideogram model page)"
+    url: https://ideogram.ai/models/4.5/
+    accessed: 2026-10-05
+  - title: "Introducing Ideogram 4.5 (Ideogram on X, September 30, 2026)"
+    url: https://x.com/ideogram_ai/status/2105327223431737780
+    accessed: 2026-10-05
+  - title: "Ideogram says its new model can edit part of an image without messing up the rest (The Decoder, October 1, 2026)"
+    url: https://the-decoder.com/ideogram-says-its-new-model-can-edit-part-of-an-image-without-messing-up-the-rest/
+    accessed: 2026-10-05
+  - title: "Ideogram 4.5 targets image drift with multi-turn editing (Runtime Wire)"
+    url: https://runtimewire.com/article/ideogram-45-multi-turn-image-editing
+    accessed: 2026-10-05
+  - title: "Ideogram 4.5: AI image editing that holds up edit after edit (Morphic)"
+    url: https://morphic.com/resources/models/ideogram-4-5
+    accessed: 2026-10-05
+  - title: "Ideogram 4.5 is coming to Recraft Studio (Recraft Blog)"
+    url: https://www.recraft.ai/blog/ideogram-4-5-is-coming-to-recraft-studio
+    accessed: 2026-10-05
+beforeYouUse:
+  clientData: >-
+    not verified: the announcement and model page don't say how uploaded
+    images are stored or whether they're used for training. Editing means
+    uploading your source image, so check Ideogram's terms (and those of
+    any partner app you use it through) before uploading unreleased client
+    photography or products.
+  usageRights: >-
+    not verified: Ideogram's launch materials don't address commercial use
+    or ownership of edited images, and partner apps may have their own
+    terms. Confirm the license on the plan or platform you're actually
+    using.
+  disclosure: >-
+    not verified: nothing we found says whether edited images carry Content
+    Credentials or other AI metadata. If a client needs edits disclosed,
+    track it yourself.
+  accessibility: "not applicable: this is an image editing model."
+  cost: >-
+    not verified: coverage of the launch reports four API quality tiers
+    from under a cent to 22 cents per image at native 2K resolution, but we
+    didn't confirm current pricing in the Ideogram app or on partner
+    platforms.
+---
+Most AI image tools are good at the first generation and worse at the fifth edit. Ask for a change, then another, then another, and the parts you never touched start to drift: colors shift, edges soften, texture picks up artifacts. Ideogram 4.5, released September 30, is a model built specifically around that problem.
+
+## What changed
+
+Ideogram 4.5 is an editing model rather than a new generation engine. Ideogram calls it its most precise edit model, and the pitch is multi-turn editing: you can edit the same image repeatedly, and the areas you didn't ask to change are meant to stay as they were instead of being quietly re-rendered on every pass.
+
+A few specifics from the launch:
+
+- **Edits at full size.** Ideogram says it can edit high-resolution images without downsizing them. You edit a cropped region, and the crop's edges are preserved so it drops back into the original without a visible seam. Ideogram's own example is a 24.2-megapixel photo.
+- **Targeted changes.** A third-party model guide describes painting a mask to fence an edit into one area, plus up to four reference images to steer things like a color, pattern, or product (three if you also use a mask).
+- **A broad list of edit types.** Ideogram lists color and lighting adjustments, text changes, product photography, interior design, architecture, old photo restoration, sketch to image, style reference, reframing, and depth to image.
+- **Where it runs.** It's live in the Ideogram app, the API, and launch partners including Runway and Picsart. Recraft says it's bringing the model to Recraft Studio next. Ideogram also says open weights are coming, though they weren't part of the launch.
+
+## Why it matters for designers
+
+The edit stage is where AI images usually fall apart in real work. A product shot needs the label fixed, then the background warmed, then a reflection removed, and by the third pass the product itself looks subtly different from the one the client approved. A model that leaves untouched pixels alone is a much better fit for that kind of back-and-forth than regenerating the whole image each time.
+
+Text editing is the other piece to watch. Ideogram has long been one of the stronger generators for type inside images, and fixing a garbled word or swapping copy in a mockup without touching the layout around it is exactly the kind of small, repeated edit graphic designers need.
+
+## What to watch out for
+
+The before-and-after comparisons against other models come from Ideogram itself. Independent coverage points out that Ideogram hasn't published results showing how often the model succeeds across long edit sequences, so treat the "no drift" claim as something to test on your own images, not a guarantee. The Decoder reports that early testers saw strong consistency across edits, which is encouraging, but it's not the same as a measured result.
+
+"Precise" still means AI. For anything where exact pixels matter, like a logo, legal copy, or a product's real colors, compare the final edit against the original before it goes anywhere.
+
+Data handling, rights, and pricing weren't spelled out in the launch materials. The sidebar covers what we could and couldn't confirm.

@@ -43,10 +43,12 @@ export const ART_MOTIFS = [
   'cube',
   'document',
   'face',
+  'filmstrip',
   'grid',
   'halftone',
   'image',
   'layers',
+  'marquee',
   'nodes',
   'pen',
   'phone',
@@ -404,6 +406,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     tones: [region(poly([6, 100, 14, 94, 44, 89, 56, 89, 86, 94, 94, 100]), 0.3)],
   },
   // A 3x3 icon grid with a few small marks.
+  // A filmstrip running off to the right: three shot frames, then two
+  // fainter generated frames under a sparkle, for AI-extended clips.
+  filmstrip: {
+    fills: [
+      ...[4, 24, 44].map((x) => outline(box(x, 38, x + 12, 62), 0.7)),
+      outline(box(64, 38, 76, 62), 0.3),
+      outline(box(84, 38, 96, 62), 0.12),
+      outline(star4(80, 12, 9, 2.4), 0.8),
+    ],
+    strokes: [poly([2, 28, 98, 28]), poly([2, 72, 98, 72])],
+    tones: [],
+  },
   grid: {
     fills: [10, 39, 68].flatMap((y, row) =>
       [10, 39, 68].map((x, col) => outline(box(x, y, x + 22, y + 22), [0.1, 0.3, 0.5][(row + col) % 3])),
@@ -427,6 +441,32 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
   },
   // A node graph: two inputs wired into one output.
+  // A dashed selection marquee over one corner of a landscape: a targeted
+  // edit that leaves the rest of the picture alone.
+  marquee: {
+    fills: [outline(circle(24, 26, 8, 20), 0.9), outline(box(60, 18, 80, 32), 0.5)],
+    strokes: [
+      poly([50, 8, 55, 8]),
+      poly([50, 42, 55, 42]),
+      poly([59, 8, 64, 8]),
+      poly([59, 42, 64, 42]),
+      poly([68, 8, 73, 8]),
+      poly([68, 42, 73, 42]),
+      poly([77, 8, 82, 8]),
+      poly([77, 42, 82, 42]),
+      poly([86, 8, 90, 8]),
+      poly([86, 42, 90, 42]),
+      poly([50, 8, 50, 13]),
+      poly([90, 8, 90, 13]),
+      poly([50, 17, 50, 22]),
+      poly([90, 17, 90, 22]),
+      poly([50, 26, 50, 31]),
+      poly([90, 26, 90, 31]),
+      poly([50, 35, 50, 40]),
+      poly([90, 35, 90, 40]),
+    ],
+    tones: [region(poly([4, 94, 28, 60, 44, 76, 62, 54, 96, 94]), 0.5)],
+  },
   nodes: {
     fills: [outline(box(6, 12, 36, 34), 0.35), outline(box(6, 64, 36, 86), 0.35), outline(box(62, 38, 94, 60), 0.55)],
     strokes: [poly([36, 23, 49, 23, 49, 49, 62, 49]), poly([36, 75, 49, 75, 49, 49])],
