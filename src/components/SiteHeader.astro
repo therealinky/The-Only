@@ -50,10 +50,10 @@ const latest = (await getListableArticles()).slice(0, 5);
 
 <script>
   // The header (nav and Latest strip) scrolls away with the page like any
-  // other content. Once the reader is about 30% of the way down, scrolling up
+  // other content. Once the reader is about 25% of the way down, scrolling up
   // slides in a floating copy of just the nav row; scrolling down slides it
   // away again. It also tucks away once the real header is back in view near
-  // the top. Below the 30% mark, scrolling up never brings it in fresh, but
+  // the top. Below the 25% mark, scrolling up never brings it in fresh, but
   // if it's already showing it stays while the reader keeps going up.
   // Things pinned under it (the Toolkit's A-Z bar, the article sidebar)
   // follow --header-offset: the bar's height while it's showing, else 0.
@@ -63,7 +63,7 @@ const latest = (await getListableArticles()).slice(0, 5);
     if (header && bar) {
       const root = document.documentElement;
       const menu = bar.querySelector<HTMLDetailsElement>('details');
-      const THRESHOLD = 0.3;
+      const THRESHOLD = 0.25;
       // Ignore tiny movements (trackpad jitter, momentum settling).
       const NUDGE = 6;
       let lastY = window.scrollY;
