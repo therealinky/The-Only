@@ -229,9 +229,22 @@ production builds (`import.meta.env.PROD`) so local dev and previews don't skew 
 doesn't track individual visitors — no consent banner needed. Dashboard: Cloudflare account →
 **Web Analytics** → `theonly.bemosu.com`.
 
-The site's custom domain is a subdomain of a zone on Cloudflare, so it didn't show up in Web Analytics'
-"select from your existing websites" dropdown (that only lists root zones); typing `theonly.bemosu.com` in
-manually and using the token it issued works the same way.
+The site's custom domain is a subdomain whose DNS lives at DreamHost (`bemosu.com`'s nameservers), with
+`theonly.bemosu.com` pointed at Cloudflare Pages by a CNAME, so it didn't show up in Web Analytics' "select from
+your existing websites" dropdown (that only lists zones on Cloudflare); typing `theonly.bemosu.com` in manually
+and using the token it issued works the same way.
+
+## Contact
+
+Reader mail goes to `theonly@bemosu.com`, a DreamHost forward-only address (DreamHost panel → Mail → Manage
+Email) that forwards to the editor's inbox. `bemosu.com` already uses DreamHost for mail, so don't move it to
+Cloudflare Email Routing: that would replace its MX records.
+
+The address is set in `SITE.contactEmail` (`src/config/site.ts`) in two parts and rendered with
+`ContactEmail.astro`, which stores it reversed and assembles the `mailto:` link in the browser, so the full
+address never appears in the built HTML. It shows up on the About page (`#contact`), in the Editorial Policy's
+corrections section, and as "Contact" in the footer bar. If the address gets overrun with spam, create a new
+forward-only address in DreamHost, update `SITE.contactEmail`, and delete the old one.
 
 ## Deploying to Cloudflare Pages
 

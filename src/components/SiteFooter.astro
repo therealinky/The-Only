@@ -7,6 +7,11 @@ const year = new Date().getFullYear();
 const navItems = await getNavItems();
 const articleCount = (await getListableArticles()).length;
 const toolCount = (await getAllTools()).length;
+import ContactEmail from './ContactEmail.astro';
+
+// Joins the last two words with a non-breaking space so the paragraph never
+// ends on a single word ("wrong.") at any width or in any browser.
+const description = SITE.description.replace(/ (\S+)$/, '\u00A0$1');
 ---
 
 <footer class="site-footer">
@@ -24,7 +29,7 @@ const toolCount = (await getAllTools()).length;
           {SITE.name}
         </h2>
         <p class="site-footer__descriptor">{SITE.descriptor}</p>
-        <p>{SITE.description}</p>
+        <p class="site-footer__description">{description}</p>
       </section>
 
       <nav class="site-footer__group" aria-labelledby="footer-read">
@@ -72,6 +77,7 @@ const toolCount = (await getAllTools()).length;
       <ul class="site-footer__links">
         <li><a href="/about/">About</a></li>
         <li><a href="/editorial-policy/">Editorial Policy</a></li>
+        <li><ContactEmail label="Contact" /></li>
         <li><a href="/search/">Search</a></li>
         <li><a href="/rss.xml">RSS</a></li>
         <li><a href="#top">Back to top ↑</a></li>

@@ -18,6 +18,10 @@ export const SITE = {
   // published article whose reviewedBy still equals this placeholder as
   // "not actually reviewed yet" and fails the build. See the README.
   defaultReviewedBy: 'Editor name (set in config)',
+  // Reader contact (a DreamHost forward-only address). Kept in two parts so
+  // the full address never appears in the built HTML; ContactEmail.astro
+  // assembles it in the browser. See the README's Contact section.
+  contactEmail: { user: 'theonly', domain: 'bemosu.com' },
 } as const;
 
 // The Brief email. No signup form is shown, and no email addresses are
