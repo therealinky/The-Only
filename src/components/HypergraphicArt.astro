@@ -3,7 +3,7 @@
 // generated and src/lib/hypergraphy-svg.ts for how it becomes SVG. Purely
 // decorative (the title/dek already carry the information), so it's hidden
 // from assistive tech.
-import { GRADIENT_PAIRS, type ArtMotif } from '../lib/hypergraphy';
+import { GRADIENT_PAIRS, HYPERGRAPHY_CANVAS, type ArtMotif } from '../lib/hypergraphy';
 import { renderInlineArt } from '../lib/hypergraphy-svg';
 
 interface Props {
@@ -16,20 +16,33 @@ const { gradientVariant, svg } = renderInlineArt(Astro.props);
 const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
 ---
 
-<div class="hg-art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
+<div
+  class="hg-art"
+  style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`}
+  data-canvas-w={HYPERGRAPHY_CANVAS.width}
+  data-cell-w={HYPERGRAPHY_CANVAS.cellW}
+  data-cell-h={HYPERGRAPHY_CANVAS.cellH}
+  aria-hidden="true"
+>
   <div class="hg-art__wash"></div>
   <div class="hg-art__grain"></div>
   <Fragment set:html={svg} />
 </div>
 
 <script>
+  import { enableArtBrush } from '../lib/hypergraphy-brush';
+
   const items = document.querySelectorAll<HTMLElement>('.hg-art');
+  const shown = (item: Element) => {
+    item.classList.add('is-in-view');
+    enableArtBrush(item as HTMLElement);
+  };
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-in-view');
+            shown(entry.target);
             observer.unobserve(entry.target);
           }
         }
@@ -38,6 +51,6 @@ const [hueA, hueB] = GRADIENT_PAIRS[gradientVariant];
     );
     items.forEach((item) => observer.observe(item));
   } else {
-    items.forEach((item) => item.classList.add('is-in-view'));
+    items.forEach(shown);
   }
 </script>
