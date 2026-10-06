@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-06
 updatedAt: 2026-10-06
 lastVerified: 2026-10-06
+reviewedBy: Ana M. Rivas
 disciplines:
   - "Photo & Imaging"
   - "Brand & Graphic"
@@ -23,13 +24,19 @@ sources:
   - title: "Style Reference (Midjourney Docs)"
     url: https://docs.midjourney.com/docs/style-reference
     accessed: 2026-10-06
-  - title: "Sref Codes, Image Style References, Moodboards in Midjourney: What's the Difference? (Substack, October 1, 2025)"
+  - title: "Moodboards (Midjourney Docs)"
+    url: https://docs.midjourney.com/hc/en-us/articles/39193335040013-Moodboards
+    accessed: 2026-10-06
+  - title: "Personalization (Midjourney Docs)"
+    url: https://docs.midjourney.com/hc/en-us/articles/32433330574221-Personalization
+    accessed: 2026-10-06
+  - title: "Sref Codes, Image Style References, Moodboards in Midjourney: What's the Difference? (Tatiana Tsiguleva, Substack, October 1, 2025)"
     url: https://ciguleva.substack.com/p/sref-codes-image-style-references
     accessed: 2026-10-06
   - title: "How to control Midjourney: style references, image references, and moodboards (Chase Jarvis blog, January 2026)"
     url: https://chasejarvis.com/blog/how-to-control-midjourney-style-references-image-references-and-moodboards/
     accessed: 2026-10-06
-  - title: "How to create a consistent brand aesthetic in Midjourney (How I AI workflow notes)"
+  - title: "How to create a consistent brand aesthetic in Midjourney: Jamey Gannon's workflow (How I AI workflow notes)"
     url: https://www.chatprd.ai/how-i-ai/workflows/how-to-create-a-consistent-brand-aesthetic-in-midjourney
     accessed: 2026-10-06
   - title: "Mastering Midjourney (How I AI, Lenny's Newsletter)"
@@ -78,15 +85,15 @@ beforeYouUse:
     inside a normal Midjourney subscription, but testing a reference set
     means a lot of generations. Budget for your plan's GPU time accordingly.
 ---
-Midjourney gives you at least four ways to steer an image's look: style references from images, sref codes, moodboards, and personalization codes. They overlap enough to be confusing, and they don't behave the same. This workflow pulls together Midjourney's own docs and several independent practitioner guides, plus general Midjourney technique, into one process for building a look that holds up across a whole project. It's a synthesis of published sources, not something we've run end to end ourselves.
+Midjourney gives you at least four ways to steer an image's look: style references from images, sref codes, moodboards, and personalization codes. They overlap enough to be confusing, and they don't behave the same. This workflow pulls together Midjourney's own docs and several independent practitioner guides, plus general Midjourney technique, into one process for building a look that holds up across a whole project. Its backbone, testing references against fixed subjects, layering in personalization, and documenting the recipe, comes from designer Jamey Gannon's process as she walked through it on the How I AI podcast with Claire Vo. The other sources fill in how each control behaves and where opinions differ. It's a synthesis of published sources, not something we've run end to end ourselves.
 
 ## First, know what each control actually does
 
 - **Image references** steer content: composition, shapes, objects. They also leak the reference's look, so a low-quality reference can drag your output down with it.
 - **Style references** (`--sref` with an image) steer the aesthetic, things like color, lighting, and texture, while the prompt decides the subject.
 - **Sref codes** are numeric style codes you can reuse. Sources describe them as the strongest and most predictable influence, but also the least flexible, since you can't edit a code.
-- **Moodboards** are collections of images you curate in Midjourney and apply as a profile. Their big advantage is that you can update them: if the output runs too dark, take out the dark images.
-- **Personalization codes** come from rating images in Midjourney's this-or-that flow. They reflect your general taste, not a specific project.
+- **Moodboards** are collections of images you curate in Midjourney and apply as a profile. Their big advantage is that you can update them: if the output runs too dark, take out the dark images. Their strength is set with `--stylize` rather than the style weight parameter.
+- **Personalization codes** come from picking the images you like from a grid on Midjourney's Personalize page. Your global profile reflects your general taste, but you can also create separate profiles aimed at a specific style.
 
 ## The workflow
 
@@ -96,11 +103,11 @@ Midjourney gives you at least four ways to steer an image's look: style referenc
 
 3. **Test references one at a time.** Run your test subjects with each candidate image as a single `--sref`. You'll quickly spot the one that pushes everything orange, or the one that drags in its own subject matter. Drop those.
 
-4. **Combine the survivors and tune the weight.** Add your best two to four images as style references together. Midjourney's docs let you weight multiple references against each other (for example `--sref imageA::2 imageB::1`) and set overall strength with `--sw`, which runs from 0 to 1000 with a default of 100. Lower values give the prompt more say. Higher values make the reference dominate.
+4. **Combine the survivors and tune the weight.** Add your best two to four images as style references together. You can weight multiple references against each other in the prompt text (for example `--sref imageA::2 imageB::1`), a syntax that dates from Midjourney's Discord-era docs and isn't shown on the current Style Reference page, so test it on your version. Overall strength is set with `--sw`, which Midjourney's docs say runs from 0 to 1000 with a default of 100. Lower values give the prompt more say. Higher values make the reference dominate.
 
-5. **Decide between references and a moodboard.** This is where sources disagree. One camp found that a whole moodboard of varied images gets averaged into something muddy, and that a few carefully chosen individual references work better. Another recommends moodboards for branding precisely because they give you results that are consistent without being identical and stay editable. Both are right in context. If your reference images are tightly matched, a moodboard is easier to maintain. If they vary, curated individual references give you more control. Note that Midjourney's docs say moodboards don't work with `--sw` or the style-version parameter, so you trade fine weight control for editability.
+5. **Decide between references and a moodboard.** This is where sources disagree. Gannon's process treats a varied mood board averaging into a generic look as the failure to fix, and moves to a few carefully chosen individual references instead. Tatiana Tsiguleva and Chase Jarvis both recommend Midjourney moodboards for branding, precisely because they give you results that are consistent without being identical and stay editable. Both are right in context. If your reference images are tightly matched, a moodboard is easier to maintain. If they vary, curated individual references give you more control. Note that Midjourney's docs say moodboards don't work with `--sw` or the style-version parameter. You still get a strength dial, though: `--stylize` (0 to 1000, default 100) sets how much of the moodboard comes through.
 
-6. **Optionally layer in personalization.** Adding your personalization code on top of your references can add some of your own taste to the result. Test with and without it across your subjects. It's easy for it to pull every image toward your personal default look, which isn't always the client's.
+6. **Optionally layer in personalization.** Adding a personalization code on top of your references can add some of your own taste to the result. Test with and without it across your subjects, and if your global profile keeps pulling in the wrong medium or motif, make a narrower profile just for this client. It's easy for it to pull every image toward your personal default look, which isn't always the client's.
 
 7. **Split by subject if you need to.** If the set nails people but makes products look wrong, don't force one reference set to cover everything. Build a separate set for each subject class and treat them as siblings with a shared palette.
 
