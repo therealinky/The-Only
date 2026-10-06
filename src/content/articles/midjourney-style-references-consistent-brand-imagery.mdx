@@ -1,0 +1,123 @@
+---
+title: "Getting consistent brand imagery out of Midjourney with style references and moodboards"
+dek: >-
+  Style references, sref codes, moodboards, and personalization all promise
+  a consistent look, and they behave quite differently. Pulling together
+  Midjourney's docs and several practitioners' write-ups, here's how to
+  build a look that holds across a whole campaign.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-06
+updatedAt: 2026-10-06
+lastVerified: 2026-10-06
+disciplines:
+  - "Photo & Imaging"
+  - "Brand & Graphic"
+art: grid
+tools:
+  - Midjourney
+sources:
+  - title: "Style Reference (Midjourney Docs)"
+    url: https://docs.midjourney.com/docs/style-reference
+    accessed: 2026-10-06
+  - title: "Sref Codes, Image Style References, Moodboards in Midjourney: What's the Difference? (Substack, October 1, 2025)"
+    url: https://ciguleva.substack.com/p/sref-codes-image-style-references
+    accessed: 2026-10-06
+  - title: "How to control Midjourney: style references, image references, and moodboards (Chase Jarvis blog, January 2026)"
+    url: https://chasejarvis.com/blog/how-to-control-midjourney-style-references-image-references-and-moodboards/
+    accessed: 2026-10-06
+  - title: "How to create a consistent brand aesthetic in Midjourney (How I AI workflow notes)"
+    url: https://www.chatprd.ai/how-i-ai/workflows/how-to-create-a-consistent-brand-aesthetic-in-midjourney
+    accessed: 2026-10-06
+  - title: "Mastering Midjourney (How I AI, Lenny's Newsletter)"
+    url: https://www.lennysnewsletter.com/p/mastering-midjourney-how-to-create
+    accessed: 2026-10-06
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Midjourney's own documentation and
+    several independent practitioner guides on using style references,
+    sref codes, moodboards, and personalization to keep generated imagery
+    consistent across a project.
+  whyItMatters: >-
+    One great Midjourney image is easy. Thirty that look like they belong to
+    the same brand is the hard part, and it's the part clients actually pay
+    for.
+  bestFor: >-
+    Brand, graphic, and marketing designers producing campaign, social, or
+    editorial imagery in Midjourney who need a repeatable look rather than
+    one-off hero shots.
+  timeToTry: >-
+    An hour or two to build and test a first reference set. Expect to keep
+    refining it over the first project you use it on.
+beforeYouUse:
+  clientData: >-
+    not verified: images you upload as references, and the images you
+    generate, may be visible in Midjourney's public gallery depending on
+    your plan. Midjourney has historically limited its private Stealth
+    mode to higher-tier plans. Check the current plan docs before uploading
+    unreleased client material.
+  usageRights: >-
+    not verified: ownership of Midjourney output depends on Midjourney's
+    current terms and your plan, which we didn't re-check for this piece.
+    Separately, using another artist's work as a style reference is a real
+    ethical and legal gray area. Build reference sets from images you or
+    your client own or have licensed.
+  disclosure: >-
+    not verified: Midjourney doesn't label output for you here. Whether a
+    campaign needs to disclose AI-generated imagery is down to the client,
+    the platform it runs on, and any contract terms.
+  accessibility: >-
+    not applicable: this is about producing a consistent image style, not
+    building layouts or interfaces. Alt text for the finished images is
+    still your job.
+  cost: >-
+    not verified: style references, moodboards, and personalization all run
+    inside a normal Midjourney subscription, but testing a reference set
+    means a lot of generations. Budget for your plan's GPU time accordingly.
+---
+Midjourney gives you at least four ways to steer an image's look: style references from images, sref codes, moodboards, and personalization codes. They overlap enough to be confusing, and they don't behave the same. This workflow pulls together Midjourney's own docs and several independent practitioner guides, plus general Midjourney technique, into one process for building a look that holds up across a whole project. It's a synthesis of published sources, not something we've run end to end ourselves.
+
+## First, know what each control actually does
+
+- **Image references** steer content: composition, shapes, objects. They also leak the reference's look, so a low-quality reference can drag your output down with it.
+- **Style references** (`--sref` with an image) steer the aesthetic, things like color, lighting, and texture, while the prompt decides the subject.
+- **Sref codes** are numeric style codes you can reuse. Sources describe them as the strongest and most predictable influence, but also the least flexible, since you can't edit a code.
+- **Moodboards** are collections of images you curate in Midjourney and apply as a profile. Their big advantage is that you can update them: if the output runs too dark, take out the dark images.
+- **Personalization codes** come from rating images in Midjourney's this-or-that flow. They reflect your general taste, not a specific project.
+
+## The workflow
+
+1. **Collect before you open Midjourney.** Gather a tight set of images that capture the color, lighting, texture, and framing you're after. Use images you or the client have rights to. Crop out anything distracting, like text, logos, or busy backgrounds, because a style reference picks up more than you think.
+
+2. **Pick a fixed set of test subjects.** Choose four or five subjects that match what the campaign will actually need, say a person, a product, an interior, and an outdoor scene. Keep the prompts short and plain. You'll rerun these same prompts every time you change a reference, so you're comparing styles, not prompts.
+
+3. **Test references one at a time.** Run your test subjects with each candidate image as a single `--sref`. You'll quickly spot the one that pushes everything orange, or the one that drags in its own subject matter. Drop those.
+
+4. **Combine the survivors and tune the weight.** Add your best two to four images as style references together. Midjourney's docs let you weight multiple references against each other (for example `--sref imageA::2 imageB::1`) and set overall strength with `--sw`, which runs from 0 to 1000 with a default of 100. Lower values give the prompt more say. Higher values make the reference dominate.
+
+5. **Decide between references and a moodboard.** This is where sources disagree. One camp found that a whole moodboard of varied images gets averaged into something muddy, and that a few carefully chosen individual references work better. Another recommends moodboards for branding precisely because they give you results that are consistent without being identical and stay editable. Both are right in context. If your reference images are tightly matched, a moodboard is easier to maintain. If they vary, curated individual references give you more control. Note that Midjourney's docs say moodboards don't work with `--sw` or the style-version parameter, so you trade fine weight control for editability.
+
+6. **Optionally layer in personalization.** Adding your personalization code on top of your references can add some of your own taste to the result. Test with and without it across your subjects. It's easy for it to pull every image toward your personal default look, which isn't always the client's.
+
+7. **Split by subject if you need to.** If the set nails people but makes products look wrong, don't force one reference set to cover everything. Build a separate set for each subject class and treat them as siblings with a shared palette.
+
+8. **Write the recipe down.** Record the exact reference images or codes, weights, personalization code, model version, aspect ratios, and a couple of example prompts, alongside sample outputs. Keep it wherever the rest of the brand guidelines live. Without it, the look exists only in one person's Midjourney history.
+
+## Why it matters for designers
+
+The gap between "Midjourney can make a nice image" and "Midjourney can supply a campaign" is consistency. A documented, tested reference set turns a lucky prompt into something a team can reuse, hand off, and hold to a standard, the same way you'd treat a photography style guide.
+
+It also changes where your effort goes. Instead of rewriting adjectives in every prompt, you put the work into curating references and testing them once, which is a lot closer to art direction than to prompting.
+
+## What to watch out for
+
+Version changes can move the target. Midjourney's docs list which model versions each feature supports, and that list has shifted over time. When Midjourney ships a new default model, rerun your test subjects before trusting the old recipe, and pin the version in your recipe if you need continuity.
+
+Consistent isn't the same as identical. Every source frames this as building a repeatable look, not pixel-level control. Recurring characters, exact products, and logos need other tools, like image or character references, or real photography.
+
+Watch what the reference drags in. Strong style weights can import composition and objects along with the look. If subjects start resembling your reference images, lower `--sw` or swap the reference.
+
+And be careful with whose style you're borrowing. Building a reference set from a living illustrator's or photographer's portfolio isn't a neutral technical choice, and it's not something most clients want attached to their brand.
