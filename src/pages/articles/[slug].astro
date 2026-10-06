@@ -10,6 +10,7 @@ import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRenderableArticles } from '../../lib/articles';
 import { formatDate } from '../../lib/format-date';
+import { slugify } from '../../lib/slugify';
 import { getReadingTime } from '../../lib/read-time';
 import { SITE } from '../../config/site';
 
@@ -60,7 +61,19 @@ const structuredData = {
       </div>
       <h1>{data.title}</h1>
       <p>{data.dek}</p>
-      <p class="article-card__disciplines">{data.disciplines.join(', ')} · {readingTime} min read</p>
+      <p class="article-card__disciplines">
+        {
+          data.disciplines.map((discipline, i) => (
+            <>
+              {i > 0 && ', '}
+              <a class="article-meta__discipline" href={`/discipline/${slugify(discipline)}/`}>
+                {discipline}
+              </a>
+            </>
+          ))
+        }
+        {' '}· {readingTime} min read
+      </p>
     </header>
 
     {
