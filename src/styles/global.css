@@ -664,6 +664,12 @@ main {
   color: var(--color-footer-muted);
 }
 
+/* Balances the last lines where the browser supports it; the non-breaking
+   space in SiteFooter.astro is the fallback that keeps "go wrong." together. */
+.site-footer__description {
+  text-wrap: pretty;
+}
+
 .site-footer__name {
   display: flex;
   align-items: center;

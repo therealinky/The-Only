@@ -8,6 +8,10 @@ const navItems = await getNavItems();
 const articleCount = (await getListableArticles()).length;
 const toolCount = (await getAllTools()).length;
 import ContactEmail from './ContactEmail.astro';
+
+// Joins the last two words with a non-breaking space so the paragraph never
+// ends on a single word ("wrong.") at any width or in any browser.
+const description = SITE.description.replace(/ (\S+)$/, '\u00A0$1');
 ---
 
 <footer class="site-footer">
@@ -25,7 +29,7 @@ import ContactEmail from './ContactEmail.astro';
           {SITE.name}
         </h2>
         <p class="site-footer__descriptor">{SITE.descriptor}</p>
-        <p>{SITE.description}</p>
+        <p class="site-footer__description">{description}</p>
       </section>
 
       <nav class="site-footer__group" aria-labelledby="footer-read">
