@@ -1439,9 +1439,11 @@ img.media__frame {
   color: var(--color-inverse-muted);
 }
 
+/* Room above each label (Client data, What changed, ...) so it doesn't sit
+   tight against the last line of the item before it. */
 .article-sidebar dl {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-5);
 }
 
 .article-sidebar dl > div {
@@ -1461,7 +1463,7 @@ img.media__frame {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-bg);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-4);
 }
 
 .article-sidebar__jump {
