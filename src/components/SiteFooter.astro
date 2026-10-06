@@ -7,6 +7,7 @@ const year = new Date().getFullYear();
 const navItems = await getNavItems();
 const articleCount = (await getListableArticles()).length;
 const toolCount = (await getAllTools()).length;
+import ContactEmail from './ContactEmail.astro';
 ---
 
 <footer class="site-footer">
@@ -72,6 +73,7 @@ const toolCount = (await getAllTools()).length;
       <ul class="site-footer__links">
         <li><a href="/about/">About</a></li>
         <li><a href="/editorial-policy/">Editorial Policy</a></li>
+        <li><ContactEmail label="Contact" /></li>
         <li><a href="/search/">Search</a></li>
         <li><a href="/rss.xml">RSS</a></li>
         <li><a href="#top">Back to top ↑</a></li>

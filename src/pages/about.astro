@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { FORMAT_DESCRIPTIONS, FORMAT_LABELS, FORMATS, SITE } from '../config/site';
+import ContactEmail from '../components/ContactEmail.astro';
 ---
 
 <BaseLayout title="About" description={`About ${SITE.name}: ${SITE.descriptor}.`}>
@@ -32,5 +33,10 @@ import { FORMAT_DESCRIPTIONS, FORMAT_LABELS, FORMATS, SITE } from '../config/sit
   </ul>
   <p>
     Read our <a href="/editorial-policy/">Editorial Policy</a> for how we source, review, and label evidence.
+  </p>
+  <h2 id="contact">Contact</h2>
+  <p>
+    Corrections, questions, and tips go to <ContactEmail />. If you get The Brief, you can also just reply to any
+    issue.
   </p>
 </BaseLayout>

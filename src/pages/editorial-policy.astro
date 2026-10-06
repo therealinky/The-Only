@@ -20,6 +20,7 @@ import {
   SENTIMENT_LEVELS,
   SITE,
 } from '../config/site';
+import ContactEmail from '../components/ContactEmail.astro';
 ---
 
 <BaseLayout title="Editorial Policy" description={`How ${SITE.name} sources, reviews, and labels its reporting.`}>
@@ -173,5 +174,9 @@ import {
     URL keeps working, but the page shows a short withdrawal notice explaining why instead of the original body. A
     withdrawn article is removed from listings, search, and our RSS feed, and marked so search engines don't index
     it.
+  </p>
+  <p>
+    Spotted an error, a claim that's out of date, or a source that doesn't say what we said it does? Email{' '}
+    <ContactEmail /> with the article and what's wrong, and we'll check it against the sources.
   </p>
 </BaseLayout>

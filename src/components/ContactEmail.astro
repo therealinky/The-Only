@@ -1,0 +1,38 @@
+---
+import { SITE } from '../config/site';
+
+interface Props {
+  /** Link text. Defaults to the address itself once the browser assembles it. */
+  label?: string;
+  /** Where the link goes before (or without) JavaScript. */
+  fallbackHref?: string;
+}
+
+const { label, fallbackHref = '/about/#contact' } = Astro.props;
+const { user, domain } = SITE.contactEmail;
+
+// The address is stored reversed in data attributes and only put together
+// in the browser, so scrapers reading the HTML for "name@domain" patterns
+// or mailto: links don't find it. Without JavaScript, readers see a
+// spelled-out version ("theonly at bemosu dot com").
+const reverse = (value: string) => [...value].reverse().join('');
+const spelledOut = `${user} at ${domain.replaceAll('.', ' dot ')}`;
+---
+
+<a
+  class="contact-email"
+  href={fallbackHref}
+  data-contact-email
+  data-u={reverse(user)}
+  data-d={reverse(domain)}
+  data-label={label}
+>{label ?? spelledOut}</a>
+
+<script>
+  const reverse = (value: string) => [...value].reverse().join('');
+  document.querySelectorAll<HTMLAnchorElement>('[data-contact-email]').forEach((link) => {
+    const address = `${reverse(link.dataset.u ?? '')}@${reverse(link.dataset.d ?? '')}`;
+    link.href = `mailto:${address}`;
+    if (!link.dataset.label) link.textContent = address;
+  });
+</script>
