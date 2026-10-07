@@ -1,0 +1,87 @@
+---
+title: "The Figma agent is out of beta, and now it spends your AI credits"
+dek: >-
+  As of October 6, the agent in Figma Design is generally available, with
+  library guidelines written in markdown, file search inside chat, and a
+  catch: it no longer runs for free.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-07
+updatedAt: 2026-10-07
+lastVerified: 2026-10-07
+disciplines:
+  - UI/UX
+art: gauge
+tools:
+  - Figma
+sources:
+  - title: "Figma product news and release notes (October 6, 2026 entry)"
+    url: https://www.figma.com/release-notes/
+    accessed: 2026-10-07
+  - title: "3 ways product designers use the Figma agent (Figma Blog, October 6, 2026)"
+    url: https://www.figma.com/blog/3-ways-product-designers-use-the-figma-agent/
+    accessed: 2026-10-07
+  - title: "AI credit updates FAQ (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/42614902212887-AI-credit-updates-FAQ
+    accessed: 2026-10-07
+  - title: "Work with the Figma agent in design files (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/37998629035799
+    accessed: 2026-10-07
+beforeYouUse:
+  clientData: >-
+    not verified: the launch post and help pages we read don't say how
+    prompts, attached files, or pasted frames are handled or whether they're
+    used for training. Check your plan's AI settings and Figma's AI terms
+    before pointing the agent at client work.
+  usageRights: >-
+    not verified: nothing in the launch materials addresses ownership of
+    agent-generated layouts or images. Images made with the newly selectable
+    image models may carry their own terms.
+  disclosure: >-
+    not verified: we found nothing saying agent edits are labeled or tracked
+    as AI-made in the file. If a client needs to know, note it yourself.
+  accessibility: >-
+    not verified: Figma doesn't say whether the agent checks contrast, focus
+    order, or other accessibility basics. Review its output the way you'd
+    review a teammate's.
+  cost: >-
+    known: since October 6 the agent and Weave tools draw from the same AI
+    credit budget as Figma Make. Figma says agent usage varies with prompt
+    complexity, the actions it takes, and the context you give it, and Weave
+    tools have a set cost per tool. Figma doesn't publish a per-prompt figure
+    for the agent.
+---
+Figma's on-canvas agent has spent the past several months in an open beta that didn't cost anything to use. That ended on October 6. The agent in Figma Design is now generally available, it picked up a few genuinely useful features on the way out, and every prompt now draws on your AI credits.
+
+## What changed
+
+Figma's release notes and launch post list the main additions:
+
+- **Guidelines for libraries.** Library owners can upload markdown files to a Figma library with rules, best practices, and antipatterns for their design system. The agent reads them for extra context when it works with that library.
+- **File search in chat.** You can ask the agent to find Figma files, and it's faster overall, according to Figma.
+- **More ways to give it context.** You can attach Figma files to a conversation and paste frames or other nodes straight into a prompt as a reference.
+- **Watching teammates' agents.** You can see a teammate's agent working on the canvas live.
+- **Generative plugins and custom skills.** Generative plugins are now generally available too, and custom skills (saved, shareable agent workflows) are now available on the Starter plan.
+
+Figma also says output quality improved, and that the agent now wins in "~60%+ of our human-graded evals with professional designers." That's Figma's own internal testing, not an independent benchmark.
+
+The cost side is in Figma's credit FAQ: the agent and Weave tools moved to general availability on October 6 and now share the same AI credit budget as Figma Make. Beta usage didn't count against credits.
+
+## Why it matters for designers
+
+Guidelines are the interesting part for anyone who runs a design system. Until now, getting an agent to respect your conventions meant hoping it inferred them from components. A markdown file that says "use this button for primary actions, never put two side by side, don't use raw hex values" gives the agent the same written rules a new hire would get. It's also a good excuse to write those rules down if your team never has.
+
+The credit change matters just as much in day-to-day work. A lot of designers got used to the agent as a free sidekick for small chores: renaming layers, roughing out variants, tidying a frame. Each of those requests now has a cost, and since Figma says usage depends on how complex the prompt is and what the agent does, it's hard to predict what a task will cost before you run it.
+
+## What to watch out for
+
+The agent now shares a credit pool with Figma Make and other AI features, so heavy agent use can leave less for everything else. Keep an eye on your balance for the first couple of weeks, and if you're an admin, check how your team's usage lands before someone runs out mid-project.
+
+Seat type matters. Figma's help center describes the agent as available on all plans, but only Full seats with edit access can have it make changes; other seats can chat with it without editing. How many credits come with your plan isn't spelled out in the FAQ, which points admins to their dashboard, so check what your plan and seat actually include.
+
+Guidelines only help if they're accurate and current. An outdated rules file can steer the agent toward patterns your team already dropped.
+
+Data handling and rights weren't covered in what we read. The sidebar has the details.
