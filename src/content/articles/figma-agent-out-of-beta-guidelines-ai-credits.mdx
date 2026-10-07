@@ -7,11 +7,12 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-07
 updatedAt: 2026-10-07
 lastVerified: 2026-10-07
+reviewedBy: Ana M. Rivas
 disciplines:
   - UI/UX
 art: gauge
@@ -30,12 +31,16 @@ sources:
   - title: "Work with the Figma agent in design files (Figma Help Center)"
     url: https://help.figma.com/hc/en-us/articles/37998629035799
     accessed: 2026-10-07
+  - title: "Manage AI settings and content training for your team or organization (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/17725942479127-Manage-AI-settings-and-content-training-for-your-team-or-organization
+    accessed: 2026-10-07
 beforeYouUse:
   clientData: >-
-    not verified: the launch post and help pages we read don't say how
-    prompts, attached files, or pasted frames are handled or whether they're
-    used for training. Check your plan's AI settings and Figma's AI terms
-    before pointing the agent at client work.
+    known: Figma's help center says AI content training is on by default for
+    Starter and Professional teams and off by default on Organization and
+    Enterprise plans, and admins can turn it off at any time without losing
+    access to AI features. If you're on Starter or Professional, check that
+    setting before pointing the agent at client files.
   usageRights: >-
     not verified: nothing in the launch materials addresses ownership of
     agent-generated layouts or images. Images made with the newly selectable
@@ -64,6 +69,7 @@ Figma's release notes and launch post list the main additions:
 - **File search in chat.** You can ask the agent to find Figma files, and it's faster overall, according to Figma.
 - **More ways to give it context.** You can attach Figma files to a conversation and paste frames or other nodes straight into a prompt as a reference.
 - **Watching teammates' agents.** You can see a teammate's agent working on the canvas live.
+- **Image model choice.** When you use the agent to edit an image on the canvas, you can now pick which image model does the work.
 - **Generative plugins and custom skills.** Generative plugins are now generally available too, and custom skills (saved, shareable agent workflows) are now available on the Starter plan.
 
 Figma also says output quality improved, and that the agent now wins in "~60%+ of our human-graded evals with professional designers." That's Figma's own internal testing, not an independent benchmark.
@@ -80,7 +86,9 @@ The credit change matters just as much in day-to-day work. A lot of designers go
 
 The agent now shares a credit pool with Figma Make and other AI features, so heavy agent use can leave less for everything else. Keep an eye on your balance for the first couple of weeks, and if you're an admin, check how your team's usage lands before someone runs out mid-project.
 
-Seat type matters. Figma's help center describes the agent as available on all plans, but only Full seats with edit access can have it make changes; other seats can chat with it without editing. How many credits come with your plan isn't spelled out in the FAQ, which points admins to their dashboard, so check what your plan and seat actually include.
+Seat type matters. Figma's help center describes the agent as available on all plans, but only Full seats with edit access can have it make changes to a shared file; other seats can chat with it without editing. Anyone can have it edit their own drafts, and Figma's launch post calls availability on the Starter plan limited. How many credits come with your plan isn't spelled out in the FAQ, which points admins to their dashboard. Every seat gets a monthly allowance that resets each month, and admins can buy more.
+
+If you're an admin on an Organization or Enterprise plan, there's a useful way to estimate what this will cost: Figma lets you download a CSV of your team's agent and Weave usage from the beta period, which shows how many credits that usage would have taken.
 
 Guidelines only help if they're accurate and current. An outdated rules file can steer the agent toward patterns your team already dropped.
 

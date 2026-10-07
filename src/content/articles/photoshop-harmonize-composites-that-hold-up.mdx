@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-07
 updatedAt: 2026-10-07
 lastVerified: 2026-10-07
+reviewedBy: Ana M. Rivas
 disciplines:
   - Photo & Imaging
 art: cutout
@@ -33,10 +34,10 @@ summary:
     and quick concept composites that need to look right at a glance.
   timeToTry: "20 to 30 minutes on your own images"
 sources:
-  - title: "Intro to compositing using Harmonize (Adobe Learn, August 7, 2026)"
+  - title: "Blend subjects seamlessly using Harmonize in Photoshop (Adobe Learn, taught by Aaron Nace, August 7, 2026)"
     url: https://www.adobe.com/learn/photoshop/web/blend-subjects-with-harmonize
     accessed: 2026-10-07
-  - title: "How to use the Harmonize and Upscale tools in Photoshop, Day 6 (PHLearn, December 6, 2025)"
+  - title: "How to use Harmonize and Generative Upscale in Photoshop, Day 6 (Aaron Nace, PHLearn, December 6, 2025)"
     url: https://phlearn.com/tutorial/10-days-of-ai-in-photoshop-and-lightroom-day-6
     accessed: 2026-10-07
   - title: "Auto blend layers in Photoshop with Harmonize, includes resolution hack (PhotoshopCAFE, August 2025)"
@@ -45,7 +46,7 @@ sources:
   - title: "Photoshop's new AI Harmonize tool: pro tips you need (John Paul Caponigro)"
     url: https://www.johnpaulcaponigro.com/blog/46081/photoshops-new-ai-harmonize-tool-pro-tips-you-need/
     accessed: 2026-10-07
-  - title: "AI images generated in Photoshop beta are low resolution and soft (Adobe Community bug report)"
+  - title: "AI images generated in Photoshop beta are low resolution and soft (Adobe Community bug report, with a Photoshop product manager's reply, August 2026)"
     url: https://community.adobe.com/bug-reports-699/p-the-ai-images-generated-in-adobe-photoshop-beta-are-vaguely-low-resolution-soft-focus-visually-they-arent-sharp-1638419
     accessed: 2026-10-07
 beforeYouUse:
@@ -71,13 +72,13 @@ beforeYouUse:
 ---
 Harmonize is Photoshop's answer to the hardest part of compositing: making a subject look like it was actually lit by the scene you dropped it into. Click it and Photoshop reworks the subject's highlights, shadows, and color to match the background, and often adds a contact shadow too.
 
-This is a synthesis of Adobe's own tutorial and several independent hands-on guides, plus general Photoshop knowledge, not a workflow we've tested end to end ourselves. The sources mostly agree on the basics and differ on how much to trust the result.
+This is a synthesis of Adobe's own tutorial and several hands-on guides, plus general Photoshop knowledge, not a workflow we've tested end to end ourselves. One note on the sources: Adobe's tutorial and the PHLearn guide are both taught by Aaron Nace, so they're one voice, not two. Colin Smith at PhotoshopCAFE and photographer John Paul Caponigro are the independent ones, and they're where the resolution workaround comes from.
 
 1. **Prep the subject as a smart object.** Place the subject on the background as a smart object and remove its background (Remove Background in the Contextual Task Bar or the Layers panel works). The cutout should be clean before you harmonize. Harmonize matches light, not edges, so stray halo pixels get "harmonized" right along with everything else.
 2. **Get scale, position, and perspective right first.** This is the step people skip. Harmonize doesn't fix proportion or perspective, so a subject that's too big or tilted wrong will still look pasted in, just with better color. Transform it until the size and horizon feel right before you spend a credit.
 3. **Duplicate the subject layer and hide the copy.** Harmonize creates a new layer rather than overwriting the original, but keeping an untouched copy at the bottom of the stack costs nothing and gives you something to mask back to later.
-4. **Decide how much of the scene Harmonize should see.** This is where sources split. Adobe's tutorial runs it straight on the full document. Several independent guides describe Harmonize's output as limited to roughly 1024 x 1024 pixels stretched across the whole image, which makes subjects look soft on large files. Their workaround: copy a tight crop of the background around the subject, put that and the subject together in a smart object, and harmonize inside it, so the same output resolution covers a much smaller area. The tradeoff is context. Crop too tight and Harmonize can't see enough of the scene's light, or has no room to draw a shadow. Leave enough space around the subject for both.
-5. **Run it, then run it again.** Each generation gives you three variations in the Properties panel. Hands-on reviews note the spread between runs can be wider than you'd expect, so if none of the first three fit, generate again before giving up. Each run uses a generative credit, so it's worth getting steps 1 and 2 right first.
+4. **Decide how much of the scene Harmonize should see.** This is where sources split. Adobe's tutorial runs it straight on the full document. PhotoshopCAFE and John Paul Caponigro both describe Harmonize's output as limited to roughly 1024 x 1024 pixels stretched across the whole image, which makes subjects look soft on large files. Their workaround: copy a tight crop of the background around the subject, put that and the subject together in a smart object, and harmonize inside it, so the same output resolution covers a much smaller area. The tradeoff is context. Crop too tight and Harmonize can't see enough of the scene's light, or has no room to draw a shadow. Leave enough space around the subject for both.
+5. **Run it, then run it again.** Each generation gives you three variations in the Properties panel. PHLearn's advice is to generate at least twice, since the fourth or fifth option is often better than anything in the first batch. Compare them on the direction of the light first. Each run uses a generative credit, so it's worth getting steps 1 and 2 right first.
 6. **Harmonize before other generative edits.** If you also plan to use Generative Fill on the subject (changing clothing, adding a prop), harmonize first. Lighting matched at the end can undo the consistency of earlier fills.
 7. **Check it at 100% and repair detail by hand.** Zoom in on faces, product labels, and any text. Where Harmonize softened something that has to stay crisp, mask the harmonized layer to let the original copy show through in just that area, then match its color with a clipped Curves or Color Balance adjustment.
 8. **Finish with classic techniques.** Harmonize gets the light close, and the rest is still traditional compositing. Adobe's own tutorial adds lens blur to the background so depth of field matches, and uses Blend If in Layer Style to let underlying texture show through added elements. A little grain or noise over the subject helps it match the background's texture too.
@@ -90,9 +91,9 @@ Its output is also easy to keep under control. Because it lands on its own layer
 
 ## What to watch out for
 
-The resolution limit is the big one. The guides describing the 1024 x 1024 ceiling date from 2025, and an Adobe Community bug report describes the same softness in generative output. We couldn't confirm whether Adobe has raised the limit since, so check your own results at 100% before you assume it's still there or that it's gone.
+The resolution limit is the big one. The guides describing the 1024 x 1024 ceiling date from 2025, and we couldn't confirm the exact number today. But in August 2026, replying to a bug report about soft Generative Fill results, a Photoshop product manager confirmed that Photoshop's generative features still produce output at a fixed internal resolution, so results can look soft on larger documents. His suggested workaround is the same idea as step 4: work on a smaller area, then composite it back. That thread is about Generative Fill rather than Harmonize specifically, so check your own results at 100%.
 
-Sources disagree on how far to trust it. Adobe presents Harmonize as a one-click blend, while independent photographers consistently say it works best as a starting point and that manual compositing still gives more control, especially for stylized looks. Plan on finishing by hand for anything that's going to print or be seen large.
+Even Adobe's own tutorial doesn't stop at the click: it finishes the composite with Lens Blur and Blend If, and the independent guides spend most of their time on what to do around Harmonize, not in it. Plan on finishing by hand for anything that's going to print or be seen large.
 
 It doesn't fix a bad setup. Wrong scale, wrong perspective, or a messy cutout will survive harmonizing, so the prep in steps 1 and 2 matters more than which variation you pick.
 
