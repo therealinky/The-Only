@@ -41,9 +41,11 @@ export const ART_MOTIFS = [
   'code',
   'coins',
   'cube',
+  'cutout',
   'document',
   'face',
   'filmstrip',
+  'gauge',
   'grid',
   'halftone',
   'image',
@@ -362,6 +364,13 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     strokeTone: 0.95,
   },
+  // A cut-out figure standing on a ground line under a sun, casting a
+  // shadow away from the light: a subject blended into a new scene.
+  cutout: {
+    fills: [outline(circle(40, 26, 9), 0.5), outline(poly([30, 44, 50, 44, 56, 80, 24, 80]), 0.5), outline(circle(82, 18, 9), 0.2)],
+    strokes: [poly([4, 80, 96, 80])],
+    tones: [region(poly([24, 80, 56, 80, 30, 96, 2, 96]), 0.3)],
+  },
   // A page with a folded corner and a headline block.
   document: {
     fills: [],
@@ -407,7 +416,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   },
   // A 3x3 icon grid with a few small marks.
   // A filmstrip running off to the right: three shot frames, then two
-  // fainter generated frames under a sparkle, for AI-extended clips.
+  // A semicircular dial, light to dark, with a needle leaning toward the
+  // dark end: a usage meter.
+  gauge: {
+    fills: [
+      ...[0.15, 0.25, 0.35, 0.5, 0.7].map((tone, i) =>
+        outline(wedge(50, 74, 30, 44, Math.PI + (i * Math.PI) / 5 + 0.06, Math.PI + ((i + 1) * Math.PI) / 5 - 0.06), tone),
+      ),
+      dot(50, 74, 4),
+    ],
+    strokes: [poly([50, 74, 72, 46])],
+    tones: [],
+  },
   filmstrip: {
     fills: [
       ...[4, 24, 44].map((x) => outline(box(x, 38, x + 12, 62), 0.7)),
