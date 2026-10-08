@@ -51,6 +51,7 @@ export const ART_MOTIFS = [
   'image',
   'layers',
   'marquee',
+  'megaphone',
   'nodes',
   'pen',
   'phone',
@@ -64,6 +65,7 @@ export const ART_MOTIFS = [
   'sphere',
   'swatches',
   'timeline',
+  'tshirt',
   'tokens',
   'wand',
   'waveform',
@@ -462,6 +464,13 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   },
   // A node graph: two inputs wired into one output.
   // A dashed selection marquee over one corner of a landscape: a targeted
+  // A megaphone: a mouthpiece, a flared horn, a handle underneath, and
+  // three sound marks: advertising and campaigns.
+  megaphone: {
+    fills: [outline(poly([24, 42, 72, 20, 72, 80, 24, 58]), 0.4), outline(box(10, 42, 22, 58), 0.7)],
+    strokes: [poly([38, 64, 42, 80, 52, 80, 50, 69]), poly([82, 30, 92, 22]), poly([84, 50, 96, 50]), poly([82, 70, 92, 78])],
+    tones: [],
+  },
   // edit that leaves the rest of the picture alone.
   marquee: {
     fills: [outline(circle(24, 26, 8, 20), 0.9), outline(box(60, 18, 80, 32), 0.5)],
@@ -639,6 +648,15 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(box(58, 47, 88, 57), 0.3),
       region(box(22, 69, 70, 79), 0.4),
     ],
+  },
+  // A T-shirt with a round logo printed on the chest: vector art placed on
+  // a product photo as a mockup.
+  tshirt: {
+    fills: [
+      outline(poly([30, 10, 40, 10, 44, 17, 56, 17, 60, 10, 70, 10, 94, 28, 84, 44, 74, 37, 74, 92, 26, 92, 26, 37, 16, 44, 6, 28]), 0.2),
+    ],
+    strokes: [],
+    tones: [region(circle(50, 48, 12), 0.75)],
   },
   // A design-token table: header labels over a rule, then rows of a color
   // chip, a token name, and its value.

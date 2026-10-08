@@ -1,0 +1,103 @@
+---
+title: "Getting believable product mockups out of Adobe Illustrator's Mockup panel"
+dek: >-
+  Illustrator's Mockup feature wraps vector art onto a photo of a real object
+  and keeps it editable. Pulling together Adobe's docs and several independent
+  write-ups, here's how to set it up, which photos it handles well, and where
+  you'll still need to finish by hand.
+format: workflow
+evidence: researched
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-08
+updatedAt: 2026-10-08
+lastVerified: 2026-10-08
+disciplines:
+  - Brand & Graphic
+art: tshirt
+tools:
+  - Adobe Illustrator
+sources:
+  - title: "Create mockups for images (Adobe Illustrator User Guide, last updated October 27, 2025)"
+    url: https://helpx.adobe.com/illustrator/desktop/manage-objects/traces-mockups-symbols/create-mockups-for-images.html
+    accessed: 2026-10-08
+  - title: "Edit mockups (Adobe Illustrator User Guide, last updated October 27, 2025)"
+    url: https://helpx.adobe.com/illustrator/desktop/manage-objects/traces-mockups-symbols/edit-mockups.html
+    accessed: 2026-10-08
+  - title: "Save mockups as templates (Adobe Illustrator User Guide, last updated October 27, 2025)"
+    url: https://helpx.adobe.com/illustrator/desktop/manage-objects/traces-mockups-symbols/save-mockups-as-templates.html
+    accessed: 2026-10-08
+  - title: "Design Mockups in Illustrator with Real-Life Objects (Adobe Community announcement and replies)"
+    url: https://community.adobe.com/announcements-651/design-mockups-in-illustrator-with-real-life-objects-805903/index2.html
+    accessed: 2026-10-08
+  - title: "Experimenting with Illustrator's New Mockup Feature (Steve Caplin, CreativePro, August 1, 2023)"
+    url: https://creativepro.com/experimenting-with-illustrators-new-mockup-feature/
+    accessed: 2026-10-08
+  - title: "Creating Quick Mockups in Illustrator (Mike Rankin, CreativePro)"
+    url: https://creativepro.com/creating-quick-mockups-in-illustrator/
+    accessed: 2026-10-08
+  - title: "How to Use the Illustrator Mockup Tool (Diana Toma, Envato Tuts+, October 25, 2023)"
+    url: https://design.tutsplus.com/tutorials/how-to-use-the-illustrator-mockup-tool--cms-108083
+    accessed: 2026-10-08
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's Mockup documentation and several
+    independent hands-on write-ups, plus general Illustrator technique, on how
+    to get mockups that look placed rather than pasted.
+  whyItMatters: >-
+    A quick, editable mockup inside the app where the logo lives means you can
+    show a client their mark on real merchandise without a trip through
+    Photoshop smart objects.
+  bestFor: >-
+    Logos and badges on apparel, packaging, mugs, signage, and device screens
+    for client presentations and early concept reviews.
+  timeToTry: 15 to 20 minutes with your own artwork and a product photo
+beforeYouUse:
+  clientData: >-
+    not verified: we couldn't confirm from Adobe's docs whether Mockup
+    processes your photo and artwork on your machine or sends them to Adobe's
+    servers. If the brand is unreleased, check with Adobe or your admin first.
+  usageRights: >-
+    not verified: you still need the rights to the product photo you place.
+    Adobe's curated templates come from the Mockup panel itself, and we didn't
+    find their license terms stated in the help pages.
+  disclosure: >-
+    not applicable: Mockup maps your own vector art onto a photo rather than
+    generating new imagery, though it's still worth telling a client a mockup
+    is a visualization, not a product sample.
+  accessibility: >-
+    not applicable: this is a presentation and visualization technique.
+  cost: >-
+    not verified: Mockup is part of Illustrator, but Adobe's help pages don't
+    say whether it uses generative credits. Adobe's announcement does say a
+    GPU is required for it to work.
+---
+Illustrator's Mockup feature takes your vector art and wraps it onto a photo of a real object, a shirt, a box, a mug, so it follows the object's surface. The art stays a live symbol, so you can keep editing the logo after it's placed.
+
+This is a synthesis of Adobe's own documentation and several independent write-ups from people who've put the feature through its paces, plus general Illustrator knowledge. It's not a workflow we've tested end to end ourselves. Some of the hands-on sources date from the feature's beta in 2023, so where they disagree with Adobe's current docs, we say so.
+
+1. **Pick the photo with the surface in mind.** This matters more than anything you do afterward. Adobe's announcement for the full release says art adjusts onto planar surfaces realistically, and lists reflective surfaces, small grooves, and images of the sky as known trouble spots. Flat or gently curved areas shot fairly straight on, like a shirt front, a box face, or a tote, are the safest bet. Busy creases and folds are where results fall apart.
+2. **Get the artwork into a shape Mockup accepts.** Mockup is picky. Adobe lists mesh, graph, gradient mesh, freeform gradient, placed art, raster, and raster effects as unsupported, along with anything that is or expands to a clip group, which rules out patterns. Linked files don't work either, so embed them first. For a Creative Cloud Libraries asset, place a copy rather than a linked instance. If the Mockup commands are greyed out, one of these is usually why.
+3. **Select the art and the photo together, then create the mockup.** Open Window > Mockup, select both with the Selection tool, and click Create Mockup. You'll also find Mockup under the Object menu, in the right-click menu, and in the Properties panel and Contextual Task Bar. Adobe says you can't create a mockup with multiple images, and during the beta an Adobe community manager said it took one symbol at a time, so plan on one placement per mockup.
+4. **Place and size it while watching the wrap.** Drag the art across the object and it reshapes to the surface as it moves. Handles around the art let you scale and rotate it in real time. Click outside the image to lock it in place, and use Edit Content in the Properties panel to pick it back up later.
+5. **Decide whether to blend it by hand.** This is where sources differ. Testing the beta, one reviewer found Illustrator adapted the art's blending on its own, so shading showed through. Another tutorial from the same period sets the blend mode by hand, Darken or Multiply with opacity a little under 100%, so the art picks up fabric texture. Adobe's own announcement points to the Transparency panel's blending options for bringing lighting and texture through. Our read: check the automatic result first, then try Multiply or Darken if the art still looks like a sticker. Multiply works best on light objects. On dark fabric it can make the art nearly disappear, so you may want Normal with a little less opacity instead.
+6. **Edit the logo, not the mockup.** After you create a mockup, your art becomes a symbol. Double-click the mockup group to enter isolation mode, then double-click the art to edit the symbol, and the change shows up everywhere that symbol appears. This is the real advantage over a flattened Photoshop composite. If you want effects from the Effect menu, apply them in symbol editing mode, since Adobe says they can't go directly on art inside a mockup group.
+7. **Save setups you'll reuse.** Select a finished mockup and click the save icon in the Mockup panel, and it's added to Your Mockups with a placeholder marking where the art sat. Adobe allows up to 20 saved templates, available across all your Illustrator documents. Mockups made in Illustrator 28.5 or earlier need to be released and recreated before you can save them. If you don't have a product photo yet, the panel's free templates are sorted into categories like Apparel, Packaging, and Digital Devices, and Preview Mockup shows your art on those templates right in the panel.
+8. **Know when to finish elsewhere.** Mockup won't let you warp its output further. In the beta, one reviewer found that neither Expand Appearance nor copy and paste produced art that a mesh distortion could be applied to. For a hero image with heavy folds, the classic route still applies: take the photo into Photoshop and use a displacement map or a warp on a smart object. Use Illustrator's Mockup for speed and editability, and Photoshop when realism has to survive a close look.
+
+## Why it matters for designers
+
+Showing a client their logo on a shirt or a box is often the moment an identity clicks for them. Doing that inside Illustrator, with the art still live, means you can swap a color or tweak the mark during the review instead of rebuilding a composite. Saved templates make it practical to keep a set of standard merch shots for every identity project.
+
+It also lowers the bar for early exploration. Testing three logo directions on the same product photo takes minutes rather than an afternoon in Photoshop.
+
+## What to watch out for
+
+The surface is the limit. The beta reviews found it handled cylinders like mugs well and struggled with creased shirts, spheres, and a cleanly framed billboard in a street scene. Adobe's own list of trouble spots covers reflective surfaces and fine grooves. Those reviews are from 2023, and Adobe has said the full release brought higher-quality results, so test your own photo before promising a client a particular shot.
+
+The list of unsupported artwork is long, and the greyed-out menu doesn't always say why. Patterns, gradient meshes, and placed images are the usual culprits. Simplify or expand the art into plain vector shapes on a copy before you start.
+
+There's no mesh-warp escape hatch. If the automatic wrap is close but not right, your choices are to reposition and rescale until it fits or move to Photoshop.
+
+Adobe also notes that in Mainland China and Russia, Mockup needs add-ons installed from the Creative Cloud desktop app before it'll work. Data handling and cost questions are in the sidebar.
