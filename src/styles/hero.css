@@ -204,6 +204,17 @@ main > .page-hero:first-child {
   pointer-events: none;
 }
 
+/* The home hero's panel picks up a little rose so it sits with the
+   gradient's pink corner instead of reading blue against it. */
+.page-hero--purple .page-hero__glass::before {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--hero-rose) 22%, transparent),
+      color-mix(in srgb, var(--hero-rose) 22%, transparent)
+    ),
+    rgba(255, 255, 255, 0.1);
+}
+
 /* Older Safari's prefixed blur; see .site-header-float in global.css for
    why it's in its own block. */
 @supports not (backdrop-filter: blur(1px)) {
