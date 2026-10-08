@@ -271,7 +271,15 @@ export default config({
           description: 'Required when status is "Withdrawn".',
           multiline: true,
         }),
-        content: fields.mdx({ label: 'Content', extension: 'mdx', components: { Media: mediaBlock } }),
+        // The editor's own inline image button is turned off: it saves files
+        // where the site can't find them and has no alt text. Images go in
+        // through the Media block instead.
+        content: fields.mdx({
+          label: 'Content',
+          extension: 'mdx',
+          options: { image: false },
+          components: { Media: mediaBlock },
+        }),
       },
     }),
   },
