@@ -1,0 +1,123 @@
+---
+title: "Getting clean removals out of Adobe Lightroom's Remove tool, from stray objects to reflections"
+dek: >-
+  Lightroom's Remove tool now packs Generative Remove plus one-click
+  Distraction Removal for people, reflections, and dust. Pulling together
+  Adobe's own guidance and several independent guides, here's how to pick
+  the right mode, brush it properly, and know when to hand off to
+  Photoshop.
+format: workflow
+evidence: researched
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-09
+updatedAt: 2026-10-09
+lastVerified: 2026-10-09
+disciplines:
+  - Photo & Imaging
+art: eraser
+tools:
+  - Adobe Lightroom
+  - Adobe Photoshop
+sources:
+  - title: "Generative Remove tips (Adobe Lightroom Classic product page)"
+    url: https://www.adobe.com/cc-shared/fragments/products/lightroom-classic/generative-remove/tips/default
+    accessed: 2026-10-09
+  - title: "Remove distractions in a photo with Generative Remove (Adobe Lightroom Classic Help)"
+    url: https://helpx.adobe.com/lightroom-classic/desktop/process-and-develop-photos/remove-tool.html
+    accessed: 2026-10-09
+  - title: "Remove distracting people in a photo (Adobe Lightroom Classic Help)"
+    url: https://helpx.adobe.com/vn_en/lightroom-classic/help/distraction-removal-people.html
+    accessed: 2026-10-09
+  - title: "Lightroom v9.6 Is Live! Transform Photos with Prompt to Edit and Enhanced Reflection Removal (Adobe Community announcement, September 29, 2026)"
+    url: https://community.adobe.com/announcements-678/lightroom-v9-6-is-live-transform-photos-with-prompt-to-edit-and-enhanced-reflection-removal-1644292
+    accessed: 2026-10-09
+  - title: "Lightroom tip: Lightroom's new Reflections removal tool really does work (Life after Photoshop, updated August 22, 2025)"
+    url: https://lifeafterphotoshop.com/lightroom-tip-lightrooms-new-reflections-removal-tool-really-does-work-and-heres-how-to-use-it/
+    accessed: 2026-10-09
+  - title: "Lightroom tip: How to get Lightroom's new Distraction Removal People tool to work (Life after Photoshop, updated August 22, 2025)"
+    url: https://lifeafterphotoshop.com/lightroom-tip-how-to-get-lightrooms-new-distraction-removal-people-tool-to-work/
+    accessed: 2026-10-09
+  - title: "Reflection Removal not working in Lightroom? Try this (Glyn Dewis, August 27, 2026)"
+    url: https://glyndewis.com/blog/reflection-removal-fix
+    accessed: 2026-10-09
+  - title: "Remove Distractions in Lightroom: A Simple How-To Guide (The School of Photography)"
+    url: https://www.theschoolofphotography.com/tutorials/remove-distractions-in-lightroom
+    accessed: 2026-10-09
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's own guidance and several
+    independent guides on Lightroom's Remove tool, covering Generative
+    Remove and the Distraction Removal options for people, reflections,
+    and dust, plus general Lightroom technique.
+  whyItMatters: >-
+    Cleaning up a frame is one of the most common photo jobs there is.
+    Most bad results come from using the wrong mode or brushing too
+    tightly, both easy to fix once you know what each mode is for.
+  bestFor: >-
+    Photographers and designers prepping product, event, travel, and
+    real estate images who want cleanup done in Lightroom without a trip
+    to Photoshop for every fix.
+  timeToTry: >-
+    Ten minutes on a few test images to learn each mode. Knowing when to
+    hand off to Photoshop comes with a project or two.
+beforeYouUse:
+  clientData: >-
+    known: Adobe's help page says Generative Remove needs an internet
+    connection, which means the image is processed online. not verified:
+    we didn't confirm exactly what's sent or retained, so check Adobe's
+    generative AI terms before using it on images under NDA.
+  usageRights: >-
+    not verified: Adobe describes its Firefly models as commercially safe,
+    but a removal is still a change to the photo. For editorial, documentary,
+    or evidence-type images, removing people or objects may break the rules
+    of the publication or contract.
+  disclosure: >-
+    not verified: we didn't confirm whether Lightroom attaches Content
+    Credentials to generative removals. If your client or publication has
+    rules about AI edits, check before delivering.
+  accessibility: >-
+    not applicable: this is a photo cleanup technique, not a published
+    interface or document.
+  cost: >-
+    not verified: one guide notes that removals in Lightroom and Camera Raw
+    don't use generative credits while the Photoshop hand-off does use one.
+    Adobe's credit rules change, so check the current generative credits
+    FAQ for your plan.
+---
+Lightroom's Remove tool has quietly grown into three tools in one: a brush that removes whatever you paint, a Generative Remove mode that rebuilds the background with Adobe Firefly, and a Distraction Removal panel that finds people, reflections, and dust for you. This workflow pulls together Adobe's own guidance and several independent guides, plus general Lightroom technique, into one approach. It's synthesized from published sources, not something we've tested end to end on a full shoot.
+
+1. **Pick the mode for the job before you touch the brush.** In the Develop module, open the Remove tool and set it to Remove (not Heal or Clone). For tiny things like dust spots and small blemishes, leave Generative AI off. The non-generative remove brush is faster for small local fixes, and it works offline. Turn Generative AI on for anything bigger, like a sign, a bin, a person, or a power line, where the background behind it has to be invented.
+
+2. **Brush bigger than you think.** This is the tip every source agrees on, Adobe included. Set the brush a little larger than the object and paint over all of it, plus its shadow and any reflection it casts. A tight stroke that leaves a sliver of shadow or edge gives the model something to rebuild, and that's where smudges and half-objects come from. If the object has clean, defined edges, turn on Detect Objects so Lightroom tightens the selection to the object itself.
+
+3. **Use the variations before you redo the stroke.** Generative Remove gives you alternate fills to flip through. If none of them work, click Generate for a fresh set. Only repaint if every version shows the same flaw, because that usually means the selection, not the fill, is the problem.
+
+4. **Let Distraction Removal find people for you, then edit its list.** In the Distraction Removal panel, open People. Lightroom detects the people it thinks are distractions, covers them with a red mask, and puts a pin on each one. Delete the pin on anyone you want to keep, then click Remove. You can't control who it detects first, so check every pin before you run it.
+
+5. **Treat reflections as a separate job.** Open Reflections in the same panel and apply it. A slider lets you dial removal up or down, which is handy when you only want to soften glare rather than erase it completely. Work in the faster preview quality while you judge it, then switch to the best quality setting before you export, since the preview is lower resolution.
+
+6. **If the Distraction Removal options are greyed out, nudge a slider.** Several sources describe the People and Reflections options staying unavailable until you make any adjustment, such as moving Exposure, which you can undo right away. It's been reported as a bug, so it may already be fixed in your version, but it's the first thing to try.
+
+7. **Hand off to Photoshop when Lightroom gives up.** Reflection Removal is built for big, dominant glass like windows and storefronts. On smaller surfaces, like eyeglasses or a display case, it can do nothing at all because it doesn't see a reflection worth fixing. Same goes for awkward removals like a long power line across a busy sky. Send the photo to Photoshop with Edit In, select just the problem area, and use Generative Fill with a short prompt that asks it to remove the reflection or object and leave everything else alone.
+
+8. **Check the fill at 100%, then finish with your usual edit.** Generative fills can be a little softer, smoother, or a different brightness than the pixels around them. Zoom in and compare grain and contrast, and if the patch stands out, a touch of matching texture or a small local adjustment usually blends it.
+
+## Why it matters for designers
+
+A lot of design work starts with someone else's photo: a client's product shot, an event photo for a social post, an interior for a real estate listing. Clearing a distraction used to mean a round trip to Photoshop for every image. Doing it in Lightroom keeps the edit non-destructive and in the same place you're already color-correcting a whole batch.
+
+Knowing which mode to reach for is most of the battle. The sources mostly agree on brush technique, but they differ a lot on how much to trust Distraction Removal. Some guides found it gave clean results in seconds, while others got low-resolution patches, odd shapes, or even invented people, and called it fine for social posts but not for high-quality work. The safe takeaway is to treat the automatic options as a fast first pass and check them closely, not as a finished retouch.
+
+Some of the older advice has also aged. Several earlier guides tell you to run Generative Remove before cropping, but Adobe changed that in a December 2024 update, so the order no longer matters. And Adobe's Lightroom 9.6 update in late September 2026 says Reflection Removal is now cleaner on windows, glass, and water, with fewer smudges and ghosting, so if you gave up on it last year, it's worth another try.
+
+## What to watch out for
+
+Removals aren't neutral. For editorial, documentary, or news-style images, removing a person or an object can break a publication's rules, so check before you clean up anything that's supposed to show what really happened.
+
+Generative modes need an internet connection and send the image to Adobe for processing. That's worth knowing for client work under NDA.
+
+Fills can miss the surrounding grain, brightness, or contrast, especially on smooth skies and plain backgrounds, and straight lines like power lines or architecture edges can come out bent. Always check at 100% before exporting.
+
+Most of the independent guides were written against earlier versions of these features, some while they were still in early access. Menus and results may have shifted since, so if a step doesn't match what you see, trust your version of Lightroom over the guide.
