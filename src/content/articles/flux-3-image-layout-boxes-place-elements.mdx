@@ -1,0 +1,94 @@
+---
+title: "FLUX 3 Image lets you place every element with a box before it generates"
+dek: >-
+  Black Forest Labs' new image model takes a layout, not just a prompt:
+  you draw a box for each element, describe it, and the model builds the
+  image around your composition. You can then edit, swap, or move one
+  region and tell it to leave the rest alone.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+example: false
+publishedAt: 2026-10-09
+updatedAt: 2026-10-09
+lastVerified: 2026-10-09
+reviewedBy: Ana M. Rivas
+disciplines:
+  - Photo & Imaging
+  - Brand & Graphic
+art: layout
+tools:
+  - Black Forest Labs FLUX
+sources:
+  - title: "FLUX 3 Image (Black Forest Labs model page)"
+    url: https://bfl.ai/models/flux-3-image
+    accessed: 2026-10-09
+  - title: "FLUX 3 Image overview (Black Forest Labs documentation)"
+    url: https://docs.bfl.ml/flux_3/flux3_image_overview
+    accessed: 2026-10-09
+  - title: "Pricing (Black Forest Labs)"
+    url: https://bfl.ai/pricing
+    accessed: 2026-10-09
+  - title: "Black Forest Labs Launches FLUX 3 Image with Pixel-Level Control and 4K Output (Digg AI, citing October 1, 2026 posts)"
+    url: https://digg.com/ai/9mex7e8e
+    accessed: 2026-10-09
+beforeYouUse:
+  clientData: >-
+    not verified: editing means uploading reference images to Black Forest
+    Labs' API or Playground, and by default FLUX 3 also searches the web to
+    get real things right (a setting called grounding, which you can turn
+    off). We didn't find a clear statement on how uploads are stored or
+    whether they're used for training, so check their terms before using
+    unreleased client work.
+  usageRights: >-
+    not verified: the model page doesn't address who owns generated
+    images or what the model was trained on. Read the API terms before
+    using output commercially, and make sure you have rights to any
+    references you upload.
+  disclosure: >-
+    not verified: we found nothing saying FLUX 3 Image labels or
+    watermarks its output. Follow your client's and platform's own AI
+    disclosure rules.
+  accessibility: >-
+    not applicable: this is an image generation model, so accessibility
+    depends on how you use the output, like adding alt text and checking
+    contrast on any text it renders.
+  cost: >-
+    known: Black Forest Labs' pricing page lists FLUX 3 Image per image by
+    resolution, from $0.041 at 768 x 768 to $0.048 at 1K, $0.10 at 2K, and
+    $0.607 at 4K, with reference images and prompts included at no extra
+    charge. Partner platforms may price it differently.
+---
+Most image models make you fight for composition. You write "logo top left, product center, headline along the bottom" and hope. Black Forest Labs' FLUX 3 Image, announced on October 1, takes a different approach: you lay the image out first.
+
+## What changed
+
+FLUX 3 Image is Black Forest Labs' new model for generating and editing images. The headline feature is layout boxes. You place each element on a canvas with a bounding box and a short description, and the model generates an image that keeps those elements where you put them. According to Black Forest Labs, the canvas is a 0 to 1000 grid on both axes, and in the Playground you can simply draw the boxes by hand.
+
+The same idea carries over to editing. You can re-describe, replace, or move an individual box, and Black Forest Labs says everything you didn't touch stays exactly where it was. Its pitch is that you can make several targeted edits at once, round after round, without the rest of the image drifting.
+
+A few other details from the model page and docs:
+
+- It accepts up to 10 reference images, each one tagged so your prompt can refer to it.
+- It generates natively at 2K and 4K.
+- Text in a layout is given as exact strings, and the docs' edit examples ask for existing text to be kept unchanged.
+- An optional upsampler expands short requests into fuller captions, and Black Forest Labs says it leaves your drawn boxes alone.
+
+You don't have to draw every box yourself, either. Give it one line and an aspect ratio, and an agent plans the layout for you, with every box still editable afterward.
+
+You can use it in the browser Playground or through the API. Companies can also license the weights to run and fine-tune it on their own infrastructure.
+
+## Why it matters for designers
+
+Layout is the part of image generation that's hardest to direct with words, and it's the part designers care most about. Drawing a box for the product, a box for the headline, and a box for negative space is how a lot of us already think about a composition, so being able to hand the model that structure is a real shift from prompt-and-pray.
+
+The region editing matters just as much. A common frustration with AI images is fixing one thing and watching something else drift. If moving the product or swapping a background object really does leave every other part alone, that makes iterating on a key visual or a campaign variant far less painful. (Ideogram's 4.5 edit model, which we covered on October 5, is chasing the same problem from a different angle.)
+
+## What to watch out for
+
+This is mostly an API and Playground model right now, not a button inside a design app you already use. The box coordinates are written as numbers in the API, so outside the Playground you'll want the layout agent or a tool that turns drawn boxes into that format.
+
+"Without changing any other pixel" is Black Forest Labs' claim, not something we've tested. Zoom in and compare before and after on anything that matters, especially faces, small text, and product details.
+
+Watch the resolution you pick. At Black Forest Labs' list prices, a 4K image costs about six times as much as a 2K one, so it's worth exploring at lower resolution and only rendering finals at 4K. Reports also mention open weights for a related FLUX 3 model coming later, but the model page only describes a commercial license for FLUX 3 Image, so don't plan on a free local version yet.

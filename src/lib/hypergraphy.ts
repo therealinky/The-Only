@@ -28,6 +28,7 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
 
 export const ART_MOTIFS = [
   'agent',
+  'animchart',
   'bag',
   'blend',
   'bolt',
@@ -43,12 +44,14 @@ export const ART_MOTIFS = [
   'cube',
   'cutout',
   'document',
+  'eraser',
   'face',
   'filmstrip',
   'gauge',
   'grid',
   'halftone',
   'image',
+  'layout',
   'layers',
   'marquee',
   'megaphone',
@@ -541,6 +544,43 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([50, 80, 50, 88, 66, 96, 94, 96]),
     ],
     tones: [],
+  },
+  // A bar chart whose bars are still rising, with motion trails above
+  // them: an animated explainer built from a chart rather than footage.
+  animchart: {
+    fills: [
+      { points: box(10, 62, 30, 88), kind: 'solid', tone: 0.45 },
+      { points: box(40, 46, 60, 88), kind: 'solid', tone: 0.65 },
+      { points: box(70, 30, 90, 88), kind: 'solid', tone: 0.9 },
+    ],
+    strokes: [
+      poly([8, 92, 94, 92]),
+      poly([20, 54, 20, 44]),
+      poly([50, 38, 50, 26]),
+      poly([80, 22, 80, 8]),
+    ],
+    tones: [],
+  },
+  // A tilted eraser at the end of a pencil line it has wiped away, leaving
+  // a clean gap: removing a distraction from a photo.
+  eraser: {
+    fills: [
+      outline(poly([50, 30, 70, 10, 92, 32, 72, 52]), 0.25),
+      { points: poly([50, 30, 60, 20, 82, 42, 72, 52]), kind: 'solid', tone: 0.85 },
+    ],
+    strokes: [poly([6, 82, 30, 82]), poly([70, 82, 94, 82])],
+    tones: [],
+  },
+  // A canvas with three placed bounding boxes, each with corner handles,
+  // one holding a sun and one a figure: composing an image by layout.
+  layout: {
+    fills: [
+      ...[[8, 8], [36, 8], [8, 36], [36, 36], [56, 28], [92, 28], [56, 92], [92, 92], [8, 60], [44, 60], [8, 92], [44, 92]].map(
+        ([x, y]) => ({ points: box(x - 2.5, y - 2.5, x + 2.5, y + 2.5), kind: 'solid' as const, tone: 1 }),
+      ),
+    ],
+    strokes: [frame(8, 8, 36, 36), frame(56, 28, 92, 92), frame(8, 60, 44, 92)],
+    tones: [region(circle(22, 22, 8), 0.8), region(ellipse(74, 50, 7, 8), 0.75), region(box(66, 58, 82, 86), 0.6), region(box(14, 76, 38, 88), 0.4)],
   },
   // Nested frames of different aspect ratios sharing one corner.
   ratios: {
