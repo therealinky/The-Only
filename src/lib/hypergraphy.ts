@@ -36,6 +36,7 @@ export const ART_MOTIFS = [
   'bubbles',
   'camera',
   'cards',
+  'cleanplate',
   'chat',
   'clapper',
   'cloud',
@@ -48,6 +49,7 @@ export const ART_MOTIFS = [
   'face',
   'filmstrip',
   'gauge',
+  'glyph',
   'grid',
   'halftone',
   'image',
@@ -560,6 +562,41 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([80, 22, 80, 8]),
     ],
     tones: [],
+  },
+  // A film frame over a hillside with a dashed mask where something used
+  // to stand, now empty and filled with the hill behind it: a clean plate
+  // from video object removal.
+  cleanplate: {
+    fills: [],
+    strokes: [
+      frame(8, 12, 92, 88),
+      poly([52, 28, 56, 28]),
+      poly([52, 62, 56, 62]),
+      poly([60, 28, 64, 28]),
+      poly([60, 62, 64, 62]),
+      poly([68, 28, 72, 28]),
+      poly([68, 62, 72, 62]),
+      poly([76, 28, 80, 28]),
+      poly([76, 62, 80, 62]),
+      poly([52, 32, 52, 36]),
+      poly([80, 32, 80, 36]),
+      poly([52, 40, 52, 44]),
+      poly([80, 40, 80, 44]),
+      poly([52, 48, 52, 52]),
+      poly([80, 48, 80, 52]),
+      poly([52, 56, 52, 60]),
+      poly([80, 56, 80, 60]),
+    ],
+    tones: [region(poly([8, 88, 8, 66, 30, 54, 56, 60, 76, 50, 92, 56, 92, 88]), 0.55), region(circle(26, 30, 7), 0.8)],
+  },
+  // A serif capital A beside a magnifying glass: identifying a typeface
+  // from lettering.
+  glyph: {
+    fills: [
+      outline(poly([8, 86, 26, 12, 36, 12, 54, 86, 44, 86, 40, 70, 22, 70, 18, 86]), 0.85),
+    ],
+    strokes: [poly([4, 86, 24, 86]), poly([38, 86, 58, 86]), ring(76, 38, 13)],
+    tones: [region(poly([84, 49, 89, 45, 99, 59, 94, 63]), 0.9)],
   },
   // A tilted eraser at the end of a pencil line it has wiped away, leaving
   // a clean gap: removing a distraction from a photo.
