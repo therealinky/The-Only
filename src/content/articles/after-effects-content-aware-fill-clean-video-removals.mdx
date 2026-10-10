@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-10
 updatedAt: 2026-10-10
 lastVerified: 2026-10-10
+reviewedBy: Ana M. Rivas
 disciplines:
   - Motion & Video
 art: cleanplate
@@ -78,14 +79,14 @@ After Effects' Content-Aware Fill removes an object from video by masking it out
 
 2. **Make the object transparent, with a little room around it.** Content-Aware Fill only fills transparent areas, so draw a mask around the object and set it to Subtract. Any method that creates transparency works, including Roto Brush, a key, or the Eraser. Adobe suggests keeping the mask close to the object but leaving some space around it. If the object moves, track the mask (right-click the mask and choose Track Mask) or keyframe it by hand.
 
-3. **Mask shadows and reflections too, but separately.** A removed person whose shadow is still on the ground gives the edit away. Adobe's own tip is that removing a person and their shadow separately works better than removing both at once. Do it in two passes, starting with the bigger element.
+3. **Mask shadows and reflections too, but separately.** A removed person whose shadow is still on the ground gives the edit away. Adobe's own tip is that removing a person and their shadow separately works better than removing both at once, so do it in two passes.
 
 4. **Pick the fill method for the shot, not the default.** Open Window > Content-Aware Fill.
    - **Object** is the default, and it's built for moving objects, like a car on a road. It estimates the motion behind the object.
    - **Surface** is for static, flat things: a sign on a wall, a stain on a shirt, a logo on a product.
    - **Edge Blend** is the fastest. It blends pixels from the hole's edges, so it suits plain, low-texture surfaces like text on paper, but it can soften texture.
 
-5. **Set Alpha Expansion and feathering, then test on a short range.** Alpha Expansion grows the area to fill. Adobe says the fill doesn't need precise masking and can do better when the area includes pixels outside the object. Tutorials suggest a modest amount, around 10 pixels, plus a light feather on the mask so the fill blends in rather than leaving a hard seam. Set Range to Work Area over a few seconds and generate. Moving the playhead while it renders prioritizes that frame, so you can judge the result before the whole range is done.
+5. **Set Alpha Expansion and feathering, then test on a short range.** Alpha Expansion grows the area to fill. Adobe says the fill doesn't need precise masking and can do better when the area includes pixels outside the object. VDCI's tutorial suggests a modest amount, around 10 pixels, and PremiumBeat's found the best results with a light feather on the mask, about 2 to 8 pixels, so the fill blends in rather than leaving a hard seam. Set Range to Work Area over a few seconds and generate. Moving the playhead while it renders prioritizes that frame, so you can judge the result before the whole range is done.
 
 6. **Turn on Lighting Correction when the light shifts.** If the shot has auto exposure, passing shadows, or flares, enable Lighting Correction. Adobe recommends starting on Strong and backing off to Moderate or Subtle if it over-corrects. Flickery scenes like sun on grass or sand are where Strong goes wrong most often. Edge Blend doesn't need it.
 
@@ -103,9 +104,9 @@ The older guides also predate Photoshop's newer tools. The Remove tool and Gener
 
 ## What to watch out for
 
-Moving water, foliage, crowds, and anything with lots of changing light and texture are still hard. Adobe says results may vary on those, and one tutorial's fill broke down when the object passed behind foreground elements. Budget time for a reference frame, or for a different approach entirely.
+Complex moving textures are still hard. Adobe says the feature might give different results on something like water, or areas with varied light and texture, and points to Photoshop's tools for those shots. Budget time for a reference frame, or for a different approach entirely.
 
-Disk space adds up fast. One tutorial's 11-second 1080p clip produced a fill sequence over 4GB. Check where the Fills folder is going before you generate a long range.
+Disk space adds up fast, since every fill is a full image sequence. Check where the Fills folder is going before you generate a long range.
 
 If you're working with 4K footage in an HD comp, Adobe suggests using scaled-down, transcoded footage for better performance.
 
