@@ -1,0 +1,115 @@
+---
+title: "Getting clean object removals out of After Effects' Content-Aware Fill"
+dek: >-
+  Content-Aware Fill can erase a boom mic, a sign, or a passerby from a
+  shot, but only if you pick the right fill method and feed it the right
+  mask. Pulling together Adobe's docs and several independent tutorials,
+  here's a fuller workflow, including where the guides disagree.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-10-10
+updatedAt: 2026-10-10
+lastVerified: 2026-10-10
+reviewedBy: Ana M. Rivas
+disciplines:
+  - Motion & Video
+art: cleanplate
+tools:
+  - Adobe After Effects
+  - Adobe Photoshop
+sources:
+  - title: "Remove objects from your videos with the Content-Aware Fill panel (Adobe After Effects Help, last updated October 14, 2024)"
+    url: https://helpx.adobe.com/after-effects/desktop/remove-objects-from-your-videos/content-aware-fill.html
+    accessed: 2026-10-10
+  - title: "Using a Reference Frame for Cleaner Content Aware Fill in After Effects (VDCI, December 4, 2025)"
+    url: https://vdci.edu/learn/after-effects/aware-fill
+    accessed: 2026-10-10
+  - title: "Tutorial: Getting Started with Content-Aware Fill in After Effects (PremiumBeat, April 3, 2019)"
+    url: https://www.premiumbeat.com/blog/tutorial-content-aware-fill-after-effects/
+    accessed: 2026-10-10
+  - title: "Object Removal Made Easy with Content-Aware Fill for After Effects 2019 (No Film School, April 3, 2019)"
+    url: https://nofilmschool.com/object-removal-content-aware-fill-adobe-after-effects
+    accessed: 2026-10-10
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's Content-Aware Fill
+    documentation and several independent tutorials, plus general After
+    Effects technique, covering masking, fill methods, Lighting
+    Correction, and reference frames.
+  whyItMatters: >-
+    Removing something that shouldn't be in a shot is one of the most
+    common cleanup jobs in motion work. Content-Aware Fill can do a lot of
+    it in-app, if you set it up the way it expects.
+  bestFor: >-
+    Motion designers and editors cleaning up social, brand, and event
+    footage: stray signs, rigging, logos, crew in the background.
+  timeToTry: >-
+    Half an hour on a short test clip to learn the fill methods. Shots
+    that need a reference frame take longer, and a Photoshop install.
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's help page doesn't say whether Content-Aware Fill
+    processes footage locally or in the cloud. The fill renders to image
+    files saved next to your project by default, so treat those files with
+    the same care as the source footage.
+  usageRights: >-
+    not verified: the fill is built from pixels in your own footage, not
+    from a generative model, but removing people, logos, or objects can
+    still conflict with releases, brand agreements, or editorial rules.
+    Check before you erase anything a contract or publication cares about.
+  disclosure: >-
+    not verified: we didn't confirm whether After Effects records
+    Content-Aware Fill in any Content Credentials. If a client or outlet
+    has rules about altered footage, ask before delivering.
+  accessibility: >-
+    not applicable: this is a footage cleanup technique, not a published
+    interface or document.
+  cost: >-
+    known: Content-Aware Fill is a built-in panel in Adobe After Effects.
+    The reference frame workflow also needs Adobe Photoshop installed, per
+    Adobe's help page. Fill layers are rendered image sequences that can
+    take up a lot of disk space.
+---
+After Effects' Content-Aware Fill removes an object from video by masking it out and rebuilding the hole from pixels in the surrounding frames. It's been around since 2019, and most bad results come from the same few setup mistakes. This workflow pulls together Adobe's own documentation and several independent tutorials, plus general After Effects technique. It's synthesized from published sources, not something we've tested end to end on a real job.
+
+1. **Read the shot before you mask anything.** Scrub through and note three things: whether the camera moves, whether the object moves, and whether the light changes. Those answers decide your fill method and your Lighting Correction setting. Remember that the fill borrows from other frames, so it works best when the background behind the object is visible somewhere else in the clip.
+
+2. **Make the object transparent, with a little room around it.** Content-Aware Fill only fills transparent areas, so draw a mask around the object and set it to Subtract. Any method that creates transparency works, including Roto Brush, a key, or the Eraser. Adobe suggests keeping the mask close to the object but leaving some space around it. If the object moves, track the mask (right-click the mask and choose Track Mask) or keyframe it by hand.
+
+3. **Mask shadows and reflections too, but separately.** A removed person whose shadow is still on the ground gives the edit away. Adobe's own tip is that removing a person and their shadow separately works better than removing both at once, so do it in two passes.
+
+4. **Pick the fill method for the shot, not the default.** Open Window > Content-Aware Fill.
+   - **Object** is the default, and it's built for moving objects, like a car on a road. It estimates the motion behind the object.
+   - **Surface** is for static, flat things: a sign on a wall, a stain on a shirt, a logo on a product.
+   - **Edge Blend** is the fastest. It blends pixels from the hole's edges, so it suits plain, low-texture surfaces like text on paper, but it can soften texture.
+
+5. **Set Alpha Expansion and feathering, then test on a short range.** Alpha Expansion grows the area to fill. Adobe says the fill doesn't need precise masking and can do better when the area includes pixels outside the object. VDCI's tutorial suggests a modest amount, around 10 pixels, and PremiumBeat's found the best results with a light feather on the mask, about 2 to 8 pixels, so the fill blends in rather than leaving a hard seam. Set Range to Work Area over a few seconds and generate. Moving the playhead while it renders prioritizes that frame, so you can judge the result before the whole range is done.
+
+6. **Turn on Lighting Correction when the light shifts.** If the shot has auto exposure, passing shadows, or flares, enable Lighting Correction. Adobe recommends starting on Strong and backing off to Moderate or Subtle if it over-corrects. Flickery scenes like sun on grass or sand are where Strong goes wrong most often. Edge Blend doesn't need it.
+
+7. **When the fill can't figure it out, paint it a reference frame.** For busy or textured backgrounds, click Create Reference Frame. After Effects sends that frame to Photoshop. Clean it with Clone Stamp, the healing tools, or the Remove tool, then Save. Don't use Save As, or After Effects won't see the change. Back in After Effects, generate the fill again, and it uses your painted frame as a guide. For shots where the angle or light changes a lot, Adobe says you can add more than one reference frame.
+
+8. **Review, then manage the files.** Toggle the mask off and on and watch the result at full resolution, especially the edges and anywhere a foreground object crosses the hole. Fill layers are image sequences written to a Fills folder next to your project, and they get big quickly. Clear out old versions with Delete Unused Fill Footage from the panel menu.
+
+## Why it matters for designers
+
+A lot of motion work is cleanup on footage someone else shot: a client's logo on a competitor's shirt, a light stand in an interview, a sign that dates the clip. Content-Aware Fill handles more of that inside After Effects than most people expect, without a round trip to a dedicated VFX tool.
+
+The sources mostly agree on the basics, but they differ in useful ways. On reference frames, Adobe's walkthrough suggests the frame where the object is largest, while another guide suggests the first or last frame, wherever the shot is cleanest. Both make sense: the largest-object frame gives the fill the most to learn from, and a clean frame is quicker to paint. Pick whichever you can paint convincingly. On static objects, the older tutorials found results inconsistent without a reference frame. Adobe's more recent guidance adds Lighting Correction, which takes care of one of the most common reasons fills used to look patchy.
+
+The older guides also predate Photoshop's newer tools. The Remove tool and Generative Fill in Photoshop make painting a reference frame faster than the Clone Stamp work the 2019 tutorials describe.
+
+## What to watch out for
+
+Complex moving textures are still hard. Adobe says the feature might give different results on something like water, or areas with varied light and texture, and points to Photoshop's tools for those shots. Budget time for a reference frame, or for a different approach entirely.
+
+Disk space adds up fast, since every fill is a full image sequence. Check where the Fills folder is going before you generate a long range.
+
+If you're working with 4K footage in an HD comp, Adobe suggests using scaled-down, transcoded footage for better performance.
+
+Removals change what a shot shows. For documentary, news, or testimonial footage, erasing a person or a brand may break a release or an editorial policy, so check before you clean it up.
+
+Several of the independent tutorials date from the feature's 2019 launch. The core panel hasn't changed much, but if a step doesn't match your version, trust the app over the guide.
