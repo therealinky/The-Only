@@ -1,0 +1,121 @@
+---
+title: "Syncing Adobe Lightroom's AI masks across a whole shoot without babysitting every frame"
+dek: >-
+  Lightroom doesn't copy an AI mask from one photo to the next. It copies
+  the instructions and redraws the mask on every frame. Pulling together
+  several independent guides and Adobe community threads, here's how to
+  batch subject, sky, and people masks so they actually land where you
+  meant them to.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-11
+updatedAt: 2026-10-11
+lastVerified: 2026-10-11
+disciplines:
+  - Photo & Imaging
+art: sliders
+tools:
+  - Adobe Lightroom
+sources:
+  - title: "The Power of Masking in Lightroom, Day 8 of 10 Days of AI in Photoshop and Lightroom (PhLearn, December 8, 2025)"
+    url: https://phlearn.com/tutorial/10-days-of-ai-in-photoshop-and-lightroom-day-8/
+    accessed: 2026-10-11
+  - title: "How to use Select People in Lightroom (Shotkit)"
+    url: https://shotkit.com/select-people-edit-lightroom/
+    accessed: 2026-10-11
+  - title: "A Guide to Lightroom's Newest Features, Summer 2022 Update (Digital Photography School)"
+    url: https://digital-photography-school.com/lightroom-summer-2022-update/
+    accessed: 2026-10-11
+  - title: "Lightroom 11.4 update: AI mask presets and syncing to batch process images (Photoshop Cafe, June 2022)"
+    url: https://photoshopcafe.com/lightroom-11-4-update-powerful-ai-mask-presets-and-syncing-to-batch-process-images
+    accessed: 2026-10-11
+  - title: "What's new in Lightroom Classic 11.4 (The Lightroom Queen, June 14, 2022, updated June 29, 2022)"
+    url: https://www.lightroomqueen.com/whats-new-in-lightroom-classic-11-4/
+    accessed: 2026-10-11
+  - title: "Masking: add auto update/recompute to subject/sky masking after copy/paste (Adobe Community, Lightroom Classic ideas)"
+    url: https://community.adobe.com/t5/lightroom-classic-ideas/p-masking-add-auto-update-recompute-to-subject-sky-masking-after-copy-paste/idi-p/12480563
+    accessed: 2026-10-11
+  - title: "AI masks require updating and/or disappear (Adobe Community, Lightroom Classic bugs, June 2024 onward)"
+    url: https://community.adobe.com/t5/lightroom-classic-bugs/p-ai-masks-require-updating-and-or-disappear/idi-p/15347415/page/4
+    accessed: 2026-10-11
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of several independent tutorials and
+    Adobe community threads on batching Lightroom Classic's AI masks
+    (Subject, Sky, People, and friends) across a series of photos with
+    Sync, Copy and Paste, and presets.
+  whyItMatters: >-
+    Masked local edits are where a lot of a shoot's look lives, and doing
+    them one frame at a time doesn't scale. Batching works well once you
+    know that each frame gets its own freshly computed mask, and which
+    shots that can go wrong on.
+  bestFor: >-
+    Photographers and designers editing a consistent series: portrait
+    sessions, product sets, events, real estate, and campaign shoots where
+    every frame needs the same sky, subject, or skin treatment.
+  timeToTry: >-
+    Twenty minutes on a small set of similar photos to learn the moving
+    parts. Building presets you trust takes a shoot or two.
+beforeYouUse:
+  clientData: >-
+    not verified: the sources we read don't say whether Lightroom Classic
+    computes AI masks on your machine or sends images to Adobe's servers.
+    If you work under an NDA, check Adobe's current documentation first.
+  usageRights: >-
+    not applicable: masks only control where your own adjustments apply;
+    nothing is generated or added to the image.
+  disclosure: >-
+    not applicable: this is ordinary local tonal and color adjustment, the
+    same kind of edit as a hand-painted brush mask.
+  accessibility: >-
+    not applicable: this is a photo editing technique, not a published
+    interface or document.
+  cost: >-
+    not verified: AI masking is part of the regular Lightroom Classic
+    toolset in every source we read, and none of them mention generative
+    credits. We didn't find an Adobe page that says so directly, so check
+    your plan if credits matter to you.
+---
+Lightroom's AI masks (Select Subject, Select Sky, Select People, and the rest) are great on a single frame. The real time saver is using them across a whole shoot, and that's where people tend to get surprised. This walkthrough is synthesized from several independent tutorials and Adobe community threads, plus general Lightroom Classic knowledge. We haven't verified it end to end on a test set of our own.
+
+The one idea that makes the rest click: when you sync or paste an AI mask, Lightroom doesn't copy the shape. It copies the recipe ("select the sky," "select this person's hair"), runs the detection again on each target photo, and applies your edits to the new result. That's why it works when your subject moves around the frame, and it's also why it can go wrong.
+
+1. **Pick a representative hero frame.** Choose a photo that looks like most of the set: same lighting, same subject, same kind of sky. If the shoot has two distinct setups (indoor and outdoor, say), treat them as two batches with two hero frames.
+
+2. **Build the masks and name them.** Create the AI masks you need and make your adjustments. Rename each mask to something like "Sky warm" or "Skin soften." Names carry over when you copy settings, which matters once a photo has five masks and you're trying to find the one that misfired.
+
+3. **Keep the masks few and deliberate.** Every extra mask is another detection that can miss on some frame in the batch. A handful of purposeful masks syncs more predictably than a pile of overlapping tweaks, and it's less likely to make photos look overworked.
+
+4. **Check the overlay before you sync.** Toggle the mask overlay (the O key) and look at what's actually selected on the hero frame. If the hero mask picks up a lamp post or misses a shoulder, every synced frame starts from that same mistake.
+
+5. **Sync, or copy and paste.** Both work, and the guides split on which they prefer:
+   - **Sync** in the Library or Develop module: click the hero frame first so it's the most-selected photo, then add the rest of the series, open Sync Settings, make sure Masking is checked, and synchronize. Order matters. Sync copies *from* the most-selected photo, so getting it backwards can overwrite your edit with an unedited frame's settings.
+   - **Copy and Paste Settings**: copy from the hero frame with Masking ticked in the dialog, select the targets, and paste. This is handy when you're working through a series one by one and want to bring masks forward selectively.
+   Either way, if Masking isn't ticked, your global settings transfer and your local edits silently don't.
+
+6. **Give it a minute.** Each frame gets its own detection, so a big batch takes time. Guides range from a second or two per photo on a recent machine to minutes for a large set.
+
+7. **Spot-check, especially group shots.** Masks that target a category (sky, subject, background) are the most dependable to batch. Masks that target a specific *person* are the riskiest: in a group portrait, Lightroom may pick a different person on the next frame, and a softening meant for one face lands on someone else's. For groups, consider using Select Subject for broad edits and handling individual-person masks frame by frame.
+
+8. **Turn a mask set you trust into a preset.** Since Lightroom Classic 11.4, presets can include AI masks, and they adapt to each image when applied. That makes a "house look" for a recurring kind of shoot practical. One caution: when a preset with AI masks is applied during import, the masks may need recomputing afterward. Look for the Update AI Settings command (older versions called it Update AI Masks) and run it on the batch.
+
+9. **Change the hero, then sync again.** If you tweak the hero frame's mask later, the other frames don't follow along. Re-select the series and sync again.
+
+## Why it matters for designers
+
+A lot of a series' consistency comes from local edits: the same lift on every face, the same calmer sky, the same darker background behind a product. Before AI masks, that meant painting a brush mask on every single photo. Now the expensive part is making one good mask and checking the rest, which changes how far you can push local edits on a 300-photo job.
+
+It's also useful outside photography proper. If you're prepping a set of lifestyle images for a brand system, a synced mask is a clean way to make every background or sky land in the same palette before the images ever reach a layout.
+
+## What to watch out for
+
+The sources are old in places. Several of the most detailed guides date from 2022, when mask syncing and AI mask presets arrived in Lightroom Classic 11.4. The core behavior hasn't changed since, but menu names have drifted, so expect small differences in your version. The sources also focus on Lightroom Classic; we didn't confirm how closely the cloud-based Lightroom app matches.
+
+AI masks that need updating are a long-running pain point. An Adobe community thread that began in June 2024 collects reports of AI masks and other AI edits needing updates or disappearing. An Adobe staff reply in August 2025 linked one cause to a third-party plugin and said a fix had shipped. A community workaround that also circulates there involves moving a catalog data file and rerunning Update AI Settings. If you try it, back up your catalog first, and know that it isn't an official Adobe fix.
+
+"Recipe, not shape" cuts both ways. A frame where the subject is partly hidden, turned away, or sharing the frame with a similar-looking object can get a very different mask from your hero frame. Batch with confidence, but scroll the filmstrip before you export.
+
+The sidebar has notes on data handling and cost.
