@@ -9,11 +9,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-11
 updatedAt: 2026-10-11
 lastVerified: 2026-10-11
+reviewedBy: Ana M. Rivas
 disciplines:
   - Photo & Imaging
 art: sliders
@@ -40,6 +41,9 @@ sources:
     accessed: 2026-10-11
   - title: "AI masks require updating and/or disappear (Adobe Community, Lightroom Classic bugs, June 2024 onward)"
     url: https://community.adobe.com/t5/lightroom-classic-bugs/p-ai-masks-require-updating-and-or-disappear/idi-p/15347415/page/4
+    accessed: 2026-10-11
+  - title: "Develop Settings > Update AI Settings always greyed out (Adobe Community, Lightroom Classic discussions)"
+    url: https://community.adobe.com/t5/lightroom-classic-discussions/develop-settings-gt-update-ai-settings-always-greyed-out/td-p/13287065
     accessed: 2026-10-11
 summary:
   whatChanged: >-
@@ -100,7 +104,7 @@ The one idea that makes the rest click: when you sync or paste an AI mask, Light
 
 7. **Spot-check, especially group shots.** Masks that target a category (sky, subject, background) are the most dependable to batch. Masks that target a specific *person* are the riskiest: in a group portrait, Lightroom may pick a different person on the next frame, and a softening meant for one face lands on someone else's. For groups, consider using Select Subject for broad edits and handling individual-person masks frame by frame.
 
-8. **Turn a mask set you trust into a preset.** Since Lightroom Classic 11.4, presets can include AI masks, and they adapt to each image when applied. That makes a "house look" for a recurring kind of shoot practical. One caution: when a preset with AI masks is applied during import, the masks may need recomputing afterward. Look for the Update AI Settings command (older versions called it Update AI Masks) and run it on the batch.
+8. **Turn a mask set you trust into a preset.** Since Lightroom Classic 11.4, presets can include AI masks, and they adapt to each image when applied. That makes a "house look" for a recurring kind of shoot practical. One caution: when a preset with AI masks is applied during import, the masks may need recomputing afterward. Use the Update AI Settings command (older versions called it Update AI Masks) to recompute them. Run it from the Library module's Grid view (Photo > Develop Settings > Update AI Settings) with the whole batch selected. In the Develop module it's under Settings, but community experts note that from Develop's single-photo view it only updates the photo you're looking at.
 
 9. **Change the hero, then sync again.** If you tweak the hero frame's mask later, the other frames don't follow along. Re-select the series and sync again.
 
@@ -114,7 +118,7 @@ It's also useful outside photography proper. If you're prepping a set of lifesty
 
 The sources are old in places. Several of the most detailed guides date from 2022, when mask syncing and AI mask presets arrived in Lightroom Classic 11.4. The core behavior hasn't changed since, but menu names have drifted, so expect small differences in your version. The sources also focus on Lightroom Classic; we didn't confirm how closely the cloud-based Lightroom app matches.
 
-AI masks that need updating are a long-running pain point. An Adobe community thread that began in June 2024 collects reports of AI masks and other AI edits needing updates or disappearing. An Adobe staff reply in August 2025 linked one cause to a third-party plugin and said a fix had shipped. A community workaround that also circulates there involves moving a catalog data file and rerunning Update AI Settings. If you try it, back up your catalog first, and know that it isn't an official Adobe fix.
+AI masks that need updating are a long-running pain point. An Adobe community thread that began in June 2024 collects reports of AI masks and other AI edits needing updates or disappearing. In August 2025 an Adobe staff member linked one cause to a third-party plugin (Imagen AI) and said that month's update addressed the issue. The same staff reply pointed to a workaround from a longtime community expert, which involves rebuilding the catalog's .lrcat-data file (where Lightroom stores computed AI settings) and then rerunning Update AI Settings. If you try it, back up your catalog first.
 
 "Recipe, not shape" cuts both ways. A frame where the subject is partly hidden, turned away, or sharing the frame with a similar-looking object can get a very different mask from your hero frame. Batch with confidence, but scroll the filmstrip before you export.
 
