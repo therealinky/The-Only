@@ -34,6 +34,19 @@ main > .page-hero:first-child {
   z-index: 0;
 }
 
+/* Dark mode only: each hero's color glows multiply onto its base gradient
+   instead of lightening it, so the colors read deeper and richer against the
+   dark page. Light mode keeps the normal blend. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .page-hero__gradient {
+    background-blend-mode: multiply;
+  }
+}
+
+:root[data-theme='dark'] .page-hero__gradient {
+  background-blend-mode: multiply;
+}
+
 /* A soft, feathered streak in a complementary hue — depth on top of the
    base gradient, like a cirrus cloud banking diagonally out of frame.
    Screen-blended so it reads as a glow rather than a flat shape; drifts
