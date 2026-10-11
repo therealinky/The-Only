@@ -72,6 +72,7 @@ export const ART_MOTIFS = [
   'timeline',
   'tshirt',
   'tokens',
+  'trace',
   'wand',
   'waveform',
   'wheel',
@@ -727,6 +728,26 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
   },
   // A T-shirt with a round logo printed on the chest: vector art placed on
+  // A logo mark mid-trace: the left half is stair-stepped raster pixels, the
+  // right half a smooth vector arc with anchor points and handles.
+  trace: {
+    fills: [
+      outline(box(48, 8, 56, 16), 0.9),
+      outline(box(86, 46, 94, 54), 0.9),
+      outline(box(48, 84, 56, 92), 0.9),
+      dot(74, 12, 2.4),
+      dot(74, 88, 2.4),
+    ],
+    strokes: [
+      Array.from({ length: 25 }, (_, i) => {
+        const angle = -Math.PI / 2 + (i / 24) * Math.PI;
+        return { x: 52 + Math.cos(angle) * 38, y: 50 + Math.sin(angle) * 38 };
+      }),
+      poly([56, 12, 74, 12]),
+      poly([56, 88, 74, 88]),
+    ],
+    tones: [region(poly([44, 12, 26, 12, 26, 24, 14, 24, 14, 38, 6, 38, 6, 62, 14, 62, 14, 76, 26, 76, 26, 88, 44, 88]), 0.6)],
+  },
   // a product photo as a mockup.
   tshirt: {
     fills: [
