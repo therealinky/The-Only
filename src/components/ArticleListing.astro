@@ -13,6 +13,8 @@ interface Props {
   disciplineBase?: string;
   /** Show the discipline filter bar. Off for lists that aren't a section, like a tool's page. */
   showFilters?: boolean;
+  /** Show the "N articles" count. Off for short suggestion lists like Keep reading. */
+  showCount?: boolean;
   activeDiscipline?: Discipline;
   emptyMessage?: string;
   /** Show this many matching articles at first, with a "See more" button for the rest. */
@@ -24,6 +26,7 @@ const {
   allHref = '/',
   disciplineBase = '/discipline/',
   showFilters = true,
+  showCount = true,
   activeDiscipline,
   emptyMessage = 'No articles match this filter yet.',
   pageSize,
@@ -61,9 +64,13 @@ let matchIndex = 0;
   )
 }
 
-<p data-filter-count>
-  {visibleCount} {visibleCount === 1 ? 'article' : 'articles'}
-</p>
+{
+  showCount && (
+    <p data-filter-count>
+      {visibleCount} {visibleCount === 1 ? 'article' : 'articles'}
+    </p>
+  )
+}
 
 <div data-article-grid data-page-size={pageSize}>
   {
