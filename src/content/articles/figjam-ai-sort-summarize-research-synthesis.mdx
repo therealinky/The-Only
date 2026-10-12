@@ -1,0 +1,130 @@
+---
+title: "Using FigJam AI's sort and summarize as a first pass on research notes, not the synthesis itself"
+dek: >-
+  FigJam can group a wall of interview stickies by topic and write a summary
+  of each pile in seconds. Pulling together Figma's docs, a competing
+  approach in Miro, and what researchers have found when they test these
+  tools, here's how to use that speed without letting it make your calls.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-12
+updatedAt: 2026-10-12
+lastVerified: 2026-10-12
+disciplines:
+  - UI/UX
+art: stickies
+tools:
+  - FigJam
+sources:
+  - title: "Sort and summarize stickies with FigJam AI (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/18711926790423
+    accessed: 2026-10-12
+  - title: "Use AI tools in FigJam (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/16822138920343
+    accessed: 2026-10-12
+  - title: "Figma sweetens FigJam whiteboard tool with new AI features (TechCrunch, November 7, 2023)"
+    url: https://techcrunch.com/2023/11/07/figma-sweetens-figjam-whiteboard-tool-with-new-ai-features/
+    accessed: 2026-10-12
+  - title: "Cluster sticky notes with Miro AI (Miro Help Center)"
+    url: https://help.miro.com/hc/en-us/articles/4409706795410
+    accessed: 2026-10-12
+  - title: "Cluster by keyword: an easy, intelligent way to analyze input (Miro Community product news)"
+    url: https://community.miro.com/product-news-31/cluster-by-keyword-an-easy-intelligent-way-to-analyze-input-11735
+    accessed: 2026-10-12
+  - title: "Human vs. machine: testing AI's ability to synthesize and analyze research, Laura Klein, Advancing Research 2026 (Rosenfeld Media, March 11, 2026)"
+    url: https://rosenverse.rosenfeldmedia.com/videos/human-vs-machine-testing-ais-ability-to-synthesize-and-analyze-research
+    accessed: 2026-10-12
+  - title: "The Emerging Use of GenAI for UX Research in Software Development: Challenges and Opportunities (arXiv, December 17, 2025)"
+    url: https://arxiv.org/abs/2512.15944v1
+    accessed: 2026-10-12
+  - title: "How to Synthesize Research Findings (Without Losing Signal) (Articos blog, September 3, 2026)"
+    url: https://www.articos.com/blog/research-synthesis
+    accessed: 2026-10-12
+  - title: "How to Create an AI-Generated Affinity Diagram for UX Research (Coherent, July 6, 2026)"
+    url: https://coherent.agency/post/ai-generated-affinity-diagram
+    accessed: 2026-10-12
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Figma's documentation, Miro's
+    competing clustering feature, a Nielsen Norman Group talk, an academic
+    study, and practitioner guides on using AI to group and summarize
+    research notes on a whiteboard.
+  whyItMatters: >-
+    Clustering hundreds of stickies is the slowest, most mechanical part of
+    affinity mapping. AI can take that first pass, but the sources agree it
+    can't judge which patterns matter, and its polished output makes
+    mistakes easy to miss.
+  bestFor: >-
+    Product and UX designers running their own interviews or usability
+    sessions, and small teams synthesizing in FigJam without a dedicated
+    research tool.
+  timeToTry: >-
+    Half an hour on notes from a past round of research you've already
+    synthesized by hand, so you can compare what the AI found with what
+    you found.
+beforeYouUse:
+  clientData: >-
+    known: per Figma's help docs, the text you send to FigJam AI goes to
+    OpenAI for processing and is temporarily retained there, and Figma's
+    agreement with OpenAI says it isn't used for model training. Research
+    notes often contain participant details, so check your consent forms and
+    any client NDA before running them through it, and strip names first.
+  usageRights: >-
+    not applicable: the output is a regrouping and summary of your own notes,
+    not new creative work.
+  disclosure: >-
+    known: Figma labels some AI outputs, including summaries, as
+    AI-generated, and its docs ask you to disclose AI-generated content. If
+    an AI summary ends up in a research readout, say so.
+  accessibility: >-
+    not applicable: this is an internal synthesis technique, not a published
+    interface or document.
+  cost: >-
+    not verified: Figma's docs say FigJam AI needs a paid plan and a Full,
+    Dev, or Collab seat. We didn't find current per-use credit costs for
+    sorting or summarizing in the pages we read, so check your plan.
+---
+FigJam's AI can sort a selection of stickies into groups and write a summary of any pile you point it at. For anyone who's spent an afternoon dragging 300 interview notes around a board, that's a real time saver. It's also exactly where research synthesis is most likely to go quietly wrong.
+
+This walkthrough is synthesized from Figma's own documentation, Miro's competing clustering feature, a Nielsen Norman Group talk and an academic study on how well AI handles research synthesis, and a couple of practitioner guides, plus general FigJam knowledge. It isn't any one person's process, and we haven't run it end to end on a study of our own.
+
+The idea that holds it together: let the AI do the sorting, and keep the deciding for yourself. Nielsen Norman Group's testing, presented at Advancing Research 2026, found that AI tools can speed up experienced researchers a little but hallucinate findings, miss meaningful patterns, and produce shallow summaries. They also found that the output looks polished enough to hide those flaws. The same talk noted AI does better at grouping data that humans have already coded.
+
+1. **Write atomic notes.** One observation, quote, or behavior per sticky, written plainly enough to make sense on its own. AI grouping works on the words in each note, so "P4: couldn't find export, went to Help" sorts far better than "export??".
+
+2. **Encode the participant in color, not authorship.** FigJam can sort by Author, but that means whoever typed the sticky, which in a team synthesis is the note-taker, not the participant. Give each participant or session its own sticky color and put an ID at the start of each note. That gives you a way to check later whether a theme comes from many people or from one talkative participant.
+
+3. **Do a light coding pass first.** Before you hand anything to the AI, skim the notes and add short tags or labels where the meaning isn't obvious from the words alone (for example, "workaround" or "trust issue"). This matches what Nielsen Norman Group saw working best, and it gives the AI something firmer than raw phrasing to group on.
+
+4. **Sort by Topic.** Select the stickies, click Organize in the selection toolbar, and choose Sort stickies, then Topic. FigJam copies the selection into a new section and groups the copies, so your original notes stay where they were. That's useful: keep the original wall as your source of truth.
+
+5. **Treat every group as a guess.** Go through each cluster and ask whether the notes actually belong together, or just share a word. One practitioner guide notes that AI clustering tends to stay surface-level and keyword-driven, so two notes that both mention "search" might land together even though one is a complaint and the other is praise. Move misfits by hand and rename each section in your own words.
+
+6. **Check breadth with your colors.** Look at each cluster's mix of sticky colors. A cluster that's mostly one color is one participant's story, however big it looks. One guide's rule of thumb is to treat themes with thin support as hypotheses rather than findings. Frequency isn't the same as importance either, and that judgment stays with you.
+
+7. **Summarize per cluster, then edit.** Select two or more stickies in a cluster, click Organize, then Summarize. The summary appears as a new object on the board. You can't edit it directly, so copy its text into a sticky or text box and rewrite it. Use the summary as a draft label, not an insight. Every sentence you keep should point back to specific notes on the wall.
+
+8. **Write the insights yourself.** The "so what" (which pattern matters, why, and what the team should do about it) is the part every source here says AI can't do well. Draft it as a team. The AI-sorted board is the material, not the conclusion.
+
+**A different approach worth knowing.** Miro clusters stickies by keyword or by sentiment rather than by topic, and it generates a keyword title for each cluster. Keyword clustering is more literal and easier to predict, which makes its mistakes easier to spot. Sentiment clustering is handy for a quick split of usability feedback into positive and negative. FigJam's topic sort tries to read meaning, which can produce better first groupings but makes it harder to see why a note landed where it did. Either way, step 5 still applies.
+
+**Where the sources disagree.** One guide suggests asking an AI to generate an affinity diagram from a description of your product before any research exists, then treating its themes as questions to investigate. That can help you plan interviews, but it isn't synthesis. Nothing on that board came from a user, and it should never sit next to real findings looking like one.
+
+## Why it matters for designers
+
+Plenty of product designers run their own research without a dedicated researcher or a research repository tool, and the synthesis step is where time runs out. Doing the mechanical grouping in seconds means more of that time can go to the interpretive work that actually changes a design.
+
+It also helps with a team dynamic that a recent academic study picked up on. In interviews with UX researchers, product managers, and designers, researchers expressed limited trust in AI results, while product managers often overestimated what AI could do. A visible process, with AI sorting on one side and human-checked themes on the other, makes it easier to show a stakeholder what the AI did and didn't decide.
+
+## What to watch out for
+
+Polished output is the main risk. A neatly labeled cluster with a confident summary looks finished. Nielsen Norman Group's warning is that closer inspection can reveal gaps that could mislead stakeholders. Budget real time for step 5.
+
+Watch what's in your notes. Research notes often carry names, job titles, and details participants shared in confidence. The sidebar covers where FigJam AI sends text. If your consent forms don't cover third-party AI processing, anonymize before you sort.
+
+Figma's documentation on these features has changed over time, including how AI access is priced, and older pages describe them as a free beta. Check what your plan includes today.
+
+The sources here cover the features and the research on AI synthesis in general. None of them is a hands-on accuracy test of FigJam's topic sort specifically, so treat its groupings with the same skepticism you'd give any AI first draft.
