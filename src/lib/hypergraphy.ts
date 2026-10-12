@@ -63,11 +63,13 @@ export const ART_MOTIFS = [
   'plug',
   'ratios',
   'reel',
+  'rerun',
   'ribbon',
   'seal',
   'sliders',
   'sparkle',
   'sphere',
+  'stickies',
   'swatches',
   'timeline',
   'tshirt',
@@ -640,6 +642,19 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [region(box(14, 20, 86, 72), 0.12)],
   },
+  // A rerun arrow circling an image frame: the model checks a finished
+  // picture against the prompt and goes around again.
+  rerun: {
+    fills: [outline(poly([79, 8, 93, 26, 71, 28]), 1)],
+    strokes: [
+      Array.from({ length: 29 }, (_, i) => {
+        const angle = -Math.PI / 3 + (i / 28) * (Math.PI * 5) / 3;
+        return { x: 50 + Math.cos(angle) * 40, y: 52 + Math.sin(angle) * 40 };
+      }).reverse(),
+      frame(32, 36, 68, 66),
+    ],
+    tones: [region(poly([34, 64, 46, 48, 54, 58, 60, 52, 66, 64]), 0.75), region(circle(58, 43, 3.5, 12), 0.8)],
+  },
   // A single flowing brush stroke with an ink-blot accent.
   ribbon: {
     fills: [dot(93, 22, 3.4)],
@@ -700,6 +715,17 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(ellipse(52, 90, 30, 5), 0.5),
     ],
     strokeTone: 0.7,
+  },
+  // Sticky notes sorted into three clusters, each cluster its own shade:
+  // a whiteboard of research notes grouped by theme.
+  stickies: {
+    fills: [
+      ...[8, 34, 60].map((y) => outline(box(6, y, 26, y + 18), 0.3)),
+      ...[8, 34].map((y) => outline(box(40, y, 60, y + 18), 0.6)),
+      ...[8, 34, 60].map((y) => outline(box(74, y, 94, y + 18), 0.9)),
+    ],
+    strokes: [poly([6, 92, 26, 92]), poly([40, 92, 60, 92]), poly([74, 92, 94, 92])],
+    tones: [],
   },
   // A palette of six color chips, light to dark.
   swatches: {
