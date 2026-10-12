@@ -1642,3 +1642,15 @@ img.media__frame {
   font-size: var(--text-sm);
   font-weight: 600;
 }
+
+/* ---------- Keep reading (related articles under each article) ---------- */
+
+.keep-reading {
+  margin-block-start: var(--space-8);
+  padding-block-start: var(--space-6);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.keep-reading h2 {
+  margin-block: 0 var(--space-5);
+}

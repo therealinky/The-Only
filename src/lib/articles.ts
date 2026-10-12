@@ -87,3 +87,25 @@ export async function getNavItems() {
   const showTryIt = await hasTryIt();
   return NAV_ITEMS.filter((item) => item.href !== '/try-it/' || showTryIt);
 }
+
+/**
+ * Up to `count` published articles to suggest after `article` ("Keep
+ * reading"). Shared tools count most, then shared disciplines; ties go to the
+ * most recent. If too few articles share anything, the newest ones fill in.
+ * Never the article itself, drafts, or withdrawn articles.
+ */
+export async function getRelatedArticles(article: Article, count = 3): Promise<Article[]> {
+  const candidates = (await getListableArticles()).filter((entry) => entry.id !== article.id);
+  const tools = new Set(article.data.tools);
+  const disciplines = new Set<string>(article.data.disciplines);
+  const score = (entry: Article) =>
+    entry.data.tools.filter((tool) => tools.has(tool)).length * 3 +
+    entry.data.disciplines.filter((d) => disciplines.has(d)).length;
+  // getListableArticles is newest first, and sort is stable, so equal scores
+  // stay newest first.
+  return candidates
+    .map((entry) => ({ entry, score: score(entry) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, count)
+    .map(({ entry }) => entry);
+}

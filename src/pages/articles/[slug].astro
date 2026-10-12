@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import ArticleBanners from '../../components/ArticleBanners.astro';
+import ArticleListing from '../../components/ArticleListing.astro';
 import ArticleSidebar from '../../components/ArticleSidebar.astro';
 import EvidenceBadge from '../../components/EvidenceBadge.astro';
 import FormatBadge from '../../components/FormatBadge.astro';
@@ -8,7 +9,7 @@ import HypergraphicArt from '../../components/HypergraphicArt.astro';
 import Media from '../../components/Media.astro';
 import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getRenderableArticles } from '../../lib/articles';
+import { getRelatedArticles, getRenderableArticles } from '../../lib/articles';
 import { formatDate } from '../../lib/format-date';
 import { slugify } from '../../lib/slugify';
 import { getReadingTime } from '../../lib/read-time';
@@ -28,6 +29,7 @@ const isWithdrawn = data.status === 'withdrawn';
 const { Content, headings } = await render(article);
 const hasTutorial = headings.some((h) => h.slug === 'tutorial');
 const readingTime = getReadingTime(article.body ?? data.dek);
+const related = isWithdrawn ? [] : await getRelatedArticles(article);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -133,4 +135,13 @@ const structuredData = {
       )
     }
   </article>
+
+  {
+    related.length > 0 && (
+      <section class="keep-reading" aria-labelledby="keep-reading">
+        <h2 id="keep-reading">Keep reading</h2>
+        <ArticleListing articles={related} showFilters={false} showCount={false} />
+      </section>
+    )
+  }
 </BaseLayout>
