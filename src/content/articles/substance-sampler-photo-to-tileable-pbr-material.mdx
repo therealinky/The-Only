@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-13
 updatedAt: 2026-10-13
 lastVerified: 2026-10-13
+reviewedBy: Ana M. Rivas
 disciplines:
   - 3D
 art: bricks
@@ -71,8 +72,10 @@ summary:
     stone can take a few minutes, while hero materials take longer.
 beforeYouUse:
   clientData: >-
-    not verified: Adobe's Sampler docs we read don't say whether Image to
-    Material runs on your machine or in the cloud. The Generative (Beta)
+    not verified: Adobe's Sampler docs we read don't say outright whether
+    Image to Material runs on your machine or in the cloud, though a
+    troubleshooting page points to a "GPU accelerated Neural Networks"
+    preference, which suggests the AI step runs locally. The Generative (Beta)
     panel is a separate, generative feature, so treat prompts and
     reference images there as leaving your machine. Check before using a
     client's proprietary surface or product.
@@ -99,7 +102,7 @@ Substance 3D Sampler can take a single photo of a surface, like a stone wall, a 
 
 This guide pulls together Adobe's own documentation and tutorials, Poly Haven's published standards for photo-based textures, and independent write-ups on making materials from photos and from AI-generated images, plus general Sampler know-how. It's a synthesis, not a process we've tested end to end ourselves, and we point out where the sources take different approaches.
 
-1. **Shoot the surface for a material, not a nice photo.** The goal is a flat, evenly lit image with as little light and shadow baked in as possible. Shoot square-on to the surface so there's no perspective to undo, and on an overcast day or in soft, even light rather than direct sun. Adobe's tutorial says a smartphone works as well as a DSLR for this. Two extra habits help later: put something with a known size in a test shot so you can set the real-world scale, and include a gray card or other neutral surface so you can check white balance. If you're out and about, Adobe Capture on your phone can preview the result and send it to Sampler.
+1. **Shoot the surface for a material, not a nice photo.** The goal is a flat, evenly lit image with as little light and shadow baked in as possible. Shoot square-on to the surface so there's no perspective to undo, and on an overcast day or in soft, even light rather than direct sun. Adobe's tutorial shoots its sample with a DSLR but says a smartphone works too. Two extra habits help later: put something with a known size in a test shot so you can set the real-world scale, and include a gray card or other neutral surface so you can check white balance. If you're out and about, Adobe Capture on your phone can preview the result and send it to Sampler.
 
 2. **Pick the right algorithm.** Drag the photo into Sampler and choose Image to Material. It has two modes. **AI Powered** uses machine learning to recognize shapes and generate normal, height, and roughness maps, and it also strips shadows and highlights out of the base color. Since Sampler 4.2 you can tell it what kind of material you're feeding it, like fabric, wood, or leather, which helps it generate more accurate channels, so try a couple of categories and keep the best. **B2M** is the older procedural method. Adobe says it can be less accurate but works on a wider range of images. If AI Powered gets confused by an unusual surface, B2M is your fallback.
 
@@ -115,7 +118,7 @@ This guide pulls together Adobe's own documentation and tutorials, Poly Haven's 
 
 8. **Export the right way for where it's going.** Export as an SBSAR if you want to keep those exposed controls in other Substance apps, or as bitmaps for Blender, a game engine, or a web 3D tool. If you need more resolution, Sampler's AI Upscale can double or quadruple it, and Adobe recommends running it on data at its original resolution rather than something you've already resized.
 
-**No photo of the right surface?** Sampler's Generative (Beta) panel has Text-to-Texture and Image-to-Texture. Image-to-Texture takes a reference image of any aspect ratio and gives back square, tiling textures, four variations at a time, and you can run Image to Material on the result. People were already doing a version of this with earlier image generators. It's a useful starting point, but a generated texture isn't a measured surface, so treat the scale and color as guesses.
+**No photo of the right surface?** Sampler's Generative (Beta) panel has three generative features: Text-to-Texture, Text-to-Pattern, and Image-to-Texture. Image-to-Texture takes a reference image of any aspect ratio and gives back square, tiling textures, four variations at a time, and you can run Image to Material on the result. People were already doing a version of this with earlier image generators. It's a useful starting point, but a generated texture isn't a measured surface, so treat the scale and color as guesses.
 
 ## Why it matters for designers
 
@@ -125,6 +128,6 @@ The steps also transfer. Once you understand delighting, tiling, and checking fo
 
 ## What to watch out for
 
-The sources set very different quality bars, and that's worth knowing. Adobe's tutorials show a phone photo and a few filters producing a usable material in minutes. Poly Haven's published standards, aimed at materials meant to look right in any scene, ask for much more: color calibrated against a chart, real-world dimensions measured accurately, very high resolution reached without upscaling, and ideally a cross-polarized flash rig to remove reflections. Neither is wrong. Decide which one your project needs before you start.
+The sources set very different quality bars, and that's worth knowing. Adobe's tutorials show a phone photo and a few filters producing a usable material in minutes. Poly Haven's published standards, aimed at materials meant to look right in any scene, ask for much more: maps at least 8192 x 8192 pixels reached without upscaling, saved as 16-bit PNGs, color calibrated against a color chart or a known white or gray surface, real-world dimensions measured to within 5%, and ideally a cross-polarized ring flash to remove reflections. (They do allow an overcast day for very diffuse surfaces.) Neither is wrong. Decide which one your project needs before you start.
 
 The AI mode has quirks. Adobe's own troubleshooting page says AI Powered results sometimes come out with the wrong colors, and suggests toggling GPU-accelerated neural networks in Sampler's preferences. Delighting can't fully rescue a photo shot in hard sunlight, so a better source photo usually beats more filters. And some of the independent write-ups we drew on are a few years old, so menus and filter names may have moved since. Adobe has been moving its Sampler docs to Experience League, which is the place to check current names.
