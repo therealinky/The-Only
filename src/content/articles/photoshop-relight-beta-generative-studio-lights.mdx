@@ -1,0 +1,75 @@
+---
+title: "Photoshop's beta can now relight a photo with up to three movable lights"
+dek: >-
+  Relight is a new generative layer in the Photoshop beta. You drag lights
+  around the canvas, set their color and softness, and Photoshop replaces
+  the photo's lighting on a separate layer. Each final render costs 30
+  generative credits.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-13
+updatedAt: 2026-10-13
+lastVerified: 2026-10-13
+disciplines:
+  - Photo & Imaging
+art: spotlight
+tools:
+  - Adobe Photoshop
+sources:
+  - title: "Relight is now available in Photoshop Beta! (Adobe Community, September 28, 2026)"
+    url: https://community.adobe.com/announcements-698/relight-is-now-available-in-photoshop-beta-1644153
+    accessed: 2026-10-13
+  - title: "Photoshop 27.10: New AI editing tools, Light adjustment layer, and more (Adobe Community, August 28, 2026)"
+    url: https://community.adobe.com/announcements-710/photoshop-27-10-new-ai-editing-tools-light-adjustment-layer-and-more-1639062
+    accessed: 2026-10-13
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's post says Relight needs an active internet
+    connection, so the image is processed online, but it doesn't describe
+    how relit images are handled or stored. Check your client agreement
+    before relighting their photos.
+  usageRights: >-
+    not verified: the announcement doesn't mention usage rights. We'd
+    assume Adobe's usual generative AI terms apply, but we didn't confirm
+    that for a beta feature.
+  disclosure: >-
+    not verified: nothing in the post covers labeling or Content
+    Credentials for Relight results. Changing the light in a photo can
+    change what it shows, so think about disclosure for editorial or
+    documentary work.
+  accessibility: >-
+    not applicable: this is a photo editing feature, not a published
+    interface or document.
+  cost: >-
+    known: Adobe's post says each click of Done costs 30 generative
+    credits. The post ties the cost to Done, so plan on paying again each
+    time you edit a Relight layer and render it.
+---
+Adobe added a generative relighting tool to the Photoshop beta, announced in its community forum on September 28. It's called Relight, and it does something no slider in Photoshop could do before: put new lights into a photo that wasn't shot with them, and let you move those lights around afterward.
+
+## What changed
+
+**A new Relight layer.** Select an unlocked Pixel, Rotate Object, or Smart Object layer, then choose Layer > New Relight layer (it's also in the Layers panel menu). Your original pixels stay untouched, and the relit version lives on its own Relight Layer, so you can turn it off or come back to it later from the Layer menu.
+
+**Up to three lights you can drag.** A white light appears in the middle of the image. You can move it anywhere on the canvas, even outside the image as long as it stays above the bottom edge, and add up to two more. Each one has its own position, intensity, color, and diffusion. You always need at least one.
+
+**It replaces the light, not just adds to it.** Adobe says Relight swaps out the photo's existing lighting for yours. If you hide every light, what's left is the ambient or original light.
+
+**Preview first, render at the end.** While you're adjusting, you're looking at a low-resolution preview. Clicking Done generates the final result at the image's full resolution. Adobe also says Relight works with Actions and scripting.
+
+This is a different tool from the Light adjustment layer that arrived in Photoshop 27.10 in August. That one is a non-destructive tonal adjustment for exposure, contrast, highlights, and shadows. Relight is generative and changes where the light comes from.
+
+## Why it matters for designers
+
+Relighting is one of the hardest things to fake by hand. Fixing a flat product shot, matching a cut-out subject to a new background, or warming one side of a portrait used to mean dodging and burning, painted gradients, or a reshoot. Being able to place a light, change its color, and soften it, then move it again without starting over, makes that a few minutes of exploration instead of an afternoon.
+
+It also pairs naturally with compositing. If you already use Harmonize or careful masking to drop a subject into a new scene, the light direction is often the giveaway. A movable light on its own layer gives you a direct way to fix that.
+
+## What to watch out for
+
+It's beta only, and it costs credits. Each Done click is 30 generative credits according to Adobe, and editing a Relight layer means rendering again. Early replies in the announcement thread push back on that cost for a beta feature, and some report that fine detail can soften in the final render, so zoom in before you send anything.
+
+Those same replies ask for things like a separate brightness control, which suggests the controls are still settling. We haven't tried Relight ourselves, so the results described here are Adobe's own. The build numbers in the post also don't quite match each other, so if you don't see Layer > New Relight layer, update the Photoshop beta in the Creative Cloud app and check again.

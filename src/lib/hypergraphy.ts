@@ -32,6 +32,7 @@ export const ART_MOTIFS = [
   'bag',
   'blend',
   'bolt',
+  'bricks',
   'browser',
   'bubbles',
   'camera',
@@ -69,6 +70,7 @@ export const ART_MOTIFS = [
   'sliders',
   'sparkle',
   'sphere',
+  'spotlight',
   'stickies',
   'swatches',
   'timeline',
@@ -262,6 +264,24 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   bolt: {
     fills: [outline(poly([60, 4, 22, 56, 46, 56, 36, 96, 80, 40, 56, 40, 68, 4]), 0.7)],
     strokes: [poly([82, 14, 90, 6]), poly([86, 26, 96, 24]), poly([16, 78, 8, 86])],
+    tones: [],
+  },
+  // A brick wall: four courses of bricks in a running bond, each shaded a
+  // little differently like a photographed surface.
+  bricks: {
+    fills: [
+      outline(box(4, 6, 44, 22), 0.3),
+      outline(box(52, 6, 96, 22), 0.5),
+      outline(box(4, 30, 20, 46), 0.45),
+      outline(box(28, 30, 68, 46), 0.2),
+      outline(box(76, 30, 96, 46), 0.35),
+      outline(box(4, 54, 44, 70), 0.55),
+      outline(box(52, 54, 96, 70), 0.25),
+      outline(box(4, 78, 20, 94), 0.2),
+      outline(box(28, 78, 68, 94), 0.4),
+      outline(box(76, 78, 96, 94), 0.5),
+    ],
+    strokes: [],
     tones: [],
   },
   // A browser window: traffic lights, address bar, hero block, three cards.
@@ -715,6 +735,17 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(ellipse(52, 90, 30, 5), 0.5),
     ],
     strokeTone: 0.7,
+  },
+  // A studio spotlight on a stand, throwing a widening beam across a round
+  // subject.
+  spotlight: {
+    fills: [
+      outline(box(6, 16, 24, 34), 0.75),
+      outline(poly([24, 12, 34, 6, 34, 44, 24, 38]), 0.6),
+      outline(circle(72, 74, 11), 0.45),
+    ],
+    strokes: [poly([15, 34, 15, 80]), poly([15, 80, 4, 94]), poly([15, 80, 26, 94])],
+    tones: [region(poly([34, 8, 96, 36, 96, 98, 34, 42]), 0.28)],
   },
   // Sticky notes sorted into three clusters, each cluster its own shade:
   // a whiteboard of research notes grouped by theme.
