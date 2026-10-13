@@ -1,0 +1,133 @@
+---
+title: "Turning one photo into a tileable 3D material with Substance 3D Sampler"
+dek: >-
+  Sampler's AI-powered Image to Material can pull a full PBR material out of
+  a single phone photo. Getting one that tiles cleanly and holds up on a
+  render takes a few more steps. Here's the path, pulled together from
+  Adobe's docs and several independent guides.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+example: false
+publishedAt: 2026-10-13
+updatedAt: 2026-10-13
+lastVerified: 2026-10-13
+reviewedBy: Ana M. Rivas
+disciplines:
+  - 3D
+art: bricks
+tools:
+  - Adobe Substance 3D Sampler
+  - Adobe Capture
+sources:
+  - title: "Image To Material (Adobe Substance 3D Sampler documentation, updated April 7, 2026)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/filters/tools/image-to-material
+    accessed: 2026-10-13
+  - title: "Make it Tile (Adobe Substance 3D Sampler documentation)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/filters/tools/make-it-tile
+    accessed: 2026-10-13
+  - title: "Delight (AI Powered) (Adobe Substance 3D Sampler documentation)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/filters/tools/delight-ai-powered
+    accessed: 2026-10-13
+  - title: "Generative Workflows (Adobe Substance 3D Sampler documentation, updated April 10, 2026)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/features-and-workflows/generative-workflows
+    accessed: 2026-10-13
+  - title: "Image to Material visual artefacts (Adobe Substance 3D Sampler documentation)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/technical-support/filter-issues/image-to-material-visual-artefacts
+    accessed: 2026-10-13
+  - title: "Version 4.2 release notes (Adobe Substance 3D Sampler, September 5, 2023)"
+    url: https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/release-notes/version-4-2
+    accessed: 2026-10-13
+  - title: "Image to Material (Adobe Substance 3D Sampler tutorial, July 17, 2024)"
+    url: https://www.adobe.com/learn/substance-3d-sampler/web/image-to-material
+    accessed: 2026-10-13
+  - title: "Texture Requirements (Poly Haven technical standards)"
+    url: https://docs.polyhaven.com/en/technical-standards/textures
+    accessed: 2026-10-13
+  - title: "Tutorial: Creating Materials With Substance 3D Sampler's 3D Capture (80 Level, February 22, 2023)"
+    url: https://80.lv/articles/tutorial-creating-materials-with-substance-3d-sampler-s-3d-capture/
+    accessed: 2026-10-13
+  - title: "Tutorial: Creating Materials With DALL-E 2 & Substance 3D (80 Level, June 24, 2022)"
+    url: https://80.lv/articles/tutorial-creating-materials-with-dall-e-2-substance-3d
+    accessed: 2026-10-13
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's Sampler documentation and
+    tutorials, Poly Haven's published texture standards, and independent
+    write-ups on turning photos (and AI-generated images) into PBR
+    materials, plus general Sampler technique.
+  whyItMatters: >-
+    Custom materials are what make a product render, a packaging mockup,
+    or a 3D scene look specific instead of stock. A photo of the real
+    surface is the fastest way to get one, if you know where the AI step
+    needs help.
+  bestFor: >-
+    3D artists, product and packaging designers, and motion designers who
+    build scenes in Substance, Blender, Stager, or a game engine and want
+    materials based on real surfaces.
+  timeToTry: >-
+    An hour or so to work through it once with a surface you've already
+    photographed. After that, a simple material like fabric, plaster, or
+    stone can take a few minutes, while hero materials take longer.
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's Sampler docs we read don't say outright whether
+    Image to Material runs on your machine or in the cloud, though a
+    troubleshooting page points to a "GPU accelerated Neural Networks"
+    preference, which suggests the AI step runs locally. The Generative (Beta)
+    panel is a separate, generative feature, so treat prompts and
+    reference images there as leaving your machine. Check before using a
+    client's proprietary surface or product.
+  usageRights: >-
+    not verified: for your own photos, the main question is what you
+    photographed. A branded or designed surface, like a printed fabric or
+    someone's mural, carries its own rights. Adobe's docs don't address
+    rights for materials generated in the Generative (Beta) panel.
+  disclosure: >-
+    not applicable: a material made from your own photo is a normal
+    texturing process. If you build one from a generated image, follow
+    your usual AI disclosure practice.
+  accessibility: >-
+    not applicable: this is a 3D texturing workflow, not a published
+    interface or document.
+  cost: >-
+    known: Image to Material is part of Substance 3D Sampler, which needs a
+    Substance 3D subscription. Adobe's docs say Image to Material in the
+    Adobe Capture app needs a Substance 3D Collection subscription, and
+    that the generative Sampler features don't use generative credits
+    while they're in beta.
+---
+Substance 3D Sampler can take a single photo of a surface, like a stone wall, a piece of leather, or a weathered plank, and turn it into a full PBR material: base color, normal, height, roughness, and more. The AI-powered version of that feature does a lot of the heavy lifting. What it doesn't do on its own is give you something that repeats without seams, sits at the right scale, and looks right under new light.
+
+This guide pulls together Adobe's own documentation and tutorials, Poly Haven's published standards for photo-based textures, and independent write-ups on making materials from photos and from AI-generated images, plus general Sampler know-how. It's a synthesis, not a process we've tested end to end ourselves, and we point out where the sources take different approaches.
+
+1. **Shoot the surface for a material, not a nice photo.** The goal is a flat, evenly lit image with as little light and shadow baked in as possible. Shoot square-on to the surface so there's no perspective to undo, and on an overcast day or in soft, even light rather than direct sun. Adobe's tutorial shoots its sample with a DSLR but says a smartphone works too. Two extra habits help later: put something with a known size in a test shot so you can set the real-world scale, and include a gray card or other neutral surface so you can check white balance. If you're out and about, Adobe Capture on your phone can preview the result and send it to Sampler.
+
+2. **Pick the right algorithm.** Drag the photo into Sampler and choose Image to Material. It has two modes. **AI Powered** uses machine learning to recognize shapes and generate normal, height, and roughness maps, and it also strips shadows and highlights out of the base color. Since Sampler 4.2 you can tell it what kind of material you're feeding it, like fabric, wood, or leather, which helps it generate more accurate channels, so try a couple of categories and keep the best. **B2M** is the older procedural method. Adobe says it can be less accurate but works on a wider range of images. If AI Powered gets confused by an unusual surface, B2M is your fallback.
+
+3. **Work at a lower resolution, then crop.** Adobe notes that the AI mode takes longer on high-resolution images and suggests using Sampler's layer resolution settings to keep things responsive while you build the stack. Next, add a Crop filter to trim any stretched or distorted edges before you deal with tiling. Sampler filters stack like Photoshop layers: each one affects everything under it.
+
+4. **Make it tile.** Add **Make it Tile**. It overlays offset copies of your material and blends the seams with patches you control. Threshold, Smoothness, Contrast, and Color Equalizer do most of the work, and Height Matching changes how the height maps blend (check it in the 2D view's height channel). Then turn up texture tiling in the viewer, to around four repeats, to see what really happens at scale. Adobe's docs say Make it Tile works best on even, grid-like surfaces with no single eye-catching spot. If yours has one, try the separate Tiling filter instead, which works differently.
+
+5. **Hunt down the repeat.** A material can tile without seams and still give itself away with one distinctive crack or knot showing up over and over. Use **Equalize** to even out uneven lighting or color across the photo, then **Clone Stamp** over anything that stands out too much. It's the step that turns a quick material into a usable one.
+
+6. **Delight only if you used B2M.** Adobe's **Delight (AI Powered)** filter removes lighting from the base color and has no settings. The docs are specific about order: put it at the top of the stack, after extracting the channels and making the material tile. They also say not to use it with AI Powered Image to Material, which already includes a delighting pass.
+
+7. **Check it on a real shape, then expose what you'll tweak.** Look at the material on a sphere and a flat plane under a few lighting setups, not just the default. Then pin the parameters you'll want to adjust later, like a target color, roughness, or normal intensity, so they show up as simple controls when you use the material elsewhere.
+
+8. **Export the right way for where it's going.** Export as an SBSAR if you want to keep those exposed controls in other Substance apps, or as bitmaps for Blender, a game engine, or a web 3D tool. If you need more resolution, Sampler's AI Upscale can double or quadruple it, and Adobe recommends running it on data at its original resolution rather than something you've already resized.
+
+**No photo of the right surface?** Sampler's Generative (Beta) panel has three generative features: Text-to-Texture, Text-to-Pattern, and Image-to-Texture. Image-to-Texture takes a reference image of any aspect ratio and gives back square, tiling textures, four variations at a time, and you can run Image to Material on the result. People were already doing a version of this with earlier image generators. It's a useful starting point, but a generated texture isn't a measured surface, so treat the scale and color as guesses.
+
+## Why it matters for designers
+
+Stock material libraries are great until a client needs their actual brick, their packaging board, or their upholstery fabric. A photo plus Sampler gets you there quickly, and the extra steps above are what separate a material that looks fine on a thumbnail from one that holds up on a full-screen product render.
+
+The steps also transfer. Once you understand delighting, tiling, and checking for repeats, you'll spot the same problems in materials from any tool, including the AI texture generators that keep showing up inside 3D apps.
+
+## What to watch out for
+
+The sources set very different quality bars, and that's worth knowing. Adobe's tutorials show a phone photo and a few filters producing a usable material in minutes. Poly Haven's published standards, aimed at materials meant to look right in any scene, ask for much more: maps at least 8192 x 8192 pixels reached without upscaling, saved as 16-bit PNGs, color calibrated against a color chart or a known white or gray surface, real-world dimensions measured to within 5%, and ideally a cross-polarized ring flash to remove reflections. (They do allow an overcast day for very diffuse surfaces.) Neither is wrong. Decide which one your project needs before you start.
+
+The AI mode has quirks. Adobe's own troubleshooting page says AI Powered results sometimes come out with the wrong colors, and suggests toggling GPU-accelerated neural networks in Sampler's preferences. Delighting can't fully rescue a photo shot in hard sunlight, so a better source photo usually beats more filters. And some of the independent write-ups we drew on are a few years old, so menus and filter names may have moved since. Adobe has been moving its Sampler docs to Experience League, which is the place to check current names.
