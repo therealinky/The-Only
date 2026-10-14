@@ -948,6 +948,142 @@ main {
   }
 }
 
+/* List layout (ArticleListing's default): the newest visible article as a
+   wide feature card, then a two-column list of rows with square, padded
+   thumbnails. Two columns keep summaries near 50 to 60 characters a line.
+   "Newest visible" is the first item not hidden by the discipline filter,
+   so the feature follows the filter. Keep reading uses layout="cards" and
+   keeps the even grid above. */
+[data-article-grid][data-layout='list'] {
+  grid-template-columns: 1fr;
+  column-gap: var(--space-7);
+  row-gap: 0;
+}
+
+@media (min-width: 48rem) {
+  [data-article-grid][data-layout='list'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) {
+  grid-column: 1 / -1;
+  margin-block-end: var(--space-5);
+}
+
+@media (min-width: 48rem) {
+  [data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr auto auto;
+    column-gap: var(--space-6);
+    padding: var(--space-6);
+  }
+
+  [data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__art {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    margin: calc(-1 * var(--space-6)) 0 calc(-1 * var(--space-6)) calc(-1 * var(--space-6));
+    aspect-ratio: auto;
+    min-height: 340px;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) - 1px) 0 0 calc(var(--radius-md) - 1px);
+  }
+
+  [data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card > :not(.article-card__art) {
+    grid-column: 2;
+  }
+
+  [data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__meta {
+    margin-block-start: var(--space-2);
+  }
+
+  [data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card h2 {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    margin-block-end: var(--space-3);
+  }
+}
+
+/* The rows after the feature: no card box, a hairline between rows, and a
+   calm tint on hover instead of the card lift. */
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  column-gap: var(--space-4);
+  align-content: start;
+  margin-inline: calc(-1 * var(--space-3));
+  padding: var(--space-5) var(--space-3);
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+  border-radius: 0;
+  background: none;
+  transition: background-color var(--transition-base);
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card:hover {
+  background: color-mix(in srgb, var(--color-accent) 5%, transparent);
+  border-color: var(--color-border);
+  box-shadow: none;
+  transform: none;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card:hover h2 a {
+  color: var(--color-accent);
+}
+
+/* Square tile on the article's two-hue wash, with the art inset in it. The
+   motifs are centered and close to square, so cropping the sides keeps them
+   whole. */
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__art {
+  grid-column: 1;
+  grid-row: 1 / span 6;
+  align-self: start;
+  box-sizing: border-box;
+  width: 96px;
+  margin: 0;
+  padding: 14px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__art img {
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card > :not(.article-card__art) {
+  grid-column: 2;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__meta {
+  margin-block-end: var(--space-2);
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card h2 {
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card > p:not([class]) {
+  font-size: 0.95rem;
+  margin-block-end: var(--space-2);
+}
+
+@media (min-width: 48rem) {
+  [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
+    grid-template-columns: 132px minmax(0, 1fr);
+    column-gap: var(--space-5);
+  }
+
+  [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__art {
+    width: 132px;
+    padding: 20px;
+  }
+}
+
 /* Row-by-row fade-in on load and scroll (ArticleListing.astro). Hidden only
    while .reveal-cards is on the root, which BaseLayout sets before first paint
    and drops again if the reveal script never starts. */
