@@ -1099,11 +1099,10 @@ main {
   }
 }
 
-/* Read-time badge (list layout only; the even card grid keeps it beside the
-   date). Plum with light text, like the footer. ArticleCard renders it twice
-   and CSS shows one: over the feature's art at the bottom right, or under a
-   list row's thumbnail. Only one is ever displayed, so screen readers hear
-   it once. */
+/* Read-time badge, plum with light text like the footer. ArticleCard
+   renders it twice and CSS shows one: over the art's bottom right corner
+   (feature card and the Keep reading cards), or under a list row's square
+   thumbnail. Only one is ever displayed, so screen readers hear it once. */
 .article-card__readtime {
   display: none;
   padding: 0.2em 0.6em;
@@ -1116,20 +1115,24 @@ main {
   white-space: nowrap;
 }
 
-[data-layout='list'] .article-card__date-readtime {
+.article-card__date-readtime {
   display: none;
 }
 
-[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__art {
+.article-card__art {
   position: relative;
 }
 
-[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__readtime--on-art {
+.article-card__readtime--on-art {
   display: inline-block;
   position: absolute;
   inset-inline-end: var(--space-3);
   inset-block-end: var(--space-3);
   z-index: 1;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__readtime--on-art {
+  display: none;
 }
 
 [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
