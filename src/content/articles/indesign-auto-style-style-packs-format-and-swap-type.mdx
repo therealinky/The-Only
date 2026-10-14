@@ -8,11 +8,12 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
 example: false
 publishedAt: 2026-10-14
 updatedAt: 2026-10-14
 lastVerified: 2026-10-14
+reviewedBy: Ana M. Rivas
 disciplines:
   - Brand & Graphic
 art: pilcrow
@@ -55,9 +56,10 @@ sources:
 beforeYouUse:
   clientData: >-
     not verified: sources disagree on whether your text leaves your
-    machine. One tutorial says Style Packs don't need an internet
-    connection, while an Adobe Community expert reports InDesign showing a
-    "processing in cloud" message and sending the text to a server. Adobe's
+    machine. A CreativePro tutorial from April 2025 says Style Packs don't
+    need an internet connection, while an Adobe Community expert testing
+    InDesign 2024 in February 2024 reported a "processing in cloud" message
+    and said the text is sent to a server. Adobe's
     help pages don't say either way. Treat it as cloud processing for
     confidential or embargoed copy until Adobe confirms otherwise.
   usageRights: >-
@@ -76,7 +78,7 @@ beforeYouUse:
     help pages don't mention generative credits for them. You need an
     InDesign subscription.
 ---
-Auto Style is InDesign's AI feature for styling text. It reads a selection, decides which lines are headings, subheadings, lists, and body paragraphs, and applies a matching set of paragraph styles called a Style Pack. Most people only ever see it as a little icon after pasting from Word. Set up with your own styles, though, it's a quiet time-saver for long documents and a genuinely useful trick for showing clients type options.
+Auto Style is InDesign's AI feature for styling text (Adobe describes Style Packs as "Adobe Sensei-powered"). It reads a selection, decides which lines are headings, subheadings, lists, and body paragraphs, and applies a matching set of paragraph styles called a Style Pack. Most people only ever see it as a little icon after pasting from Word. Set up with your own styles, though, it's a quiet time-saver for long documents and a genuinely useful trick for showing clients type options.
 
 This workflow pulls together Adobe's own documentation, a couple of independent tutorials, and community troubleshooting threads, plus general InDesign know-how. It isn't any one person's process, and we haven't run it end to end ourselves.
 
@@ -86,7 +88,7 @@ This workflow pulls together Adobe's own documentation, a couple of independent 
 
 3. **Save it so other documents can use it.** A new pack lives in the current document. To reuse it, right-click it in the Paragraph Styles panel and choose Save as Custom Style Pack. It then shows up under the Custom tab of the Style Packs panel in any document, even if you later delete it from the original file.
 
-4. **Get clean text into InDesign.** Auto Style works best on simply structured copy, and Adobe says the text needs at least 1,000 characters for it to work. You have three routes: paste text and choose the Auto Style option from the paste icon, place a TXT or DOCX file with File > Place, or select text that's already in a frame. If the Auto Style option doesn't appear when you paste, turn on Show Auto Style Option in Edit > Preferences > Clipboard Handling. If the source has inconsistent formatting, spend two minutes tidying it in the source document first. That's cheaper than fixing a misread structure afterward.
+4. **Get clean text into InDesign.** Auto Style works best on simply structured copy, and Adobe says pasted or placed text needs at least 1,000 characters for it to work. You have three routes: paste text and choose the Auto Style option from the paste icon, place a TXT or DOCX file with File > Place, or select text that's already in a frame. If the Auto Style option doesn't appear when you paste, turn on Show Auto Style Option in Edit > Preferences > Clipboard Handling. If the source has inconsistent formatting, spend two minutes tidying it in the source document first. That's cheaper than fixing a misread structure afterward.
 
 5. **Apply the pack.** Select the text, the frame, or several threaded frames, then pick your pack in the Style Packs panel. You can also use Type > Auto Style, or the Auto Style button in the Quick Actions section of the Properties panel. Then read through the result. Short one-line paragraphs and bold lead-ins are the usual places where body copy gets mistaken for a heading, or the other way round.
 
@@ -102,7 +104,7 @@ There's a quieter benefit too. Because Auto Style applies real paragraph styles 
 
 ## What to watch out for
 
-The sources don't agree on whether it works offline. One tutorial says Style Packs don't need an internet connection. A community thread tells a different story: an Adobe Community expert describes a "processing in cloud" message, and a later reply traced a recurring "try again later" error to a corporate firewall blocking Adobe's servers, with the problem gone at home. If you see that error, try a smaller selection and check your network before assuming the file is broken. And if the copy is confidential, assume it's going to the cloud.
+The sources don't agree on whether it works offline, and the dates may explain why. In February 2024, an Adobe Community expert testing InDesign 2024 saw a "processing in cloud" message and said the text goes to a server. A CreativePro tutorial from April 2025 says Style Packs don't need an internet connection, so the processing may have moved onto your machine since. Adobe's help pages don't say either way. In the same community thread, the experts' advice for a "try again later" error was to try a smaller selection, and another user traced similar errors with Adobe's cloud AI features (exporting to Adobe Express, AI tools in Photoshop) to a corporate firewall, with the problem gone at home. If you hit that error, check your network before assuming the file is broken. And if the copy is confidential, assume it's going to the cloud until Adobe says otherwise.
 
 Language support has been limited. The feature launched English-only according to tutorial commenters, with German support added in a later update. If you work in another language version of InDesign, check that the option actually appears before planning a workflow around it.
 
