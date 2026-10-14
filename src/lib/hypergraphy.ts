@@ -46,6 +46,7 @@ export const ART_MOTIFS = [
   'cube',
   'cutout',
   'document',
+  'dropdown',
   'eraser',
   'face',
   'filmstrip',
@@ -61,6 +62,7 @@ export const ART_MOTIFS = [
   'nodes',
   'pen',
   'phone',
+  'pilcrow',
   'plug',
   'ratios',
   'reel',
@@ -407,6 +409,13 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [closeLoop(PAGE), poly([66, 6, 66, 24, 84, 24])],
     tones: [region(PAGE, 0.18), region(box(26, 32, 62, 40), 0.6)],
   },
+  // An AI chat box with its model picker open above it: three options in a
+  // list, the selected one shaded dark, and a chevron in the chat box.
+  dropdown: {
+    fills: [outline(box(28, 28, 72, 38), 0.9), outline(box(14, 78, 44, 84), 0.45)],
+    strokes: [frame(22, 6, 78, 58), frame(8, 68, 92, 94), poly([72, 78, 79, 85, 86, 78])],
+    tones: [region(box(28, 10, 72, 20), 0.25), region(box(28, 46, 72, 54), 0.25)],
+  },
   // A front-facing adult face: swept-back hair, eyes, brows, nose, lips,
   // ears, and a neck into shoulders.
   face: {
@@ -558,6 +567,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([36, 72, 64, 72]),
     ],
     tones: [region(box(32, 14, 68, 24), 0.4), region(box(36, 30, 64, 50), 0.35), region(box(32, 54, 68, 86), 0.12)],
+  },
+  // A pilcrow (paragraph mark): a solid bowl hanging off the top of two
+  // tall stems, for paragraph styles.
+  pilcrow: {
+    fills: [
+      outline(circle(38, 31, 19), 0.85),
+      outline(box(38, 12, 82, 20), 0.85),
+      outline(box(50, 12, 60, 92), 0.85),
+      outline(box(72, 12, 82, 92), 0.85),
+    ],
+    strokes: [],
+    tones: [],
   },
   // A plug with prongs and a cable: integrations and MCP connectors.
   plug: {
