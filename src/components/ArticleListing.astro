@@ -19,6 +19,12 @@ interface Props {
   emptyMessage?: string;
   /** Show this many matching articles at first, with a "See more" button for the rest. */
   pageSize?: number;
+  /**
+   * "list" (the default): the newest visible article as a wide feature card,
+   * then a two-column list with square thumbnails. "cards": an even grid of
+   * cards, for short rows like Keep reading.
+   */
+  layout?: 'list' | 'cards';
 }
 
 const {
@@ -30,7 +36,12 @@ const {
   activeDiscipline,
   emptyMessage = 'No articles match this filter yet.',
   pageSize,
+  layout = 'list',
 } = Astro.props;
+
+// In the list layout the feature card fills a row of its own, so "See more"
+// adds one fewer than the first page to keep the two-column rows even.
+const pageStep = pageSize !== undefined && layout === 'list' ? Math.max(1, pageSize - 1) : pageSize;
 
 const matches = (article: Article) => !activeDiscipline || article.data.disciplines.includes(activeDiscipline);
 const visibleCount = articles.filter(matches).length;
@@ -72,7 +83,7 @@ let matchIndex = 0;
   )
 }
 
-<div data-article-grid data-page-size={pageSize}>
+<div data-article-grid data-layout={layout} data-page-size={pageSize} data-page-step={pageStep}>
   {
     articles.map((article) => {
       const isMatch = matches(article);
@@ -150,6 +161,7 @@ let matchIndex = 0;
     const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>('a[data-discipline]'));
     const seeMore = document.querySelector<HTMLButtonElement>('[data-see-more]');
     const pageSize = Number(grid.dataset.pageSize) || Infinity;
+    const pageStep = Number(grid.dataset.pageStep) || pageSize;
     let shown = pageSize;
 
     function matchingItems() {
@@ -191,7 +203,7 @@ let matchIndex = 0;
 
     seeMore?.addEventListener('click', () => {
       const firstNew = matchingItems()[shown];
-      shown += pageSize;
+      shown += pageStep;
       applyPaging();
       // Keeps keyboard and screen-reader users at the start of what was revealed.
       firstNew?.querySelector<HTMLAnchorElement>('a.article-card__link')?.focus();
