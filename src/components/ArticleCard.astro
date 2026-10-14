@@ -17,9 +17,11 @@ const [hueA, hueB] = GRADIENT_PAIRS[artGradientVariant(article.id)];
 ---
 
 <article class="article-card" data-format={data.format} data-disciplines={data.disciplines.join('|')}>
-  <div class="article-card__art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`} aria-hidden="true">
+  <div class="article-card__art" style={`--hg-hue-a: var(${hueA}); --hg-hue-b: var(${hueB})`}>
     <img src={`/art/${article.id}.svg`} alt="" width="800" height="420" loading="lazy" decoding="async" />
+    <span class="article-card__readtime article-card__readtime--on-art">{readingTime} min read</span>
   </div>
+  <span class="article-card__readtime article-card__readtime--below">{readingTime} min read</span>
   <div class="article-card__meta">
     <FormatBadge format={data.format} />
     <EvidenceBadge evidence={data.evidence} />
@@ -31,6 +33,6 @@ const [hueA, hueB] = GRADIENT_PAIRS[artGradientVariant(article.id)];
   <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
   <p class="article-card__date">
     <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
-    {' '}· {readingTime} min read
+    <span class="article-card__date-readtime">{' '}· {readingTime} min read</span>
   </p>
 </article>

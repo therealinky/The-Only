@@ -1069,7 +1069,7 @@ main {
   border-radius: 4px;
 }
 
-[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card > :not(.article-card__art) {
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card > :not(.article-card__art, .article-card__readtime) {
   grid-column: 2;
 }
 
@@ -1096,6 +1096,64 @@ main {
   [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__art {
     width: 132px;
     padding: 20px;
+  }
+}
+
+/* Read-time badge (list layout only; the even card grid keeps it beside the
+   date). Plum with light text, like the footer. ArticleCard renders it twice
+   and CSS shows one: over the feature's art at the bottom right, or under a
+   list row's thumbnail. Only one is ever displayed, so screen readers hear
+   it once. */
+.article-card__readtime {
+  display: none;
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  background: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+[data-layout='list'] .article-card__date-readtime {
+  display: none;
+}
+
+[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__art {
+  position: relative;
+}
+
+[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card__readtime--on-art {
+  display: inline-block;
+  position: absolute;
+  inset-inline-end: var(--space-3);
+  inset-block-end: var(--space-3);
+  z-index: 1;
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
+  --thumb-size: 96px;
+  min-height: calc(2 * var(--space-5) + var(--thumb-size) + var(--space-2) + 1.75rem);
+}
+
+[data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__readtime--below {
+  /* An absolutely positioned grid child's containing block is its grid
+     area, so pin it to the thumbnail's column and center it there. Both
+     column lines are named: an "auto" end would mean the card's edge. */
+  display: block;
+  position: absolute;
+  grid-column: 1 / 2;
+  grid-row: 1;
+  inset-block-start: calc(var(--thumb-size) + var(--space-2));
+  inset-inline: 0;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
+    --thumb-size: 132px;
   }
 }
 
