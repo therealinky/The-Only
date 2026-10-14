@@ -1006,8 +1006,9 @@ main {
   }
 }
 
-/* The rows after the feature: no card box, a hairline between rows, and a
-   calm tint on hover instead of the card lift. */
+/* The rows after the feature: no card box or divider. On hover a row lifts
+   into a rounded, frosted panel instead of the card's lift. The transparent
+   border keeps the row from shifting when the panel's border appears. */
 [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card {
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr);
@@ -1015,18 +1016,32 @@ main {
   align-content: start;
   margin-inline: calc(-1 * var(--space-3));
   padding: var(--space-5) var(--space-3);
-  border: 0;
-  border-block-start: 1px solid var(--color-border);
-  border-radius: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
   background: none;
-  transition: background-color var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card:hover {
-  background: color-mix(in srgb, var(--color-accent) 5%, transparent);
-  border-color: var(--color-border);
-  box-shadow: none;
+  background: var(--color-row-hover-bg);
+  border-color: var(--color-row-hover-border);
+  box-shadow: var(--shadow-row-hover);
+  backdrop-filter: blur(14px) saturate(140%);
   transform: none;
+}
+
+/* Older Safari's prefixed blur; see .site-header-float for why it's here. */
+@supports not (backdrop-filter: blur(1px)) {
+  [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card:hover {
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+}
+
+[data-layout='list'] > [data-article-item]:nth-child(1 of :not([hidden])) .article-card:hover {
+  border-color: var(--color-feature-hover-border);
 }
 
 [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card:hover h2 a {

@@ -6,7 +6,7 @@
      backgrounds), plus two decorative-only hues (gold, blue) used purely in
      hero gradients, never as text. Same hue family in light/dark, adjusted
      for contrast. */
-  --color-bg: #f6f4fa;
+  --color-bg: #f9f7fd;
   --color-bg-elevated: #ffffff;
   --color-text: #3a3648; /* charcoal, not black — sits easier against the soft gradients */
   --color-text-muted: #625c72;
@@ -32,6 +32,13 @@
      for the blur to show. */
   --color-header-bg: rgb(255 255 255 / 82%);
   --color-header-border: rgb(255 255 255 / 55%);
+
+  /* Listing hover states: list rows lift into a frosted panel, and the
+     feature card's outline stays light in light mode. */
+  --color-row-hover-bg: rgb(255 255 255 / 72%);
+  --color-row-hover-border: rgb(109 95 199 / 14%);
+  --shadow-row-hover: 0 6px 22px rgb(60 44 120 / 0.08);
+  --color-feature-hover-border: #cbc3ec;
 
   /* Footer panel: deep plum in both themes, so it always grounds the page. */
   --color-footer-bg: #2a2550;
@@ -110,6 +117,10 @@
     --color-inverse-muted: #625c72;
     --color-border: #322c42;
     --color-border-strong: #6b6280;
+    --color-row-hover-bg: rgb(255 255 255 / 5%);
+    --color-row-hover-border: rgb(255 255 255 / 9%);
+    --shadow-row-hover: 0 6px 22px rgb(0 0 0 / 0.35);
+    --color-feature-hover-border: #6b6280;
     --color-accent: #a79bf0;
     --color-accent-2: #7fc7a0;
     --color-accent-3: #e39dbe;
@@ -146,6 +157,10 @@
   --color-inverse-muted: #625c72;
   --color-border: #322c42;
   --color-border-strong: #6b6280;
+  --color-row-hover-bg: rgb(255 255 255 / 5%);
+  --color-row-hover-border: rgb(255 255 255 / 9%);
+  --shadow-row-hover: 0 6px 22px rgb(0 0 0 / 0.35);
+  --color-feature-hover-border: #6b6280;
   --color-accent: #a79bf0;
   --color-accent-2: #7fc7a0;
   --color-accent-3: #e39dbe;
