@@ -140,23 +140,8 @@ main > .page-hero:first-child {
   display: block;
 }
 
-.page-hero__line-echo,
 .page-hero__line-fill {
   display: block;
-}
-
-.page-hero__line-echo {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  color: rgba(255, 255, 255, 0.28);
-  transform: translate(0.05em, 0.09em);
-  filter: blur(1px);
-}
-
-.page-hero__line-fill {
-  position: relative;
-  z-index: 1;
   color: rgba(255, 255, 255, 0.94);
 }
 
