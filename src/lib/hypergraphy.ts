@@ -45,6 +45,7 @@ export const ART_MOTIFS = [
   'coins',
   'cube',
   'cutout',
+  'database',
   'document',
   'dropdown',
   'eraser',
@@ -57,8 +58,10 @@ export const ART_MOTIFS = [
   'image',
   'layout',
   'layers',
+  'markdown',
   'marquee',
   'megaphone',
+  'microphone',
   'nodes',
   'pen',
   'phone',
@@ -218,6 +221,24 @@ const CLOUD = poly([
 // neighboring bars merge into one blob at secondary-motif size.
 const WAVE_HEIGHTS = [14, 30, 20, 42, 26, 38, 18, 32, 12];
 const WHEEL_TONES = [0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84, 0.96];
+
+// The lower half of a cylinder band, for the database motif.
+const dbArc = (cy: number) =>
+  Array.from({ length: 19 }, (_, i) => {
+    const a = (i / 18) * Math.PI;
+    return { x: 50 + Math.cos(a) * 34, y: cy + Math.sin(a) * 9 };
+  });
+// A microphone capsule: rounded at both ends.
+const MIC_CAPSULE = [
+  ...Array.from({ length: 13 }, (_, i) => {
+    const a = Math.PI + (i / 12) * Math.PI;
+    return { x: 50 + Math.cos(a) * 10, y: 20 + Math.sin(a) * 10 };
+  }),
+  ...Array.from({ length: 13 }, (_, i) => {
+    const a = (i / 12) * Math.PI;
+    return { x: 50 + Math.cos(a) * 10, y: 44 + Math.sin(a) * 10 };
+  }),
+];
 
 function card(x: number): Motif {
   return {
@@ -855,6 +876,31 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   wand: {
     fills: [outline(poly([10, 84, 16, 90, 70, 36, 64, 30]), 0.55), outline(star4(80, 18, 13, 3), 0.9), dot(90, 44), dot(56, 12)],
     strokes: [poly([56, 40, 62, 46])],
+    tones: [],
+  },
+  // A database: a stacked cylinder, its top face dark and two bands
+  // around the body. A CMS or backend behind a site.
+  database: {
+    fills: [outline(ellipse(50, 20, 34, 9), 0.75)],
+    strokes: [poly([16, 20, 16, 80]), poly([84, 20, 84, 80]), dbArc(40), dbArc(60), dbArc(80)],
+    tones: [region(box(16, 20, 84, 80), 0.15)],
+  },
+  // The Markdown mark: an M and a down arrow inside a rounded frame. A
+  // written spec or brief.
+  markdown: {
+    fills: [outline(poly([58, 52, 82, 52, 70, 66]), 0.9)],
+    strokes: [frame(8, 24, 92, 76), poly([20, 64, 20, 36, 33, 52, 46, 36, 46, 64]), poly([70, 34, 70, 54])],
+    tones: [region(box(8, 24, 92, 76), 0.1)],
+  },
+  // A studio microphone: a rounded capsule in a U-shaped cradle on a stand.
+  // Recorded dialogue and voice.
+  microphone: {
+    fills: [outline(MIC_CAPSULE, 0.6)],
+    strokes: [
+      cubic({ x: 24, y: 38 }, { x: 24, y: 78 }, { x: 76, y: 78 }, { x: 76, y: 38 }),
+      poly([50, 68, 50, 88]),
+      poly([32, 90, 68, 90]),
+    ],
     tones: [],
   },
   // An audio waveform.

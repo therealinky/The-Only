@@ -1,0 +1,88 @@
+---
+title: "Figma's code layers hit open beta, and Specs gives your agents a written brief"
+dek: >-
+  At Config India, Figma opened code-backed prototypes on the canvas to
+  everyone and introduced Specs, a Markdown document that lives next to
+  your designs and can be handed to a coding agent. Code layers use AI
+  credits, but they're free to create and edit on paid plans until
+  November 4.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-15
+updatedAt: 2026-10-15
+lastVerified: 2026-10-15
+disciplines:
+  - UI/UX
+  - Web
+art: markdown
+tools:
+  - Figma
+sources:
+  - title: "Build by design: New workflows for new ways of building (Figma blog, October 2026)"
+    url: https://www.figma.com/blog/build-by-design/
+    accessed: 2026-10-15
+  - title: "Design together with code layers on the canvas (Figma blog, October 2026)"
+    url: https://www.figma.com/blog/design-together-with-code-layers/
+    accessed: 2026-10-15
+  - title: "Introducing Specs: Markdown as a medium (Figma blog, October 2026)"
+    url: https://www.figma.com/blog/introducing-figma-specs/
+    accessed: 2026-10-15
+  - title: "Figma unveils AI-powered tools to bring code, design and agents onto a single canvas (Entrackr, October 15, 2026)"
+    url: https://entrackr.com/news/figma-unveils-ai-powered-tools-to-bring-code-design-and-agents-onto-a-single-canvas-12677861
+    accessed: 2026-10-15
+beforeYouUse:
+  clientData: >-
+    not verified: Figma's posts don't say how code imported from GitHub,
+    a local folder, or a captured live page is handled differently from
+    other file content. If a client's repository or an unreleased site is
+    involved, check your organization's AI settings and Figma's AI terms
+    before you import it.
+  usageRights: >-
+    not verified: the announcements don't cover ownership of code the
+    Figma agent writes inside a code layer. We'd assume Figma's usual AI
+    terms apply, but we didn't confirm it.
+  disclosure: >-
+    not applicable: code layers and Specs are working tools for
+    prototypes and documentation, not published output, though any
+    AI-written code you ship is still AI-written.
+  accessibility: >-
+    not verified: Figma pitches code layers as a way to test real
+    interactions early, and one customer quoted in the post says it helped
+    settle accessibility sooner, but Figma doesn't describe any built-in
+    accessibility checking. Review prototypes for focus states, contrast,
+    and semantics yourself.
+  cost: >-
+    known: Figma says code layers use AI credits, and that creating and
+    editing within code layers is free on paid plans through November 4,
+    2026. Specs is rolling out in open beta to paid plans. Figma hasn't
+    said what code layers will cost after the free window.
+---
+Figma used its Config India event in Bengaluru this week to move two things forward that change how a prototype gets from the canvas into code: code layers are now in open beta, and there's a new document type called Specs. Both are built around the idea that a coding agent, Figma's own or one you already use, should be able to read your design work directly.
+
+## What changed
+
+**Code layers are open to everyone.** A code layer is a working, code-backed prototype that sits on the canvas next to your frames. Figma's overview says code layers are rolling out in open beta on all plans. You can make one by converting an existing design, prompting the Figma agent, importing a lightweight prototyping codebase from GitHub or a local folder, capturing a live web page with the Chrome extension, or pulling in a prototype from a coding tool through Figma's MCP server. A GitHub import stays connected to its repository, and you can push changes to a branch and open a pull request for review.
+
+**Versions side by side, and a way back to layers.** You can duplicate a code layer, try a different direction, and compare the two on the canvas, then combine ideas from each. An **Extract designs** command turns a screen or flow from a code layer back into editable Figma layers, so a designer can fix things the usual way and send the edits back.
+
+**Specs is Markdown on the canvas.** Press D or use the Specs icon in Figma or FigJam, or drop any .md file onto the canvas. A spec can embed frames, FigJam diagrams, and code layers alongside the text. Coding agents can read a spec as Markdown and update it through Figma's MCP server, and Figma's own agent can reply to comments right in the spec. Pasting a spec's link into a coding agent passes along the linked frames and code. Figma says Specs is rolling out in open beta on web, desktop, and mobile, for paid plans.
+
+**Design systems get guidelines for agents.** Published libraries can now carry guidelines that agents follow, in open beta on paid plans. Code sources, which connect a library to a GitHub repo or npm package, are in closed beta, and a central place to manage all of it is only being previewed.
+
+## Why it matters for designers
+
+The handoff document has always lived somewhere else: a ticket, a wiki page, a comment thread. Specs puts it on the canvas, in a format coding agents already read well, with the actual frames embedded instead of screenshots. If you're already writing a short brief before prompting an agent, this is a more structured home for it.
+
+Code layers matter for anyone who's been prototyping in a separate tool and pasting screen recordings back into Figma. Being able to keep several coded directions next to each other, comment on them like any other frame, and pull a screen back out as layers, closes a loop that's been awkward until now.
+
+## What to watch out for
+
+The free window is short. Figma says code layers use AI credits, and they're only free to create and edit on paid plans through November 4, 2026. After that there's no published rate yet, so keep an eye on your credit usage if you start relying on them.
+
+Figma describes the GitHub import as supporting "lightweight" prototyping codebases and says support for more complex ones will come over time, so don't expect to drop a production app onto the canvas.
+
+Everything here is described as rolling out, with availability varying by feature, so some of it may not be in your account yet. We haven't tried code layers or Specs ourselves; this is based on Figma's own announcements.
