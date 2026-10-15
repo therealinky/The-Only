@@ -3,12 +3,13 @@ title: "Getting natural-sounding dialogue out of Enhance Speech in Adobe Premier
 dek: >-
   Enhance Speech can rescue a phone-mic interview in one click, and it can
   also leave a voice sounding hollow or robotic. Pulling together Adobe's
-  own notes, several independent guides, and what editors report in
+  own notes, several guides, and what editors report in
   Adobe's forums, here's how to use it without overdoing it.
 format: workflow
 evidence: researched
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-15
 updatedAt: 2026-10-15
@@ -72,9 +73,9 @@ beforeYouUse:
 ---
 Enhance Speech is Premiere Pro's one-click AI dialogue cleanup. It lives in the Essential Sound panel, and on rough audio from a phone or a video call it can sound like a different recording. Pushed too far, it also makes voices sound processed, and every guide we found warns about that in some form.
 
-This is synthesized from Adobe's own description of the feature, several independent guides, and recurring reports in Adobe's community forum, plus general Premiere Pro audio technique. It isn't a workflow we've tested end to end ourselves.
+This is synthesized from Adobe's own description of the feature, several guides, and recurring reports in Adobe's community forum, plus general Premiere Pro audio technique. Two of the guides come from companies that sell audio products (Hollyland makes microphones, and SimpleClean sells a noise cleanup service), so we've only used their technique advice. It isn't a workflow we've tested end to end ourselves.
 
-1. **Pick the right audio first.** Adobe says Enhance Speech works best on dialogue from low-quality mics, like phones, online meetings, and on-camera mics, and is less effective on heavily degraded audio, overlapping speakers, whispers, loud music, and singing. Other guides add heavy room echo, strong wind, and clipped audio to that list. If your clip is one of those, expect a partial fix at best.
+1. **Pick the right audio first.** Adobe says Enhance Speech works best on dialogue from low-quality mics, like phones, online meetings, and on-camera mics, and is less effective on heavily degraded audio, overlapping speakers, whispers, loud music, and singing. One guide adds heavy room echo, strong wind, and clipped audio to that list. If your clip is one of those, expect a partial fix at best.
 
 2. **Lock the cut before you enhance.** Enhance Speech analyzes each clip, and in Adobe's beta forum editors reported that trimming a clip after analysis triggered it again, which slowed editing down. Whether or not that's still true in your version, cleaning up dialogue after the edit is settled saves waiting on analysis you'll throw away.
 
@@ -82,13 +83,13 @@ This is synthesized from Adobe's own description of the feature, several indepen
 
 4. **Turn it on and let it analyze.** Enhance Speech is off by default. Check it and click Enhance. Analysis runs locally in the background, so you can keep editing while it finishes.
 
-5. **Set the mix by ear, starting low.** After processing, the Mix Amount slider blends the enhanced audio with the original. This is where the sources split. Some recommend keeping it low so a bit of natural room tone survives. Others say simply drag until it sounds best, with no target value. A third approach, raised in Adobe's forum, skips blending entirely: run it fully enhanced, then lay a separately recorded room tone or ambience bed underneath. The common thread: a voice with zero background often sounds less real than one with a little. Toggle the checkbox on and off to compare.
+5. **Set the mix by ear, starting low.** After processing, the Mix Amount slider blends the enhanced audio with the original. This is where the sources split. Some recommend keeping it low so a bit of natural room tone survives. Others say simply drag until it sounds best, with no target value. A third option, borrowed from general audio practice, skips blending entirely: run it fully enhanced, then lay a separately recorded room tone or ambience bed underneath. The common thread: a voice with zero background often sounds less real than one with a little. Toggle the checkbox on and off to compare.
 
 6. **Listen to the pauses.** The most consistent complaint in Adobe's forum is words that come out robotic, garbled, or changed, especially around pauses and mumbled phrases. Play through every pause and quiet line before you move on. Lowering the mix usually helps; if one phrase is beyond saving, use the original audio for just that bit.
 
 7. **Split clips that change.** If the noise changes partway through a clip, like a door opening or an air conditioner kicking on, one guide suggests splitting it so each part can have its own setting instead of one compromise for both.
 
-8. **Add targeted fixes afterward, one at a time.** Both of the more detailed guides agree on order: Enhance Speech first as a broad pass, then only the Repair controls you still need, such as Reduce Rumble for low traffic or HVAC noise or DeHum for electrical buzz. Stacking a strong Enhance Speech with heavy Reduce Noise and Reduce Reverb is exactly what makes voices sound hollow or watery. EQ and compression come after the cleanup; one guide suggests testing your usual chain with and without Enhance Speech and trusting your ears.
+8. **Add targeted fixes afterward, one at a time.** Both of the more detailed guides agree on order: Enhance Speech first as a broad pass, then only the Repair controls you still need, such as Reduce Rumble for low traffic or HVAC noise or DeHum for electrical buzz. Stacking a strong Enhance Speech with heavy Reduce Noise and Reduce Reverb is exactly what makes voices sound hollow or watery. EQ and compression come after the cleanup. If you have a usual chain, try it with and without Enhance Speech and trust your ears.
 
 9. **Check it in context, on small speakers.** Listen with the music and neighboring clips playing, then check on laptop speakers and earbuds, where most social video gets heard. Over-processing that's hidden on studio headphones can be obvious on a phone.
 
@@ -102,8 +103,8 @@ The skill isn't finding the button. It's knowing when to stop. The editors who a
 
 It reduces noise rather than removing it. Background noise and voices share the same frequencies, so pushing harder costs voice quality. If a recording truly needs a silent background, re-recording is still the real fix.
 
-Forum reports from the beta period also describe exports that occasionally used unprocessed audio and sessions where the slider seemed to do nothing. The workarounds people describe are rendering the enhanced audio to a new file (or exporting the dialogue as a WAV and re-importing it) before the final export. Those reports are from 2023, so they may not apply to current versions, but it's worth one listen to your exported file.
+Forum reports from the beta period also describe exports that occasionally used unprocessed audio and sessions where the slider seemed to do nothing. The workarounds people describe are rendering the enhanced audio to a new file (or exporting the dialogue as a WAV and re-importing it) before the final export. Those reports are from 2023 and early 2024, so they may not apply to current versions, but it's worth one listen to your exported file.
 
-Enhance Speech is built for a single main speaker. On a panel or a crosstalk-heavy conversation, it can treat nearby chatter as speech or struggle with overlapping voices.
+Enhance Speech is built for a single main speaker. On a panel or a crosstalk-heavy conversation, overlapping voices tend to give poor results.
 
 Guides also disagree on the slider's scale and on which version first included the AI feature, so ignore specific numbers you read elsewhere and go by what you hear in your own version.
