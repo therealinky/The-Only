@@ -11,8 +11,8 @@ difficulty: quick
 status: published
 example: false
 publishedAt: 2026-10-05
-updatedAt: 2026-10-05
-lastVerified: 2026-10-05
+updatedAt: 2026-10-15
+lastVerified: 2026-10-15
 reviewedBy: Ana M. Rivas
 disciplines:
   - Motion & Video
@@ -35,6 +35,12 @@ sources:
   - title: "Generative Extend: Premiere Pro feature review (Music Radio Creative)"
     url: https://producer.musicradiocreative.com/generative-extend-review/
     accessed: 2026-10-05
+  - title: "Generative Extend overview (Adobe Help Center, updated September 9, 2026)"
+    url: https://helpx.adobe.com/premiere/desktop/edit-projects/edit-with-generative-ai/generative-extend-overview.html
+    accessed: 2026-10-15
+  - title: "Known and fixed issues in Adobe Premiere (Adobe Help Center, updated September 30, 2026)"
+    url: https://helpx.adobe.com/premiere/desktop/troubleshooting/limitations-and-known-issues/known-and-fixed-issues.html
+    accessed: 2026-10-15
   - title: "Generative credits FAQ (Adobe Help Center)"
     url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html
     accessed: 2026-10-05
@@ -85,7 +91,7 @@ This workflow is synthesized from Adobe's own notes and several independent hand
 
 1. **Pick the right job for it.** The sources agree on what Generative Extend is good at: adding a handle for a transition, holding a shot a little longer to land on a beat, and extending ambient sound. It's not a way to invent new action. In PetaPixel's tests, a simple walking shot held up best, while a busy pan and a low-light shot with a tilt showed visible jitter and a drop in sharpness. ProVideo Coalition's reviewer came away more impressed with how it handled camera movement and imperfect lighting, so results vary by shot: try it on the clip you actually have before planning around it.
 
-2. **Check the clip is eligible before you plan around it.** Adobe's current notes say it supports clips at 12 to 30 fps in 8-bit SDR. Adobe added 4K and vertical video support when the feature became generally available, so the 1080p limit mentioned in early reviews no longer applies. An early review also found log footage wasn't supported, so if you shoot log, test it on one clip before you count on it.
+2. **Check the clip is eligible before you plan around it.** Adobe now supports source clips from 360p to 4K, at 12–60 fps, in 8-, 10-, or 16-bit SDR or HDR. Vertical video is supported too, so the 1080p limit mentioned in early reviews no longer applies. The important distinction is in the output: generated extensions are 8-bit SDR, and clips above 30 fps get extensions generated at 30 fps. Your original footage stays unchanged. Earlier reports also identified issues with log footage, so if you shoot log, test it on one clip before counting on it. Adobe's known-issues page also lists iPhone HDR clips as unsupported. For the latest specifications and limitations, see [Adobe's Generative Extend overview](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-with-generative-ai/generative-extend-overview.html).
 
 3. **Extend only what you need.** Grab the Generative Extend tool from the Tools panel, then drag the head or tail of the clip. Like the Rate Stretch tool, it needs empty space on that side of the clip, so move or trim the neighboring clip out of the way first. Adobe's current limit is up to 2 seconds for video. In practice, the reviews agree you rarely want the full 2 seconds: a handful of frames for a transition blends in far better than a long tail, and quality issues tend to become more noticeable the longer the generated section runs.
 
