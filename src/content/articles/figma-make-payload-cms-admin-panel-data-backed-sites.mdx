@@ -1,0 +1,80 @@
+---
+title: "Figma Make sites can now come with a real CMS, thanks to Payload"
+dek: >-
+  Prompt a site in Figma Make and it can now set up a database, file
+  storage, user login, and an admin panel your client can edit, all hosted
+  by Figma. The hosting is free while it's in beta, and Figma says pricing
+  will be announced before it takes effect.
+format: brief
+evidence: announced
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-15
+updatedAt: 2026-10-15
+lastVerified: 2026-10-15
+disciplines:
+  - Web
+art: database
+tools:
+  - Figma Make
+  - Payload
+sources:
+  - title: "Create, ship, and manage data-backed websites with Payload in Figma (Figma blog, October 2026)"
+    url: https://www.figma.com/blog/websites-with-payload-in-figma/
+    accessed: 2026-10-15
+  - title: "Build by design: New workflows for new ways of building (Figma blog, October 2026)"
+    url: https://www.figma.com/blog/build-by-design/
+    accessed: 2026-10-15
+  - title: "Figma unveils AI-powered tools to bring code, design and agents onto a single canvas (Entrackr, October 15, 2026)"
+    url: https://entrackr.com/news/figma-unveils-ai-powered-tools-to-bring-code-design-and-agents-onto-a-single-canvas-12677861
+    accessed: 2026-10-15
+beforeYouUse:
+  clientData: >-
+    not verified: Figma hosts the Payload backend, so a client's content,
+    uploaded files, and user logins would live on Figma's infrastructure.
+    The announcement doesn't cover data location, retention, or what
+    happens to that data if you stop using Make. Check before you put real
+    customer data or user accounts in it.
+  usageRights: >-
+    not verified: the post doesn't address ownership of the AI-generated
+    site code or the content structure Make sets up. Payload itself is
+    open source, but we didn't confirm how Figma's AI terms apply here.
+  disclosure: >-
+    not applicable: this is a backend and content-management feature, not
+    a generator of public-facing imagery or copy.
+  accessibility: >-
+    not verified: Figma makes no claims about the accessibility of sites
+    Make generates or of the Payload admin panel. Test both before handing
+    a site over, especially if a client's editors rely on assistive tech.
+  cost: >-
+    not verified: Figma says Payload is available on all plans and the
+    hosting for Payload-backed Make projects is free while it's in beta,
+    and that it will announce pricing and packaging before they take
+    effect. Prompting in Make itself still draws on your AI credits.
+---
+Until now, a site built in Figma Make was mostly a front end. If the copy needed changing, someone had to go back into Make and prompt it. Figma announced this week that Payload, the open-source content framework that joined Figma last year, now works inside Make, so a site can come with its own backend and an admin panel for editing it.
+
+## What changed
+
+**A backend set up from a prompt.** According to Figma's post, when you prompt an app in Make it can now also set up storage and management tools: a database, file storage, user login, and an admin panel. You can upload a CSV and ask the agent to turn it into a Payload collection, which is a quick way to get existing content, like a product list or a set of case studies, into a site.
+
+**An admin panel for the people who edit content.** After you publish, adding /admin to the site's URL opens Payload's panel. From there, Figma says, teams can create articles, edit copy, tag content, swap media, reorder categories, and review versions. Permissions control who can change what.
+
+**Figma hosts it.** The backend runs on Figma's infrastructure, so content and data sit alongside the designs. Make's settings can also store API keys so they aren't exposed to visitors on the published site.
+
+**Availability.** Figma says Payload is available on all plans, with access rolling out to all accounts over the coming weeks. Hosting for Payload-backed Make projects is in beta and free to use for now.
+
+## Why it matters for designers
+
+The usual sticking point when a designer builds a small site for a client is the hand-off: who updates it once you're done? A built-in admin panel with versions and permissions answers that without bolting on a separate CMS. For a portfolio, a campaign microsite, or a small business site, that could be the difference between a prototype and something you can actually leave with the client.
+
+It also means you can design with real content. Pulling a CSV into a collection lets you see how layouts hold up with actual titles, long names, and missing images, instead of tidy placeholder copy.
+
+## What to watch out for
+
+Pricing is an open question. Hosting is free while it's in beta, and Figma says it will announce pricing and packaging before they take effect, but there's no number yet. Think twice before promising a client a site whose running cost you don't know.
+
+The post doesn't describe exporting a Make project or moving the backend elsewhere. It only points to Payload's own site for self-hosting or extending Payload. If a site needs to outlive your Figma subscription, find out how you'd move it before you build on this.
+
+There are no published storage or usage limits either. We haven't built anything with this yet, so all of the above is from Figma's announcement, and access is still rolling out.
