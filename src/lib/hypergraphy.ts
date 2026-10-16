@@ -54,6 +54,7 @@ export const ART_MOTIFS = [
   'gauge',
   'glyph',
   'grid',
+  'hierarchy',
   'halftone',
   'image',
   'layout',
@@ -80,6 +81,7 @@ export const ART_MOTIFS = [
   'swatches',
   'timeline',
   'tshirt',
+  'turntable',
   'tokens',
   'trace',
   'wand',
@@ -907,6 +909,34 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   waveform: {
     fills: [],
     strokes: WAVE_HEIGHTS.map((h, i) => poly([10 + i * 10, 50 - h, 10 + i * 10, 50 + h])),
+    tones: [],
+  },
+  // An object tree: a root row, two indented children, and a grandchild,
+  // joined by elbow connectors, with a sparkle beside the root: an AI
+  // assistant tidying a 3D scene's hierarchy.
+  hierarchy: {
+    fills: [
+      outline(box(8, 8, 52, 22), 0.6),
+      outline(box(28, 34, 76, 46), 0.4),
+      outline(box(28, 58, 76, 70), 0.4),
+      outline(box(48, 82, 94, 94), 0.25),
+      outline(star4(82, 15, 10, 2.6), 0.6),
+    ],
+    strokes: [poly([16, 22, 16, 64, 28, 64]), poly([16, 40, 28, 40]), poly([38, 70, 38, 88, 48, 88])],
+    tones: [],
+  },
+  // A figure standing on a round platter, with a curved arrow sweeping over
+  // its head: flat artwork turned to show new angles.
+  turntable: {
+    fills: [
+      outline(circle(50, 38, 9), 0.55),
+      outline(poly([38, 52, 62, 52, 66, 72, 34, 72]), 0.55),
+      outline(ellipse(50, 78, 38, 8), 0.25),
+    ],
+    strokes: [
+      cubic({ x: 14, y: 42 }, { x: 16, y: 6 }, { x: 84, y: 6 }, { x: 86, y: 42 }),
+      poly([78, 35, 86, 42, 92, 33]),
+    ],
     tones: [],
   },
   // A color wheel: eight wedges, light to dark, between two rings.

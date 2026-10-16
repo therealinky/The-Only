@@ -1,0 +1,124 @@
+---
+title: "Getting usable new angles out of Turntable in Adobe Illustrator"
+dek: >-
+  Turntable can spin a flat character or object around and hand you dozens
+  of editable views, but it's picky about what you feed it. Pulling
+  together Adobe's docs, hands-on reviews, and early tester reports,
+  here's how to prep art for it and what to do with the results.
+format: workflow
+evidence: researched
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-16
+updatedAt: 2026-10-16
+lastVerified: 2026-10-16
+disciplines:
+  - Illustration
+  - Brand & Graphic
+art: turntable
+tools:
+  - Adobe Illustrator
+sources:
+  - title: "View 2D objects from new angles (Adobe Illustrator Help)"
+    url: https://helpx.adobe.com/illustrator/desktop/use-generative-ai/view-artwork-from-any-angle.html
+    accessed: 2026-10-16
+  - title: "Turntable in Illustrator: multi-angle viewing for vector and raster objects (Adobe Community, April 2, 2026)"
+    url: https://community.adobe.com/featured-content-766/turntable-in-illustrator-multi-angle-viewing-for-vector-and-raster-objects-1556004
+    accessed: 2026-10-16
+  - title: "Behind the design: Adobe Illustrator Turntable (Adobe Design)"
+    url: https://adobe.design/ideas/behind-the-design-adobe-illustrator-turntable
+    accessed: 2026-10-16
+  - title: "Generative credits FAQ (Adobe Creative Cloud Help)"
+    url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html
+    accessed: 2026-10-16
+  - title: "Rotating Objects in Illustrator Using Turntable (CreativePro)"
+    url: https://creativepro.com/rotating-objects-in-illustrator-using-turntable/
+    accessed: 2026-10-16
+  - title: "Project Turntable: First Look (CreativePro)"
+    url: https://creativepro.com/project-turntable-first-look/
+    accessed: 2026-10-16
+  - title: "Adobe Illustrator now lets you rotate 2D vectors in 3D space (9to5Mac, March 30, 2026)"
+    url: https://9to5mac.com/2026/03/30/adobe-illustrator-now-lets-you-rotate-2d-vectors-in-3d-space/
+    accessed: 2026-10-16
+  - title: "Adobe's 3D rotation tool for flat drawings is now Illustrator's Turntable (ThatPainter, updated October 10, 2026)"
+    url: https://thatpainter.com/adobes-3d-rotation-tool-for-flat-drawings-is-now-illustrators-turntable/
+    accessed: 2026-10-16
+  - title: "Illustrator beta community forum (Adobe Community)"
+    url: https://community.adobe.com/illustrator-beta-653/index13.html
+    accessed: 2026-10-16
+summary:
+  whatChanged: >-
+    Not a new release. Turntable has been a full Illustrator feature since
+    version 30.3 in March 2026. This is a synthesis of Adobe's docs, several
+    independent reviews, and early tester reports, plus general Illustrator
+    technique, on which art it handles well and how to work with what it
+    generates.
+  whyItMatters: >-
+    Drawing a character or prop from new angles by hand takes real time.
+    Turntable can get you most of a turnaround in about a minute, as long as
+    you give it the right kind of art and treat its output as a strong
+    draft rather than final linework.
+  bestFor: >-
+    Illustrators, character and mascot designers, and brand teams who need
+    turnarounds, alternate poses for layouts, or quick spinning GIFs from
+    flat vector art.
+  timeToTry: >-
+    About 15 minutes on one piece of art, including prep.
+beforeYouUse:
+  clientData: >-
+    not verified: Turntable runs on Adobe Firefly, so the selected artwork
+    is processed by Adobe's generative service. Check Adobe's generative AI
+    terms and your organization's settings before using it on unreleased
+    client characters or products.
+  usageRights: >-
+    not verified: Adobe's usual Firefly terms should apply to generated
+    views, but we didn't find Turntable-specific language. The views are
+    derived from your own art, so the bigger rights question is whether
+    you own or have permission to adapt the original.
+  disclosure: >-
+    not verified: Adobe doesn't say whether Turntable output carries
+    Content Credentials. Generated views are AI interpretations of the
+    unseen sides of your art, so if a client expects fully hand-drawn work,
+    tell them.
+  accessibility: >-
+    not applicable: this is a drawing aid, not a change to how your final
+    artwork is presented to an audience.
+  cost: >-
+    not verified: Adobe's generative credits FAQ is reported to list
+    Turntable at 20 credits per generation, far more than most features
+    that use one, but we couldn't load the page directly to confirm.
+    Check it and your plan's monthly allowance before running it on a
+    whole batch.
+---
+Turntable takes a flat illustration and generates views of it from other angles: turned to the side, from behind, tilted up or down. Adobe first showed it as Project Turntable at MAX 2024, and it's been a regular Illustrator feature since version 30.3. One generation gives you a whole set of views (reports put it at up to 74), and each one stays an editable vector.
+
+The results swing a lot depending on what you give it, though. This guide is synthesized from Adobe's own documentation, a few hands-on reviews, and reports from early testers, plus general Illustrator technique. We haven't run it through a full project ourselves.
+
+1. **Pick art that suits it.** Every source lands in the same place: Turntable is best with bold, graphic art of things that exist in the real world, like a character, mascot, animal, or simple prop, with simple shading and a clear silhouette. Adobe's own tip is to use objects without a background that have recognizable angles. Logos, type, diagrams, and abstract geometric shapes are riskier, and for simple geometric objects Adobe points you to Illustrator's regular 3D and Materials tools instead, which are more predictable.
+
+2. **Prep a copy of the art.** Work on a duplicate, isolated on its own artboard with no background behind it. Adobe's docs list a handful of things Turntable doesn't support, including freeform, radial, and mesh gradients, opacity and blending, Grain and Blur effects, live strokes, and area text. A practical step none of the sources spell out: before you run it, outline any strokes (Object > Path > Outline Stroke), swap unsupported gradients for flat fills or a linear gradient, and group the whole object. Early testers reported that grouping helps keep the geometry from breaking apart as it rotates.
+
+3. **Run it and find your angle.** Select the object and choose Object > Generative > Turntable. You'll also find it in the Transform, Properties, and Control panels and the right-click menu. It takes a minute or so. Illustrator places the result as a linked Generative Object and keeps a copy of your original, which Adobe's design team built specifically so your source art is never overwritten. In the Contextual Task Bar, the slider turns the object sideways up to 180 degrees either way, and the tilt arrows tip it 30 degrees up or down. You can combine the two. One reviewer found the slider moves in 15-degree steps, with nothing in between.
+
+4. **Trust the near angles more than the far ones.** Your drawing doesn't contain its own back or underside, so Turntable has to invent them. Reviewers found the most reliable views sit within roughly the first 90 degrees of turn. Full side and back views are where things like a cap's direction, facial features, and line weight variation drift away from the original. Plan on redrawing those, or using them as reference rather than final art.
+
+5. **Pull out the views you want.** Add next rotated view to left or right drops a neighboring angle onto the canvas as its own Generative Object. Place all views on canvas lays out the whole set at once, which is the quickest way to build a character turnaround sheet. Export as GIF makes a spinning loop, with options for view type, frame range, speed, direction, and background.
+
+6. **Make edits stick.** This is the part that catches people. If you edit a view in isolation mode and then move the slider again, Adobe says those edits are lost. To keep a view for good, duplicate the Generative Object and ungroup it. That breaks its link to the other views, so do it only once you've settled on an angle. Generation History (Object > Generative > Generation History) keeps track of what you've generated.
+
+7. **Clean up like it's a first draft.** Ungrouped views are regular vectors, but testers noted the generated shapes are split apart differently from how you probably built the original, which matters if your style relies on overlapping, layered shapes. Rebuilding key areas with the Shape Builder tool and matching stroke weights back to your original is usually faster than drawing the angle from scratch, and it's where the time savings actually come from.
+
+## Why it matters for designers
+
+Turnarounds are tedious and they eat budget, especially early in a project when you're still selling the idea. Adobe says animators used Turntable during its beta to speed up character turnarounds for pitch decks, and game designers used it for concept art. For brand work, it's a quick way to see a mascot from a three-quarter angle for a layout, or to make a spinning GIF for social, without opening a 3D app.
+
+It's also clear about what it isn't. Turntable makes 2D views, not a 3D model, so there's no mesh to export or camera to set up. That keeps the flat, drawn look of your style, which is exactly what Illustrator's 3D tools tend to lose with organic art.
+
+## What to watch out for
+
+Credits are the first thing to check. Turntable is reported to cost 20 generative credits per generation, compared with one for most standard features, so experimenting on lots of pieces adds up fast. See the sidebar for details.
+
+Sources disagree a bit on how good the results are, and it mostly comes down to the art. Reviews of simple, cartoony objects are enthusiastic. Testers working with detailed or highly stylized illustration were much less impressed, reporting lost details and flattened line quality on the far angles. Some of the harshest reports date from the beta, and Adobe says the feature was refined before release, so it's worth testing on your own style before you commit to it for a client job.
+
+Finally, the generated views are an interpretation. They aren't guaranteed to be evenly spaced, consistent, or physically accurate, and anything hidden in your original (a back pocket, a logo on the far side) is invented. Check every view you keep against your own idea of the character before it goes anywhere.
