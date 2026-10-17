@@ -1,0 +1,88 @@
+---
+title: "Webflow's MCP server can now tell your agent how a site is performing, and Gemini can connect to it"
+dek: >-
+  Agents connected to Webflow can now read page-level Analyze traffic,
+  Optimize experiment results, and AEO Analytics, and Google Gemini joins
+  Claude and ChatGPT as a way to connect.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-17
+updatedAt: 2026-10-17
+lastVerified: 2026-10-17
+disciplines:
+  - Web
+art: linechart
+tools:
+  - Webflow
+  - Gemini
+sources:
+  - title: "MCP adds Analyze, Optimize, and AEO Analytics data, plus a Gemini connector (Webflow Updates, October 15, 2026)"
+    url: https://webflow.com/updates/mcp-optimize-analyze-aeo
+    accessed: 2026-10-17
+  - title: "Access the Webflow MCP in Google Gemini (Webflow Updates, October 15, 2026)"
+    url: https://webflow.com/updates/google-gemini
+    accessed: 2026-10-17
+  - title: "From building to measuring, Webflow's MCP server now reads how your site performs (Webflow Blog)"
+    url: https://webflow.com/blog/mcp-analyze-optimize-aeo
+    accessed: 2026-10-17
+beforeYouUse:
+  clientData: >-
+    not verified: Webflow says agents only see the data the person
+    prompting them already has access to, but site analytics will pass
+    through whichever AI assistant you connect (Claude, ChatGPT, or
+    Gemini), and how each of those retains it falls under that provider's
+    terms, not Webflow's. Check your client agreement before piping a
+    client's traffic data into a personal assistant account.
+  usageRights: >-
+    not applicable: this update reads your own site's data back to you
+    rather than generating new content.
+  disclosure: >-
+    not applicable: nothing here produces client-facing work on its own,
+    though anything the agent builds or edits through the same connection
+    is worth reviewing as you would any AI-assisted change.
+  accessibility: >-
+    not verified: Webflow lists accessibility checks among the things the
+    Gemini connector can run, but it doesn't describe what those checks
+    cover. Treat them as a first pass, not an audit.
+  cost: >-
+    known: Webflow says MCP access to Analyze, Optimize, and AEO Analytics
+    comes at no extra cost if you already have access to those tools. The
+    Gemini connector is free to install, English-only in the United States
+    for now, and doesn't use Webflow AI credits "at this time." It works
+    with a personal Google Account today, with Gemini Enterprise support
+    still coming.
+---
+Webflow's MCP server has mostly been about building: making pages, filling the CMS, adding interactions. An update on October 15 adds the other half. The same agent can now read how the site is actually doing, and Google Gemini is now one of the assistants you can connect it to.
+
+## What changed
+
+Agents connected to Webflow's MCP server can now read from three of Webflow's measurement tools:
+
+- **Analyze**: page-level traffic and goal data. Agents could already read site-level numbers, so the change is going page by page.
+- **Optimize**: your A/B tests and experiments and their results, including which variation is winning. Webflow says creating and editing experiments through agents is still in development, so for now it's read-only.
+- **AEO Analytics**: the pages LLM crawlers request most (filterable by provider and crawler category), plus your tracked prompts and how answer engines responded to them.
+
+Webflow's pitch is that you can ask one question across all three, something like "which pages lost traffic this week, how are my experiments doing, and what are AI crawlers reading," and get it back in one answer.
+
+There's also a new Team Administration piece that lets an agent or script invite people, change roles, and remove access to a workspace and its sites, limited to what the prompting person's own role allows.
+
+On the connection side, Gemini now works with Webflow's MCP server alongside Claude and ChatGPT. Through it you can build pages and components, manage CMS collections, add interactions, ask about traffic, and run SEO, AEO, and accessibility checks without leaving Gemini.
+
+## Why it matters for designers
+
+If you hand off Webflow sites and stay on for maintenance, this closes a loop that usually lives in a separate dashboard. You can change a hero headline through an agent and, a week later, ask the same agent whether that page's traffic or goal completions moved. That's a faster way to answer the "did it work?" question clients always ask.
+
+The AEO data is the newer, less familiar part. Seeing which pages AI crawlers actually request is a useful prompt for deciding which content to tighten up first. Webflow itself is careful to say a crawler requesting a page doesn't mean an answer engine used it, so it's a signal, not proof.
+
+And if your team lives in Gemini rather than Claude or ChatGPT, you no longer have to switch assistants just to work on a Webflow site.
+
+## What to watch out for
+
+The agent can only read what you already have. Webflow says MCP access is included if you have access to Analyze, Optimize, and AEO Analytics, so if a client site doesn't use those, there's nothing new for the agent to pull.
+
+The Gemini connector is limited for now: English in the United States, personal Google Accounts only, with Gemini Enterprise support (and support for Webflow Enterprise plans) still in development. And it doesn't use Webflow AI credits "at this time," which reads like a policy that could change.
+
+Finally, an agent summarizing analytics is still an agent summarizing. Before you take a "traffic dropped because of X" conclusion to a client, check the actual numbers in Analyze yourself.

@@ -59,6 +59,7 @@ export const ART_MOTIFS = [
   'image',
   'layout',
   'layers',
+  'linechart',
   'markdown',
   'marquee',
   'megaphone',
@@ -78,6 +79,7 @@ export const ART_MOTIFS = [
   'sphere',
   'spotlight',
   'stickies',
+  'stopwatch',
   'swatches',
   'timeline',
   'tshirt',
@@ -938,6 +940,30 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([78, 35, 86, 42, 92, 33]),
     ],
     tones: [],
+  },
+  // A line chart on two axes, climbing left to right through marked data
+  // points with a shaded area beneath: site traffic and performance data.
+  linechart: {
+    fills: [dot(20, 72, 3), dot(38, 56, 3), dot(54, 62, 3), dot(70, 38, 3), dot(88, 20, 3)],
+    strokes: [poly([10, 8, 10, 90, 94, 90]), poly([20, 72, 38, 56, 54, 62, 70, 38, 88, 20])],
+    tones: [region(poly([20, 72, 38, 56, 54, 62, 70, 38, 88, 20, 88, 90, 20, 90]), 0.25)],
+  },
+  // A stopwatch: a round face with a crown and side button on top, quarter
+  // ticks, and one hand a few seconds past twelve with the elapsed sweep
+  // shaded: an edit that comes back in seconds.
+  stopwatch: {
+    fills: [outline(box(42, 4, 58, 12), 0.7), dot(50, 58, 3.2)],
+    strokes: [
+      ring(50, 58, 36),
+      poly([50, 12, 50, 22]),
+      poly([76, 28, 84, 20]),
+      poly([50, 26, 50, 32]),
+      poly([82, 58, 76, 58]),
+      poly([50, 90, 50, 84]),
+      poly([18, 58, 24, 58]),
+      poly([50, 58, 66, 34]),
+    ],
+    tones: [region(wedge(50, 58, 0, 36, -Math.PI / 2, -Math.PI / 2 + Math.PI / 3), 0.35)],
   },
   // A color wheel: eight wedges, light to dark, between two rings.
   wheel: {
