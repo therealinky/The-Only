@@ -1,0 +1,89 @@
+---
+title: "Krea 3 is an image editing model built to be fast and leave your product alone"
+dek: >-
+  Krea's new editing model returns most 2K edits in under 8 seconds, takes
+  several reference images per edit, and is pitched at keeping labels,
+  logos, and faces intact while the scene around them changes.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-17
+updatedAt: 2026-10-17
+lastVerified: 2026-10-17
+disciplines:
+  - Photo & Imaging
+  - Brand & Graphic
+art: stopwatch
+tools:
+  - "Krea"
+  - ComfyUI
+sources:
+  - title: "Introducing Krea 3 (Krea blog, October 15, 2026)"
+    url: https://www.krea.ai/blog/introducing-krea-3
+    accessed: 2026-10-17
+  - title: "Krea 3 in ComfyUI: Text to Image and Image Editing (ComfyUI docs)"
+    url: https://docs.comfy.org/tutorials/partner-nodes/krea/krea-3
+    accessed: 2026-10-17
+  - title: "ComfyUI changelog, v0.41.1 (October 15, 2026)"
+    url: https://docs.comfy.org/changelog
+    accessed: 2026-10-17
+  - title: "Krea launched Krea 3 for fast and precise image editing (TestingCatalog, October 15, 2026)"
+    url: https://testingcatalog.com/krea-launched-krea-3-for-fast-and-precise-image-editing
+    accessed: 2026-10-17
+beforeYouUse:
+  clientData: >-
+    not verified: Krea's launch post doesn't say how uploaded reference
+    images are stored or whether they're used for training. The ComfyUI
+    docs are clear that the node sends your prompt and references to
+    Krea's servers rather than running locally. Check Krea's terms before
+    uploading unreleased client products.
+  usageRights: >-
+    not verified: the announcement doesn't address commercial rights to
+    Krea 3 output. Krea publishes separate terms and model licensing pages,
+    which we haven't reviewed for this model.
+  disclosure: >-
+    not verified: nothing in the announcement mentions labeling or
+    watermarking edited images. If a client expects AI-edited product
+    shots to be disclosed, that's on you.
+  accessibility: >-
+    not applicable: this is an image editing model, so accessibility comes
+    down to how you use the output (alt text and so on), not the model
+    itself.
+  cost: >-
+    known: Krea lists Krea 3 at $0.06 per image at 2K and $0.03 per image
+    at 1K. Running it through ComfyUI's Partner Node bills your Comfy
+    account instead, at Comfy's Partner Node rates.
+---
+Krea released Krea 3 on October 15, and it's aimed squarely at a common frustration with AI image editing: the good models are slow, and they tend to quietly change things you didn't ask them to. Krea's pitch is an editor that comes back fast and leaves the rest of the image alone.
+
+## What changed
+
+Krea 3 is Krea's new image editing model. The headline claims, all Krea's own:
+
+- **Speed**: most edits come back in under 8 seconds, end to end, at native 2K. Krea's comparison puts that well ahead of the other editing models it offers, based on its own timing data.
+- **Preservation**: change the setting around a product and the label and logo should stay sharp, or swap a few pieces of furniture in a room and keep everything else, including the people in it.
+- **References**: Krea's post says up to 6 reference images per edit, for products, characters, or style. The ComfyUI node accepts up to 8, so the limit may depend on where you run it.
+- **Consistency across a set**: give it a few character references and it's meant to keep the same person across new poses, locations, and lighting.
+
+It also works from a sketch, a line drawing, or a moodboard, and Krea says it keeps paintings, vector art, and ink drawings in their own medium rather than turning everything photographic.
+
+It's live on krea.ai, through Krea's API, and through partners including fal, Replicate, and OpenRouter. ComfyUI added it as a Partner Node the same day, with a "precise edit" switch that keeps everything outside the edited area unchanged and a choice between a fast mode and a slower "high" mode for complex edits.
+
+Krea's post also shares a useful prompting pattern: say what stays first (naming the label or logo), describe the change like a photographer would, say what each reference image is for, and use "only" when an edit should touch one thing.
+
+## Why it matters for designers
+
+For anyone producing product imagery or campaign variants, speed changes how you work. At a few seconds an edit you can try five backgrounds or colorways in the time a slower model gives you one, which makes exploring cheaper than planning.
+
+The preservation claim is the bigger deal for brand work. A packshot that comes back with a slightly wrong logo or a rewritten label is useless, and that drift is exactly why many designers still composite products in by hand. If Krea 3 really keeps them intact, it's a reasonable first pass for lifestyle shots and catalog variants.
+
+## What to watch out for
+
+The speed numbers, the quality comparisons, and the "your product stays your product" promise all come from Krea's own launch post. Nobody, including us, has independently benchmarked them yet. Zoom in on labels, small type, and fine logo detail before anything goes to a client.
+
+Krea also rewrites your prompt before generating, according to the ComfyUI docs, so reusing a seed won't reproduce the same image. If you need repeatable results across a batch, plan around that.
+
+And it isn't free to iterate. At list price, running every image in a big catalog through it adds up, and ComfyUI users are billed at Comfy's own rates rather than Krea's.
