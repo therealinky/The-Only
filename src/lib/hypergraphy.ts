@@ -51,6 +51,7 @@ export const ART_MOTIFS = [
   'eraser',
   'face',
   'filmstrip',
+  'flyer',
   'gauge',
   'glyph',
   'grid',
@@ -78,6 +79,7 @@ export const ART_MOTIFS = [
   'sparkle',
   'sphere',
   'spotlight',
+  'stamp',
   'stickies',
   'stopwatch',
   'swatches',
@@ -947,6 +949,40 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [dot(20, 72, 3), dot(38, 56, 3), dot(54, 62, 3), dot(70, 38, 3), dot(88, 20, 3)],
     strokes: [poly([10, 8, 10, 90, 94, 90]), poly([20, 72, 38, 56, 54, 62, 70, 38, 88, 20])],
     tones: [region(poly([20, 72, 38, 56, 54, 62, 70, 38, 88, 20, 88, 90, 20, 90]), 0.25)],
+  },
+  // A long text page on the left, an arrow, and a one-page flyer on the
+  // right with a bold headline bar, a round image, and two short lines: a
+  // dense document turned into a single-page design.
+  flyer: {
+    fills: [outline(box(67, 12, 91, 24), 0.9), outline(circle(79, 48, 10), 0.5)],
+    strokes: [
+      frame(2, 16, 30, 84),
+      poly([8, 28, 24, 28]),
+      poly([8, 37, 24, 37]),
+      poly([8, 46, 24, 46]),
+      poly([8, 55, 24, 55]),
+      poly([8, 64, 24, 64]),
+      poly([8, 73, 18, 73]),
+      poly([38, 50, 52, 50]),
+      poly([46, 43, 53, 50, 46, 57]),
+      frame(62, 6, 96, 94),
+      poly([67, 70, 91, 70]),
+      poly([67, 79, 84, 79]),
+    ],
+    tones: [region(box(2, 16, 30, 84), 0.12), region(box(62, 6, 96, 94), 0.12)],
+  },
+  // A rubber stamp, knob handle over a dark base, lifted above the mark it
+  // has just printed: a framed sparkle. One trained style, stamped onto new
+  // work.
+  stamp: {
+    fills: [
+      outline(circle(50, 12, 9), 0.6),
+      outline(box(45, 20, 55, 32), 0.6),
+      outline(box(24, 32, 76, 44), 0.9),
+      outline(star4(50, 77, 13, 4), 0.85),
+    ],
+    strokes: [frame(22, 58, 78, 96)],
+    tones: [region(box(22, 58, 78, 96), 0.15)],
   },
   // A stopwatch: a round face with a crown and side button on top, quarter
   // ticks, and one hand a few seconds past twelve with the elapsed sweep
