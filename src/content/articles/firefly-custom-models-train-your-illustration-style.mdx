@@ -1,0 +1,141 @@
+---
+title: "Training a Firefly custom model on your own illustration style, without it going generic"
+dek: >-
+  Firefly Custom Models can learn your illustration style from 10 to 30
+  images. Pulling together Adobe's docs and several independent write-ups,
+  here's how to curate, caption, test, and actually use one.
+format: workflow
+evidence: researched
+difficulty: involved
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-19
+updatedAt: 2026-10-19
+lastVerified: 2026-10-19
+disciplines:
+  - Illustration
+  - "Brand & Graphic"
+art: stamp
+tools:
+  - Adobe Firefly
+sources:
+  - title: "Create and train custom models (Adobe Help Center, updated Oct 13, 2026)"
+    url: https://helpx.adobe.com/firefly/web/custom-models/get-started-with-custom-models/train-custom-models.html
+    accessed: 2026-10-19
+  - title: "Best practices for training custom models (Adobe Help Center, updated Sept 21, 2026)"
+    url: https://helpx.adobe.com/firefly/web/custom-models/get-started-with-custom-models/best-practices-for-training-custom-models.html
+    accessed: 2026-10-19
+  - title: "Prompt guidelines for custom models (Adobe Help Center, updated Sept 21, 2026)"
+    url: https://helpx.adobe.com/firefly/web/custom-models/get-started-with-custom-models/prompt-guidelines-for-custom-models.html
+    accessed: 2026-10-19
+  - title: "Generate and edit images with custom models (Adobe Help Center, updated Oct 13, 2026)"
+    url: https://helpx.adobe.com/firefly/web/custom-models/get-started-with-custom-models/generate-and-edit-images-with-custom-models.html
+    accessed: 2026-10-19
+  - title: "Firefly Custom Models is now available in public beta (Adobe Community announcement, March 19, 2026)"
+    url: https://community.adobe.com/announcements-402/firefly-custom-models-is-now-available-in-public-beta-1554332
+    accessed: 2026-10-19
+  - title: "Adobe Firefly now bundles 30 AI models and lets users train custom styles on their own images (Jonathan Kemper, The Decoder, March 20, 2026)"
+    url: https://the-decoder.com/adobe-firefly-now-bundles-30-ai-models-and-lets-users-train-custom-styles-on-their-own-images/
+    accessed: 2026-10-19
+  - title: "Adobe Firefly now trains custom AI models on your images (Udit Goenka, March 23, 2026)"
+    url: https://udit.co/blog/adobe-firefly-custom-models-creator-personalization
+    accessed: 2026-10-19
+  - title: "Adobe Firefly Custom Models: Train AI on Your Brand Style (XainFlow blog, March 22, 2026)"
+    url: https://www.xainflow.com/blog/adobe-firefly-custom-models-brand-ai-2026
+    accessed: 2026-10-19
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's Firefly Custom Models
+    documentation and several independent write-ups on training a model on
+    your own illustration style, still in beta for individual and teams
+    users.
+  whyItMatters: >-
+    A style model trained on your own portfolio is the most direct way to
+    get Firefly output that looks like your work instead of everyone's,
+    and the quality depends almost entirely on how you prepare the set.
+  bestFor: >-
+    Illustrators and brand designers with a consistent, established style
+    who want faster sketches, client style tests, or on-style variations
+    for a campaign.
+  timeToTry: >-
+    An afternoon to curate and caption 10 to 30 images, then anywhere from
+    30 minutes to several hours of training, plus a round of testing.
+beforeYouUse:
+  clientData: >-
+    known: Adobe's announcement says it doesn't train Firefly generative AI
+    models on the content you upload to train your own custom model, and
+    won't share your custom model without your consent. Before training on
+    client work, you still need the client's permission, since Firefly asks
+    you to confirm you have the rights to every training image.
+  usageRights: >-
+    not verified: The Decoder reports that you own the content you generate
+    with your custom model, but we didn't find that in Adobe's help pages
+    for this piece. Firefly makes you confirm you have the rights to
+    every training image, so train only on work you made or have licensed
+    for this use.
+  disclosure: >-
+    not verified: neither Adobe's help pages nor the write-ups say whether
+    custom-model output is labeled differently from other Firefly output.
+    If a client has an AI policy, tell them the work started from a
+    trained model, even if it's trained on your own style.
+  accessibility: >-
+    not applicable: this is about producing illustration in a consistent
+    style, not layouts or interfaces. Alt text and contrast for wherever
+    the art ends up are still your job.
+  cost: >-
+    known: Adobe's announcement says training and generating use the
+    generative credits already included in your plan, but doesn't say how
+    many each one takes. The help page says you need a Creative Cloud or
+    Enterprise plan, and Custom Models is still in beta for individual and
+    teams users.
+---
+Firefly Custom Models let you train a private model on 10 to 30 of your own images so Firefly generates in your style instead of its default look. Adobe offers model types for illustration, characters, iconography, and photography. This workflow focuses on illustration style. It pulls together Adobe's own documentation, Adobe's beta announcement, and several independent write-ups, plus general Firefly know-how, into one process. It's a synthesis of published sources, not something we've trained and tested ourselves.
+
+## The workflow
+
+1. **Decide what the model is for before you pick a single image.** Several write-ups make the same point in different words: a narrow, coherent model beats a broad one. "My editorial spot illustrations" is a model. "Everything in my portfolio" is three or four models fighting each other. If you work in more than one style, plan a separate model for each one.
+
+2. **Curate 10 to 30 images that agree with each other.** Adobe's illustration guidance asks for a consistent style and palette, balanced composition, variety in perspective and framing, and clear details without clutter. It warns against mixed techniques, unfinished pieces, busy backgrounds, and off-theme work. The trap is the "consistent but varied" balance. Keep the rendering identical (line weight, shading, texture, palette) and vary everything else: subjects, framing, scale, and interior versus exterior scenes. If every training image has a cat in it, the model will think cats are part of your style.
+
+3. **Prep the files properly.** Adobe's current best-practices page asks for JPG or PNG, 1024 × 1024 pixels or larger, under 20 MB for individual and teams users, a consistent aspect ratio across the set, and no more extreme than 16:9 or 9:16. Avoid transparent backgrounds, which is a gotcha for illustrators who keep spot art on transparent layers. Flatten those onto a background close to how the art normally appears. Crop out signatures, watermarks, and repeated props unless you want them baked in.
+
+4. **Create the model and pick the right type.** From the Firefly home page, go to Custom Models, choose Create custom model, and pick the illustration style option rather than the character one. Character models are for one recurring subject and use a Concept ID. A style model is about how things are drawn, not who's in them.
+
+5. **Rewrite the auto-captions, don't just approve them.** Firefly captions every image automatically. Adobe's guidance is to fix anything wrong, add visual detail that describes your style or subject, and vary the sentence structure instead of repeating one caption template. Write each caption to describe what's in the image, in plain, specific nouns. Whatever vocabulary you use here is the vocabulary that will work best in prompts later.
+
+6. **Set at least three model tags that describe the style itself.** Tags are meant for permanent traits, like Adobe's examples of watercolor texture, flat illustration, or geometric style. Keep temporary things out of the tags: expressions, clothing, props, or objects someone is holding. For an illustrator, good tags are usually medium, line quality, and color approach.
+
+7. **Clear the analysis flags before training.** Firefly scores the dataset and flags images that break the guidelines. Fix those or swap the images, then run Analyze and caption again if you changed captions or tags. When you hit Train, you'll be asked to confirm you have the rights to the images. Training can take from 30 minutes to several hours, according to Adobe, and you'll get an email when it's done.
+
+8. **Test against a fixed prompt list, including prompts nothing like your training set.** Write five or six prompts in advance: a couple of subjects close to your training images and a few deliberately far from them. Adobe's prompt guide says to describe content (subject, pose, setting, materials) rather than the style, since the model already knows the style. One independent write-up stresses the far-off prompts as the real test, because a model that only reproduces its training subjects has memorized them, not learned a style. Adobe also warns that prompts unrelated to the dataset can give poor results. Expect both effects, and judge the model on the middle ground.
+
+9. **Retrain rather than fight it with prompts.** If results drift, the fix is almost always in the dataset: an off-style image, a repeated prop, captions that taught the wrong words. One write-up suggests training a couple of versions from slightly different image sets and comparing them. Keep notes on which images went into each version so you know what changed.
+
+10. **Use it where you actually work, and finish by hand.** Adobe's October help page says custom models can generate in Firefly on the web, Photoshop (through an update to its beta desktop app), Express, Illustrator, GenStudio, and Firefly Services. Firefly's Edit mode also lets you use Custom Model 5 models to add, remove, or change elements in an existing image while keeping the style. Output is raster. Adobe is explicit that custom models are image models, not vector models, and that SVG export from them is enterprise-only and works much like Image Trace, with more anchor points than hand-built vectors. For vector deliverables, plan on redrawing or tracing the result yourself.
+
+## Where the sources disagree
+
+**How many images.** Adobe's current docs and most write-ups say 10 to 30. One independent guide gives higher ranges for style and character models and attributes them to Adobe. That doesn't match Adobe's current pages, so go with 10 to 30.
+
+**Resolution.** Adobe's current page asks for 1024 × 1024 pixels or larger. XainFlow agrees on that minimum but suggests using the highest resolution you have, which is an easy way to stay on the safe side.
+
+**Where you can use the model.** The March announcement mentioned only Firefly and Firefly Boards. Adobe's October help page adds Photoshop, Express, Illustrator, and more. If an older tutorial says you're stuck in the Firefly web app, it's out of date.
+
+**What it's good for.** The write-ups split on this. One frames style models as a way for illustrators to show clients style fit before doing the hand work. Another, from a competing platform, argues that custom models can narrow creative exploration and that one-off work is better served by prompting a general model. Both have a point: a style model is great for consistency and a poor tool for finding something new.
+
+## Why it matters for designers
+
+Prompting a general model "in a flat illustration style with textured shading" gets you something generic. A model trained on your own work starts from your line weights, palette, and habits, which is a very different starting point for client sketches or on-style variations across a campaign.
+
+It also puts the effort where illustrators already have the skill. The quality of a custom model comes down to curation and description, choosing which pieces represent the style and naming what's in them. That's closer to art directing your own portfolio than to prompt engineering.
+
+## What to watch out for
+
+It's still a beta. Adobe labels Custom Models beta for individual and teams users, so expect the steps, limits, and options described here to keep shifting. Some users in Adobe's community thread reported "You don't have access to train models" messages in certain locations, without an explanation from Adobe.
+
+Credit costs aren't published. Adobe says training and generation use your plan's existing generative credits, but neither Adobe nor the write-ups we found give a firm number. Watch your balance during the first training run.
+
+Only train on work you have the rights to. That rules out client work you don't have permission to reuse, and it rules out other artists' work entirely, whatever the tool technically allows.
+
+Finally, keep your hand in the loop. Output is raster, it can repeat quirks from your dataset, and it's only as consistent as the set you trained on. Treat it as a fast sketch partner in your own style, not a replacement for finishing the piece.
