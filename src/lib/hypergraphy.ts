@@ -58,6 +58,7 @@ export const ART_MOTIFS = [
   'hierarchy',
   'halftone',
   'image',
+  'keystone',
   'layout',
   'layers',
   'linechart',
@@ -516,6 +517,21 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [outline(circle(72, 32, 7, 20), 0.9)],
     strokes: [frame(8, 14, 92, 86), poly([10, 84, 34, 48, 50, 68, 64, 54, 90, 84])],
     tones: [region(box(8, 14, 92, 86), 0.08), region(poly([8, 86, 34, 48, 50, 68, 64, 54, 92, 86]), 0.55)],
+  },
+  // A building shot from below, its sides converging toward the top
+  // (keystoning), between two true vertical guides it should line up with.
+  keystone: {
+    fills: [
+      outline(box(38, 22, 45, 30), 0.5),
+      outline(box(55, 22, 62, 30), 0.5),
+      outline(box(34, 40, 43, 48), 0.5),
+      outline(box(57, 40, 66, 48), 0.5),
+      outline(box(30, 58, 41, 66), 0.5),
+      outline(box(59, 58, 70, 66), 0.5),
+      outline(box(44, 76, 56, 92), 0.6),
+    ],
+    strokes: [closeLoop(poly([34, 10, 66, 10, 86, 92, 14, 92])), poly([5, 6, 5, 94]), poly([95, 6, 95, 94])],
+    tones: [region(poly([34, 10, 66, 10, 86, 92, 14, 92]), 0.14)],
   },
   // A stack of layers: a diamond with two chevrons below it.
   layers: {

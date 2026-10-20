@@ -1,0 +1,85 @@
+---
+title: "DxO ViewPoint 6 uses AI masks to fix one subject's geometry without generating pixels"
+dek: >-
+  The perspective and distortion tool can now select a single subject and
+  reshape just that part of the frame, opens Raw files directly, and DxO is
+  clear the AI only selects, it never fills or invents anything.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-20
+updatedAt: 2026-10-20
+lastVerified: 2026-10-20
+disciplines:
+  - Photo & Imaging
+art: keystone
+tools:
+  - "DxO ViewPoint"
+  - "DxO PhotoLab"
+  - "Adobe Lightroom Classic"
+  - "Adobe Photoshop"
+  - "Capture One"
+sources:
+  - title: "DxO ViewPoint 6 (DxO product page)"
+    url: https://www.dxo.com/dxo-viewpoint/
+    accessed: 2026-10-20
+  - title: "DxO ViewPoint 6 adds direct Raw support and more precise local corrections (DPReview, October 20, 2026)"
+    url: https://www.dpreview.com/news/dxo-viewpoint-6-adds-direct-raw-support-and-more-precise-local-corrections/
+    accessed: 2026-10-20
+  - title: "DxO ViewPoint 6: Enhanced AI Masking Features (Macfilos, October 20, 2026)"
+    url: https://www.macfilos.com/2026/10/20/dxo-viewpoint-6-ai-masks-bring-local-geometry-control/
+    accessed: 2026-10-20
+  - title: "Wonky photos of buildings begone! DxO ViewPoint 6 introduces AI masking, but maintains that no AI image generation takes place (Digital Camera World)"
+    url: https://www.digitalcameraworld.com/tech/software/wonky-photos-of-buildings-begone-dxo-viewpoint-6-introduces-ai-masking-but-maintains-that-no-ai-image-generation-takes-place
+    accessed: 2026-10-20
+beforeYouUse:
+  clientData: >-
+    not verified: none of the coverage says whether the AI subject
+    selection runs on your machine or sends images anywhere. ViewPoint has
+    always been desktop software, but check DxO's documentation before
+    running embargoed client work through the new masks.
+  usageRights: >-
+    known: DxO says the AI only selects your subject and generates no
+    pixels, so the output is your original photo, reshaped. Your rights to
+    the image are whatever they were before you opened it.
+  disclosure: >-
+    not verified: since nothing is generated, this sits closer to classic
+    perspective correction than generative editing, but reshaping a subject
+    still changes what the photo shows. Whether that needs disclosing
+    depends on the client and the use (editorial and real estate work often
+    have their own rules).
+  accessibility: >-
+    not applicable: this is a photo correction tool, so accessibility comes
+    down to how you use the output, not the software itself.
+  cost: >-
+    known: DxO sells ViewPoint as a perpetual license with no subscription.
+    Coverage reports $129.99 for a new license and $84.99 to upgrade from
+    ViewPoint 5, and DxO offers a 30-day free trial with no card required.
+---
+DxO released ViewPoint 6 on October 20, and the headline change is a careful use of AI: masks that pick out one subject so you can fix its shape or perspective without touching the rest of the frame. Just as notable is what DxO says it doesn't do. No generated fill, no invented edges, no cropping.
+
+## What changed
+
+ViewPoint is DxO's tool for correcting perspective, lens distortion, and the stretched look subjects get near the edges of a wide-angle shot. Version 6 adds three things worth knowing about:
+
+- **AI masks in ReShape Fusion.** ReShape Fusion, added in version 5, lets you move, scale, or rotate part of an image using a mesh. Now you draw a rectangle around a subject, ViewPoint builds a mask along its outline, and the mesh wraps around that subject instead of sitting on a uniform grid. You can subdivide or merge regions of the mesh, switch individual control points on or off, and set how far the correction carries into the surrounding picture.
+- **Direct Raw support.** Version 5 only took JPEG and TIFF, so Raw files had to be processed somewhere else first. Version 6 opens Raw directly, rendering it with DxO's camera profiles in its wide gamut working space, and adds basic exposure (from -4 to +4 EV) and white balance controls. DxO itself calls this far from a full Raw editor.
+- **Non-destructive sidecars.** Corrections save to a sidecar file as you work, and you export to JPEG or 8- or 16-bit TIFF.
+
+It runs standalone on macOS and Windows, or as a plug-in for Lightroom Classic, Photoshop, and Capture One. PhotoLab 10 owners get the tools inside PhotoLab.
+
+## Why it matters for designers
+
+If you shoot or retouch architecture, interiors, or product photography, the usual geometry fix is global: straighten the verticals and accept what happens to everything else. Being able to correct just one building, one product, or one face stretched at the edge of a group shot is a real step up, and it's the kind of fix that used to mean careful masking and warping in Photoshop.
+
+The "no generated pixels" stance matters too. A lot of clients, especially in real estate, editorial, and documentary work, are uneasy about generative fill showing up in their images. A tool where the AI only does the selection keeps the edit in familiar retouching territory, and it's easier to explain to a client.
+
+## What to watch out for
+
+All of this comes from DxO and early news coverage. Nobody we found has published hands-on results yet, so how well the subject selection copes with cluttered scenes, fine edges like hair or foliage, or overlapping objects is still an open question.
+
+Reshaping one subject means the area around it has to give somewhere. DxO says it doesn't fill in the edges or change the frame size, so watch the blend into the background closely, especially on straight lines and repeating patterns where a warp is easy to spot.
+
+And the new Raw support is a convenience, not a replacement for your main Raw editor. If you already develop in Lightroom or Capture One, the plug-in route is probably still the cleaner workflow.
