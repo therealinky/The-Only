@@ -1142,16 +1142,15 @@ main {
 
 [data-layout='list'] > [data-article-item]:not(:nth-child(1 of :not([hidden]))) .article-card__readtime--below {
   /* An absolutely positioned grid child's containing block is its grid
-     area, so pin it to the thumbnail's column and center it there. Both
-     column lines are named: an "auto" end would mean the card's edge. */
+     area, so pin it to the thumbnail's column and align it with the
+     thumbnail's right edge. Both column lines are named: an "auto" end
+     would mean the card's edge. */
   display: block;
   position: absolute;
   grid-column: 1 / 2;
   grid-row: 1;
   inset-block-start: calc(var(--thumb-size) + var(--space-2));
-  inset-inline: 0;
-  width: fit-content;
-  margin-inline: auto;
+  inset-inline-end: 0;
 }
 
 @media (min-width: 48rem) {
