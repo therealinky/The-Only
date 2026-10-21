@@ -46,6 +46,7 @@ export const ART_MOTIFS = [
   'cube',
   'cutout',
   'database',
+  'denoise',
   'document',
   'dropdown',
   'eraser',
@@ -73,6 +74,7 @@ export const ART_MOTIFS = [
   'plug',
   'ratios',
   'reel',
+  'relight',
   'rerun',
   'ribbon',
   'seal',
@@ -728,6 +730,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   },
   // A rerun arrow circling an image frame: the model checks a finished
   // picture against the prompt and goes around again.
+  // A film frame with a dark foreground figure and a new light glowing
+  // behind it: relighting footage with depth, so light falls behind
+  // foreground objects.
+  relight: {
+    fills: [
+      outline(star4(70, 36, 13, 4), 1),
+      outline(poly([16, 88, 18, 64, 24, 56, 34, 56, 40, 64, 42, 88]), 0.9),
+      outline(circle(29, 40, 7), 0.9),
+    ],
+    strokes: [frame(6, 12, 94, 92)],
+    tones: [region(circle(70, 36, 22), 0.22), region(circle(70, 36, 12), 0.32)],
+  },
   rerun: {
     fills: [outline(poly([79, 8, 93, 26, 71, 28]), 1)],
     strokes: [
@@ -902,6 +916,17 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   },
   // A database: a stacked cylinder, its top face dark and two bands
   // around the body. A CMS or backend behind a site.
+  // A render split down the middle: speckled with grain on the left,
+  // smooth and clean on the right. Denoising a render.
+  denoise: {
+    fills: [
+      ...[18, 30, 42, 54, 66, 78].flatMap((y, row) =>
+        [12 + (row % 2) * 6, 26 + (row % 2) * 6, 40].filter((x) => x <= 40).map((x) => dot(x, y, 2.2)),
+      ),
+    ],
+    strokes: [frame(4, 8, 96, 90), poly([50, 8, 50, 90])],
+    tones: [region(box(58, 14, 90, 84), 0.45)],
+  },
   database: {
     fills: [outline(ellipse(50, 20, 34, 9), 0.75)],
     strokes: [poly([16, 20, 16, 80]), poly([84, 20, 84, 80]), dbArc(40), dbArc(60), dbArc(80)],

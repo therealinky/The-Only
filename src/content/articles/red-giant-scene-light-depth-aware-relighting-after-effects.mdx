@@ -1,0 +1,87 @@
+---
+title: "Red Giant's Scene Light puts new lights into existing footage in After Effects"
+dek: >-
+  Scene Light, new in Red Giant 2027.0, uses AI to estimate depth and surface
+  direction from your footage, then lets After Effects lights fall across the
+  scene, even behind people and objects in the foreground. Maxon says the
+  analysis runs on your own machine.
+format: brief
+evidence: announced
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-21
+updatedAt: 2026-10-21
+lastVerified: 2026-10-21
+disciplines:
+  - Motion & Video
+art: relight
+tools:
+  - Red Giant
+  - Adobe After Effects
+sources:
+  - title: "Red Giant 2027.0 New Features (Maxon Japan, October 14, 2026)"
+    url: https://note.com/maxonjapan/n/n21d10a90f10c
+    accessed: 2026-10-21
+  - title: "Red Giant (Maxon)"
+    url: https://www.maxon.net/en/red-giant
+    accessed: 2026-10-21
+  - title: "Red Giant 2027: Relight, Noise, Schmutz (Digital Production, October 20, 2026)"
+    url: https://digitalproduction.com/2026/10/20/red-giant-2027-relight-noise-schmutz/
+    accessed: 2026-10-21
+  - title: "Maxon Fall 2026 release gives you more creative control (ProVideo Coalition, October 20, 2026)"
+    url: https://www.provideocoalition.com/maxon-fall-2026-release-gives-you-more-creative-control/
+    accessed: 2026-10-21
+  - title: "Red Giant learns to relight shot video (Renderu, October 16, 2026)"
+    url: https://renderu.com/en/news/post/28695
+    accessed: 2026-10-21
+beforeYouUse:
+  clientData: >-
+    known: Maxon Japan's release note says all of Scene Light's calculations
+    run locally, footage isn't uploaded anywhere, and it isn't used for AI
+    training. That's a good sign for client footage under NDA, though we
+    haven't checked it ourselves.
+  usageRights: >-
+    not verified: Scene Light changes the lighting of your own footage
+    rather than generating new imagery, and none of the announcements
+    mention any extra usage terms. We didn't review Maxon's EULA for this
+    release.
+  disclosure: >-
+    not verified: nothing in Maxon's material covers labeling. Relighting
+    can change what a shot appears to show, like turning day into night, so
+    think about disclosure for documentary or news work.
+  accessibility: >-
+    not applicable: this is a compositing effect, not a published interface
+    or document.
+  cost: >-
+    not verified: Scene Light ships in Red Giant 2027.0, which comes with a
+    Red Giant subscription or Maxon One. Maxon's page doesn't give a
+    separate price for Scene Light, and plan pricing varies by region.
+---
+Maxon's Red Giant suite picked up an AI relighting effect for After Effects in its 2027.0 release on October 14. It's called Scene Light, and the pitch is simple: add a light to footage you've already shot and have it behave like it's actually in the scene, instead of painting a glow over a flat image.
+
+## What changed
+
+**It works out the scene's shape first.** According to Digital Production's breakdown, Scene Light analyzes your footage to estimate a depth map and a surface-normal map (which way each surface is facing), then uses those with regular After Effects lights. Depth is what lets a light sit behind a person or object in the foreground instead of washing evenly across the frame. Maxon's own page describes it as true 3D lighting that travels even behind foreground objects.
+
+**Typical jobs.** The examples Maxon and the trade coverage give are adding interactive light from a muzzle flash or explosion, matching the light on a VFX element you've inserted, light from sources inside the frame, and broader changes like a day-for-night look. The lights stay adjustable inside your comp.
+
+**CG passes work too.** If you're relighting a render rather than live action, Digital Production notes you can feed in real depth and normal passes from Cinema 4D, Redshift, or another renderer instead of relying on the AI's estimate.
+
+**It runs locally.** Maxon Japan's release note says the calculations happen on your machine, footage isn't uploaded, and it isn't used to train AI.
+
+Scene Light is After Effects only for now. Red Giant as a whole supports several hosts, but the release table lists After Effects as Scene Light's host.
+
+## Why it matters for designers
+
+Adding believable light to a shot after the fact has usually meant a lot of rotoscoping, masks, and hand-tuned color work, and it's the kind of fix that tends to get cut when a deadline is close. A depth-aware light you can just place and move makes it realistic to warm up a flat interview, add the flash from a practical effect that wasn't there on set, or make a composited element look like it belongs.
+
+For motion designers working on social and brand video, it also opens up mood changes without a reshoot. A day-for-night pass or a moody accent light becomes something you can try in a few minutes and throw away if it doesn't work.
+
+## What to watch out for
+
+The whole effect depends on how well the AI reads your shot's depth. Coverage from Renderu and Digital Production both stress that it's estimating the scene, not rebuilding it, so tricky edges, reflections, hair, and overlapping objects need checking in motion, not just on a still frame. Shots that are hard for the AI may still need hand-made maps and masks.
+
+Digital Production also lists some known issues at release: the Edge Smoothing control is broken, the buttons for placing spot and point lights can freeze After Effects when it's running in a language other than English, and the Depth Generator's Render to Comp option can crash After Effects on some systems. Their advice, which we'd echo, is to try it on a duplicate comp before using it on a live job.
+
+We haven't used Scene Light ourselves, so everything here comes from Maxon and the trade coverage linked in the sources. See the sidebar for the data and cost details.

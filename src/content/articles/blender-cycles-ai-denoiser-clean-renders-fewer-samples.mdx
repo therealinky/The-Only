@@ -1,0 +1,110 @@
+---
+title: "Getting clean Cycles renders from fewer samples with Blender's AI denoiser"
+dek: >-
+  Cycles' denoiser is on by default, so most people never touch its
+  settings. Pulling together Blender's manual and several long Blender
+  Artists threads, here's how to set it up for stills and animation, and
+  where the advice disagrees.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-21
+updatedAt: 2026-10-21
+lastVerified: 2026-10-21
+disciplines:
+  - 3D
+art: denoise
+tools:
+  - Blender
+sources:
+  - title: "Sampling (Blender 5.2 LTS Manual)"
+    url: https://docs.blender.org/manual/en/latest/render/cycles/render_settings/sampling.html
+    accessed: 2026-10-21
+  - title: "Denoise Node (Blender 5.2 LTS Manual)"
+    url: https://docs.blender.org/manual/en/latest/compositing/types/filter/denoise.html
+    accessed: 2026-10-21
+  - title: "Denoising (Blender 2.93 Manual)"
+    url: https://docs.blender.org/manual/en/2.93/render/layers/denoising.html
+    accessed: 2026-10-21
+  - title: "Intel Open Image Denoise"
+    url: https://www.openimagedenoise.org/
+    accessed: 2026-10-21
+  - title: "How to optimize Cycles for fast rendering with minimal quality loss? Here's my settings (Blender Artists, September 2026)"
+    url: https://blenderartists.org/t/how-to-optimize-cycles-for-fast-rendering-with-minimal-quality-loss-here-s-my-settings/1653621
+    accessed: 2026-10-21
+  - title: "Which denoiser to use and how many samples to use with it (Blender Artists, February 2025)"
+    url: https://blenderartists.org/t/which-denoiser-to-use-and-how-many-samples-to-use-with-it/1581417
+    accessed: 2026-10-21
+  - title: "Noise in animation (Blender Artists, August 2023)"
+    url: https://blenderartists.org/t/noise-in-animation/1480255
+    accessed: 2026-10-21
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Blender's manual, Intel's Open Image
+    Denoise documentation, and several Blender Artists threads on getting
+    the most out of Cycles' AI denoiser, plus general Blender technique.
+  whyItMatters: >-
+    The denoiser is the biggest lever on Cycles render times, but its
+    defaults are a compromise. A few deliberate settings let stills render
+    with far fewer samples, and keep animations from flickering.
+  bestFor: >-
+    3D artists, motion designers, and product or packaging designers who
+    render stills or short animations in Blender Cycles and want shorter
+    render times without mushy detail.
+  timeToTry: >-
+    About an hour to run a few test renders of one of your own scenes with
+    different settings. Animation testing takes longer, since you need to
+    watch a rendered sequence, not a single frame.
+beforeYouUse:
+  clientData: >-
+    known: denoising runs inside Blender on your own CPU or GPU, per the
+    manual's Use GPU setting. Your scenes and renders aren't sent anywhere
+    for this.
+  usageRights: >-
+    not applicable: the denoiser cleans up your own render rather than
+    generating new content, so it doesn't change who owns the image.
+  disclosure: >-
+    not applicable: denoising is a standard rendering step, comparable to
+    anti-aliasing, not generated imagery.
+  accessibility: >-
+    not applicable: this is a rendering technique, not a published interface
+    or document.
+  cost: >-
+    known: Blender is free and open source, and Intel's Open Image Denoise
+    library it uses is open source under the Apache 2.0 license. The real
+    cost is your render time and, if you denoise on the GPU, extra graphics
+    memory.
+---
+Cycles ships with an AI denoiser switched on, which is why a render at a modest sample count looks clean instead of grainy. Most people leave it on its defaults and push samples up when something looks off. That works, but it leaves a lot of render time on the table for stills, and it's often the wrong fix for animation.
+
+This is synthesized from Blender's own manual, Intel's documentation for the denoiser Blender uses, and several long troubleshooting threads on Blender Artists, plus general Blender knowledge. We haven't run a controlled test of every setting ourselves, so treat the numbers below as starting points from those sources, not guarantees.
+
+1. **Pick the denoiser on purpose.** In Render Properties > Sampling > Denoise, the manual describes OpenImageDenoise as typically giving the highest quality, OptiX as an option for some older NVIDIA cards, and Automatic as whatever's fastest on your hardware. Under the hood, Open Image Denoise is a set of deep-learning filters from Intel trained on everything from very noisy to nearly finished renders. The forum consensus is OpenImageDenoise for final frames and the faster option for the viewport. Turn on Use GPU if you have the memory, since the manual says it's significantly faster than the CPU.
+
+2. **Give it at least the albedo pass.** The Passes setting decides what extra information the denoiser gets besides the noisy color. The manual recommends at least Albedo, because color alone can blur out detail, especially at low sample counts. Albedo + Normal adds surface direction, which helps it keep edges and fine geometry. Use that unless you have a reason not to.
+
+3. **Choose a Prefilter based on how clean your passes are.** This is where sources disagree a little. The manual describes Accurate as cleaning up the albedo and normal passes before denoising, and None as keeping the most detail but assuming those passes are already noise free, which can take a high sample count. One detailed forum reply says Accurate removes the most noise but can soften detail, and recommends against Fast. A sensible way to read both: start with Accurate, and only switch to None for high-sample stills where you can see fine texture being smeared.
+
+4. **Set a minimum sample count, not just a maximum.** With Noise Threshold on, Cycles stops sampling each area once it's clean enough. The manual gives typical thresholds between 0.1 and 0.001, lower meaning better quality and longer renders. Several forum threads point out the catch: with Min Samples left at 0, the threshold can stop too early in dim interiors and the denoiser then has too little to work with, which shows up as blotches. Setting a minimum (forum suggestions range from 64 to over 100 for interiors) fixes that. For simple scenes, one poster reports that loosening the threshold a little above the default barely changes quality and saves real time.
+
+5. **Find your sample count by going down, not up.** Render a test frame, lower the samples until you see denoising artifacts (smeared texture, blotchy shadows, wobbly edges), then step back up. Forum replies agree the right number depends heavily on lighting and materials, and stills can often go far lower than people expect. Keep a crop of the busiest area of the frame for comparison, since artifacts show up there first.
+
+6. **Denoise in the compositor when you want control.** Turn on Denoising Data in View Layer Properties > Passes, render, then wire the Noisy Image, Denoising Albedo, and Denoising Normal outputs into a Denoise node in the compositor, as the manual describes. You get the same denoiser, but now you can compare against the raw render, re-denoise without re-rendering, and blend some of the original grain back in with a Mix node if the result looks too plastic. Turn on the node's HDR option for renders with values above 1.
+
+7. **Treat animation as its own problem.** The reason is temporal: each frame's noise is different, so the denoiser makes slightly different guesses frame to frame and the result shimmers, even when every still looks clean. Blender's older manual says OptiX in particular isn't temporally stable, and that animation still needs high sample counts. The forum fixes that come up most often: raise Min Samples, render at double resolution and scale down afterward (crisper input, less flicker, though not none), and for really stubborn shots, finish with a temporal denoiser in your video software.
+
+8. **Fix the sources of noise, not just the noise.** The same threads keep pointing at a handful of scene problems the denoiser can't solve: glass that casts full shadows, small lights or emissive meshes tucked into deep gaps, windows without light portals, many lights inside volumes, and heavy subsurface scattering. Rendering volumetric fog on its own view layer and denoising it separately is another common approach. Cleaning these up often does more than doubling samples.
+
+## Why it matters for designers
+
+Render time is the tax on every 3D look-dev decision. The longer each test render of a product shot takes, the fewer lighting ideas you try. Getting the denoiser right is usually the cheapest way to win that time back, and it doesn't need new hardware or a paid add-on.
+
+For motion work, it's also the difference between a sequence that looks finished and one with a subtle boil in the shadows. Knowing that flicker is a temporal problem, not a sample-count problem alone, saves a lot of blind re-rendering.
+
+## What to watch out for
+
+Don't judge animation settings from a single frame. Every thread on flicker comes back to this: a frame that looks perfect can shimmer at full speed. Render a short stretch and watch it before committing to the whole shot.
+
+Hair, grass, and fine fur are where the denoiser struggles most, and forum replies recommend testing them early in a project. The menu names here match Blender's current 5.2 LTS manual. Older tutorials, and some of the forum threads, were written for earlier versions, so a setting may sit in a slightly different place. See the sidebar for the data and cost details.
