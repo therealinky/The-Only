@@ -1,0 +1,74 @@
+---
+title: "Spline's MCP server moves to the cloud, so ChatGPT and Claude can build 3D scenes without the desktop app"
+dek: >-
+  Spline now hosts its MCP server, so you can connect ChatGPT, Claude, Cursor,
+  and other AI tools by signing in with your Spline account, no desktop app or
+  API key required. The same update brings PBR materials and timeline
+  animations to native iOS and Android exports.
+format: brief
+evidence: announced
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-22
+updatedAt: 2026-10-22
+lastVerified: 2026-10-22
+disciplines:
+  - 3D
+  - Web
+art: cloudcube
+tools:
+  - Spline
+  - ChatGPT
+  - Claude
+  - Cursor
+sources:
+  - title: "Remote MCP, native PBR and more (Spline changelog, October 19, 2026)"
+    url: https://updates.spline.design/changelog/remote-mcp-native-pbr-and-more
+    accessed: 2026-10-22
+  - title: "Spline MCP (Spline setup page)"
+    url: https://spline.design/mcp
+    accessed: 2026-10-22
+beforeYouUse:
+  clientData: >-
+    not verified: Spline's setup page says each grant belongs to one person
+    and each chat only works in the file it opened, but it doesn't say how
+    scene data passed between Spline and your AI tool is handled or retained.
+    Your AI tool's own data terms apply to the chat side too.
+  usageRights: >-
+    not verified: neither the changelog nor the setup page covers usage
+    rights for scenes built or edited by an outside AI tool.
+  disclosure: >-
+    not verified: there's no stated requirement to disclose that a scene was
+    built through MCP.
+  accessibility: >-
+    not verified: nothing in the update covers accessibility for interactive
+    3D output, whether it's built by hand or by an agent.
+  cost: >-
+    not verified: Spline's setup page doesn't say which plans can use the
+    hosted server or whether it uses AI credits. Your AI tool may need its
+    own paid plan for custom connectors; Spline notes this for Grok.
+---
+When Spline relaunched as V2 in August, one of the headline pieces was an MCP server that let outside AI tools drive the 3D editor. Its October 19 update makes that a lot easier to set up: the server now runs in Spline's cloud, so connecting ChatGPT, Claude, or Cursor is a sign-in rather than a desktop-app setup.
+
+## What changed
+
+Spline's changelog says its MCP server now runs in the cloud, so no editor needs to be open, and your AI tool can build and edit 3D scenes for you, with every change linking to the file it made. Per Spline's setup page, you add the hosted server address in your AI tool and sign in with your Spline account through OAuth. There's no API key to create or store, and revoking the grant stops it working.
+
+The setup page covers a few routes in. In ChatGPT you can install the Spline plugin or add the server yourself, and with the server the editor opens in a panel inside the chat. In Claude you add it as a custom connector, Claude Code has a one-line command, and Cursor has a one-click install. Spline also lists VS Code and other MCP clients. The page says to mention Spline or Hana, its 2D design tool, in your prompt so the agent picks the right one. The older local option, where the Spline desktop app runs the server on your own machine, is still there as an alternative.
+
+The same update gives agents a few new abilities: publishing a scene and returning its public link, writing variable and conditional logic for interactions, and controlling animation clips inside imported GLB or glTF models. And separately from AI, PBR materials, booleans, path extrusions, and timeline animations now carry through to Spline's native iOS and Android exports.
+
+## Why it matters for designers
+
+The local setup was fine if you already lived in the desktop app and a code editor. A hosted server you sign into is a much lower bar, especially for designers who mostly work in a chat window. It also makes it more realistic to chain tools: ask the same assistant to draft a landing page and build the 3D hero object it needs, then get a link to a real, editable Spline file rather than a one-off render.
+
+The native export changes matter on their own if you hand 3D scenes to app developers. Materials and animations that previously didn't survive the trip to iOS and Android now do, according to the changelog.
+
+## What to watch out for
+
+The two Spline pages read a little differently. The changelog says no editor needs to be open, while the setup page says calls run in Spline in your browser, and ChatGPT opens the editor in a panel. Expect some kind of Spline session in the loop, just not necessarily the desktop app.
+
+Spline doesn't say which plans include the hosted server, whether it uses AI credits, or what usage limits apply, so check before building it into client work. Some AI clients only load MCP servers at startup, so you may need to restart after adding it. And the usual agent caveat applies: a scene that looks right in the chat preview can still have scale, lighting, or interaction problems, so open the file and check it yourself before you ship it.
+
+We haven't connected Spline's hosted server ourselves yet, so the sidebar reflects what Spline has published, not what we've confirmed.
