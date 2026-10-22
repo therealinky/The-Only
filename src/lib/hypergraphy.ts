@@ -41,6 +41,7 @@ export const ART_MOTIFS = [
   'chat',
   'clapper',
   'cloud',
+  'cloudcube',
   'code',
   'coins',
   'cube',
@@ -50,6 +51,7 @@ export const ART_MOTIFS = [
   'document',
   'dropdown',
   'eraser',
+  'eye',
   'face',
   'filmstrip',
   'flyer',
@@ -387,6 +389,22 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [poly([50, 66, 50, 40]), poly([40, 50, 50, 40, 60, 50])],
     tones: [],
   },
+  // A cloud floating over an isometric cube: a 3D scene built and edited
+  // from a hosted server, with no editor open.
+  cloudcube: {
+    fills: [outline(CLOUD.map((p) => ({ x: 10 + p.x * 0.8, y: 2 + (p.y - 24) * 0.8 })), 0.2)],
+    strokes: [
+      poly([50, 50, 70, 61, 70, 83, 50, 94, 30, 83, 30, 61, 50, 50]),
+      poly([50, 72, 70, 61]),
+      poly([50, 72, 30, 61]),
+      poly([50, 72, 50, 94]),
+    ],
+    tones: [
+      region(poly([50, 50, 70, 61, 50, 72, 30, 61]), 0.14),
+      region(poly([30, 61, 50, 72, 50, 94, 30, 83]), 0.45),
+      region(poly([50, 72, 70, 61, 70, 83, 50, 94]), 0.78),
+    ],
+  },
   // A code window with </> over the code.
   code: {
     fills: [dot(13, 16, 1.6), dot(19, 16, 1.6), dot(25, 16, 1.6)],
@@ -686,6 +704,22 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     strokes: [poly([4, 86, 24, 86]), poly([38, 86, 58, 86]), ring(76, 38, 13)],
     tones: [region(poly([84, 49, 89, 45, 99, 59, 94, 63]), 0.9)],
+  },
+  // An open eye: an almond-shaped lid line, a shaded iris with a dark
+  // pupil and a light catchlight left clear, and lashes along the top lid.
+  // A blink fixed after the shot.
+  eye: {
+    fills: [dot(50, 50, 7)],
+    strokes: [
+      cubic({ x: 8, y: 52 }, { x: 30, y: 20 }, { x: 70, y: 20 }, { x: 92, y: 52 }),
+      cubic({ x: 8, y: 52 }, { x: 30, y: 80 }, { x: 70, y: 80 }, { x: 92, y: 52 }),
+      ring(50, 50, 17),
+      poly([26, 32, 20, 22]),
+      poly([40, 27, 37, 15]),
+      poly([60, 27, 63, 15]),
+      poly([74, 32, 80, 22]),
+    ],
+    tones: [region(circle(50, 50, 17), 0.5)],
   },
   // A tilted eraser at the end of a pencil line it has wiped away, leaving
   // a clean gap: removing a distraction from a photo.
