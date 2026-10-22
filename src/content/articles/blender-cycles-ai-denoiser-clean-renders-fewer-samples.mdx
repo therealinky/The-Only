@@ -8,7 +8,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-21
 updatedAt: 2026-10-21
@@ -93,9 +94,9 @@ This is synthesized from Blender's own manual, Intel's documentation for the den
 
 6. **Denoise in the compositor when you want control.** Turn on Denoising Data in View Layer Properties > Passes, render, then wire the Noisy Image, Denoising Albedo, and Denoising Normal outputs into a Denoise node in the compositor, as the manual describes. You get the same denoiser, but now you can compare against the raw render, re-denoise without re-rendering, and blend some of the original grain back in with a Mix node if the result looks too plastic. Turn on the node's HDR option for renders with values above 1.
 
-7. **Treat animation as its own problem.** The reason is temporal: each frame's noise is different, so the denoiser makes slightly different guesses frame to frame and the result shimmers, even when every still looks clean. Blender's older manual says OptiX in particular isn't temporally stable, and that animation still needs high sample counts. The forum fixes that come up most often: raise Min Samples, render at double resolution and scale down afterward (crisper input, less flicker, though not none), and for really stubborn shots, finish with a temporal denoiser in your video software.
+7. **Treat animation as its own problem.** The reason is temporal: each frame's noise is different, so the denoiser makes slightly different guesses frame to frame and the result shimmers, even when every still looks clean. Blender's older manual says OptiX in particular isn't temporally stable, and that animation still needs high sample counts. The forum fixes that come up most often: raise Min Samples, render at double resolution and scale down afterward (crisper input, less flicker, though not none), and for really stubborn shots, clean it up in third-party video software.
 
-8. **Fix the sources of noise, not just the noise.** The same threads keep pointing at a handful of scene problems the denoiser can't solve: glass that casts full shadows, small lights or emissive meshes tucked into deep gaps, windows without light portals, many lights inside volumes, and heavy subsurface scattering. Rendering volumetric fog on its own view layer and denoising it separately is another common approach. Cleaning these up often does more than doubling samples.
+8. **Fix the sources of noise, not just the noise.** The same threads keep pointing at a few scene problems the denoiser can't solve: glass that casts full shadows, and small point lights or emissive meshes tucked into deep gaps, where a spot or area light usually works better. Rendering volumetric fog on its own view layer and denoising it separately is another common approach. Cleaning these up often does more than doubling samples.
 
 ## Why it matters for designers
 

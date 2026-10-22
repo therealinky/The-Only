@@ -8,7 +8,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-21
 updatedAt: 2026-10-21
@@ -26,10 +27,10 @@ sources:
   - title: "Red Giant (Maxon)"
     url: https://www.maxon.net/en/red-giant
     accessed: 2026-10-21
-  - title: "Red Giant 2027: Relight, Noise, Schmutz (Digital Production, October 20, 2026)"
+  - title: "Red Giant 2027: Relight, Noise, Schmutz, by Bela Beier (Digital Production, October 20, 2026)"
     url: https://digitalproduction.com/2026/10/20/red-giant-2027-relight-noise-schmutz/
     accessed: 2026-10-21
-  - title: "Maxon Fall 2026 release gives you more creative control (ProVideo Coalition, October 20, 2026)"
+  - title: "Maxon Fall 2026 release gives you more creative control, by Jose Antunes (ProVideo Coalition, October 20, 2026)"
     url: https://www.provideocoalition.com/maxon-fall-2026-release-gives-you-more-creative-control/
     accessed: 2026-10-21
   - title: "Red Giant learns to relight shot video (Renderu, October 16, 2026)"
@@ -70,7 +71,7 @@ Maxon's Red Giant suite picked up an AI relighting effect for After Effects in i
 
 **It runs locally.** Maxon Japan's release note says the calculations happen on your machine, footage isn't uploaded, and it isn't used to train AI.
 
-Scene Light is After Effects only for now. Red Giant as a whole supports several hosts, but the release table lists After Effects as Scene Light's host.
+Scene Light is an After Effects effect. Red Giant as a whole supports several hosts, but Maxon's announcements describe Scene Light as working directly in After Effects.
 
 ## Why it matters for designers
 
@@ -80,7 +81,7 @@ For motion designers working on social and brand video, it also opens up mood ch
 
 ## What to watch out for
 
-The whole effect depends on how well the AI reads your shot's depth. Coverage from Renderu and Digital Production both stress that it's estimating the scene, not rebuilding it, so tricky edges, reflections, hair, and overlapping objects need checking in motion, not just on a still frame. Shots that are hard for the AI may still need hand-made maps and masks.
+The whole effect depends on how well the AI reads your shot's depth. Renderu notes that the result depends on how accurately the tool reads the frame, so test it on your own footage. Tricky edges, reflections, hair, and overlapping objects are the usual weak spots for any depth estimate, so check them in motion, not just on a still frame. Shots that are hard for the AI may still need hand-made maps and masks.
 
 Digital Production also lists some known issues at release: the Edge Smoothing control is broken, the buttons for placing spot and point lights can freeze After Effects when it's running in a language other than English, and the Depth Generator's Render to Comp option can crash After Effects on some systems. Their advice, which we'd echo, is to try it on a duplicate comp before using it on a live job.
 
