@@ -28,6 +28,7 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
 
 export const ART_MOTIFS = [
   'agent',
+  'anchors',
   'animchart',
   'bag',
   'blend',
@@ -73,6 +74,7 @@ export const ART_MOTIFS = [
   'pen',
   'phone',
   'pilcrow',
+  'plan',
   'plug',
   'ratios',
   'reel',
@@ -266,6 +268,13 @@ function merge(...motifs: Motif[]): Motif {
     tones: motifs.flatMap((m) => m.tones),
   };
 }
+
+// A five-point star's ten corners, outer and inner points alternating.
+const STAR5 = Array.from({ length: 10 }, (_, i) => {
+  const a = -Math.PI / 2 + (i / 10) * Math.PI * 2;
+  const r = i % 2 === 0 ? 44 : 20;
+  return { x: 50 + Math.cos(a) * r, y: 54 + Math.sin(a) * r };
+});
 
 const MOTIFS: Record<ArtMotif, Motif> = {
   // A robot head: antenna, square eyes, mouth, and ears.
@@ -1096,6 +1105,26 @@ const MOTIFS: Record<ArtMotif, Motif> = {
         tone,
       ),
     ),
+  },
+  // A five-point star drawn as a vector path, with a square anchor point on
+  // every corner: a generated shape that arrives as editable points.
+  anchors: {
+    fills: STAR5.map(({ x, y }) => outline(box(x - 4, y - 4, x + 4, y + 4), 0.9)),
+    strokes: [closeLoop(STAR5)],
+    tones: [region(STAR5, 0.3)],
+  },
+  // Two frames of the same scene: on the left the plan, a wireframe sun,
+  // horizon, and text box; on the right the finished, shaded render.
+  plan: {
+    fills: [],
+    strokes: [
+      frame(4, 26, 42, 74),
+      ring(16, 40, 6),
+      poly([4, 56, 42, 56]),
+      frame(10, 62, 32, 68),
+      frame(58, 26, 96, 74),
+    ],
+    tones: [region(circle(70, 40, 6), 0.9), region(box(58, 56, 96, 74), 0.55), region(box(64, 62, 86, 68), 1)],
   },
 };
 

@@ -1,0 +1,87 @@
+---
+title: "Canva Craft is Canva's own image model, and it plans the layout before it draws"
+dek: >-
+  Canva's first in-house image model sketches a written plan of the
+  composition and any text before rendering, which is meant to make its
+  images easier to split into editable layers with Magic Layers.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-23
+updatedAt: 2026-10-23
+lastVerified: 2026-10-23
+disciplines:
+  - Brand & Graphic
+  - Photo & Imaging
+art: plan
+tools:
+  - Canva
+sources:
+  - title: "Introducing Canva Craft (Canva Newsroom, October 22, 2026)"
+    url: https://www.canva.com/newsroom/news/canva-craft/
+    accessed: 2026-10-23
+  - title: "Connect API: Canva Craft is now available for image generation (Canva Developers Community, October 22, 2026)"
+    url: https://community.canva.dev/t/connect-api-canva-craft-is-now-available-for-image-generation/8999
+    accessed: 2026-10-23
+  - title: "Canva releases its first image generation model, by Ivan Mehta (TechCrunch, October 22, 2026)"
+    url: https://techcrunch.com/2026/10/22/canva-releases-its-first-image-generation-model/
+    accessed: 2026-10-23
+beforeYouUse:
+  clientData: >-
+    not verified: the announcement doesn't say how prompts or generated
+    images are stored, or whether they feed future training. Check Canva's
+    AI terms before prompting with unreleased client names, products, or
+    campaign details.
+  usageRights: >-
+    not verified: Canva's developer post says Craft is covered by Canva
+    Shield, Canva's program for AI safety and IP protection, but the launch
+    materials don't spell out ownership or commercial use of Craft images.
+    Canva says Craft was trained largely on templates from its own content
+    library. Check what Shield covers on your plan before using Craft
+    images in paid client work.
+  disclosure: >-
+    not verified: nothing we found says whether Craft images carry Content
+    Credentials or other AI metadata. If a client needs AI imagery
+    disclosed, track it yourself.
+  accessibility: >-
+    not applicable: this is an image generation model. Any text it renders
+    inside an image is part of the picture, so it still needs real alt text
+    or live text wherever it's used.
+  cost: >-
+    known: Canva says Craft is available to all Canva users, and its
+    developer post says API generations use the user's AI credits, the same
+    as other models. not verified: how many credits a Craft image costs,
+    and how credit allowances differ by plan.
+---
+Canva has spent the last couple of years running other companies' image models inside its editor. As of October 22, it has its own. Canva Craft is the first image generation model built and trained from scratch by Canva Research, the company's in-house AI lab, and it's live now for every Canva user.
+
+## What changed
+
+The interesting part is how Craft works. Most image models go straight from prompt to pixels. Craft splits the job in two: a planning model first writes out a detailed plan of the composition (which elements appear, where they sit relative to each other, their relative scale, the visual hierarchy, and any text that needs to appear), and a separate rendering model then turns that plan into the image.
+
+A few specifics from the launch:
+
+- **Up to 2K, lots of sizes.** In Canva, Craft renders at up to 2K in more than 30 aspect ratios, or a custom size you type in.
+- **Trained with a design lean.** Canva says Craft's training data includes millions of human-made templates from its content library: posters, social posts, presentations, infographics, menus, and type-heavy layouts. It was then tuned with feedback from Canva's own professional designers.
+- **Text in many languages.** You can prompt in any language, and Canva says Craft can render text in 55 of them.
+- **Built for Magic Layers.** Because Craft already knows where each element sits, Canva says its images are particularly well suited to Magic Layers, which turns a flat image into separate editable elements. Canva describes this as "JSON boundary boxing," and says it makes the layer split more accurate and faster.
+- **Where to find it.** Open Dream Lab from the bottom left panel. It's also in Canva's public API now. Canva's two posts disagree on the Canva MCP server: the newsroom post lists it as available, while the developer post says Craft on the MCP server is coming soon. Two cheaper, faster variants, Craft-fast and Craft-ultrafast, are announced but not out yet.
+
+## Why it matters for designers
+
+The plan-then-render approach is aimed squarely at the problem graphic designers have with AI images: you get a nice picture, but it's one flat layer, and the headline is baked in. If Craft's internal plan really does make Magic Layers more reliable, a generated poster or social graphic becomes something closer to a starting layout you can rearrange, retype, and rebrand, rather than an image you have to rebuild by hand.
+
+It's also a signal about where Canva is heading. Owning the model means Canva can tune it for layouts and typography rather than photography, and its developer post makes clear it wants Craft running inside other tools and AI assistants too, not only in the Canva editor.
+
+## What to watch out for
+
+The benchmark claims are Canva's own reading of DesignArena rankings, a crowdsourced comparison site. Canva says Craft debuted as the fourth-ranked image model there and placed first in two subcategories. That's worth knowing, but it isn't an independent test of how it handles your brand work, so try it on a real brief before you rely on it.
+
+The API is narrower than the app for now. Canva's developer post says the API currently offers only square, landscape, and portrait, with more ratios coming, and calls it a preview API where breaking changes may happen.
+
+Canva itself says fine print and technical drawings are things it still wants to improve, so check small text closely before anything ships.
+
+There's also a small gap in how the training data has been described. TechCrunch reports Canva said it didn't train Craft on photographs, while Canva's own announcement says only that training "places a much greater emphasis on design" and includes its templates. If the training data matters to your clients, Canva's own wording is the one to go by.

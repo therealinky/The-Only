@@ -1,0 +1,95 @@
+---
+title: "Ideogram Vector turns a prompt or an image into an editable SVG"
+dek: >-
+  Ideogram's first vector model skips the pixels entirely. It generates
+  SVG artwork from a text prompt, or converts an existing image, and the
+  pitch is shapes and colors you can actually edit afterward.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-23
+updatedAt: 2026-10-23
+lastVerified: 2026-10-23
+disciplines:
+  - Brand & Graphic
+  - Illustration
+art: anchors
+tools:
+  - Ideogram
+sources:
+  - title: "AI Vector Generator (Ideogram model page)"
+    url: https://ideogram.ai/models/vector/
+    accessed: 2026-10-23
+  - title: "Generate SVG (Ideogram API reference)"
+    url: https://developer.ideogram.ai/v2/api-reference/vectors/generate-svg
+    accessed: 2026-10-23
+  - title: "Vectorizer (Ideogram API reference)"
+    url: https://developer.ideogram.ai/v2/api-reference/vectors/image-to-svg
+    accessed: 2026-10-23
+  - title: "Introducing Ideogram's first vector model (Ideogram on X, October 22, 2026)"
+    url: https://x.com/ideogram_ai/status/2113300317584720259
+    accessed: 2026-10-23
+  - title: "Ideogram launches its first vector model for editable SVG design, by Ryan Merket (Runtime Wire, October 22, 2026)"
+    url: https://runtimewire.com/article/ideogram-vector-1-svg-model-launch
+    accessed: 2026-10-23
+  - title: "Ideogram Vector 1.0: What the SVG File Actually Holds, by Gideon Frost (OrcaRouter, October 22, 2026)"
+    url: https://www.orcarouter.ai/blog/ideogram-vector-1-0-svg-file-output
+    accessed: 2026-10-23
+beforeYouUse:
+  clientData: >-
+    not verified: the model page and API docs don't say how uploaded images
+    are stored or whether they're used for training. The API docs do say
+    outputs are private by default, and always private on Enterprise.
+    Check Ideogram's terms before vectorizing an unreleased client logo or
+    product art.
+  usageRights: >-
+    not verified: the launch materials don't address commercial use or
+    ownership of generated SVGs. That matters more than usual here, since
+    "Logos" is one of the uses Ideogram suggests. Confirm the license on
+    the plan you're using, and keep in mind that whether AI-generated marks
+    can be registered as trademarks is a legal question, not a tool
+    setting.
+  disclosure: >-
+    not verified: nothing we found says whether the SVGs carry any AI
+    metadata. A plain SVG file usually carries very little, so if a client
+    needs AI work disclosed, track it yourself.
+  accessibility: >-
+    not applicable: this is a vector generation model. Any SVG you use on
+    the web still needs a title or alt text, and type should be checked to
+    see whether it came through as live text or outlines.
+  cost: >-
+    known: Ideogram's model page lists API prices per SVG: 13, 16, or 20
+    cents for low, medium, or high quality from a prompt, 32 cents at high
+    quality with reference images, and 10 cents per image conversion. not
+    verified: which Ideogram app plans include Vector, and how app usage is
+    counted.
+---
+Most AI "vector" tools still start with pixels and trace them afterward, which is how you end up with a logo made of a few hundred wobbly anchor points. Ideogram's new vector model, announced October 22, is pitched as generating the SVG itself, with separate shapes, editable colors, and smooth gradients you can open in a vector editor and keep working on.
+
+## What changed
+
+Ideogram Vector (the API calls it `ideogram-vector-1`, and coverage is calling it Vector 1.0) does two jobs:
+
+- **Text to SVG.** Describe what you want, optionally add reference images, and it generates SVG artwork. Ideogram suggests logos, prints, and illustrations as uses.
+- **Image to SVG.** Upload a JPEG, PNG, or WEBP (up to 50 MB) and it converts it to a vector, no prompt needed. There are two modes: one that keeps more fine detail and a "simple" one that draws fewer, simpler shapes.
+
+Ideogram says you can scale the results without losing sharpness, change their colors, and select and adjust individual shapes in a vector editor. It's live in the Ideogram app and the API, and the API has a dry run option that quotes a price without generating anything, which is handy for checking costs before you wire it into anything.
+
+## Why it matters for designers
+
+The useful part is getting something closer to a working file rather than a picture of one. If the shapes really do arrive separated, with real color values on them, then recoloring a mark for a brand palette or pulling one element out of an illustration is a normal vector edit instead of a cleanup job.
+
+The image-to-SVG side might matter just as much day to day. Plenty of jobs start with a client's low-res logo or a scanned sketch that needs to become a clean vector, and Illustrator's Image Trace has been the default answer for years. This is another option to compare it against, especially with the simple mode for flat marks.
+
+## What to watch out for
+
+Editability is Ideogram's claim, not a tested result yet. One early analysis, from the blog of the AI model gateway company OrcaRouter, points out that nobody outside Ideogram has published a structured test of what's actually in the files, and that Ideogram hasn't said whether type comes through as live text or outlines, or how many anchor points simple shapes use. Open a few outputs and check before you build a workflow on it.
+
+Layer grouping on conversions isn't there yet. The vectorizer's API docs list an option to group shapes into layers, then say plainly that grouping is not yet available, so expect to organize converted files yourself.
+
+There's no editing step. You can generate a new SVG or convert an image, but you can't ask the model to change an SVG it already made. Revisions happen in your own vector tool, or by generating again.
+
+And for logos specifically, a generated mark still needs the usual checks: that it's actually distinctive, that it isn't too close to an existing mark, and that you're comfortable with the rights. The sidebar covers what we could and couldn't confirm.
