@@ -99,6 +99,8 @@ export const ART_MOTIFS = [
   'wand',
   'waveform',
   'wheel',
+  'fanout',
+  'transition',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1145,6 +1147,42 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       frame(58, 26, 96, 74),
     ],
     tones: [region(circle(70, 40, 6), 0.9), region(box(58, 56, 96, 74), 0.55), region(box(64, 62, 86, 68), 1)],
+  },
+  // One small engine on the left, with three cables fanning out to three
+  // separate app windows on the right: a single plugin reaching into
+  // several different host apps.
+  fanout: {
+    fills: [outline(circle(14, 51, 13), 0.6)],
+    strokes: [
+      frame(50, 6, 94, 28),
+      frame(50, 40, 94, 62),
+      frame(50, 74, 94, 96),
+      cubic({ x: 27, y: 45 }, { x: 36, y: 30 }, { x: 42, y: 20 }, { x: 50, y: 17 }),
+      cubic({ x: 27, y: 51 }, { x: 38, y: 51 }, { x: 44, y: 51 }, { x: 50, y: 51 }),
+      cubic({ x: 27, y: 57 }, { x: 36, y: 72 }, { x: 42, y: 82 }, { x: 50, y: 85 }),
+    ],
+    tones: [
+      region(box(50, 6, 94, 13), 0.5),
+      region(box(50, 40, 94, 47), 0.5),
+      region(box(50, 74, 94, 81), 0.5),
+    ],
+  },
+  // A keyframe diamond on the left (the old frame-based way of animating),
+  // an arrow into a small circle, then a curved, arrowed line to a second,
+  // darker circle: one state handing off to the next in a state machine.
+  transition: {
+    fills: [
+      outline(poly([22, 16, 44, 38, 22, 60, 0, 38]), 0.55),
+      outline(circle(72, 26, 11), 0.3),
+      outline(circle(88, 62, 11), 0.75),
+    ],
+    strokes: [
+      poly([46, 38, 60, 38]),
+      poly([56, 34, 60, 38, 56, 42]),
+      cubic({ x: 70, y: 36 }, { x: 74, y: 48 }, { x: 80, y: 52 }, { x: 84, y: 56 }),
+      poly([80, 50, 84, 56, 78, 58]),
+    ],
+    tones: [],
   },
 };
 
