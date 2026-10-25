@@ -1,0 +1,93 @@
+---
+title: "Framer MCP lets ChatGPT, Claude, and Cursor edit your site without a local bridge"
+dek: >-
+  Framer's official MCP server connects outside AI tools straight to your
+  projects. The agent can edit the canvas, manage CMS content, and publish,
+  and nothing needs to be open or installed on your machine.
+format: brief
+evidence: announced
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-24
+updatedAt: 2026-10-24
+lastVerified: 2026-10-24
+disciplines:
+  - Web
+  - UI/UX
+art: branch
+tools:
+  - Framer
+sources:
+  - title: "Framer MCP (Framer Updates, October 22, 2026)"
+    url: https://www.framer.com/updates/framer-mcp
+    accessed: 2026-10-24
+  - title: "Framer MCP"
+    url: https://www.framer.com/mcp/
+    accessed: 2026-10-24
+  - title: "Framer MCP Getting Started (Framer Academy)"
+    url: https://www.framer.com/academy/lessons/mcp
+    accessed: 2026-10-24
+  - title: "Connect Framer to Claude Code, Codex in ChatGPT, Cursor, and more AI's"
+    url: https://www.framer.com/agents/external
+    accessed: 2026-10-24
+  - title: "How to use branches in Framer (Framer Help)"
+    url: https://www.framer.com/help/articles/how-to-use-branches-in-framer/
+    accessed: 2026-10-24
+beforeYouUse:
+  clientData: >-
+    known: Framer says the agent uses your account's permissions and only
+    reaches projects you explicitly connect, not other projects, account
+    settings, or billing. not verified: what the AI tool on the other end
+    keeps from your project content. That's governed by that tool's own
+    terms, so check them before pointing an agent at an unreleased client
+    site.
+  usageRights: >-
+    not verified: Framer's MCP pages don't address ownership of pages or
+    copy an outside agent produces. Expect the terms of both Framer and
+    the AI tool you connect to apply.
+  disclosure: >-
+    not applicable: this is a connection between tools, not a generator
+    with its own output labeling. If a client needs AI-assisted work
+    disclosed, track it yourself.
+  accessibility: >-
+    not verified: nothing in Framer's MCP materials says the agent checks
+    alt text, heading order, or contrast. Review those on the branch before
+    anything goes live.
+  cost: >-
+    known: Framer's MCP page says AI usage "follows that agent's plan or
+    credits," meaning the AI tool you connect, not Framer. not verified:
+    whether any Framer plan is required to use MCP, since the pages we
+    read don't list plan requirements.
+---
+Until now, pointing Claude Code or Cursor at a Framer project meant setting up Framer's agent CLI and a local bridge, or reaching for an unofficial plugin that had to stay open in the editor the whole time. Framer's new official MCP server, announced October 22, drops all of that. You approve the connection with your Framer account once, and your AI tool can work on your projects from wherever it runs, including your phone.
+
+## What changed
+
+Framer MCP is a remote server that any AI tool supporting remote MCP connections and OAuth can talk to. Framer lists one-click setup for ChatGPT, Codex, Claude, Claude Code, Cursor, and Grok Bot, plus install guides for a longer list including VS Code, Windsurf, Notion, and Warp. Anything else can connect manually with the server address on Framer's MCP page.
+
+Once connected, the agent can work with the canvas, components, supported project settings, and CMS in any project your account can reach. It can build pages, update content, and publish. Framer is specific about a few things:
+
+- **Your project doesn't need to be open,** and there's no local bridge to install.
+- **It only reaches projects you connect it to.** To point it at one, copy the project link from Invite in Framer and tell the agent to connect to it.
+- **Nothing goes live until you or the agent publishes.** The agent only publishes when you explicitly ask it to.
+
+The older `@framer/agent` CLI setup still works, and Framer says both stay supported while MCP catches up to the CLI's features. MCP is now the recommended route for new setups.
+
+## Why it matters for designers
+
+The interesting part isn't another way to prompt a website. It's that the agent you already use for everything else can now reach your Framer site alongside its other connections. Framer's own examples lean into that: preparing local case studies and team photos for the CMS, pulling design references from Figma or a client brief from Google Drive, and running scheduled jobs like a weekly keyword check or a pre-meeting analytics report.
+
+If you keep a portfolio or run client sites in Framer, that's the kind of upkeep that usually slides. A new project write-up sitting in a folder can become a CMS entry without you rebuilding it field by field.
+
+It also pairs naturally with Framer's branching. Framer's MCP page suggests having the agent work on a branch, and its external-agents page goes further, saying changes from an external agent automatically happen on one. Either way, you can open the branch, click Review Changes, check the diff, and apply it to main. Applying doesn't publish, either. Your live site only changes when you publish main, and an applied branch can be reverted from version history.
+
+## What to watch out for
+
+The agent can delete things. Framer says plainly that it can read and write CMS collections, including deleting items. Ask it to work on a branch, confirm it did, and actually read the diff, especially on a client site with a full CMS.
+
+Be careful what you say yes to. Publishing is gated behind your request, but a loose "go ahead and finish this" could count. If you want a human look before anything ships, say so in your instructions every time, or save it as a standing rule in your AI tool.
+
+Watch for confusingly similar names. There are unofficial Framer MCP plugins and community servers, including one in the Framer Marketplace that its own listing says isn't official. The official one lives at Framer's MCP page and doesn't need a plugin open in the editor.
+
+Costs land on the other side of the connection. Framer says usage follows your AI tool's plan or credits, so a long agent session spends from that budget, not Framer's. The sidebar covers what we could and couldn't confirm, including whether any Framer plan is required.
