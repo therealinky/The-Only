@@ -7,7 +7,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-24
 updatedAt: 2026-10-24
@@ -28,7 +29,7 @@ sources:
   - title: "Framer MCP Getting Started (Framer Academy)"
     url: https://www.framer.com/academy/lessons/mcp
     accessed: 2026-10-24
-  - title: "Connect Framer to Claude Code, Codex in ChatGPT, Cursor, and more AI's"
+  - title: "Framer External Agents (legacy): Connect local AI agents (Framer)"
     url: https://www.framer.com/agents/external
     accessed: 2026-10-24
   - title: "How to use branches in Framer (Framer Help)"
@@ -36,12 +37,12 @@ sources:
     accessed: 2026-10-24
 beforeYouUse:
   clientData: >-
-    known: Framer says the agent uses your account's permissions and only
-    reaches projects you explicitly connect, not other projects, account
-    settings, or billing. not verified: what the AI tool on the other end
-    keeps from your project content. That's governed by that tool's own
-    terms, so check them before pointing an agent at an unreleased client
-    site.
+    known: Framer's MCP page says the agent uses your account's permissions
+    and can work in any project your Framer account has access to. You
+    point it at a specific project by pasting that project's link. not
+    verified: what the AI tool on the other end keeps from your project
+    content. That's governed by that tool's own terms, so check them before
+    pointing an agent at an unreleased client site.
   usageRights: >-
     not verified: Framer's MCP pages don't address ownership of pages or
     copy an outside agent produces. Expect the terms of both Framer and
@@ -69,7 +70,7 @@ Framer MCP is a remote server that any AI tool supporting remote MCP connections
 Once connected, the agent can work with the canvas, components, supported project settings, and CMS in any project your account can reach. It can build pages, update content, and publish. Framer is specific about a few things:
 
 - **Your project doesn't need to be open,** and there's no local bridge to install.
-- **It only reaches projects you connect it to.** To point it at one, copy the project link from Invite in Framer and tell the agent to connect to it.
+- **It works on the project you point it to, but it can reach any project your account can.** To point it at one, copy the project link from Invite in Framer and tell the agent to connect to it.
 - **Nothing goes live until you or the agent publishes.** The agent only publishes when you explicitly ask it to.
 
 The older `@framer/agent` CLI setup still works, and Framer says both stay supported while MCP catches up to the CLI's features. MCP is now the recommended route for new setups.
@@ -80,11 +81,11 @@ The interesting part isn't another way to prompt a website. It's that the agent 
 
 If you keep a portfolio or run client sites in Framer, that's the kind of upkeep that usually slides. A new project write-up sitting in a folder can become a CMS entry without you rebuilding it field by field.
 
-It also pairs naturally with Framer's branching. Framer's MCP page suggests having the agent work on a branch, and its external-agents page goes further, saying changes from an external agent automatically happen on one. Either way, you can open the branch, click Review Changes, check the diff, and apply it to main. Applying doesn't publish, either. Your live site only changes when you publish main, and an applied branch can be reverted from version history.
+It also pairs naturally with Framer's branching. Framer's MCP page suggests asking the agent to work on a branch. That's a request you make, not an automatic step, so say it every time. Then you can open the branch, click Review Changes, check the diff, and apply it to main. Applying doesn't publish, either. Your live site only changes when you publish main, and an applied branch can be reverted from version history.
 
 ## What to watch out for
 
-The agent can delete things. Framer says plainly that it can read and write CMS collections, including deleting items. Ask it to work on a branch, confirm it did, and actually read the diff, especially on a client site with a full CMS.
+The agent can delete things. Framer's page for its older agent setup says plainly that an agent can read and write CMS collections, including deleting items, and the MCP page gives the new server access to your CMS too, so assume the same. Ask it to work on a branch, confirm it did, and actually read the diff, especially on a client site with a full CMS.
 
 Be careful what you say yes to. Publishing is gated behind your request, but a loose "go ahead and finish this" could count. If you want a human look before anything ships, say so in your instructions every time, or save it as a standing rule in your AI tool.
 
