@@ -33,6 +33,7 @@ export const ART_MOTIFS = [
   'bag',
   'blend',
   'bolt',
+  'branch',
   'bricks',
   'browser',
   'bubbles',
@@ -650,6 +651,25 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       outline(box(72, 12, 82, 92), 0.85),
     ],
     strokes: [],
+    tones: [],
+  },
+  // A version-control branch: a main line with commits, and a side branch
+  // that splits off, holds its own commits, and merges back for review.
+  branch: {
+    fills: [
+      outline(circle(10, 76, 6), 0.35),
+      outline(circle(50, 76, 6), 0.35),
+      outline(circle(90, 76, 6), 0.35),
+      outline(circle(40, 24, 7), 0.9),
+      outline(circle(64, 24, 7), 0.9),
+    ],
+    strokes: [
+      poly([16, 76, 44, 76]),
+      poly([56, 76, 84, 76]),
+      cubic({ x: 22, y: 76 }, { x: 22, y: 44 }, { x: 26, y: 24 }, { x: 33, y: 24 }),
+      poly([47, 24, 57, 24]),
+      cubic({ x: 71, y: 24 }, { x: 78, y: 24 }, { x: 82, y: 44 }, { x: 82, y: 76 }),
+    ],
     tones: [],
   },
   // A plug with prongs and a cable: integrations and MCP connectors.
