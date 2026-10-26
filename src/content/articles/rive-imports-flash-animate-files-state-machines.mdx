@@ -1,0 +1,66 @@
+---
+title: "Rive can now import Flash and Animate files into its state machines"
+dek: >-
+  A new importer turns old .fla and XFL files into Rive projects: symbols
+  become artboards, frame labels become state machine states, and buttons,
+  tweens, and sounds carry over.
+format: brief
+evidence: announced
+difficulty: moderate
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-25
+updatedAt: 2026-10-25
+lastVerified: 2026-10-25
+disciplines:
+  - UI/UX
+  - Motion & Video
+art: transition
+tools:
+  - Rive
+sources:
+  - title: "Adobe Animate alternative: Rive is what Flash should've become (Rive Blog, February 10, 2026, updated October 2026)"
+    url: https://rive.app/blog/adobe-animate-alternative-rive-is-what-flash-should-have-become
+    accessed: 2026-10-25
+  - title: "Assets overview (Rive Docs)"
+    url: https://rive.app/docs/editor/fundamentals/assets-overview
+    accessed: 2026-10-25
+beforeYouUse:
+  clientData: >-
+    not verified: Rive's materials don't say whether an imported .fla file's
+    contents are processed on Rive's servers or converted locally. Worth
+    checking before importing a client's proprietary animation.
+  usageRights: >-
+    not applicable: this converts a file format you already own into a new
+    project file. It doesn't change who owns the resulting work.
+  disclosure: >-
+    not applicable: converting a legacy animation file's format isn't the
+    kind of AI-generated content this field is meant to flag.
+  accessibility: >-
+    not verified: no mention of how motion-reduction or accessibility
+    settings on the original Flash content carry over into the converted
+    state machine.
+  cost: >-
+    not verified: Rive's blog doesn't say whether the Flash and Animate
+    importer is available on every plan, including the free tier.
+---
+Rive now has a way to bring old Flash and Animate projects back to life instead of leaving them stuck in an unsupported format. A new importer in the Rive editor, which Rive says shipped in October 2026, converts .fla files, or a zipped XFL folder, straight into a Rive project.
+
+## What changed
+
+Drop an .fla file from Animate CC or later, or a zipped XFL folder, into a Rive project and the importer converts it automatically. Symbols become artboards, and frame labels become state machine states. Frame scripts come across as transitions, and buttons, tweens, and frame sounds carry over too.
+
+Rive frames this as a deliberate contrast with Flash's old timeline-and-frames model. Where Flash organized everything around keyframes on a scrubbable timeline, Rive is built around state machines: named states with conditions that move between them, closer to how interactive UI actually behaves than a timeline ever was. The importer is a bridge between the two, not just a file converter.
+
+## Why it matters for designers
+
+A lot of studios and solo designers still have a back catalog of Flash and Animate work, old web banners, game assets, interactive kids' content, that's been effectively frozen since Flash Player's end of life. An importer that gets that work into a format with an actual future, rather than requiring a full manual rebuild, lowers the cost of either reviving it or just not losing it to format rot.
+
+It's also a sign of where Rive wants to sit: not just a tool for new projects, but a landing place for a whole generation of frame-based animation work now that Flash itself is gone. If you learned animation on Flash's timeline, the importer doubles as a way to see your own old habits translated into Rive's state machine model side by side.
+
+## What to watch out for
+
+Rive's own post says the biggest shift from Flash is the State Machine and Data Binding, and admits there's a learning curve. That means a straightforward-looking import can still need real cleanup afterward. A symbol that worked as a simple timeline animation might not map cleanly onto states and transitions without some rethinking.
+
+Most of what's known so far comes from Rive's own "Adobe Animate alternative" comparison page, a marketing post that was updated for the launch, and Rive's docs don't yet say much more than that the import exists. We haven't run an actual legacy project through this ourselves, so treat the sidebar as open questions rather than confirmed answers, especially around what happens to your file during conversion and which plans include the importer.

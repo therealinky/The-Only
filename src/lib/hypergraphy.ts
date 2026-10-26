@@ -99,6 +99,7 @@ export const ART_MOTIFS = [
   'wand',
   'waveform',
   'wheel',
+  'transition',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1145,6 +1146,23 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       frame(58, 26, 96, 74),
     ],
     tones: [region(circle(70, 40, 6), 0.9), region(box(58, 56, 96, 74), 0.55), region(box(64, 62, 86, 68), 1)],
+  },
+  // A keyframe diamond on the left (the old frame-based way of animating),
+  // an arrow into a small circle, then a curved, arrowed line to a second,
+  // darker circle: one state handing off to the next in a state machine.
+  transition: {
+    fills: [
+      outline(poly([22, 16, 44, 38, 22, 60, 0, 38]), 0.55),
+      outline(circle(72, 26, 11), 0.3),
+      outline(circle(88, 62, 11), 0.75),
+    ],
+    strokes: [
+      poly([46, 38, 60, 38]),
+      poly([56, 34, 60, 38, 56, 42]),
+      cubic({ x: 70, y: 36 }, { x: 74, y: 48 }, { x: 80, y: 52 }, { x: 84, y: 56 }),
+      poly([80, 50, 84, 56, 78, 58]),
+    ],
+    tones: [],
   },
 };
 
