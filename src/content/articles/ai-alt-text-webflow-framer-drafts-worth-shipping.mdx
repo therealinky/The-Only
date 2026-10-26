@@ -1,0 +1,128 @@
+---
+title: "Turning AI-generated alt text in Webflow and Framer into alt text worth shipping"
+dek: >-
+  Webflow can draft alt text for a whole site in one pass, and Framer
+  plugins can too. Accessibility guides agree the drafts describe what an
+  image looks like, not why it's on the page. Here's how to sort, generate,
+  and review so the result actually helps screen reader users.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-26
+updatedAt: 2026-10-26
+lastVerified: 2026-10-26
+disciplines:
+  - Web
+art: alttext
+tools:
+  - Webflow
+  - Framer
+  - AltWise
+sources:
+  - title: "Include alt text on images (Webflow Help Center)"
+    url: https://help.webflow.com/hc/en-us/articles/33961330170643-Include-alt-text-on-images
+    accessed: 2026-10-26
+  - title: "Audit and improve SEO & AEO with Webflow AI (Webflow Help Center)"
+    url: https://help.webflow.com/hc/en-us/articles/45696502240147-Audit-and-improve-SEO-AEO-with-Webflow-AI
+    accessed: 2026-10-26
+  - title: "AltWise: Alt Text & Image SEO Optimizer (Framer Marketplace)"
+    url: https://www.framer.com/marketplace/plugins/altwise/
+    accessed: 2026-10-26
+  - title: "An alt Decision Tree (W3C Web Accessibility Initiative, updated May 13, 2024)"
+    url: https://www.w3.org/WAI/tutorials/images/decision-tree/
+    accessed: 2026-10-26
+  - title: "Alternative Text (WebAIM, updated October 19, 2021)"
+    url: https://webaim.org/techniques/alttext/
+    accessed: 2026-10-26
+  - title: "Should AI write your alt text? (UX Collective, December 30, 2024)"
+    url: https://uxdesign.cc/should-ai-write-your-alt-text-9a4495585aa2
+    accessed: 2026-10-26
+  - title: "Images and Alt Text (Boise State University Accessibility, October 11, 2024)"
+    url: https://www.boisestate.edu/accessibility/2024/10/11/images-and-alt-text/
+    accessed: 2026-10-26
+  - title: "Accessibility Tip | Images: Functional VS Decorative & The Pitfalls of Auto-Generated Descriptions (UBC Okanagan Centre for Teaching and Learning, May 1, 2025)"
+    url: https://ctl.ok.ubc.ca/?p=19534
+    accessed: 2026-10-26
+  - title: "What are the drawbacks of using AI to create alt text? (Accessible Web)"
+    url: https://accessibleweb.com/?p=65547
+    accessed: 2026-10-26
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Webflow's own documentation, a Framer
+    alt text plugin's listing, and several independent accessibility
+    guides, plus general web accessibility practice, on getting AI alt text
+    drafts to a standard you'd actually publish.
+  whyItMatters: >-
+    Bulk AI alt text makes it easy to clear an audit's "missing alt text"
+    warnings in minutes. Clearing the warning isn't the same as giving
+    screen reader users an equivalent experience, and the gap is in exactly
+    the places AI is weakest: purpose, context, and knowing when to say
+    nothing.
+  bestFor: >-
+    Web designers and studios handing off Webflow or Framer sites, anyone
+    inheriting a site with hundreds of images and no alt text, and teams
+    tidying up before an accessibility review.
+  timeToTry: >-
+    Under an hour for a small marketing site. Plan for longer on a site with
+    a big CMS, since that part isn't covered by bulk generation in Webflow.
+beforeYouUse:
+  clientData: >-
+    not verified: Webflow's alt text docs don't say how Webflow AI processes
+    or retains the images it describes, and third-party plugins send images
+    to their own services. If a client's site holds unreleased product shots
+    or anything under NDA, check each tool's data terms first.
+  usageRights: >-
+    not applicable: this describes your own site's existing images rather
+    than generating new imagery.
+  disclosure: >-
+    not verified: there's no standard for disclosing AI-drafted alt text.
+    The bigger issue is accuracy, since screen readers read alt text out as
+    fact, so treat it like any other published copy.
+  accessibility: >-
+    known: WCAG asks for a text alternative that serves the equivalent
+    purpose, and every accessibility guide we found says AI drafts alone
+    don't reliably get there without human review.
+  cost: >-
+    known: Webflow says its AI alt text uses Webflow AI credits and needs a
+    paid Site plan or a paid Workspace. AltWise lists a free image scan and
+    pay-as-you-go credits for generation, one credit per image.
+---
+Both Webflow and Framer now make it easy to fill in alt text with AI. Webflow has it built in, including a bulk option in the Audit panel, and Framer has marketplace plugins like AltWise that do the same across a site. The catch, and every accessibility source we read says some version of this, is that AI describes what an image shows, not why it's on the page.
+
+This is synthesized from Webflow's own help docs, a Framer plugin listing, and several independent accessibility guides from W3C, WebAIM, universities, and practitioners, plus general web accessibility practice. It isn't a workflow we've tested end to end ourselves. The steps use Webflow's panels because its docs are the most detailed, but the same order works in Framer with a plugin.
+
+1. **Sort your images before you generate anything.** The W3C's alt decision tree boils down to a few kinds of image. Decorative ones (dividers, background patterns, an arrow next to a link) get empty alt. Functional ones, inside a link or button, need alt that says where it goes or what it does. Informative ones need a short description of what they add. Complex ones, like charts, need the content written out elsewhere. Images of text need that text. AI is only really useful for the informative group, so knowing which images are which keeps you from generating drafts you'll throw away.
+
+2. **Mark the decorative images first.** In Webflow, open the Assets panel, click the cog on an image, and choose Decorative. Accessibility guides flag that AI struggles to tell decorative from meaningful images, and an unneeded description adds clutter for screen reader users. WebAIM's quick test works well here: if you could remove the image and nobody would miss any content, empty alt is probably right.
+
+3. **Write functional alt text yourself.** For a logo that links home, a cart icon, or a social icon in the footer, the alt should name the destination or action ("Cart," the company's name, the network's name), not describe the picture. AI tools see a shopping bag or a bird. They don't see the link.
+
+4. **Generate drafts for the rest in bulk.** In Webflow, open the Audit panel, choose Sitewide, click Add alt text, then Generate alt text. You can accept drafts one by one with the checkmark, or all at once with Accept. Hold off on accepting everything at once, since step 5 is where the real work happens. Webflow can draft alt text for JPG, PNG, GIF, WEBP, and AVIF files, but not SVG, so icons and illustrations exported as SVG need alt text written by hand. In Framer, AltWise's listing describes bulk generation across a site, with controls for length, tone, and detail.
+
+5. **Review every draft for purpose, not just accuracy.** This is the step the sources agree matters most. Read each draft next to the page it sits on and ask what a sighted visitor gets from the image there. A team photo on an About page might need names and roles. The same photo used as a mood image on a careers page might only need "The design team at work in the studio." Webflow's own tip is a good check: read the alt text, imagine the image is gone, and see if it still makes sense. While you're in there, cut "image of" or "photo of" (screen readers already announce images), remove anything the AI made up, and strip opinions like "beautiful" or "stunning."
+
+6. **Fix images that mean different things in different places.** In Webflow, alt text set on an asset is inherited everywhere that image appears. That's efficient, but WebAIM's guidance is clear that the same image can need different alt in different contexts, including empty alt where a caption already says the same thing. Select the image on the canvas, open its settings, and set a custom description or Decorative for just that instance. One thing to know: a fresh copy of the same image will pick up the asset-level alt text again.
+
+7. **Cover what the audit doesn't see.** Webflow's docs say the Audit panel doesn't check images inside components, lightboxes, or the CMS. For CMS images, add a plain text field to the Collection for alt text, fill it in per item, and bind the image's alt text to that field in Element settings. Images inside rich text fields need their alt text set in the CMS item itself. Webflow AI also only generates for your site's primary locale, so secondary locales need alt text written or translated separately. If you're on Framer, AltWise's listing says it works with the Framer CMS and supports many languages, which covers both gaps in that setup, though we haven't confirmed how well.
+
+8. **Give complex images a real text alternative.** For a chart, a pricing comparison, or a process diagram, keep the alt short (what it is and the main takeaway) and put the full content in nearby text or a caption, ideally as a real table or list. Here the sources lean different ways. One university guide recommends AI as a starting point for describing complex images, then editing hard for length and context. A practitioner piece recommends avoiding AI for complex images like graphs altogether. Either way, the full description should be checked against the actual data, since a chart is where a confident made-up number does the most damage.
+
+9. **Listen to it.** Turn on a screen reader (VoiceOver is built into macOS and iOS, and NVDA is free on Windows) and tab through the published page. Long, repetitive, or redundant alt text is obvious when you hear it, and much less so when you read it in a panel.
+
+## Why it matters for designers
+
+Alt text tends to land on whoever builds the site, and in Webflow and Framer that's usually a designer. AI drafting removes the blank-page problem, which is the real reason a lot of sites ship without alt text at all. The value is in using it for the slow part (a first description of hundreds of images) and keeping your own judgment for the parts that need it: what's decorative, what's a link, and what each image is actually for.
+
+It also makes a cleaner handoff. A client who later runs an accessibility check gets alt text that reflects the page, not a stack of generic descriptions that technically clear an audit.
+
+## What to watch out for
+
+Sources disagree on length. One practitioner guide suggests capping alt text at 140 characters. WebAIM puts it as typically a few words and rarely more than a sentence or two, with no hard number. Both point the same way: short, with longer content moved into the page.
+
+SEO advice and accessibility advice can pull against each other. AltWise markets "keyword-rich" alt text, while WebAIM warns against stuffing alt text with extra or search-oriented information. If a plugin offers a keyword option, use it lightly or not at all. Alt text that reads naturally to a screen reader user is the goal.
+
+Opinions on AI here run from "a useful first draft" to "don't rely on it." One university accessibility tip says plainly not to rely on auto-generated descriptions. Others treat AI as a reasonable start for bulk drafts and non-critical images, but not for sensitive content like healthcare. All of them agree a person needs to review the result.
+
+Webflow's docs say its AI won't generate into a field that already has content, so to get a fresh draft you have to clear the field first. Bulk generation also uses Webflow AI credits, so on a large site, finish steps 1 to 3 first and only generate for the images that actually need a description.
