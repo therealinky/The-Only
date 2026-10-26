@@ -28,6 +28,7 @@ export const GRADIENT_PAIRS: Record<GradientVariant, [string, string]> = {
 
 export const ART_MOTIFS = [
   'agent',
+  'alttext',
   'anchors',
   'animchart',
   'bag',
@@ -542,6 +543,19 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ),
     strokes: [ring(21, 21, 6), poly([79, 73, 86, 85, 72, 85, 79, 73]), poly([50, 44, 50, 56]), poly([44, 50, 56, 50])],
     tones: [],
+  },
+  // A picture (mountains and a sun) above three lines of written
+  // description: an image and its alt text.
+  alttext: {
+    fills: [outline(circle(70, 22, 5, 20), 0.9)],
+    strokes: [frame(14, 6, 86, 50), poly([16, 48, 36, 24, 50, 38, 62, 28, 84, 48])],
+    tones: [
+      region(box(14, 6, 86, 50), 0.08),
+      region(poly([14, 50, 36, 24, 50, 38, 62, 28, 86, 50]), 0.55),
+      region(box(14, 60, 86, 66), 0.6),
+      region(box(14, 74, 76, 80), 0.6),
+      region(box(14, 88, 58, 94), 0.6),
+    ],
   },
   // A picture: mountains, a sun, and sky.
   image: {
