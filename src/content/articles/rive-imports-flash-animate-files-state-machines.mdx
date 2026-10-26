@@ -5,9 +5,10 @@ dek: >-
   become artboards, frame labels become state machine states, and buttons,
   tweens, and sounds carry over.
 format: brief
-evidence: researched
+evidence: announced
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-25
 updatedAt: 2026-10-25
@@ -19,36 +20,36 @@ art: transition
 tools:
   - Rive
 sources:
-  - title: "Adobe Animate alternative: Rive is what Flash should've become (Rive Blog)"
+  - title: "Adobe Animate alternative: Rive is what Flash should've become (Rive Blog, February 10, 2026, updated October 2026)"
     url: https://rive.app/blog/adobe-animate-alternative-rive-is-what-flash-should-have-become
     accessed: 2026-10-25
-  - title: "Assets overview, Flash and Animate conversion (Rive Docs)"
+  - title: "Assets overview (Rive Docs)"
     url: https://rive.app/docs/editor/fundamentals/assets-overview
     accessed: 2026-10-25
 beforeYouUse:
   clientData: >-
     not verified: Rive's materials don't say whether an imported .fla file's
-    contents are processed on Rive's servers or converted locally, worth
-    checking before importing a client's proprietary animation
+    contents are processed on Rive's servers or converted locally. Worth
+    checking before importing a client's proprietary animation.
   usageRights: >-
     not applicable: this converts a file format you already own into a new
-    project file, it doesn't change who owns the resulting work
+    project file. It doesn't change who owns the resulting work.
   disclosure: >-
     not applicable: converting a legacy animation file's format isn't the
-    kind of AI-generated content this field is meant to flag
+    kind of AI-generated content this field is meant to flag.
   accessibility: >-
     not verified: no mention of how motion-reduction or accessibility
     settings on the original Flash content carry over into the converted
-    state machine
+    state machine.
   cost: >-
     not verified: Rive's blog doesn't say whether the Flash and Animate
-    importer is available on every plan, including the free tier
+    importer is available on every plan, including the free tier.
 ---
-Rive now has a way to bring old Flash and Animate projects back to life instead of leaving them stuck in an unsupported format. A new importer in the Rive editor converts .fla files, or a zipped XFL folder, straight into a Rive project.
+Rive now has a way to bring old Flash and Animate projects back to life instead of leaving them stuck in an unsupported format. A new importer in the Rive editor, which Rive says shipped in October 2026, converts .fla files, or a zipped XFL folder, straight into a Rive project.
 
 ## What changed
 
-Drop an .fla file from Animate CC or later, or a zipped XFL folder, into a Rive project and the importer converts it automatically. Symbols become artboards, and frame labels become state machine states, which Rive's own blog calls the biggest conceptual shift from how Flash worked. Frame scripts come across as transitions, and buttons, tweens, and frame sounds carry over too.
+Drop an .fla file from Animate CC or later, or a zipped XFL folder, into a Rive project and the importer converts it automatically. Symbols become artboards, and frame labels become state machine states. Frame scripts come across as transitions, and buttons, tweens, and frame sounds carry over too.
 
 Rive frames this as a deliberate contrast with Flash's old timeline-and-frames model. Where Flash organized everything around keyframes on a scrubbable timeline, Rive is built around state machines: named states with conditions that move between them, closer to how interactive UI actually behaves than a timeline ever was. The importer is a bridge between the two, not just a file converter.
 
@@ -60,6 +61,6 @@ It's also a sign of where Rive wants to sit: not just a tool for new projects, b
 
 ## What to watch out for
 
-Rive's own blog describes the state machine as the single biggest conceptual shift from Flash, which means a straightforward-looking import can still need real cleanup afterward. A symbol that worked as a simple timeline animation might not map cleanly onto states and transitions without some rethinking.
+Rive's own post says the biggest shift from Flash is the State Machine and Data Binding, and admits there's a learning curve. That means a straightforward-looking import can still need real cleanup afterward. A symbol that worked as a simple timeline animation might not map cleanly onto states and transitions without some rethinking.
 
-We haven't run an actual legacy project through this ourselves, so treat the sidebar as open questions rather than confirmed answers, especially around what happens to your file during conversion and which plans include the importer.
+Most of what's known so far comes from Rive's own "Adobe Animate alternative" comparison page, a marketing post that was updated for the launch, and Rive's docs don't yet say much more than that the import exists. We haven't run an actual legacy project through this ourselves, so treat the sidebar as open questions rather than confirmed answers, especially around what happens to your file during conversion and which plans include the importer.
