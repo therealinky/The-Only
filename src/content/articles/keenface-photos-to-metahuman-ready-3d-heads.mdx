@@ -1,0 +1,88 @@
+---
+title: "KeenFace turns a few photos into a MetaHuman-ready 3D head"
+dek: >-
+  KeenTools, the team behind FaceBuilder, now has a browser Studio and an API
+  that reconstruct a textured head with consistent topology and ARKit
+  blendshapes from your photos. It's pay-per-head, and the fine print is
+  worth reading before you build a pipeline on it.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-10-27
+updatedAt: 2026-10-27
+lastVerified: 2026-10-27
+disciplines:
+  - 3D
+art: headmesh
+tools:
+  - KeenFace
+sources:
+  - title: "KeenFace: Familiar Faces, Less Mesh Housekeeping (Digital Production, October 22, 2026)"
+    url: https://digitalproduction.com/2026/10/22/keenface-photos-3d-heads/
+    accessed: 2026-10-27
+  - title: "KeenFace"
+    url: https://keenface.ai/
+    accessed: 2026-10-27
+  - title: "KeenFace pricing"
+    url: https://keenface.ai/pricing
+    accessed: 2026-10-27
+  - title: "New CG software you may have missed: 25 October 2026 (CG Channel)"
+    url: https://www.cgchannel.com/2026/10/new-cg-software-you-may-have-missed-25-october-2026/
+    accessed: 2026-10-27
+beforeYouUse:
+  clientData: >-
+    not verified: reconstruction runs in KeenTools' cloud, so your photos
+    leave your machine. Photos of a real person's face are sensitive, and we
+    couldn't load KeenFace's terms or privacy policy to check retention,
+    deletion, or whether uploads are used for training. Get the subject's
+    consent and read those pages before uploading client or talent photos.
+  usageRights: >-
+    not verified: the pages we could read don't say who owns the generated
+    head or what commercial use is allowed. A likeness of a real person also
+    brings its own permission questions, separate from the software license.
+  disclosure: >-
+    not verified: we found no guidance on flagging a reconstructed digital
+    double to a client or audience. If the head is of a real, identifiable
+    person, agree on that with them up front.
+  accessibility: >-
+    not applicable: this produces 3D assets and doesn't change anything a
+    viewer relies on for accessibility.
+  cost: >-
+    known: the pricing page lists credits at $0.10 each excluding VAT, 150
+    credits per head, 450 free credits on sign-up (three heads), free
+    downloads, no charge for failed heads, and credits that don't expire.
+    Digital Production quotes the same rate in euros, so check what your
+    region is charged.
+---
+If you've ever built a character from reference photos, you know the part that eats the day isn't sculpting the likeness, it's the mesh housekeeping afterward. KeenTools, which has made the FaceBuilder add-on for Nuke and Blender for years, now has a standalone service aimed squarely at that problem. KeenFace was covered by Digital Production on October 22 and in CG Channel's roundup on October 25; neither source gives an exact launch date.
+
+## What changed
+
+KeenFace reconstructs a textured 3D head from photographs, either in a browser-based Studio or through a cloud REST API. According to KeenTools' documentation, as reported by Digital Production, it takes between 1 and 15 images. The capture guidance asks for a front view plus turned views from each side, and a single photo is allowed when that's all the reference you have.
+
+What comes back is built for a pipeline rather than a one-off render:
+
+- **Consistent topology.** Every head uses MetaHuman topology, and the maker says vertex order and UVs stay the same from session to session, so heads are interchangeable in a rig or a blendshape setup.
+- **Textures.** 4K PBR maps (base color, normal, roughness, specular), with an option to clean out hair and fill gaps, or keep the raw photographed look.
+- **Expressions.** 51 ARKit-compatible blendshapes adapted to each head.
+- **Formats.** The Studio exports GLB, OBJ, PLY, STL, and FBX, and there's a MetaHuman export meant to go through MetaHuman Creator's Conform from Template.
+
+Pricing is per head rather than a subscription: see the sidebar.
+
+## Why it matters for designers
+
+For 3D generalists, game and AR teams, and anyone making digital doubles, consistent topology is the real headline. A head that always arrives with the same vertex order and UVs can drop into an existing rig, texture workflow, or set of expressions without retopology. That's the step that usually turns a quick photo scan into a multi-day job.
+
+It's also a sign of where AI-assisted 3D is heading: less "generate something that looks like a head" and more "give me a clean, standard asset I can keep working on."
+
+## What to watch out for
+
+Almost every specific claim here comes from KeenTools itself. Digital Production says plainly that it hadn't timed or tested the service, including the claim that reconstruction takes minutes and that topology stays consistent across heads. Check likeness, how the face deforms, and how the materials read against your own assets before committing.
+
+The maker's own capture guidance lists a lot that can trip it up: hats, hoods, glasses, long hair, hidden ears, deep shadows, blown highlights, and a subject who changes expression between shots. Even, indirect light and a still, neutral subject matter.
+
+There are gaps in the exports, too. The MetaHuman package doesn't include eyes, teeth, or blendshapes, the ARKit set needs GLB and lacks tongueOut, and hair grooming is still a planned feature, so you get a bald base head. Heads made in the Studio and through the API share credits but can't be opened in the other one.
+
+Finally, this is a real person's face going to a cloud service. Get consent, and read the terms before you upload anyone's photos.
