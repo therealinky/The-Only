@@ -101,6 +101,8 @@ export const ART_MOTIFS = [
   'waveform',
   'wheel',
   'transition',
+  'matte',
+  'headmesh',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1177,6 +1179,35 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([80, 50, 84, 56, 78, 58]),
     ],
     tones: [],
+  },
+  // A film frame with a person isolated as a dark silhouette and a mouse
+  // pointer clicking on them: a one-click AI matte for video.
+  matte: {
+    fills: [
+      outline(circle(40, 30, 8), 0.9),
+      outline(poly([28, 44, 52, 44, 58, 88, 22, 88]), 0.9),
+      outline(poly([70, 40, 70, 64, 76, 58, 82, 70, 86, 68, 80, 56, 88, 56]), 0.6),
+    ],
+    strokes: [frame(6, 10, 94, 88)],
+    tones: [],
+  },
+  // Three small photos of a head on the left feeding a wireframe head on
+  // the right: a 3D head reconstructed from photos.
+  headmesh: {
+    fills: [
+      outline(box(4, 10, 24, 30), 0.45),
+      outline(box(4, 40, 24, 60), 0.45),
+      outline(box(4, 70, 24, 90), 0.45),
+    ],
+    strokes: [
+      closeLoop(ellipse(66, 46, 22, 30)),
+      closeLoop(ellipse(66, 46, 8, 30)),
+      poly([44, 36, 88, 36]),
+      poly([45, 56, 87, 56]),
+      poly([58, 76, 58, 90, 74, 90, 74, 76]),
+      poly([30, 50, 36, 50]),
+    ],
+    tones: [region(ellipse(70, 50, 16, 22), 0.25)],
   },
 };
 
