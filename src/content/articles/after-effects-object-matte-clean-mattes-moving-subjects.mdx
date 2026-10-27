@@ -8,7 +8,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-27
 updatedAt: 2026-10-27
@@ -22,7 +23,7 @@ sources:
   - title: "Use Object Matte to isolate and track a subject (Adobe After Effects tutorial)"
     url: https://www.adobe.com/ca/learn/after-effects/web/use-object-matte-isolate-track-subject
     accessed: 2026-10-27
-  - title: "Adobe releases After Effects 26.2 (CG Channel, April 15, 2026)"
+  - title: "Adobe releases After Effects 26.2, by Jim Thacker (CG Channel, April 15, 2026)"
     url: https://www.cgchannel.com/2026/04/adobe-releases-after-effects-26-2/
     accessed: 2026-10-27
   - title: "New in AE: Object Matte (AI-powered Rotoscoping) (Adobe Community announcement and replies, May 29, 2026)"
@@ -79,11 +80,11 @@ beforeYouUse:
 ---
 Object Matte is After Effects' AI rotoscoping tool. Instead of painting strokes over a subject the way you did with Roto Brush, you click on the person, animal, or object, and After Effects builds a matte and carries it through the shot. It shipped in After Effects 26.2 in April 2026 and took Roto Brush's place in the toolbar, which is why plenty of people opened After Effects one day and couldn't find the tool they'd been using for years.
 
-This workflow is synthesized from several independent sources (Adobe's own tutorials, release coverage, community threads from both the beta and the release, and a troubleshooting guide) plus general After Effects knowledge. It isn't any one person's process, and we haven't tested it hands-on end to end. The sources broadly agree on one thing: the first click is easy, and the real work is repairing the matte in the right place and keeping it once it's good.
+This workflow is synthesized from several independent sources (Adobe's own tutorials, release coverage, community threads from both the beta and the release, and a troubleshooting guide) plus general After Effects knowledge. The troubleshooting guide comes from Nolan Labs, a company that sells AI shot work to post-production teams. It isn't any one person's process, and we haven't tested it hands-on end to end. The sources broadly agree on one thing: the first click is easy, and the real work is repairing the matte in the right place and keeping it once it's good.
 
 1. **Make sure you're actually looking at Object Matte.** It needs After Effects 26.2 or later, and it lives in the toolbar where Roto Brush used to be. Click and hold it to find the rest of the set: Quick Selection (the reworked Roto Brush, which selects by color, contrast, and edges), Selection Brush (manual add and subtract strokes), and Refine Edge (for hair and fur). Open your clip in the Layer panel by double-clicking the layer. If the tools are greyed out or missing, the first culprit the troubleshooting guide lists is that the clip opened in the Footage panel instead, which a Composition preference controls.
 
-2. **Trim before you select.** Propagation is the slow part, so don't make After Effects analyze frames you won't use. Trim the layer to the shot you need. For long clips, split it into sections (Edit > Split Layer) and work each one separately. This comes up repeatedly in both community threads and troubleshooting advice.
+2. **Trim before you select.** Propagation is the slow part, so don't make After Effects analyze frames you won't use. Trim the layer to the shot you need. For long clips, split it into sections (Edit > Split Layer) and work each one separately. The troubleshooting guide recommends the same thing, splitting wherever the subject is hidden or leaves the frame.
 
 3. **Pick a good starting frame and work at full resolution.** Scrub to a frame where the subject is sharp, fully visible, and not motion blurred. Adobe's tutorial recommends setting the Layer panel to full resolution (View > Resolution > Full) for the best results. Hover with the Object Matte tool and you'll see a pink preview of what it's about to pick. Click when it's right.
 
@@ -93,9 +94,9 @@ This workflow is synthesized from several independent sources (Adobe's own tutor
 
 6. **Use Refine Edge only where the edge is actually soft.** Hair, fur, and motion-blurred edges need it. Solid edges usually hold without it, and Refine Edge adds a lot of processing time: one beta tester reported per-frame times more than tripling with it on very large footage. This is also where sources differ in tone. Adobe's tutorials present Refine Edge as a normal finishing step, while older Roto Brush coverage found it hard to adjust once you're several frames in, and the troubleshooting guide suggests hand-rotoscoping the very worst frames instead. Our take: paint Refine Edge on a short test range first, and only extend it if it clearly earns its time.
 
-7. **Freeze it, then finish the edge in Effect Controls.** Once the matte looks right, click Freeze in the Layer panel. That locks the result so you can keep working without After Effects recalculating, and Adobe's tips suggest freezing early for performance. Then tune the matte in Effect Controls: feather, contrast, edge position, and chatter (the flicker along the edge from frame to frame). If a bright background is bleeding color into the subject's edge, turn on Decontaminate Edge Colors. If you need to change the selection itself, unfreeze, fix it, and freeze again.
+7. **Freeze it, then finish the edge in Effect Controls.** Once the matte looks right, click Freeze in the Layer panel. That locks the result so you can keep working without After Effects recalculating. Adobe's tutorial freezes once the matte is dialed in across the clip, not before, and one beta tester found that freezing a very large clip froze After Effects itself, so save first. Then tune the matte in Effect Controls: feather, contrast, edge position, and chatter (the flicker along the edge from frame to frame). If a bright background is bleeding color into the subject's edge, turn on Decontaminate Edge Colors. If you need to change the selection itself, unfreeze, fix it, and freeze again.
 
-8. **Protect your work.** Before 26.5, propagated frames lived only in memory, so closing a project without freezing, or running low on RAM, could lose them. 26.5 added disk caching, which keeps propagated results after you close the project. If you're on an older build, freeze before you save and close. If After Effects is crashing during long propagations on 26.0 or 26.2, the troubleshooting guide points to a known issue with compressed disk caching, fixed in later versions.
+8. **Protect your work.** According to the troubleshooting guide, before 26.5 propagated frames lived only in memory, so closing a project without freezing, or running low on RAM, could lose them. It says 26.5 added disk caching, which keeps propagated results after you close the project. If you're on an older build, freeze before you save and close. If After Effects is crashing during long propagations on 26.0 or 26.2, the troubleshooting guide points to a known issue with compressed disk caching, fixed in later versions.
 
 9. **Turn one matte into several looks.** This is where the synthesis goes past most of the individual sources, which tend to stop once the subject is isolated. Pre-compose the matted layer and you can use it as a track matte for any other layer, set a duplicate to the inverse for the background, and grade, blur, or replace the two independently. Need to isolate a second object in the same shot? Adobe's tutorial shows duplicating the pre-comp, deleting the Object Matte effect, and making a new selection, which keeps each matte separate and easy to revise. If the matte is headed to another app, render it out with an alpha channel.
 
