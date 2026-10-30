@@ -31,6 +31,7 @@ export const ART_MOTIFS = [
   'alttext',
   'anchors',
   'animchart',
+  'apptiles',
   'bag',
   'blend',
   'bolt',
@@ -73,6 +74,7 @@ export const ART_MOTIFS = [
   'megaphone',
   'microphone',
   'nodes',
+  'paintbrush',
   'pen',
   'phone',
   'pilcrow',
@@ -1149,6 +1151,28 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: STAR5.map(({ x, y }) => outline(box(x - 4, y - 4, x + 4, y + 4), 0.9)),
     strokes: [closeLoop(STAR5)],
     tones: [region(STAR5, 0.3)],
+  },
+  // A flat paintbrush held on the diagonal, dark bristles laying down a
+  // curved stroke: an AI model that edits a design rather than generating one.
+  paintbrush: {
+    fills: [
+      outline(poly([90, 6, 97, 13, 60, 52, 51, 43]), 0.4),
+      outline(poly([47, 47, 56, 56, 49, 63, 40, 54]), 0.75),
+      outline(poly([36, 58, 45, 67, 38, 78, 12, 86, 24, 66]), 1),
+    ],
+    strokes: [cubic({ x: 28, y: 95 }, { x: 50, y: 100 }, { x: 70, y: 82 }, { x: 94, y: 90 })],
+    tones: [],
+  },
+  // Four app icons on a launcher: one for images, one for video, one for
+  // audio, and a sparkle for the app you describe and have built for you.
+  apptiles: {
+    fills: [
+      outline(poly([68, 18, 68, 38, 84, 28]), 0.95),
+      outline(star4(72, 72, 16, 4), 0.95),
+      ...[18, 25, 32, 39].map((x, i) => outline(box(x - 1.5, 72 - [6, 12, 9, 4][i], x + 1.5, 72 + [6, 12, 9, 4][i]), 0.95)),
+    ],
+    strokes: [frame(10, 10, 46, 46), frame(54, 10, 90, 46), frame(10, 54, 46, 90), frame(54, 54, 90, 90)],
+    tones: [region(circle(22, 22, 4), 0.9), region(poly([12, 44, 26, 26, 44, 44]), 0.8)],
   },
   // Two frames of the same scene: on the left the plan, a wireframe sun,
   // horizon, and text box; on the right the finished, shaded render.
