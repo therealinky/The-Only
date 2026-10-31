@@ -5,7 +5,12 @@ import { slugify } from '../lib/slugify';
 import ArticleCard from './ArticleCard.astro';
 
 interface Props {
-  /** All articles for this locked format (or all published articles), unfiltered by discipline. */
+  /**
+   * All articles for this locked format (or all published articles), unfiltered
+   * by discipline. With activeDiscipline, only the matches reach the page, so
+   * each discipline's page is its own list for search engines; the "all" page
+   * holds every card and can filter in place.
+   */
   articles: Article[];
   /** Link for the "All disciplines" filter. Required when the filter bar shows. */
   allHref?: string;
@@ -44,13 +49,14 @@ const {
 const pageStep = pageSize !== undefined && layout === 'list' ? Math.max(1, pageSize - 1) : pageSize;
 
 const matches = (article: Article) => !activeDiscipline || article.data.disciplines.includes(activeDiscipline);
-const visibleCount = articles.filter(matches).length;
+const listed = articles.filter(matches);
+const visibleCount = listed.length;
 let matchIndex = 0;
 ---
 
 {
   showFilters && (
-    <nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase}>
+    <nav class="filter-bar" aria-label="Filter by discipline" data-filter-bar data-all-href={allHref} data-discipline-base={disciplineBase} data-filter-in-place={!activeDiscipline || undefined}>
       <ul class="filter-bar__list">
         <li>
           <a href={allHref} aria-current={!activeDiscipline ? 'page' : undefined} data-discipline="">
@@ -85,14 +91,12 @@ let matchIndex = 0;
 
 <div data-article-grid data-layout={layout} data-page-size={pageSize} data-page-step={pageStep}>
   {
-    articles.map((article) => {
-      const isMatch = matches(article);
-      const pagedOut = isMatch && pageSize !== undefined && matchIndex++ >= pageSize;
+    listed.map((article) => {
+      const pagedOut = pageSize !== undefined && matchIndex++ >= pageSize;
       return (
         <div
           data-article-item
           data-disciplines={article.data.disciplines.join('|')}
-          hidden={!isMatch || undefined}
           data-paged-out={pagedOut || undefined}
         >
           <ArticleCard article={article} />
@@ -119,7 +123,7 @@ let matchIndex = 0;
   )
 }
 
-{articles.length === 0 && <p>{emptyMessage}</p>}
+{listed.length === 0 && <p>{emptyMessage}</p>}
 
 <script>
   // Cards fade up row by row: the rows on screen at load one after another,
@@ -209,17 +213,21 @@ let matchIndex = 0;
       firstNew?.querySelector<HTMLAnchorElement>('a.article-card__link')?.focus();
     });
 
-    for (const link of links) {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        applyFilter(link.dataset.discipline ?? '', link.getAttribute('href') ?? allHref, true);
+    // A discipline's own page only holds its own cards, so its filter links
+    // are ordinary links to the other pages.
+    if (bar.hasAttribute('data-filter-in-place')) {
+      for (const link of links) {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          applyFilter(link.dataset.discipline ?? '', link.getAttribute('href') ?? allHref, true);
+        });
+      }
+
+      window.addEventListener('popstate', () => {
+        const path = location.pathname;
+        const link = links.find((l) => l.getAttribute('href') === path);
+        applyFilter(link?.dataset.discipline ?? '', path, false);
       });
     }
-
-    window.addEventListener('popstate', () => {
-      const path = location.pathname;
-      const link = links.find((l) => l.getAttribute('href') === path);
-      applyFilter(link?.dataset.discipline ?? '', path, false);
-    });
   }
 </script>

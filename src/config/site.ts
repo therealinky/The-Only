@@ -6,9 +6,11 @@ export const SITE = {
   description:
     "A practical field guide to AI for working designers: what changed, why it matters, what's worth trying, and what could go wrong.",
   url:
-    import.meta.env?.SITE_URL ||
+    // Astro's own `site`, set in astro.config.mjs. The rest is for scripts
+    // that run outside Astro.
+    import.meta.env?.SITE ||
     (typeof process !== 'undefined' ? process.env.SITE_URL : undefined) ||
-    'http://localhost:4321',
+    'https://theonly.bemosu.com',
   // A house byline, not a person's name. Articles here are AI-drafted and
   // human-reviewed, not written by "Ana M. Rivas" or any other individual —
   // the accountable human goes in `reviewedBy` on each article instead. See
@@ -62,6 +64,22 @@ export const DISCIPLINES = [
 ] as const;
 
 export type Discipline = (typeof DISCIPLINES)[number];
+
+// The short intro on each discipline's page, also its meta description.
+export const DISCIPLINE_INTROS: Record<Discipline, string> = {
+  'Brand & Graphic':
+    'News, workflows, and honest takes on AI for brand and graphic designers, from logos and identity systems to layouts and print.',
+  Web: 'News, workflows, and honest takes on AI for web designers, from site builders and agents to getting a design live.',
+  'UI/UX':
+    'News, workflows, and honest takes on AI for product designers, from design systems and prototypes to handoff.',
+  'Motion & Video':
+    'News, workflows, and honest takes on AI for motion designers and video editors, from cleanup and masking to full edits.',
+  'Photo & Imaging':
+    'News, workflows, and honest takes on AI for photographers and retouchers, from selections and relighting to generative edits.',
+  Illustration:
+    'News, workflows, and honest takes on AI for illustrators, from sketches and vector work to the rights questions around generated art.',
+  '3D': 'News, workflows, and honest takes on AI for 3D artists, from materials and scans to whole scenes.',
+};
 
 export const FORMATS = ['brief', 'test', 'workflow', 'pulse'] as const;
 export type Format = (typeof FORMATS)[number];

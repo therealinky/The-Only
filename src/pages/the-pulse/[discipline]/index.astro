@@ -2,7 +2,7 @@
 import ArticleListing from '../../../components/ArticleListing.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { DISCIPLINES, type Discipline } from '../../../config/site';
-import { filterByFormat, getListableArticles } from '../../../lib/articles';
+import { filterByDiscipline, filterByFormat, getListableArticles } from '../../../lib/articles';
 import { slugify } from '../../../lib/slugify';
 
 export async function getStaticPaths() {
@@ -14,10 +14,16 @@ export async function getStaticPaths() {
 
 const { discipline } = Astro.props as { discipline: Discipline };
 const articles = filterByFormat(await getListableArticles(), 'pulse');
+const intro = `What the design community is saying about AI for ${discipline}.`;
 ---
 
-<BaseLayout title={`${discipline} — The Pulse`} description={`Community sentiment on AI for ${discipline}.`}>
+<BaseLayout
+  title={`${discipline} — The Pulse`}
+  description={intro}
+  noindex={filterByDiscipline(articles, discipline).length === 0}
+>
   <h1>The Pulse: {discipline}</h1>
+  <p>{intro}</p>
   <ArticleListing
     articles={articles}
     allHref="/the-pulse/"

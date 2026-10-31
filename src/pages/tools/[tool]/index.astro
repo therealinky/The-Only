@@ -15,9 +15,12 @@ export async function getStaticPaths() {
 }
 
 const { tool, articles } = Astro.props as { tool: string; articles: Awaited<ReturnType<typeof getArticlesByTool>> };
+// A one-article tool page only repeats that article's card, so it stays out of
+// search until there's more.
+const noindex = articles.length < 2;
 ---
 
-<BaseLayout title={tool} description={`Articles that discuss ${tool}.`}>
+<BaseLayout title={tool} description={`Articles that discuss ${tool}.`} noindex={noindex}>
   <p><a href="/tools/">← All tools</a></p>
   <h1>{tool}</h1>
   <ArticleListing articles={articles} showFilters={false} />
