@@ -1,0 +1,83 @@
+---
+title: "Nuke 18's beta can run AI workflows from inside the node graph"
+dek: >-
+  A new Griptape node connects Foundry's compositor to its AI orchestration
+  platform, so prompts, models, and seeds sit right in Nuke. It's a beta, the
+  AI usage costs extra, and where your plates go depends on how you run it.
+format: brief
+evidence: announced
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-10-31
+updatedAt: 2026-10-31
+lastVerified: 2026-10-31
+disciplines:
+  - Motion & Video
+art: compnode
+tools:
+  - Nuke
+  - Griptape
+sources:
+  - title: "Foundry releases Nuke 18.0 in open beta (CG Channel, October 27, 2026)"
+    url: https://www.cgchannel.com/2026/10/foundry-releases-nuke-18-0-in-open-beta/
+    accessed: 2026-10-31
+  - title: "Griptape (Foundry)"
+    url: https://www.foundry.com/products/griptape
+    accessed: 2026-10-31
+  - title: "Griptape supported models (Foundry)"
+    url: https://www.foundry.com/products/griptape/supported-models
+    accessed: 2026-10-31
+beforeYouUse:
+  clientData: >-
+    known: it depends on how you run the model. Foundry says open-source models
+    run locally keep data on your network. Through Griptape's model proxy or your
+    own API key, data goes to the model provider, under that provider's terms or
+    your agreement with them. Check these before sending client plates anywhere.
+  usageRights: >-
+    known: Griptape offers a mix of open-source, non-commercial, and commercial
+    models, and Foundry says it's on you to verify each model's licensing for
+    your use. Its Non-commercial plan is only for testing or non-commercial work.
+  disclosure: >-
+    not verified: we found no Foundry guidance on flagging AI-generated elements
+    in a shot. Check your client or studio's rules, since a generated clean plate
+    or element can end up in final pixels.
+  accessibility: >-
+    not applicable: this is a compositing feature and doesn't change anything a
+    viewer relies on for accessibility.
+  cost: >-
+    known: CG Channel lists Nuke at $3,839 a year and Nuke Indie at $499 a year.
+    Griptape has a free Non-commercial plan, and Professional is $40 a month or
+    $400 a year per user. Cloud-hosted third-party models use credits, while local
+    models and your own API keys don't. Foundry states the Professional allowance
+    two ways, as 1,000 credits a month and as $40 worth a month.
+---
+Compositors who've wanted to try generative tools usually end up bouncing frames out to another app and back again. Foundry's answer is starting to take shape. Nuke 18.0, which CG Channel reported as being in open beta on October 27, adds a node that brings those AI workflows into the node graph itself.
+
+## What changed
+
+The new Griptape node connects Nuke to Griptape, the AI orchestration platform Foundry bought earlier this year. Griptape strings third-party models for images, video, 3D, and audio into repeatable, node-based workflows, and it can work with models from companies like Google, OpenAI, Black Forest Labs, Runway, and Topaz Labs.
+
+According to CG Channel, here's how the Nuke side works:
+
+- The node runs single-file image and video AI workflows.
+- It connects to a Griptape engine that's already running, so Griptape is a separate piece of setup.
+- It reads the active workflow and exposes controls like prompts, models, seeds, and aspect ratio inside Nuke.
+
+The suggested jobs are the familiar compositing chores: keying, masking, inpainting, and clean plates, plus making new elements such as dust.
+
+The beta also brings better handling of 3D Gaussian Splats, including ways to trade fidelity for viewport speed, and support for more camera formats. There's no final release date yet, though CG Channel notes that major Nuke versions have typically taken about three months to get from beta to release.
+
+## Why it matters for designers
+
+For VFX artists, the interesting part is where the controls live. If a prompt and seed sit in the script alongside the rest of the comp, an AI step can be something you can see in the graph and go back to, not a mystery file that showed up from somewhere else.
+
+It's also worth noticing the approach. Foundry isn't tying this to one house model. Griptape is model-agnostic, so the idea is that you pick the model that suits the shot and can change it later.
+
+## What to watch out for
+
+This is a beta, so features can change, and we'd keep it away from live client work for now. We also couldn't read Foundry's own beta page, so the Nuke details here come from CG Channel's report, and nobody we read has independently tested the node. CG Channel doesn't spell out what counts as a single-file workflow, so try a small one before planning around it.
+
+Plan for two separate bills: Nuke itself, and whatever your models use through Griptape. The sidebar has the numbers. We couldn't confirm whether the node works on every Nuke edition, including Indie, so check that if it applies to you.
+
+The bigger questions are about the models. Griptape's menu mixes commercial and non-commercial licenses, and availability and third-party terms can change. Foundry recommends having security and legal teams review the policies of every model in a pipeline. On-premises deployment is listed only for Enterprise, so if a client's security rules won't let footage leave your network, sort that out first.

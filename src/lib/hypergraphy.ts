@@ -105,6 +105,8 @@ export const ART_MOTIFS = [
   'transition',
   'matte',
   'headmesh',
+  'compnode',
+  'roomscan',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1232,6 +1234,48 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([30, 50, 36, 50]),
     ],
     tones: [region(ellipse(70, 50, 16, 22), 0.25)],
+  },
+
+  // Two input nodes piped into a larger node holding a spark, piped on to one
+  // output node: a generative AI step inside a compositing node graph.
+  compnode: {
+    fills: [
+      outline(box(6, 6, 38, 24), 0.4),
+      outline(box(62, 6, 94, 24), 0.4),
+      outline(box(38, 78, 62, 94), 0.4),
+      outline(star4(50, 51, 12, 3), 0.9),
+    ],
+    strokes: [
+      frame(24, 38, 76, 64),
+      poly([22, 24, 22, 31, 38, 31, 38, 38]),
+      poly([78, 24, 78, 31, 62, 31, 62, 38]),
+      poly([50, 64, 50, 78]),
+    ],
+    tones: [],
+  },
+
+  // A phone on the left facing a room drawn in perspective, with scattered
+  // points on its floor: a real space captured as a 3D scan.
+  roomscan: {
+    fills: [
+      outline(box(4, 34, 28, 82), 0.5),
+      dot(52, 80),
+      dot(66, 72),
+      dot(78, 84),
+      dot(60, 90),
+      dot(90, 76),
+    ],
+    strokes: [
+      frame(50, 22, 84, 56),
+      poly([38, 6, 50, 22]),
+      poly([98, 6, 84, 22]),
+      poly([38, 66, 50, 56]),
+      poly([98, 66, 84, 56]),
+      poly([38, 6, 98, 6]),
+      poly([38, 6, 38, 66]),
+      poly([98, 6, 98, 66]),
+    ],
+    tones: [region(box(50, 22, 84, 56), 0.2)],
   },
 };
 
