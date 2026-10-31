@@ -7,7 +7,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-10-31
 updatedAt: 2026-10-31
@@ -19,8 +20,11 @@ tools:
   - Nuke
   - Griptape
 sources:
-  - title: "Foundry releases Nuke 18.0 in open beta (CG Channel, October 27, 2026)"
+  - title: "Foundry releases Nuke 18.0 in open beta, by Jim Thacker (CG Channel, October 27, 2026)"
     url: https://www.cgchannel.com/2026/10/foundry-releases-nuke-18-0-in-open-beta/
+    accessed: 2026-10-31
+  - title: "Nuke 18.0 Open Beta (Foundry)"
+    url: https://downloads.foundry.com/nuke-beta-18
     accessed: 2026-10-31
   - title: "Griptape (Foundry)"
     url: https://www.foundry.com/products/griptape
@@ -76,8 +80,8 @@ It's also worth noticing the approach. Foundry isn't tying this to one house mod
 
 ## What to watch out for
 
-This is a beta, so features can change, and we'd keep it away from live client work for now. We also couldn't read Foundry's own beta page, so the Nuke details here come from CG Channel's report, and nobody we read has independently tested the node. CG Channel doesn't spell out what counts as a single-file workflow, so try a small one before planning around it.
+This is a beta, so features can change, and Foundry strongly recommends not using it in production. Its beta page lists the Griptape connection as a feature under test, but the details of how the node works come from CG Channel's report, and nobody we read has independently tested it. CG Channel doesn't spell out what counts as a single-file workflow, so try a small one before planning around it.
 
-Plan for two separate bills: Nuke itself, and whatever your models use through Griptape. The sidebar has the numbers. We couldn't confirm whether the node works on every Nuke edition, including Indie, so check that if it applies to you.
+Plan for two separate bills: Nuke itself, and whatever your models use through Griptape. The sidebar has the numbers. To try the beta you need a current Nuke, NukeX, or Nuke Studio license, or Foundry's free 30-day trial. Indie isn't on that list, and we couldn't confirm whether the node will work there in the final release.
 
-The bigger questions are about the models. Griptape's menu mixes commercial and non-commercial licenses, and availability and third-party terms can change. Foundry recommends having security and legal teams review the policies of every model in a pipeline. On-premises deployment is listed only for Enterprise, so if a client's security rules won't let footage leave your network, sort that out first.
+The bigger questions are about the models. Griptape's menu mixes commercial and non-commercial licenses, and availability and third-party terms can change. Foundry recommends having security and legal teams review the policies of every model in a pipeline. Foundry's pricing tables list on-premises deployment only under Enterprise, while its FAQ says Griptape can run in the cloud or on-premises without mentioning a plan. If a client's security rules won't let footage leave your network, ask Foundry which setup qualifies before you commit.
