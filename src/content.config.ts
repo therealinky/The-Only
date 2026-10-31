@@ -72,6 +72,18 @@ const articleSchema = z
   .superRefine((data, ctx) => {
     const id = `"${data.title}"`;
 
+    // A second status note partway through a field is a new sentence, so it
+    // starts with a capital ("... link. Not verified: ...").
+    for (const [field, value] of Object.entries(data.beforeYouUse)) {
+      if (/[.!?;:,]\s+(not verified|not applicable|known):/.test(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['beforeYouUse', field],
+          message: `${id}: a status note partway through "beforeYouUse.${field}" must start a new, capitalized sentence (e.g. ". Not verified: ...").`,
+        });
+      }
+    }
+
     if (data.evidence === 'tested' && data.format !== 'test' && data.format !== 'workflow') {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
