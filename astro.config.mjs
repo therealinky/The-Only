@@ -2,31 +2,31 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { readdirSync, readFileSync } from 'node:fs';
-
-const SITE_URL = process.env.SITE_URL || 'http://localhost:4321';
+import { existsSync, readFileSync } from 'node:fs';
 
 // Astro config does not support the Vite-style factory-function export, so
 // the running command is read directly from argv instead of a `command`
 // callback argument.
 const isDevCommand = process.argv.slice(2).includes('dev');
 
-// Try It only has content once a hands-on Test article is published. Until
-// then its pages stay out of the sitemap (they're also marked noindex, and
-// hidden from the nav; see getNavItems in src/lib/articles.ts). The config
-// runs before Astro's content layer, so this reads the article files directly.
-const articlesDir = new URL('./src/content/articles/', import.meta.url);
-const hasPublishedTest = readdirSync(articlesDir)
-  .filter((name) => name.endsWith('.mdx') || name.endsWith('.md'))
-  .some((name) => {
-    const frontmatter = readFileSync(new URL(name, articlesDir), 'utf8').split(/^---$/m)[1] ?? '';
-    return /^format:\s*["']?test["']?\s*$/m.test(frontmatter) && /^status:\s*["']?published["']?\s*$/m.test(frontmatter);
-  });
+// Canonical tags, the sitemap, RSS, and share images are all built from this,
+// so a production build must never fall back to localhost.
+const SITE_URL = process.env.SITE_URL || (isDevCommand ? 'http://localhost:4321' : 'https://theonly.bemosu.com');
+
+// A page marked noindex (empty listings, one-article tool pages, Try It before
+// its first Test) stays out of the sitemap too. The sitemap is written after
+// the pages, so this reads each built page's own tag.
+const distDir = new URL('./dist/', import.meta.url);
+/** @param {string} page */
+const isNoindexed = (page) => {
+  const file = new URL(`.${new URL(page).pathname}index.html`, distDir);
+  return existsSync(file) && readFileSync(file, 'utf8').includes('<meta name="robots" content="noindex');
+};
 
 const integrations = [
   mdx(),
   sitemap({
-    filter: (page) => hasPublishedTest || !new URL(page).pathname.startsWith('/try-it/'),
+    filter: (page) => !isNoindexed(page),
   }),
 ];
 

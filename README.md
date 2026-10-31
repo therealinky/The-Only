@@ -36,7 +36,7 @@ Copy `.env.example` to `.env` and adjust. All are optional with sensible default
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `SITE_URL` | `http://localhost:4321` | Canonical site URL — used for canonical tags, sitemap, RSS, and Open Graph/JSON-LD URLs |
+| `SITE_URL` | `https://theonly.bemosu.com` (`http://localhost:4321` under `npm run dev`) | Canonical site URL — used for canonical tags, sitemap, RSS, and Open Graph/JSON-LD URLs |
 | `SHOW_EXAMPLES` | `false` | Set to `true` to include `example: true` placeholder articles in a build. Leave unset for a real production build |
 | `NEWSLETTER_PROVIDER` | unset | The Brief email signup. See [Email digest](#email-digest); the form stays hidden until this is `buttondown` |
 
@@ -257,7 +257,7 @@ This prepares the config; it does not deploy anything.
    - Build command: `npm run build`
    - Build output directory: `dist`
 4. Environment variables (**Settings → Environment variables**, for the Production environment):
-   - `SITE_URL` = `https://theonly.bemosu.com` (or whatever domain is live)
+   - `SITE_URL`: only needed if the domain ever changes from the `https://theonly.bemosu.com` default
    - `NODE_VERSION` = `22` (Cloudflare's build image should also pick this up from `.nvmrc`, but setting it
      explicitly avoids relying on that)
    - `NEWSLETTER_PROVIDER` = `buttondown` once The Brief's email signup should go live (see
