@@ -1,0 +1,92 @@
+---
+title: "SpAItial's Echo-3 scans a real space with your iPhone, and the fine print matters"
+dek: >-
+  A few minutes of walking around with a phone can become a 3D scene at real-world
+  scale, with the gaps filled in. Before you scan a client's space, check the plan
+  you're on and what the terms let SpAItial do with your upload.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-10-31
+updatedAt: 2026-10-31
+lastVerified: 2026-10-31
+disciplines:
+  - 3D
+art: roomscan
+tools:
+  - SpAItial Echo-3
+sources:
+  - title: "Echo-3 release (SpAItial, October 27, 2026)"
+    url: https://spaitial.ai/blog/echo-3-release
+    accessed: 2026-10-31
+  - title: "SpAItial's Echo-3 Turns iPhone Scans into 3D Worlds, by Michael Rubloff (Radiance Fields, October 27, 2026)"
+    url: https://radiancefields.com/spaitial-echo-3-turns-iphone-scans-into-3d-worlds
+    accessed: 2026-10-31
+  - title: "SpAItial Terms of Service (last updated October 27, 2026)"
+    url: https://spaitial.ai/terms
+    accessed: 2026-10-31
+  - title: "SpAItial Privacy Policy"
+    url: https://spaitial.ai/privacy
+    accessed: 2026-10-31
+beforeYouUse:
+  clientData: >-
+    known: scans are saved on the phone and uploaded for cloud processing. The
+    terms give SpAItial a worldwide, perpetual, irrevocable license to what you
+    upload, scans included, and allow its use for model training. There's no
+    dedicated opt-out, though the privacy policy gives a general right to object
+    to processing based on legitimate interest. You also warrant that you hold
+    the rights and permissions for what you upload, so get the space owner's
+    permission first.
+  usageRights: >-
+    known: you own the generated content, subject to the terms. Free and Standard
+    are limited to personal, non-commercial use, non-commercial research, or
+    internal evaluation. Commercial use, which expressly includes delivering work
+    to clients, needs Pro. Rights earned on paid Pro last after you cancel, and
+    earlier Echo-2 and Echo-3 output converts once when you first pay for Pro.
+    Commercial use during a free trial is temporary and ends if you cancel or the
+    trial doesn't convert to a paid plan.
+  disclosure: >-
+    not verified: we found no guidance on flagging that parts of a scene were
+    filled in by the model. If a scan will be used for measurements or to represent
+    a real property, tell whoever's relying on it.
+  accessibility: >-
+    not applicable: this produces 3D scans and doesn't change anything a viewer
+    relies on for accessibility.
+  cost: >-
+    known: SpAItial's terms set 300 credits per minute of scan footage, with a
+    900-credit minimum per scan. Radiance Fields reports that Standard includes
+    7,500 credits a month and Pro 15,000, enough for up to 25 and 50 scan minutes,
+    and that eligible new subscribers get the first month free. We couldn't find
+    the plans' dollar prices.
+---
+Scanning a real room usually means choosing between a quick capture full of holes and a slow one that takes real care. SpAItial's new Echo-3 model, released October 27 with an iPhone app, is built around the quick version: capture a space for a few minutes, then let the model finish what the phone missed.
+
+## What changed
+
+Earlier Echo models worked from a single image or a text prompt. Echo-3 starts from a capture of an actual place. SpAItial says it rebuilds the scene from what you recorded, fills the missing areas to match their surroundings, and keeps dimensions and distances true to the real space. It lists homes, classrooms, factories, equipment, outdoor spaces, and multi-floor buildings as targets.
+
+The details so far:
+
+- **Capture.** The app is out on iPhone, with Android listed as coming soon. Radiance Fields reports that LiDAR-equipped Pro iPhones get live coverage guidance and a dense point cloud preview, while other supported iPhones capture without those views.
+- **Processing.** Scans upload for cloud processing, and finished scenes can be explored, measured, and shared as a browser link.
+- **Exports.** Radiance Fields reports that one capture can export as SPZ, SOG, meshes, normals, and depth.
+- **API.** SpAItial says Echo-3 will be available to enterprise customers through an API.
+
+## Why it matters for designers
+
+If you do environments, architectural visualization, set extensions, or product scenes in real locations, a quick, to-scale scan is a handy starting point. Think of a venue you need to block out for an event, or a room you want as a reference for a 3D scene, without booking a dedicated capture.
+
+Mesh and splat exports could also make the result useful outside SpAItial's own viewer. That depends on which exports you can actually reach, though, as you'll see below.
+
+## What to watch out for
+
+The terms are the first thing to read, especially for client work. As of the version updated October 27, uploads, scans included, come with a broad, permanent license to SpAItial and can be used to train its models. Neither the terms nor the privacy policy offers a dedicated opt-out, though the policy does give a general right to object to processing based on legitimate interest. The privacy policy does say your content isn't shared with third-party model providers for their own training. A scan of a client's factory or someone's home is sensitive material, and the terms have you promise you hold the permissions for what you upload, so get them first. The sidebar has the details, including why the Standard plan won't cover paid work.
+
+The quality claims are SpAItial's own. It compared Echo-3 against Polycam, KIRI Engine, and Niantic Scaniverse on one scene, and Radiance Fields notes that it hasn't published benchmark figures. We haven't tested it either.
+
+Filled-in areas deserve some caution. SpAItial doesn't say how accurate they are, and its terms don't warrant that generated content is accurate, so we wouldn't trust a measurement that lands on a part the phone never saw.
+
+Radiance Fields also points out that the launch materials don't say which exports are available in the app, the web app, or the API. If you need a mesh in your own tool, confirm you can get one before you build a job around it.
