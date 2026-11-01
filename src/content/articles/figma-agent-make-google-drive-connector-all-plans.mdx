@@ -1,0 +1,94 @@
+---
+title: "Figma's agent and Make can now pull from your Google Drive, and connectors reach every plan"
+dek: >-
+  Research docs, spreadsheets, and images can now feed straight into a Figma
+  prompt, even on Starter. It's handy, but the setting that decides what the
+  agent can do on its own deserves a minute of your time first.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-01
+updatedAt: 2026-11-01
+lastVerified: 2026-11-01
+disciplines:
+  - UI/UX
+art: folder
+tools:
+  - Figma
+sources:
+  - title: "Figma product news and release notes (October 30, 2026 entry)"
+    url: https://www.figma.com/release-notes/
+    accessed: 2026-11-01
+  - title: "Use verified partner MCP connectors with the Figma agent and Figma Make (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/35440096186007-Use-verified-partner-MCP-connectors-with-the-Figma-agent-and-Figma-Make
+    accessed: 2026-11-01
+  - title: "Manage AI settings and content training for your team or organization (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/17725942479127-Manage-AI-settings-and-content-training-for-your-team-or-organization
+    accessed: 2026-11-01
+  - title: "AI credit updates FAQ (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/42614902212887-AI-credit-updates-FAQ
+    accessed: 2026-11-01
+beforeYouUse:
+  clientData: >-
+    known: Figma says content training is on by default for Starter and
+    Professional teams, and off on Organization and Enterprise plans. Not
+    verified: how that applies to content pulled in through a connector. The
+    training page doesn't address connectors, and the connector page doesn't
+    describe data handling beyond saying that disconnecting doesn't delete
+    anything in the external tool. Check before connecting a Drive with client
+    files in it.
+  usageRights: >-
+    not applicable: the connector moves your existing files and context around
+    and doesn't change who owns them. You still need the rights to whatever you
+    bring onto the canvas.
+  disclosure: >-
+    not verified: we found nothing saying content made from Drive files is marked
+    as agent-generated, or that a new Drive file is labeled as created by the
+    agent. If that matters to a client or team, note it yourself.
+  accessibility: >-
+    not applicable: this is a way of connecting two tools, and doesn't change
+    anything about the accessibility of what you design.
+  cost: >-
+    known: connectors are on all plans, including Starter, while custom MCP
+    connectors need a paid plan. The agent uses Figma AI credits, and Figma says
+    usage depends on context like attached files. Not verified: how much Drive
+    content adds to that, since the FAQ doesn't mention connectors.
+---
+Most of what shapes a design lives somewhere other than the design file: research notes, a brief, the spreadsheet with the real numbers. Until now, getting that into a Figma prompt usually meant copying and pasting. Figma's October 30 release notes make Google Drive a connector for both the agent and Figma Make, and open connectors up to every plan.
+
+## What changed
+
+There are two parts to this update, and the second may be the bigger one.
+
+**Google Drive is now a connector.** The agent and Make can read files from your Drive and use them as context. Figma's examples are condensing research findings, citing real figures, and bringing assets onto the canvas to edit. It also works in the other direction, so you can create a new Drive file from inside Figma, like a summary of decisions.
+
+**Connectors are now on all plans, including Starter.** That opens up the rest of Figma's featured list too, including Notion, Linear, Slack, GitHub, Dovetail, and zeroheight. Custom MCP connectors still need a paid plan, and some partners have their own requirements. Marvin and zeroheight, for example, each need an Enterprise plan on their side.
+
+To set one up, open the plus menu in the prompt box, pick Connectors, and go through the sign-in for the other tool. Each person connects their own accounts, so one teammate's setup doesn't carry over to everyone else.
+
+## Why it matters for designers
+
+The practical win is grounding. A prototype with real figures and real research in it is a lot more useful to review than one full of placeholder copy, and it gets you closer to what you'd actually ship. Asking the agent to work from a real interview summary should beat describing that summary from memory.
+
+The trip back to Drive is useful too. Design decisions tend to disappear into comments and chat threads, and being able to write them up from inside the file makes it a bit more likely that someone actually does it.
+
+The Starter change also means freelancers and small teams, who often keep client work in Drive, can now try this without upgrading.
+
+## What to watch out for
+
+Look at the permission settings first. Each connector tool can be set to Ask to run, Always run, or Never run, and Figma says tools that can write to external sources are off by default. So you'll likely need to turn on the ability to create files yourself. We'd leave anything that writes on Ask to run, at least until you've seen how it behaves.
+
+Figma's help page also warns about prompt injection when pulling in outside context. In plain terms, a document can contain text that the agent mistakes for instructions. That's a real concern for anything in your Drive that someone else wrote, like a vendor's document or a shared file from outside your team, and it's one more reason to be careful with Always run.
+
+Access is worth thinking through too. Figma describes the connector as reaching files across your Drive, and we didn't see a way to limit it to certain folders on its help page. Anything you pull into a shared Figma file may also be visible to people who can't see the original in Drive, so a confidential doc can travel further than you meant it to.
+
+A few limits to plan around:
+
+- Google Drive isn't available with the Governance+ add-on.
+- Admins can turn the Connectors feature off, so it may be missing from your menu.
+- Full seats can use the agent in Design and Make files. View, Dev, and Collab seats can try it in Drafts, and everyone needs edit access to the file.
+- With Always run, downloads can fail if the response goes over 16 MB, and Figma says that can happen with images of about 5 to 6 MB. Switching the tool to Ask to run can help.
+
+We haven't tried this, and everything here comes from Figma's own documentation. The sidebar covers what it doesn't say about training and credits.

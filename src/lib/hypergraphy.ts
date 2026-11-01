@@ -107,6 +107,8 @@ export const ART_MOTIFS = [
   'headmesh',
   'compnode',
   'roomscan',
+  'billboard',
+  'folder',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1276,6 +1278,30 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([98, 6, 98, 66]),
     ],
     tones: [region(box(50, 22, 84, 56), 0.2)],
+  },
+
+  // A roadside billboard on two posts, its panel holding a product block and
+  // two lines of copy: an ad made from a brand kit.
+  billboard: {
+    fills: [outline(box(6, 14, 94, 66), 0.2), outline(box(14, 24, 40, 56), 0.7)],
+    strokes: [
+      poly([50, 30, 84, 30]),
+      poly([50, 44, 76, 44]),
+      poly([28, 66, 28, 94]),
+      poly([72, 66, 72, 94]),
+      poly([14, 94, 86, 94]),
+    ],
+    tones: [],
+  },
+  // A file folder with a tabbed back and a document rising out of it: files
+  // pulled in from a shared drive.
+  folder: {
+    fills: [
+      outline(poly([8, 92, 8, 22, 28, 22, 36, 36, 92, 36, 92, 92]), 0.5),
+      outline(box(44, 4, 84, 27), 0.12),
+    ],
+    strokes: [poly([52, 12, 76, 12]), poly([52, 20, 68, 20])],
+    tones: [],
   },
 };
 
