@@ -7,7 +7,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-01
 updatedAt: 2026-11-01
@@ -33,12 +34,14 @@ sources:
 beforeYouUse:
   clientData: >-
     known: Figma says content training is on by default for Starter and
-    Professional teams, and off on Organization and Enterprise plans. Not
-    verified: how that applies to content pulled in through a connector. The
-    training page doesn't address connectors, and the connector page doesn't
-    describe data handling beyond saying that disconnecting doesn't delete
-    anything in the external tool. Check before connecting a Drive with client
-    files in it.
+    Professional teams, and off on Organization and Enterprise plans. Admins can
+    switch it off, which applies to new content and edits. Figma also says
+    third-party model providers can't train on what customers upload or create
+    on Figma. Not verified: how any of that applies to content pulled in through
+    a connector. The training page doesn't address connectors, and the connector
+    page doesn't describe data handling beyond saying that disconnecting doesn't
+    delete anything in the external tool. Check before connecting a Drive with
+    client files in it.
   usageRights: >-
     not applicable: the connector moves your existing files and context around
     and doesn't change who owns them. You still need the rights to whatever you
@@ -78,9 +81,11 @@ The Starter change also means freelancers and small teams, who often keep client
 
 ## What to watch out for
 
-Look at the permission settings first. Each connector tool can be set to Ask to run, Always run, or Never run, and Figma says tools that can write to external sources are off by default. So you'll likely need to turn on the ability to create files yourself. We'd leave anything that writes on Ask to run, at least until you've seen how it behaves.
+Look at the permission settings first. Each connector tool can be set to Ask to run, Always run, or Never run, and Figma says tools that can write to external sources are off by default and have to be turned on by hand. So expect to switch on file creation yourself. We'd leave anything that writes on Ask to run, at least until you've seen how it behaves.
 
 Figma's help page also warns about prompt injection when pulling in outside context. In plain terms, a document can contain text that the agent mistakes for instructions. That's a real concern for anything in your Drive that someone else wrote, like a vendor's document or a shared file from outside your team, and it's one more reason to be careful with Always run.
+
+It also helps to know that the agent picks which connector and tools to use based on your prompt. Typing @ in the chat limits it to the connectors you choose, and you can turn connectors off for a single conversation.
 
 Access is worth thinking through too. Figma describes the connector as reaching files across your Drive, and we didn't see a way to limit it to certain folders on its help page. Anything you pull into a shared Figma file may also be visible to people who can't see the original in Drive, so a confidential doc can travel further than you meant it to.
 
