@@ -8,7 +8,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-02
 updatedAt: 2026-11-02
@@ -31,13 +32,19 @@ sources:
   - title: "Create photography mood boards with Lightroom and Firefly (Adobe Learn, July 22, 2026)"
     url: https://www.adobe.com/learn/lightroom-cc/web/create-photography-mood-boards-lightroom-firefly
     accessed: 2026-11-02
-  - title: "How To Create A Mood Board With Adobe Firefly (Shotkit, updated November 3, 2025)"
+  - title: "About Firefly Boards (Adobe Help Center, updated February 2, 2026)"
+    url: https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/about-firefly-boards.html
+    accessed: 2026-11-02
+  - title: "Share for collaboration (Adobe Help Center)"
+    url: https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/share-for-collaboration.html
+    accessed: 2026-11-02
+  - title: "How To Create A Mood Board With Adobe Firefly, by Ana Mireles (Shotkit, updated November 3, 2025)"
     url: https://shotkit.com/mood-board-adobe-firefly/
     accessed: 2026-11-02
-  - title: "Adobe Firefly Boards presets (Feisworld, December 18, 2025)"
+  - title: "Adobe Firefly Boards Presets: Top 9 for Creators and Small Businesses, by Fei Wu (Feisworld, December 18, 2025)"
     url: https://www.feisworld.com/blog/adobe-firefly-boards-presets
     accessed: 2026-11-02
-  - title: "Firefly Board, a mood board for creators (Design Compass, September 30, 2025)"
+  - title: "Firefly Board, a mood board for creators, by Jongmin Park (Design Compass, September 30, 2025)"
     url: https://designcompass.org/en/2025/09/30/firefly-board/
     accessed: 2026-11-02
   - title: "History and Firefly boards disappeared (Adobe Community, February 10, 2026)"
@@ -76,19 +83,22 @@ beforeYouUse:
     from Adobe's own. Treat everything on the board as a direction, not a
     final asset, until you've checked.
   disclosure: >-
-    not verified: none of the sources address telling a client which parts of
-    a concept were generated. Agree on that up front, especially if a
-    generated image might end up in the final work.
+    known: Adobe says Boards uses Content Credentials to show how content was
+    created. Not verified: whether those credentials survive once a concept is
+    exported or finished in Photoshop. Agree with the client up front on how
+    you'll tell them what was generated, especially if a generated image might
+    end up in the final work.
   accessibility: >-
     not applicable: this is an ideation and concepting workflow, not a change
     to anything your audience interacts with.
   cost: >-
     known: generations use credits, and in Adobe's own Remix tutorial four
-    images cost 20 credits. Shotkit reports that free accounts are limited to
-    three boards, with sample boards counting toward that, and premium plans
-    getting unlimited boards. Collaborators only need a free Adobe account to
-    comment. Not verified: current credit costs for each partner model, which
-    vary.
+    images cost 20 credits. Per Adobe, plans without premium features are
+    limited to three boards (Shotkit notes the sample boards count toward
+    that), plans with premium features get unlimited boards, and partner
+    models need a Creative Cloud plan with premium features. Collaborators
+    only need a free Adobe account to comment. Not verified: current credit
+    costs for each partner model, which vary.
 ---
 This is a synthesis of how to run a mood board in Adobe Firefly Boards, drawn from several of Adobe's own tutorials and a few independent write-ups, plus general knowledge of the tool. It isn't any one person's process, and we haven't run it end to end ourselves. The common thread across the sources is that Boards works best when you treat it as a working board, not a gallery of generations.
 
@@ -96,15 +106,15 @@ This is a synthesis of how to run a mood board in Adobe Firefly Boards, drawn fr
 
 1. **Put the brief on the board first.** Before any images, add the client brief, keywords, or shot list as text at the top. Everyone who opens the board later, including you two weeks from now, sees what it's for. Text labels and simple colored shapes are enough to group things.
 
-2. **Pull in references from wherever they live.** You can upload files, drag them in, search Adobe Stock from inside Boards, or ask it to find similar inspiration from an image you've already added. Photographers can go straight from Lightroom: select photos, then choose Generate in Firefly and Start a mood board from the Photo menu (the File menu in Lightroom Classic). Adobe's tutorial says that path takes up to ten images at a time.
+2. **Pull in references from wherever they live.** You can upload files, drag them in, or search Adobe Stock from inside Boards. Photographers can go straight from Lightroom: select photos, then choose Generate in Firefly and Start a mood board from the Photo menu (the File menu in Lightroom Classic). Adobe's tutorial says that path takes up to ten images at a time.
 
 3. **Give each artboard one job.** This is the step most boards skip. Split references into separate artboards for style, subject, and color instead of one big collage. Adobe's tutorials show selecting a group of images and collecting them onto an artboard. A focused artboard is much easier to use as a reference in the next step, because it tells the model one thing.
 
-4. **Generate from your references, not just a prompt.** In the Generate image panel, use Sample from canvas to point at your sketch and your style or color artboard, then write a prompt that says how each one should be used, like "layout from the sketch, palette from the color board." You can pick Adobe's models or a partner model from the same panel. If you don't know how to describe an image you like, the describe feature will write a prompt from it for you to edit.
+4. **Generate from your references, not just a prompt.** In the Generate image panel, use Sample from canvas to point at your sketch and your style or color artboard, then write a prompt that says how each one should be used, like "layout from the sketch, palette from the color board." You can pick Adobe's models or a partner model from the same panel, though partner models need a plan with premium features. If you don't know how to describe an image you like, Boards can caption it with a prompt for you to edit.
 
 5. **Use Remix for materials, and a style reference for new directions.** Select a few images and hit Remix to blend them. Adobe's Remix tutorial shows it holding on to the base image's composition while pulling in materials and surfaces from the others, so start with the image that has the layout you want. When you want something that rethinks the angle or arrangement, use a result as a style reference with a prompt instead. The sources disagree on the details here: an older write-up describes Remix returning a fixed batch of 16, while Adobe's newer tutorial lets you pick how many and charges credits for each. It's clearly changed, so check the panel before you run a big batch.
 
-6. **Try presets as shortcuts, not answers.** Boards has a long list of one-click presets. Independent write-ups single out a handful as useful for early ideas: Restyle for testing looks on an existing image, Add to Scene and Product Photo for putting a product in context, and Remove Text for cleaning up a reference so you can reuse it. Expect to iterate, since the same write-ups report several tries before a usable result.
+6. **Try presets as shortcuts, not answers.** Boards has a long list of one-click presets. One independent roundup picks out a handful as useful for early ideas, with Add to Scene at the top of its list for putting a product in context, plus Product Photo, Restyle for testing looks on an existing image, and Remove Text for cleaning up a reference so you can reuse it. Expect to iterate. The same writer needed four tries to get a usable Mashup.
 
 7. **Keep a "picked" artboard separate from the exploring.** This isn't in any of the tutorials, but it follows from how they work. A board fills up with variations fast. Move the few directions you'd stand behind onto their own artboard, so the client reviews three choices, not forty.
 
