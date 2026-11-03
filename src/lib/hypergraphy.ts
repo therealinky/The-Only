@@ -109,6 +109,8 @@ export const ART_MOTIFS = [
   'roomscan',
   'billboard',
   'folder',
+  'lasso',
+  'moodboard',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1301,6 +1303,37 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       outline(box(44, 4, 84, 27), 0.12),
     ],
     strokes: [poly([52, 12, 76, 12]), poly([52, 20, 68, 20])],
+    tones: [],
+  },
+  // A dashed freehand lasso loop with its trailing tail, and a sparkle inside:
+  // circle part of a photo and describe what should go there.
+  lasso: {
+    fills: [outline(star4(48, 42, 16, 5), 0.85)],
+    strokes: [
+      ...Array.from({ length: 14 }, (_, i) => {
+        const a0 = (i / 14) * Math.PI * 2;
+        const a1 = a0 + (Math.PI * 2) / 28;
+        const at = (a: number) => ({ x: 48 + Math.cos(a) * (38 + 4 * Math.sin(3 * a)), y: 42 + Math.sin(a) * 30 });
+        return [at(a0), at((a0 + a1) / 2), at(a1)];
+      }),
+      cubic({ x: 30, y: 70 }, { x: 22, y: 82 }, { x: 34, y: 88 }, { x: 18, y: 96 }),
+    ],
+    tones: [],
+  },
+  // A pinboard of reference images in different sizes and shades, each held
+  // by a pin: a mood board.
+  moodboard: {
+    fills: [
+      outline(box(12, 18, 46, 52), 0.6),
+      outline(box(54, 18, 88, 40), 0.3),
+      outline(box(54, 48, 88, 84), 0.85),
+      outline(box(12, 60, 46, 84), 0.4),
+      dot(29, 18, 4.5),
+      dot(71, 18, 4.5),
+      dot(71, 48, 4.5),
+      dot(29, 60, 4.5),
+    ],
+    strokes: [frame(4, 8, 96, 92)],
     tones: [],
   },
 };
