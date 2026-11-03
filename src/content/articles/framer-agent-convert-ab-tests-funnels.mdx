@@ -1,0 +1,91 @@
+---
+title: "Framer's Agent can now set up and read your A/B tests and funnels"
+dek: >-
+  Framer's Convert add-on now works with the Framer Agent, so you can ask it
+  to build, edit, and analyze A/B tests, funnels, and triggers. Convert also
+  picked up country-based triggers, and a rebuilt Agent harness gives
+  outside agents the same reach through MCP.
+format: brief
+evidence: announced
+difficulty: moderate
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-03
+updatedAt: 2026-11-03
+lastVerified: 2026-11-03
+disciplines:
+  - Web
+  - UI/UX
+art: splittest
+tools:
+  - Framer
+sources:
+  - title: "Convert Update (Framer Updates, November 3, 2026)"
+    url: https://www.framer.com/updates/convert-update
+    accessed: 2026-11-03
+  - title: "Harness 2 (Framer Updates, November 2, 2026)"
+    url: https://www.framer.com/updates/harness-2
+    accessed: 2026-11-03
+  - title: "Run an A/B test on your Framer site (Framer Help)"
+    url: https://www.framer.com/help/articles/how-to-run-an-a-b-test-on-your-framer-site/
+    accessed: 2026-11-03
+  - title: "How to use Agents (Framer Help)"
+    url: https://www.framer.com/help/articles/how-to-use-agents/
+    accessed: 2026-11-03
+beforeYouUse:
+  clientData: >-
+    known: the Agent works inside your Framer project, and Convert measures
+    your site's visitors through Framer's own analytics. Not verified: how
+    long Framer keeps visitor-level test data, or what the Agent's
+    underlying model provider sees when it reads your results. Check
+    Framer's terms before running tests on a client's site.
+  usageRights: >-
+    not verified: Framer's update doesn't address ownership of variant copy
+    or layouts the Agent writes. Treat Agent-written variants like any other
+    draft and review them before they go live.
+  disclosure: >-
+    not applicable: this is a testing and analytics feature, not a generator
+    with its own output labeling. If a client needs AI-assisted work
+    disclosed, track it yourself.
+  accessibility: >-
+    not verified: nothing in the update says the Agent checks contrast,
+    focus order, or alt text on a new variant. A variant that wins on
+    clicks can still be harder to use, so check each one before it gets
+    traffic.
+  cost: >-
+    known: Framer's help center says A/B testing and Funnels are part of
+    Convert, "an add-on for sites on the Pro or Enterprise plan," billed by
+    your site's monthly analytics events. Not verified: whether asking the
+    Agent to build or analyze tests uses Framer AI credits, since the
+    update doesn't say.
+---
+Framer's Convert add-on has handled A/B tests, funnels, and on-page triggers for a while, but setting them up was all manual. As of November 3, you can hand that work to the Framer Agent instead. Framer says you can now ask the Agent to "create, edit, and analyze funnels and A/B tests, or add and edit triggers."
+
+## What changed
+
+There are three pieces, two in the Convert update and one in the Agent itself:
+
+- **The Agent can work with Convert.** That covers building and changing A/B tests and funnels, setting up or editing triggers, and reading the results back to you.
+- **Triggers can now target by country.** Convert's overlays, like a banner or a pop-up, can show based on a visitor's country or region. Framer's example is promoting a local event only to visitors from that country.
+- **The Agent got a new harness.** Framer's Harness 2 update, posted the day before, rebuilt how the Agent runs so it can handle a whole workflow in one pass and start applying changes while it's still planning. Framer says that means "2x fewer tool steps and 39% fewer cached input tokens per message," and that the same capabilities are available to outside agents through MCP.
+
+The underlying testing hasn't changed. Framer's help center says each page can have up to five variants, traffic splits evenly between them, and Framer reports conversion rate, lift, and a "probability of being best." It only declares a winner once that probability passes 90% and enough data has come in. Otherwise the test is marked inconclusive.
+
+## Why it matters for designers
+
+A/B testing is one of those things a lot of designers know they should do and rarely get to. Making a variant, wiring up the test, and then reading the results takes time that rarely fits in a client project. If the Agent can do the setup from a sentence, testing a different hero headline or button treatment gets a lot cheaper to try.
+
+The reading part might matter even more. A test that's been quietly running for three weeks is easy to forget about. Asking the Agent what happened, and why a result is or isn't conclusive, is a faster way to close the loop with a client.
+
+Country triggers are a smaller change, but a practical one for anyone running a site with a regional promotion, a local event, or shipping that only works in some places.
+
+## What to watch out for
+
+Convert is a paid add-on. Framer's help center says it's only for sites on the Pro or Enterprise plan and is billed by analytics events, which it defines as page views, tracked link clicks, and tracked form submits. A test on a busy page adds up, so check Framer's current pricing before you start one on a client's account.
+
+Don't let the Agent call the winner for you. Framer's own statistics already guard against declaring winners on thin data, but an Agent's summary of a test is still a summary. If a result is going into a client deck, open the test yourself and look at the numbers and the credibility bands.
+
+Variants still need a design review. The Agent can build a B version quickly, which also means it can quickly build one that's off brand or less accessible. Review every variant before it gets real traffic.
+
+The MCP angle cuts both ways. Harness 2 brings the same capabilities to outside agents through MCP, so an agent connected to your Framer account may now be able to change tests too. Framer's update doesn't say whether that includes Convert specifically. The sidebar covers what we couldn't confirm, including whether Agent work on tests uses AI credits.

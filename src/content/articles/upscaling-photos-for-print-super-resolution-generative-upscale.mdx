@@ -1,0 +1,132 @@
+---
+title: "Upscaling a photo for a bigger print, from Super Resolution to Generative Upscale"
+dek: >-
+  Lightroom and Photoshop now give you several ways to enlarge a photo, from
+  free Super Resolution to credit-based Topaz Gigapixel and Bloom models.
+  Pulling together Adobe's documentation and several independent tests,
+  here's how to choose one by subject, prep the file, and check the result
+  where it counts: on paper.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-03
+updatedAt: 2026-11-03
+lastVerified: 2026-11-03
+disciplines:
+  - Photo & Imaging
+art: upscale
+tools:
+  - Adobe Lightroom
+  - Adobe Photoshop
+  - Topaz Gigapixel
+  - Topaz Bloom
+sources:
+  - title: "Improve image quality using Enhance (Adobe Lightroom Classic Help, updated May 1, 2026)"
+    url: https://helpx.adobe.com/lightroom-classic/desktop/process-and-develop-photos/enhance-details.html
+    accessed: 2026-11-03
+  - title: "Generative Upscale with Topaz Gigapixel - frequently asked questions (Adobe Lightroom Help, updated February 20, 2026)"
+    url: https://helpx.adobe.com/lightroom/desktop/kb/generative-upscale-topaz-gigapixel-faq.html
+    accessed: 2026-11-03
+  - title: "Enhance image quality with Generative Upscale (Adobe Photoshop Help, updated May 20, 2026)"
+    url: https://helpx.adobe.com/photoshop/desktop/repair-retouch/clean-restore-images/enhance-image-quality-with-generative-upscale.html
+    accessed: 2026-11-03
+  - title: "Partner models in Adobe products (Adobe Creative Cloud Help, updated October 23, 2026)"
+    url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/non-adobe-models-in-adobe-products.html
+    accessed: 2026-11-03
+  - title: "Lightroom Super Resolution vs Topaz Gigapixel: A Print Test, by Daugirdas Tomas Racys (Long Lens Photography, updated October 2026)"
+    url: https://longlensphotography.co.uk/lightroom-super-resolution-vs-topaz-gigapixel/
+    accessed: 2026-11-03
+  - title: "Generative Upscale: The Best Way to Upscale AI Images, Tested at 100%, by Aaron Nace (PHLEARN, October 17, 2026)"
+    url: https://phlearn.com/magazine/generative-upscale/
+    accessed: 2026-11-03
+  - title: "Topaz Gigapixel now built into Lightroom, by Terry A. McDonald (luxBorealis, March 23, 2026)"
+    url: https://blog.luxborealis.com/2026/03/23/topaz-gigapixel-now-built-into-lightroom/
+    accessed: 2026-11-03
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's documentation and several
+    independent upscaling tests covering Lightroom's Super Resolution, the
+    Topaz Gigapixel and Bloom models in Generative Upscale, and when each
+    one makes sense for a print.
+  whyItMatters: >-
+    A client's photo is often too small for the poster, banner, or wall
+    print it's meant for. The tools disagree in ways that only show up in
+    certain subjects, and picking the wrong one can cost credits or add
+    detail that was never in the photo.
+  bestFor: >-
+    Designers and photographers enlarging cropped shots, older files, or
+    client-supplied images for print, signage, and large-format layouts.
+  timeToTry: >-
+    Half an hour to run one image through each option and print a few
+    matching crops. After that, it's a minute or two per image.
+beforeYouUse:
+  clientData: >-
+    known: Adobe's help page says Super Resolution runs as part of
+    Lightroom's Enhance tools, which lean on your computer's GPU.
+    Generative Upscale uses partner models and generative credits, and an
+    independent guide notes it needs an internet connection because the
+    processing happens on Adobe's servers. Not verified: what Adobe or
+    Topaz keep from an uploaded image, so check Adobe's generative AI terms
+    before sending files under NDA.
+  usageRights: >-
+    not verified: we didn't confirm how Adobe's terms treat output from a
+    third-party model like Topaz Gigapixel or Bloom for commercial use.
+    Check before using an upscaled image in paid client work.
+  disclosure: >-
+    known: Adobe's Lightroom FAQ says you can export generative upscaled
+    images with Content Credentials, but they "will not reflect the use of
+    Topaz Gigapixel as a third-party model." If a client or competition has
+    rules about AI processing, track it yourself.
+  accessibility: >-
+    not applicable: this is a photo enlargement technique, not a published
+    interface or document.
+  cost: >-
+    known: Adobe's FAQ says Super Resolution doesn't use generative
+    credits and Generative Upscale does, priced by the size of the upscaled
+    file: Gigapixel is 10 credits for output up to 25 MP and 20 credits
+    above that. Adobe's partner-model page lists Bloom at 35 credits per
+    generation from 1 to 9 MP. Photoshop's help page says Gigapixel and
+    Bloom need a premium subscription. Not verified: exactly which plans
+    count as premium, beyond Adobe pointing to Creative Cloud Pro and
+    Firefly credit add-ons.
+---
+Enlarging a photo used to mean one choice: resample it and sharpen. Now Lightroom and Photoshop offer free Super Resolution plus several credit-based models inside Generative Upscale, and they each work differently. This workflow pulls together Adobe's own documentation and several independent upscaling tests, plus general print know-how, into one approach. It's synthesized from published sources, not something we've tested end to end ourselves.
+
+1. **Work out how many pixels you actually need.** Multiply the print's long side in inches by the resolution your printer wants, often 300 ppi for close viewing. A 24-inch print at 300 ppi needs 7,200 pixels on the long side. If you're already close, a plain resize may be enough, and you can skip the rest.
+
+2. **Fix the source first.** Every source agrees that upscaling magnifies whatever's already there, including noise, soft focus, and motion blur. Adobe's Lightroom FAQ recommends running Denoise before Generative Upscale, and suggests rerunning with Denoise first if you see uneven noise, grain, or smoothness in the result. Do your crop now too, since cropping is often why you need to upscale in the first place.
+
+3. **Make upscaling the last edit.** Adobe's FAQ says Generative Upscale should be the final step because it creates a new file. Super Resolution also creates a new enhanced DNG, and Adobe's help page says you can only enhance an image once. Get the color and tone where you want them before you upscale, so you're not redoing it on a much bigger file.
+
+4. **Pick the tool by what's in the photo.**
+   - **Super Resolution** in Lightroom or Lightroom Classic doubles the width and height (four times the pixels), works on raw files, JPEGs, and TIFFs, and doesn't use generative credits. It's the one to try first for architecture, products, lettering, and anything with crisp edges.
+   - **Generative Upscale with Topaz Gigapixel** goes 2x or 4x. In Lightroom it's in the cloud-based app, not Lightroom Classic, and returns a separate DNG. In Photoshop it's under Image, then Generative Upscale, and opens the result as a new document. It tends to do better than Super Resolution on fine organic texture like grass, fur, and foliage.
+   - **Topaz Bloom**, in Photoshop's Generative Upscale, is described by Adobe as adding "new, creative detail." That's useful for AI-generated images and a risk for real photos, especially of people.
+   - **Firefly Upscaler**, Adobe's own model in the same Photoshop dialog, is described as restoring low-resolution images, up to 6,144 by 6,144 pixels. None of the independent tests here compared it, so run it alongside the others on your own crops if you're in Photoshop anyway.
+
+5. **Mind each model's limits.** Adobe lists Gigapixel in Photoshop at up to 56 megapixels and Bloom at up to 9 megapixels, while Lightroom's Generative Upscale tops out at 65,000 pixels on the long side. Super Resolution won't run on images over 128 MP or wider than 32,500 pixels. Those caps shape the order of operations: in one test, Bloom's limit allowed a 2x pass but not 4x, so the tester chained Bloom at 2x into Gigapixel at 2x for AI images. The same test found a single 4x Gigapixel pass gave waxy faces and halos on its image, so two careful steps can beat one big one.
+
+6. **Export at zero sharpening, then sharpen for the print.** One print test found Lightroom's sharpening acts more harshly once the file is twice the size. Leave sharpening at or near zero when you export the upscale, then sharpen for the final print size and paper. Adobe notes Gigapixel already applies some denoise and sharpening of its own, so it often needs less.
+
+7. **Judge the result on paper, not at 100% on screen.** This is where the sources disagree most. Inspecting at 100% is still the right way to catch invented details, like false text, logos, or freckles, especially from Bloom. But the most careful print test, judged blind on A4 prints, found the differences were much smaller on paper than on screen, and that Super Resolution looked poor at 100% while holding up well in print. Print matching crops of each version at final size, look at them from a realistic viewing distance, and pick from those.
+
+## Why it matters for designers
+
+Designers get handed the photo, not the camera. The client's only product shot is a phone picture, the event photo needs to fill a banner, or the hero image got cropped to half its original size. Knowing which upscaler to reach for saves you both credits and an awkward conversation about a print that came out soft.
+
+The tests don't agree on a single winner, and that's useful. A print test found Super Resolution did best overall on crisp edges and lettering but rippled on stone and foliage, while Gigapixel rendered the finest grass but also invented the most detail. A separate photographer's review found Gigapixel held fur and feather detail well enough for large wildlife prints. A test on AI-generated images landed on the Bloom-then-Gigapixel chain, while warning against Bloom on real photos of people. Put together, the pattern is clear: the right tool depends on the subject, not on which one is newest.
+
+Some of this advice ages quickly. Generative Upscale and its model choices are fairly new, so older comparisons often only pit Super Resolution against standalone Topaz apps, and one of the tests here notes its results apply to a specific Topaz version that newer ones may beat. If a recommendation is more than a year old, check it against your own test print.
+
+## What to watch out for
+
+Upscaling can't recover what isn't there. A blurry or noisy original turns into a bigger blurry or noisy image, or one where the model guessed, so fix what you can first and be realistic with clients about badly damaged files.
+
+Generative models can change the picture. Bloom is designed to add detail, which can mean texture, text, or features the original never had. For product shots, documentary work, or anything that has to stay accurate, stick to Super Resolution or Gigapixel and check closely at 100%.
+
+Credits add up fast. Super Resolution is free, but Gigapixel and Bloom each cost credits per run, and Photoshop's help page says they need a premium subscription. A batch of large files, or a chained two-step upscale, can use a whole month's allowance. The sidebar has the per-image costs Adobe lists.
+
+Keep the original. Both Super Resolution and Generative Upscale write a new file, which makes it easy to go back, but only if you don't delete or overwrite the source before the print is approved.
