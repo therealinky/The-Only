@@ -9,7 +9,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-03
 updatedAt: 2026-11-03
@@ -35,13 +36,13 @@ sources:
   - title: "Partner models in Adobe products (Adobe Creative Cloud Help, updated October 23, 2026)"
     url: https://helpx.adobe.com/creative-cloud/apps/generative-ai/non-adobe-models-in-adobe-products.html
     accessed: 2026-11-03
-  - title: "Lightroom Super Resolution vs Topaz Gigapixel: A Print Test (Long Lens Photography, updated October 2026)"
+  - title: "Lightroom Super Resolution vs Topaz Gigapixel: A Print Test, by Daugirdas Tomas Racys (Long Lens Photography, updated October 2026)"
     url: https://longlensphotography.co.uk/lightroom-super-resolution-vs-topaz-gigapixel/
     accessed: 2026-11-03
-  - title: "Generative Upscale: 8 Ways to Upscale AI Images, Tested (PHLEARN, October 17, 2026)"
+  - title: "Generative Upscale: The Best Way to Upscale AI Images, Tested at 100%, by Aaron Nace (PHLEARN, October 17, 2026)"
     url: https://phlearn.com/magazine/generative-upscale/
     accessed: 2026-11-03
-  - title: "Topaz Gigapixel now built into Lightroom (luxBorealis, March 23, 2026)"
+  - title: "Topaz Gigapixel now built into Lightroom, by Terry A. McDonald (luxBorealis, March 23, 2026)"
     url: https://blog.luxborealis.com/2026/03/23/topaz-gigapixel-now-built-into-lightroom/
     accessed: 2026-11-03
 summary:
@@ -84,12 +85,13 @@ beforeYouUse:
     interface or document.
   cost: >-
     known: Adobe's FAQ says Super Resolution doesn't use generative
-    credits and Generative Upscale does. Adobe's partner-model page lists
-    Gigapixel at 10 credits per generation up to 25 MP and 20 credits from
-    25 to 56 MP, and Bloom at 35 credits per generation from 1 to 9 MP.
-    Photoshop's help page says Gigapixel and Bloom need a premium
-    subscription. Not verified: whether those megapixel tiers are measured
-    on the original or the upscaled file.
+    credits and Generative Upscale does, priced by the size of the upscaled
+    file: Gigapixel is 10 credits for output up to 25 MP and 20 credits
+    above that. Adobe's partner-model page lists Bloom at 35 credits per
+    generation from 1 to 9 MP. Photoshop's help page says Gigapixel and
+    Bloom need a premium subscription. Not verified: exactly which plans
+    count as premium, beyond Adobe pointing to Creative Cloud Pro and
+    Firefly credit add-ons.
 ---
 Enlarging a photo used to mean one choice: resample it and sharpen. Now Lightroom and Photoshop offer free Super Resolution plus several credit-based models inside Generative Upscale, and they each work differently. This workflow pulls together Adobe's own documentation and several independent upscaling tests, plus general print know-how, into one approach. It's synthesized from published sources, not something we've tested end to end ourselves.
 
@@ -101,20 +103,21 @@ Enlarging a photo used to mean one choice: resample it and sharpen. Now Lightroo
 
 4. **Pick the tool by what's in the photo.**
    - **Super Resolution** in Lightroom or Lightroom Classic doubles the width and height (four times the pixels), works on raw files, JPEGs, and TIFFs, and doesn't use generative credits. It's the one to try first for architecture, products, lettering, and anything with crisp edges.
-   - **Generative Upscale with Topaz Gigapixel** goes 2x or 4x and returns a separate DNG. In Lightroom it's in the cloud-based app, not Lightroom Classic, and in Photoshop it's under Image, then Generative Upscale. It tends to do better than Super Resolution on fine organic texture like grass, fur, and foliage.
+   - **Generative Upscale with Topaz Gigapixel** goes 2x or 4x. In Lightroom it's in the cloud-based app, not Lightroom Classic, and returns a separate DNG. In Photoshop it's under Image, then Generative Upscale, and opens the result as a new document. It tends to do better than Super Resolution on fine organic texture like grass, fur, and foliage.
    - **Topaz Bloom**, in Photoshop's Generative Upscale, is described by Adobe as adding "new, creative detail." That's useful for AI-generated images and a risk for real photos, especially of people.
+   - **Firefly Upscaler**, Adobe's own model in the same Photoshop dialog, is described as restoring low-resolution images, up to 6,144 by 6,144 pixels. None of the independent tests here compared it, so run it alongside the others on your own crops if you're in Photoshop anyway.
 
 5. **Mind each model's limits.** Adobe lists Gigapixel in Photoshop at up to 56 megapixels and Bloom at up to 9 megapixels, while Lightroom's Generative Upscale tops out at 65,000 pixels on the long side. Super Resolution won't run on images over 128 MP or wider than 32,500 pixels. Those caps shape the order of operations: in one test, Bloom's limit allowed a 2x pass but not 4x, so the tester chained Bloom at 2x into Gigapixel at 2x for AI images. The same test found a single 4x Gigapixel pass gave waxy faces and halos on its image, so two careful steps can beat one big one.
 
 6. **Export at zero sharpening, then sharpen for the print.** One print test found Lightroom's sharpening acts more harshly once the file is twice the size. Leave sharpening at or near zero when you export the upscale, then sharpen for the final print size and paper. Adobe notes Gigapixel already applies some denoise and sharpening of its own, so it often needs less.
 
-7. **Judge the result on paper, not at 100% on screen.** This is where the sources disagree most. Inspecting at 100% is still the right way to catch invented details, like false text, logos, or freckles, especially from Bloom. But the most careful print test found the differences were much smaller on paper than on screen, and that Super Resolution looked poor at 100% while holding up well in print. Print matching crops of each version at final size, look at them from a realistic viewing distance, and pick from those.
+7. **Judge the result on paper, not at 100% on screen.** This is where the sources disagree most. Inspecting at 100% is still the right way to catch invented details, like false text, logos, or freckles, especially from Bloom. But the most careful print test, judged blind on A4 prints, found the differences were much smaller on paper than on screen, and that Super Resolution looked poor at 100% while holding up well in print. Print matching crops of each version at final size, look at them from a realistic viewing distance, and pick from those.
 
 ## Why it matters for designers
 
 Designers get handed the photo, not the camera. The client's only product shot is a phone picture, the event photo needs to fill a banner, or the hero image got cropped to half its original size. Knowing which upscaler to reach for saves you both credits and an awkward conversation about a print that came out soft.
 
-The tests don't agree on a single winner, and that's useful. A print test found Super Resolution did best overall on crisp edges and lettering but rippled on stone and foliage, while Gigapixel rendered the finest grass but also invented the most detail. A separate photographer's review found Gigapixel held fur and fern detail well enough for a large wildlife print. A test on AI-generated images landed on the Bloom-then-Gigapixel chain, while warning against Bloom on real photos of people. Put together, the pattern is clear: the right tool depends on the subject, not on which one is newest.
+The tests don't agree on a single winner, and that's useful. A print test found Super Resolution did best overall on crisp edges and lettering but rippled on stone and foliage, while Gigapixel rendered the finest grass but also invented the most detail. A separate photographer's review found Gigapixel held fur and feather detail well enough for large wildlife prints. A test on AI-generated images landed on the Bloom-then-Gigapixel chain, while warning against Bloom on real photos of people. Put together, the pattern is clear: the right tool depends on the subject, not on which one is newest.
 
 Some of this advice ages quickly. Generative Upscale and its model choices are fairly new, so older comparisons often only pit Super Resolution against standalone Topaz apps, and one of the tests here notes its results apply to a specific Topaz version that newer ones may beat. If a recommendation is more than a year old, check it against your own test print.
 

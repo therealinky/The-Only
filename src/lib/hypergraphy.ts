@@ -1344,10 +1344,10 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [
       outline(box(12, 22, 40, 32), 0.5),
       outline(box(60, 22, 88, 32), 0.5),
-      outline(box(14, 66, 38, 78), 0.3),
       outline(box(62, 66, 86, 78), 1),
     ],
     strokes: [
+      frame(14, 66, 38, 78),
       frame(4, 12, 46, 88),
       frame(54, 12, 96, 88),
       poly([12, 44, 38, 44]),
@@ -1364,12 +1364,12 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [
       outline(poly([10, 92, 20, 76, 26, 84, 30, 78, 36, 92]), 0.9),
       outline(poly([44, 92, 66, 52, 76, 68, 82, 58, 94, 92]), 0.45),
+      outline(poly([66, 16, 84, 16, 84, 34]), 1),
     ],
     strokes: [
       frame(4, 66, 38, 94),
       frame(4, 6, 96, 94),
-      poly([46, 54, 82, 18]),
-      poly([68, 18, 82, 18, 82, 32]),
+      poly([46, 54, 80, 20]),
     ],
     tones: [region(box(4, 66, 38, 94), 0.25)],
   },
