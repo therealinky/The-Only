@@ -113,6 +113,8 @@ export const ART_MOTIFS = [
   'moodboard',
   'splittest',
   'upscale',
+  'tablet',
+  'retopo',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1372,6 +1374,44 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([46, 54, 80, 20]),
     ],
     tones: [region(box(4, 66, 38, 94), 0.25)],
+  },
+
+  // A tablet with a sketched curve and a shape on its screen, a stylus
+  // standing beside it: drawing and designing on an iPad.
+  tablet: {
+    fills: [
+      outline(circle(46, 32, 8), 0.6),
+      outline(box(82, 10, 92, 72), 0.7),
+      outline(poly([82, 72, 92, 72, 87, 88]), 1),
+    ],
+    strokes: [
+      frame(6, 6, 72, 94),
+      frame(12, 12, 66, 88),
+      cubic({ x: 20, y: 78 }, { x: 26, y: 46 }, { x: 46, y: 84 }, { x: 58, y: 52 }),
+    ],
+    tones: [region(box(12, 12, 66, 88), 0.12)],
+  },
+
+  // A lumpy, densely shaded surface with a clean quad grid bending over
+  // it: rebuilding a dense scan or sculpt as tidy, low-poly topology.
+  retopo: {
+    fills: [],
+    strokes: [
+      closeLoop(
+        poly([20, 22, 40, 10, 62, 14, 82, 24, 90, 46, 84, 70, 66, 88, 42, 90, 20, 80, 10, 58, 12, 36]),
+      ),
+      cubic({ x: 14, y: 34 }, { x: 36, y: 24 }, { x: 64, y: 24 }, { x: 86, y: 34 }),
+      cubic({ x: 10, y: 52 }, { x: 36, y: 44 }, { x: 64, y: 44 }, { x: 90, y: 52 }),
+      cubic({ x: 14, y: 72 }, { x: 36, y: 64 }, { x: 64, y: 64 }, { x: 86, y: 72 }),
+      cubic({ x: 32, y: 14 }, { x: 24, y: 38 }, { x: 24, y: 64 }, { x: 32, y: 88 }),
+      cubic({ x: 52, y: 12 }, { x: 46, y: 38 }, { x: 46, y: 64 }, { x: 52, y: 90 }),
+      cubic({ x: 72, y: 18 }, { x: 66, y: 40 }, { x: 66, y: 64 }, { x: 72, y: 84 }),
+    ],
+    tones: [
+      region(poly([20, 22, 40, 10, 62, 14, 82, 24, 90, 46, 84, 70, 66, 88, 42, 90, 20, 80, 10, 58, 12, 36]), 0.3),
+      region(circle(62, 60, 20), 0.25),
+    ],
+    strokeTone: 0.7,
   },
 };
 
