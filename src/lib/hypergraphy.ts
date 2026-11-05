@@ -115,6 +115,8 @@ export const ART_MOTIFS = [
   'upscale',
   'tablet',
   'retopo',
+  'cull',
+  'iconset',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1412,6 +1414,38 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(circle(62, 60, 20), 0.25),
     ],
     strokeTone: 0.7,
+  },
+
+  // Two photo frames side by side, a check under the left one and a cross
+  // under the shaded right one: culling a shoot into keepers and rejects.
+  cull: {
+    fills: [
+      outline(poly([10, 50, 22, 30, 30, 40, 34, 34, 42, 50]), 0.7),
+      outline(circle(76, 30, 6), 0.5),
+    ],
+    strokes: [
+      frame(6, 12, 46, 54),
+      frame(54, 12, 94, 54),
+      poly([12, 76, 22, 88, 40, 64]),
+      poly([62, 66, 86, 90]),
+      poly([86, 66, 62, 90]),
+    ],
+    tones: [region(box(54, 12, 94, 54), 0.3)],
+    strokeTone: 0.8,
+  },
+
+  // A two-by-two set of line icons (a circle, a sparkle, a house, and a
+  // speech bubble), all drawn as strokes: an editable vector icon set.
+  iconset: {
+    fills: [],
+    strokes: [
+      ring(28, 28, 16),
+      closeLoop(star4(72, 28, 18, 6)),
+      closeLoop(poly([12, 62, 28, 48, 44, 62, 44, 88, 12, 88])),
+      closeLoop(poly([56, 52, 90, 52, 90, 78, 70, 78, 60, 88, 62, 78, 56, 78])),
+    ],
+    tones: [region(box(16, 66, 40, 88), 0.15)],
+    strokeTone: 0.8,
   },
 };
 
