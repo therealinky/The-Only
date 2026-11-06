@@ -1,0 +1,95 @@
+---
+title: "OpenAI's Images 2.6 makes looping GIFs in ChatGPT and editable SVGs through the API"
+dek: >-
+  The update adds animated GIFs and photo markup in ChatGPT and the API, plus
+  SVG output for developers. The SVG side is the more interesting one for
+  designers, but it's API-only for now and comes with real limits.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-06
+updatedAt: 2026-11-06
+lastVerified: 2026-11-06
+disciplines:
+  - Brand & Graphic
+  - Motion & Video
+art: flipbook
+tools:
+  - ChatGPT
+  - OpenAI API
+sources:
+  - title: "Introducing Images 2.6 (OpenAI, November 4, 2026)"
+    url: https://openai.com/index/introducing-images-2-6/
+    accessed: 2026-11-06
+  - title: "Images, upgraded—introducing ChatGPT Images 2.6 (OpenAI Developer Community, Announcements, November 4, 2026)"
+    url: https://community.openai.com/t/images-upgraded-introducing-chatgpt-images-2-6/1412901
+    accessed: 2026-11-06
+  - title: "ChatGPT Images 2.6 System Card (OpenAI Deployment Safety Hub, November 4, 2026)"
+    url: https://deploymentsafety.openai.com/chatgpt-images-2-6
+    accessed: 2026-11-06
+  - title: "Changelog (OpenAI API docs, entries for November 4, 2026)"
+    url: https://developers.openai.com/api/docs/changelog
+    accessed: 2026-11-06
+  - title: "Image generation (OpenAI API docs)"
+    url: https://developers.openai.com/api/docs/guides/image-generation
+    accessed: 2026-11-06
+beforeYouUse:
+  clientData: >-
+    not verified: OpenAI's launch materials we read don't say anything new
+    about how images or reference photos you upload are stored or used. Check
+    your ChatGPT data controls, or your organization's API terms, before
+    uploading client work or saved references of real people.
+  usageRights: >-
+    not verified: the launch materials don't change or restate usage terms
+    for generated GIFs or SVGs. Check OpenAI's current terms before using
+    output in paid client work, especially logos, where you'll want to be
+    sure the mark is actually ownable.
+  disclosure: >-
+    known: OpenAI's system card describes a continued commitment to C2PA
+    metadata and SynthID watermarking across ChatGPT, Codex, and the API.
+    Not verified: whether that provenance survives in GIF or SVG files. The
+    system card doesn't say, and SVG is a plain text format that doesn't
+    carry image metadata the way a PNG does.
+  accessibility: >-
+    not verified: OpenAI doesn't mention accessibility. Looping animation can
+    be a problem for people sensitive to motion, so if a GIF goes on a site,
+    the usual guidance about letting people pause or avoid autoplaying motion
+    still applies.
+  cost: >-
+    not verified: OpenAI hasn't published how many GIFs each ChatGPT plan
+    allows. In the API, OpenAI's docs say an SVG is billed at the image
+    model's rate for a reference image plus the authoring model's rate for
+    the tokens used to write the SVG, so you pay for two steps. Check the
+    pricing page before running a batch.
+---
+OpenAI shipped Images 2.6 on November 4, and the headline in ChatGPT is animation: you can now turn a prompt or an image into a looping GIF. The less flashy part might matter more to designers, though. Through the API, the new image models can also hand back an SVG.
+
+## What changed
+
+**GIFs in ChatGPT and the API.** OpenAI's announcement says you can turn a prompt or an image into an animated GIF and adjust its speed. Its system card confirms GIF generation is in both ChatGPT and the API. In the API, the docs say a GIF can have between 2 and 16 frames (9 by default), each shown for 20 to 2,000 milliseconds (200 by default).
+
+**Photo markup.** You can draw on an image to show where an edit should go. In the API, this works as a transparent annotation layer laid over the first image you send, and OpenAI's changelog says it also works with the earlier GPT Image 2.5 models.
+
+**SVG output, API only.** The system card is specific here: GIFs and markup come to ChatGPT and the API, but SVG output is an API feature. According to the docs, an SVG comes back as static vector content, with no scripts, external resources, or embedded raster images, and you can only ask for one at a time.
+
+**Two new API models.** OpenAI calls them Flare, for fast iteration, and Sunburst, for detailed work where editing precision matters. OpenAI says the API version brings 50% faster image generation and that Flare can produce an image in as little as six seconds. Both models add a `complexity` setting with low, medium, and high levels.
+
+ChatGPT also gets saved reference images, so you can keep photos of yourself, a pet, or a recurring character ready to reuse without uploading them again.
+
+## Why it matters for designers
+
+The GIFs are fun, and handy for quick social loops, reaction graphics, or a rough motion idea to show a client. But a 16-frame loop is a sketch, not a motion graphics tool, so think of it that way.
+
+SVG output is the bigger deal. Raster-only image models have meant an extra trip through a tracing tool any time you wanted an icon or a simple mark you could actually edit. Getting vectors straight from the model removes that step, at least for the kind of flat, simple graphics where tracing usually struggles least anyway. If you work with a developer or use an automation tool that talks to the API, it's worth testing now. If you only use ChatGPT, you'll have to wait.
+
+## What to watch out for
+
+The SVGs come with a few constraints. The docs say the edit endpoint can't return an SVG and can't take one as an input, so you can't hand an SVG back to the model and ask for a tweak. Revising one means generating a new one, or opening it in your vector app. They're also static with no embedded images, so don't expect photographic detail.
+
+OpenAI's own docs warn that higher complexity can increase latency and introduce unwanted changes, and `high` is the default. If an edit wanders off, try a lower setting before rewriting your prompt.
+
+On GIFs, the system card says OpenAI added safeguards for motion, but also says plainly that motion-related violations are hard to detect and the safeguards may not catch everything. That's mostly a policy concern, but it's a reason to review an animation frame by frame before posting it on a brand account.
+
+We haven't tried Images 2.6 ourselves. This comes from OpenAI's announcement, system card, and API docs, and the sidebar covers what they leave open.
