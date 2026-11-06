@@ -1,13 +1,14 @@
 ---
 title: "OpenAI's Images 2.6 makes looping GIFs in ChatGPT and editable SVGs through the API"
 dek: >-
-  The update adds animated GIFs and photo markup in ChatGPT and the API, plus
-  SVG output for developers. The SVG side is the more interesting one for
+  The update adds animated GIFs in ChatGPT and the API, brings photo markup
+  to the API, and adds SVG output for developers. The SVG side is the more interesting one for
   designers, but it's API-only for now and comes with real limits.
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-06
 updatedAt: 2026-11-06
@@ -58,23 +59,24 @@ beforeYouUse:
     the usual guidance about letting people pause or avoid autoplaying motion
     still applies.
   cost: >-
-    not verified: OpenAI hasn't published how many GIFs each ChatGPT plan
-    allows. In the API, OpenAI's docs say an SVG is billed at the image
+    known: OpenAI says Images 2.6 is available in ChatGPT and Codex across
+    all subscription tiers. Not verified: how many GIFs each plan allows,
+    which OpenAI hasn't published. In the API, OpenAI's docs say an SVG is billed at the image
     model's rate for a reference image plus the authoring model's rate for
     the tokens used to write the SVG, so you pay for two steps. Check the
     pricing page before running a batch.
 ---
-OpenAI shipped Images 2.6 on November 4, and the headline in ChatGPT is animation: you can now turn a prompt or an image into a looping GIF. The less flashy part might matter more to designers, though. Through the API, the new image models can also hand back an SVG.
+OpenAI shipped Images 2.6 on November 4 in ChatGPT, Codex and the API, on every ChatGPT plan. The headline in ChatGPT is animation: you can now turn a prompt or an image into a looping GIF. The less flashy part might matter more to designers, though. Through the API, the new image models can also hand back an SVG.
 
 ## What changed
 
-**GIFs in ChatGPT and the API.** OpenAI's announcement says you can turn a prompt or an image into an animated GIF and adjust its speed. Its system card confirms GIF generation is in both ChatGPT and the API. In the API, the docs say a GIF can have between 2 and 16 frames (9 by default), each shown for 20 to 2,000 milliseconds (200 by default).
+**GIFs in ChatGPT and the API.** OpenAI's announcement says you can turn a prompt or an image into an animated GIF, adjust its speed, and edit individual frames. Its system card confirms GIF generation is in both ChatGPT and the API. In the API, the docs say a GIF can have between 2 and 16 frames (9 by default), each shown for 20 to 2,000 milliseconds (200 by default).
 
-**Photo markup.** You can draw on an image to show where an edit should go. In the API, this works as a transparent annotation layer laid over the first image you send, and OpenAI's changelog says it also works with the earlier GPT Image 2.5 models.
+**Photo markup comes to the API.** You draw on an image to show where an edit should go. OpenAI's announcement says this was already available in ChatGPT. In the API, this works as a transparent annotation layer laid over the first image you send, and OpenAI's changelog says it also works with the earlier GPT Image 2.5 models.
 
-**SVG output, API only.** The system card is specific here: GIFs and markup come to ChatGPT and the API, but SVG output is an API feature. According to the docs, an SVG comes back as static vector content, with no scripts, external resources, or embedded raster images, and you can only ask for one at a time.
+**SVG output, API only.** The system card is specific here: GIFs and markup are in ChatGPT and the API, but SVG output is an API feature. According to the docs, an SVG comes back as static vector content, with no scripts, external resources, or embedded raster images, and you can only ask for one at a time.
 
-**Two new API models.** OpenAI calls them Flare, for fast iteration, and Sunburst, for detailed work where editing precision matters. OpenAI says the API version brings 50% faster image generation and that Flare can produce an image in as little as six seconds. Both models add a `complexity` setting with low, medium, and high levels.
+**Two new API models.** OpenAI calls them Flare, for fast iteration, and Sunburst, for detailed work where editing precision matters. OpenAI says Images 2.6 generates images 50% faster than before, and that Flare can produce an image in as little as six seconds with quality set to low. Both models add a `complexity` setting with low, medium, and high levels.
 
 ChatGPT also gets saved reference images, so you can keep photos of yourself, a pet, or a recurring character ready to reuse without uploading them again.
 
@@ -84,11 +86,13 @@ The GIFs are fun, and handy for quick social loops, reaction graphics, or a roug
 
 SVG output is the bigger deal. Raster-only image models have meant an extra trip through a tracing tool any time you wanted an icon or a simple mark you could actually edit. Getting vectors straight from the model removes that step, at least for the kind of flat, simple graphics where tracing usually struggles least anyway. If you work with a developer or use an automation tool that talks to the API, it's worth testing now. If you only use ChatGPT, you'll have to wait.
 
+The model is also showing up inside design tools. OpenAI's announcement quotes Figma Weave's creative director saying they're adding it to Weave, so if you already build image workflows there, you may not need to touch the API at all.
+
 ## What to watch out for
 
 The SVGs come with a few constraints. The docs say the edit endpoint can't return an SVG and can't take one as an input, so you can't hand an SVG back to the model and ask for a tweak. Revising one means generating a new one, or opening it in your vector app. They're also static with no embedded images, so don't expect photographic detail.
 
-OpenAI's own docs warn that higher complexity can increase latency and introduce unwanted changes, and `high` is the default. If an edit wanders off, try a lower setting before rewriting your prompt.
+OpenAI's own docs warn that higher complexity can increase latency and introduce unwanted changes, and `high` is the default. OpenAI's announcement recommends low complexity for most editing tasks, saving medium or high for scenes with many elements or constraints. If an edit wanders off, try a lower setting before rewriting your prompt.
 
 On GIFs, the system card says OpenAI added safeguards for motion, but also says plainly that motion-related violations are hard to detect and the safeguards may not catch everything. That's mostly a policy concern, but it's a reason to review an animation frame by frame before posting it on a brand account.
 
