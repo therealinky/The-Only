@@ -117,6 +117,8 @@ export const ART_MOTIFS = [
   'retopo',
   'cull',
   'iconset',
+  'flipbook',
+  'offswitch',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1446,6 +1448,47 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [region(box(16, 66, 40, 88), 0.15)],
     strokeTone: 0.8,
+  },
+
+  // Three animation frames in a row with a ball rising and falling across
+  // them, and a looping arrow underneath carrying the last frame back to
+  // the first: a short animated loop, like a generated GIF.
+  flipbook: {
+    fills: [
+      dot(16, 44, 5),
+      dot(50, 30, 5),
+      dot(84, 44, 5),
+      outline(poly([10, 72, 22, 72, 16, 62]), 0.9),
+    ],
+    strokes: [
+      frame(4, 16, 28, 54),
+      frame(38, 16, 62, 54),
+      frame(72, 16, 96, 54),
+      cubic({ x: 84, y: 64 }, { x: 84, y: 96 }, { x: 16, y: 96 }, { x: 16, y: 72 }),
+    ],
+    tones: [region(box(38, 16, 62, 54), 0.15)],
+    strokeTone: 0.8,
+  },
+
+  // A toggle switch in its off position (knob pushed to the left, track
+  // left light), with a small AI sparkle above it: the setting designers
+  // go looking for to turn an AI prompt off.
+  offswitch: {
+    fills: [dot(32, 62, 12), outline(star4(74, 22, 14, 4), 0.6)],
+    strokes: [
+      closeLoop([
+        ...Array.from({ length: 13 }, (_, i) => {
+          const a = Math.PI / 2 + (i / 12) * Math.PI;
+          return { x: 32 + Math.cos(a) * 20, y: 62 + Math.sin(a) * 20 };
+        }),
+        ...Array.from({ length: 13 }, (_, i) => {
+          const a = -Math.PI / 2 + (i / 12) * Math.PI;
+          return { x: 68 + Math.cos(a) * 20, y: 62 + Math.sin(a) * 20 };
+        }),
+      ]),
+    ],
+    tones: [],
+    strokeTone: 0.9,
   },
 };
 
