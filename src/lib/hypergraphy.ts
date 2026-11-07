@@ -1496,13 +1496,13 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   // bottom, plus a small AI sparkle: an agent captioning and dubbing clips.
   subtitles: {
     fills: [
-      outline(poly([40, 30, 40, 50, 58, 40]), 0.9),
-      outline(box(18, 60, 76, 65), 0.85),
-      outline(box(28, 72, 66, 77), 0.85),
-      outline(star4(90, 9, 8, 2.5), 0.6),
+      outline(poly([43, 30, 43, 50, 61, 40]), 0.9),
+      outline(box(21, 60, 79, 65), 0.85),
+      outline(box(31, 72, 69, 77), 0.85),
+      outline(star4(90, 10, 8, 2.5), 0.6),
     ],
-    strokes: [frame(6, 20, 88, 88)],
-    tones: [region(box(6, 20, 88, 88), 0.12)],
+    strokes: [frame(8, 20, 92, 88)],
+    tones: [region(box(8, 20, 92, 88), 0.12)],
     strokeTone: 0.8,
   },
 };

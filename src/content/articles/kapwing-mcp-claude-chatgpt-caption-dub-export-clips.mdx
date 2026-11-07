@@ -8,7 +8,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-07
 updatedAt: 2026-11-07
@@ -42,11 +43,11 @@ beforeYouUse:
   usageRights: >-
     not verified: Kapwing's MCP pages don't say anything specific about
     rights to captions, dubs, or generated media made through the connector,
-    so assume its standard terms apply and check them before client work
+    so assume its standard terms apply and check them before client work.
   disclosure: >-
     not verified: nothing in Kapwing's MCP documentation addresses labeling
     AI-dubbed audio or cloned voices, so follow your client's and platform's
-    rules, especially for voice clones
+    rules, especially for voice clones.
   accessibility: >-
     known: subtitles, transcription, and caption translation are core
     features of the connector, and Kapwing's release notes say captions made
@@ -55,10 +56,12 @@ beforeYouUse:
   cost: >-
     known: Kapwing says there's no separate fee for the MCP, and that
     dubbing, subtitles, and translation draw from your workspace's AI credits
-    at the same rate as on the website. Not verified: which plans include it,
-    since Kapwing's own pages variously say any user, all plans including
-    free, and Pro, Business, and Enterprise, and its release notes say free
-    accounts are blocked from some exports.
+    at the same rate as on the website. Not verified: which plans include it.
+    The help page contradicts itself: it says any Kapwing user can use it,
+    and also that it's for Pro, Business, and Enterprise and included in
+    paid subscriptions. The MCP page says all plans including
+    free, and the release notes say free accounts are blocked from some
+    exports.
 ---
 Kapwing, the browser-based video editor, now has an MCP server. Connect it to Claude or ChatGPT and you can ask the assistant to upload footage, caption it, translate or dub it, and hand you back an export, without opening the editor. Kapwing updated the connector's help page on November 5, so this is a good moment to look at what it actually does.
 
@@ -68,7 +71,7 @@ The connector first went out to a small group of testers at the end of September
 
 Setup is the usual custom connector routine. In Claude or ChatGPT, you add a connector, paste in Kapwing's server URL, and sign in to your Kapwing account. Kapwing says it's been built and tested for ChatGPT, Codex, and Claude, and recommends newer, stronger models.
 
-Once it's connected, the help page lists things like checking your recent projects and remaining AI credits, uploading files to your Media Library, adding subtitles, translating captions, dubbing audio into another language with voice cloning, and downloading your exported MP4s. Uploads are capped at 5GB through the uploader and 500MB from a URL.
+Once it's connected, the help page lists things like checking your recent projects and remaining AI credits, uploading files to your Media Library, adding subtitles, translating captions, dubbing audio into another language with voice cloning, auto-editing footage, syncing AI B-roll to a script or voiceover, and downloading your exported MP4s. Uploads are capped at 5GB through the uploader and 500MB from a URL.
 
 ## Why it matters for designers
 
@@ -78,7 +81,9 @@ It also fits a pattern we keep seeing: video and design tools are opening themse
 
 ## What to watch out for
 
-Kapwing's own pages don't agree with each other yet, so check before you plan around a feature. The help page updated November 5 still says the connector can't generate videos or edit projects with more than one asset, while the October 27 release notes describe adding both. It also says the connector isn't in ChatGPT's plugin library yet, while the release notes say it went live there on October 15. Who gets it is murky too: one page says all plans including free, another says Pro, Business, and Enterprise, and the release notes say free accounts are blocked from some exports, such as videos over four minutes.
+Kapwing's own pages don't agree with each other yet, so check before you plan around a feature. The help page updated November 5 still says the connector can't generate videos or edit projects with more than one asset, while the October 27 release notes describe adding both. It also says the connector isn't in ChatGPT's plugin library or Anthropic's Connectors Directory yet, while the release notes say it went live in ChatGPT's library on October 15. Who gets it is murky too: the help page says both any Kapwing user and Pro, Business, and Enterprise, the MCP page says all plans including free, and the release notes say free accounts are blocked from some exports, such as videos over four minutes.
+
+There are smaller limits too. The help page says the connector can only scan the five most recent projects in a workspace, and it can't rename projects or use your brand kit yet.
 
 The access is broad. The assistant can see and do whatever you can in Kapwing, across every workspace you're in, so if you share a workspace with clients, think about that before connecting it. Admins can switch MCP access off in workspace settings.
 
