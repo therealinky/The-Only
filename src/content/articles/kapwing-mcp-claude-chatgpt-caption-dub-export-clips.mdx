@@ -1,0 +1,85 @@
+---
+title: "Kapwing's MCP lets Claude or ChatGPT caption, dub, and export your clips"
+dek: >-
+  Kapwing now has an MCP server that hooks its video tools into Claude and
+  ChatGPT, so you can upload footage, add subtitles, translate, dub, and pull
+  an export from a chat. Its own help pages don't fully agree on what it can
+  do yet, or on who gets it.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-07
+updatedAt: 2026-11-07
+lastVerified: 2026-11-07
+disciplines:
+  - Motion & Video
+art: subtitles
+tools:
+  - Kapwing
+  - Claude
+  - ChatGPT
+sources:
+  - title: "About the Kapwing MCP (Kapwing Help Center, updated November 5, 2026)"
+    url: https://www.kapwing.com/help/about-the-kapwing-mcp/
+    accessed: 2026-11-07
+  - title: "Release Notes - Kapwing MCP (Kapwing Help Center)"
+    url: https://www.kapwing.com/help/release-notes-kapwing-mcp/
+    accessed: 2026-11-07
+  - title: Kapwing MCP
+    url: https://www.kapwing.com/mcp
+    accessed: 2026-11-07
+beforeYouUse:
+  clientData: >-
+    known: Kapwing says the connector signs in through your own Kapwing
+    account and gets the same access you have, including every workspace you
+    belong to and private folders like My Drafts, and its MCP page says
+    Kapwing doesn't share user data or use it to train AI models. Not
+    verified: how the chat app on the other end (Claude or ChatGPT) handles
+    transcripts, file names, or footage details that pass through the
+    conversation, which falls under that app's own terms.
+  usageRights: >-
+    not verified: Kapwing's MCP pages don't say anything specific about
+    rights to captions, dubs, or generated media made through the connector,
+    so assume its standard terms apply and check them before client work
+  disclosure: >-
+    not verified: nothing in Kapwing's MCP documentation addresses labeling
+    AI-dubbed audio or cloned voices, so follow your client's and platform's
+    rules, especially for voice clones
+  accessibility: >-
+    known: subtitles, transcription, and caption translation are core
+    features of the connector, and Kapwing's release notes say captions made
+    through it now appear in the rendered video. Not verified: how accurate
+    the transcripts are, so proofread captions before publishing.
+  cost: >-
+    known: Kapwing says there's no separate fee for the MCP, and that
+    dubbing, subtitles, and translation draw from your workspace's AI credits
+    at the same rate as on the website. Not verified: which plans include it,
+    since Kapwing's own pages variously say any user, all plans including
+    free, and Pro, Business, and Enterprise, and its release notes say free
+    accounts are blocked from some exports.
+---
+Kapwing, the browser-based video editor, now has an MCP server. Connect it to Claude or ChatGPT and you can ask the assistant to upload footage, caption it, translate or dub it, and hand you back an export, without opening the editor. Kapwing updated the connector's help page on November 5, so this is a good moment to look at what it actually does.
+
+## What changed
+
+The connector first went out to a small group of testers at the end of September. On October 12 Kapwing opened it to all users, and an October 27 update added prompt-based image and video generation and the ability to start edits from chat, including through the transcript and by positioning layers.
+
+Setup is the usual custom connector routine. In Claude or ChatGPT, you add a connector, paste in Kapwing's server URL, and sign in to your Kapwing account. Kapwing says it's been built and tested for ChatGPT, Codex, and Claude, and recommends newer, stronger models.
+
+Once it's connected, the help page lists things like checking your recent projects and remaining AI credits, uploading files to your Media Library, adding subtitles, translating captions, dubbing audio into another language with voice cloning, and downloading your exported MP4s. Uploads are capped at 5GB through the uploader and 500MB from a URL.
+
+## Why it matters for designers
+
+Captioning and versioning are the chores that eat a motion designer's afternoon. Most of the work isn't creative, it's taking one finished clip and making the subtitled version, the Spanish version, and the version with the burned-in captions for a client who won't turn them on. Handing that to an assistant in a chat window while you keep working on the next edit is a real time saver, and it reaches you through tools you may already have open.
+
+It also fits a pattern we keep seeing: video and design tools are opening themselves up to outside assistants instead of only building their own. If you already use Claude or ChatGPT for briefs and scripts, this lets the same conversation carry through to the deliverable.
+
+## What to watch out for
+
+Kapwing's own pages don't agree with each other yet, so check before you plan around a feature. The help page updated November 5 still says the connector can't generate videos or edit projects with more than one asset, while the October 27 release notes describe adding both. It also says the connector isn't in ChatGPT's plugin library yet, while the release notes say it went live there on October 15. Who gets it is murky too: one page says all plans including free, another says Pro, Business, and Enterprise, and the release notes say free accounts are blocked from some exports, such as videos over four minutes.
+
+The access is broad. The assistant can see and do whatever you can in Kapwing, across every workspace you're in, so if you share a workspace with clients, think about that before connecting it. Admins can switch MCP access off in workspace settings.
+
+Dubbing and translation spend the same AI credits as the website, and Kapwing notes that big uploads and frequent dubbing burn through them faster. In sandboxed setups like Claude's Cowork, Kapwing says uploads can fail with a blocked-egress error and suggests using its embedded uploader or giving the agent browser access instead. We haven't tried any of this ourselves, so treat the sidebar as a list of things to confirm first.

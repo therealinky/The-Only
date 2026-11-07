@@ -119,6 +119,7 @@ export const ART_MOTIFS = [
   'iconset',
   'flipbook',
   'offswitch',
+  'subtitles',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1489,6 +1490,20 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
     strokeTone: 0.9,
+  },
+
+  // A video frame with a play button and two subtitle bars along the
+  // bottom, plus a small AI sparkle: an agent captioning and dubbing clips.
+  subtitles: {
+    fills: [
+      outline(poly([40, 30, 40, 50, 58, 40]), 0.9),
+      outline(box(18, 60, 76, 65), 0.85),
+      outline(box(28, 72, 66, 77), 0.85),
+      outline(star4(90, 9, 8, 2.5), 0.6),
+    ],
+    strokes: [frame(6, 20, 88, 88)],
+    tones: [region(box(6, 20, 88, 88), 0.12)],
+    strokeTone: 0.8,
   },
 };
 
