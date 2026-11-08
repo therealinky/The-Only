@@ -8,7 +8,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-08
 updatedAt: 2026-11-08
@@ -58,7 +59,7 @@ beforeYouUse:
     while the FAQ says it isn't free. The open weights are free to download,
     but running them locally needs a large GPU or a cloud machine.
 ---
-Viggle has released Remake, a video-to-video tool that changes what's in a clip you already have. You upload footage, then ask in a chat for a different person, a new outfit, a swapped background, rain instead of sun, or a whole new style, and it re-renders the shot while keeping the original motion and sound. Viggle also put the model weights on Hugging Face, with ComfyUI support, so you can run it yourself if you have the hardware.
+Viggle released Remake on November 2, a video-to-video tool that changes what's in a clip you already have. You upload footage, then ask in a chat for a different person, a new outfit, a swapped background, rain instead of sun, or a whole new style, and it re-renders the shot while keeping the original motion and carrying the original sound over unchanged. Viggle also put the model weights on Hugging Face, with ComfyUI support, so you can run it yourself if you have the hardware.
 
 ## What changed
 
@@ -74,7 +75,7 @@ The edited-frames approach is also familiar ground for designers. You decide the
 
 ## What to watch out for
 
-The app version tops out at 720p, which is fine for drafts and some social posts but not for broadcast or a big screen. Viggle's own page also admits that chrome and glass come out looking approximate.
+The app version tops out at 720p, which is fine for drafts and some social posts but not for broadcast or a big screen. Viggle's own page also admits that chrome and glass come out looking approximate, and its FAQ says small text on new objects isn't reliable, so check any product labels or signage you swap in.
 
 Running it yourself is a big job. The model card says the full repository is about 210GB, and the full-quality route wants a single GPU with 80GB or more of memory. The compressed versions bring that down to cards with 12 to 24GB, at lower resolution and shorter clips. Each render covers a short window, with the project recommending up to about 12 seconds, so longer videos get split into pieces. The model card lists known weak spots too: non-human characters in long takes, small artifacts in fine detail, and drift across multi-shot clips. The release also comes with curated demos but no published quality comparisons against other tools.
 
