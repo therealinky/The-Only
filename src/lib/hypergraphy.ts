@@ -120,6 +120,7 @@ export const ART_MOTIFS = [
   'flipbook',
   'offswitch',
   'subtitles',
+  'recast',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1494,6 +1495,23 @@ const MOTIFS: Record<ArtMotif, Motif> = {
 
   // A video frame with a play button and two subtitle bars along the
   // bottom, plus a small AI sparkle: an agent captioning and dubbing clips.
+  // A video frame holding the same pose twice, dark original on the left
+  // and a pale replacement on the right, under a swap arrow: recasting the
+  // person in existing footage.
+  recast: {
+    fills: [
+      outline(circle(32, 44, 7), 0.85),
+      outline(poly([22, 56, 42, 56, 46, 80, 18, 80]), 0.85),
+      outline(circle(68, 44, 7), 0.3),
+      outline(poly([58, 56, 78, 56, 84, 80, 52, 80]), 0.3),
+    ],
+    strokes: [
+      frame(6, 26, 94, 88),
+      cubic({ x: 30, y: 18 }, { x: 40, y: 4 }, { x: 60, y: 4 }, { x: 70, y: 18 }, 20),
+      poly([63, 15, 70, 18, 71, 10]),
+    ],
+    tones: [],
+  },
   subtitles: {
     fills: [
       outline(poly([43, 30, 43, 50, 61, 40]), 0.9),

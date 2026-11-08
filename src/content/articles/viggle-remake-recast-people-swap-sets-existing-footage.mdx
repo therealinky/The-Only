@@ -1,0 +1,81 @@
+---
+title: "Viggle Remake recasts people and swaps sets in footage you already shot"
+dek: >-
+  Viggle's new video-to-video tool lets you chat your way to a different
+  actor, outfit, background, or weather in an existing clip, and the model
+  weights are out too. The app version is capped at 720p, and the open
+  version needs serious hardware and a careful read of its license.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-08
+updatedAt: 2026-11-08
+lastVerified: 2026-11-08
+disciplines:
+  - Motion & Video
+art: recast
+tools:
+  - Viggle
+  - ComfyUI
+sources:
+  - title: "Viggle Remake: Video to Video AI Agent (Viggle)"
+    url: https://viggle.ai/models/viggle-remake
+    accessed: 2026-11-08
+  - title: "Viggle/Viggle-Remake (Hugging Face model card)"
+    url: https://huggingface.co/Viggle/Viggle-Remake
+    accessed: 2026-11-08
+  - title: "Viggle Remake Reshoots Any Video With Two H3 LoRAs (ComfyUI Wiki, November 4, 2026)"
+    url: https://comfyui-wiki.com/en/news/2026-11-04-viggle-remake
+    accessed: 2026-11-08
+beforeYouUse:
+  clientData: >-
+    not verified: the Remake page doesn't say how uploaded footage is stored
+    or whether it's used for training, so check Viggle's privacy policy
+    before uploading client footage. Running the open weights yourself keeps
+    the footage on your own machine, but that takes much heavier hardware.
+  usageRights: >-
+    known: the open weights fall under the MiniMax H3 Community License,
+    which for commercial products asks you to show "MiniMax H3" prominently,
+    ship a copy of the license, and get written permission from MiniMax
+    above US$20 million in annual revenue. Not verified: what rights you
+    hold to clips made in the Viggle app, since the Remake page doesn't
+    cover it, so read Viggle's terms before using output in paid work.
+  disclosure: >-
+    known: the model card warns that the tool can put a real person's
+    likeness into footage without their consent, asks people not to do
+    that, and asks that AI-generated output be labeled. Only use it on
+    footage you have the rights to change, with permission from anyone you
+    recast.
+  accessibility: >-
+    not applicable: this is a footage editing tool, and its pages don't
+    describe any captioning or accessibility features.
+  cost: >-
+    known: Viggle's page says Remake comes with every paid plan, with Pro
+    listed at $7.99 a month billed yearly. Not verified: whether the free
+    plan can use it, because the pricing table lists Remake on the free tier
+    while the FAQ says it isn't free. The open weights are free to download,
+    but running them locally needs a large GPU or a cloud machine.
+---
+Viggle has released Remake, a video-to-video tool that changes what's in a clip you already have. You upload footage, then ask in a chat for a different person, a new outfit, a swapped background, rain instead of sun, or a whole new style, and it re-renders the shot while keeping the original motion and sound. Viggle also put the model weights on Hugging Face, with ComfyUI support, so you can run it yourself if you have the hardware.
+
+## What changed
+
+There are two ways in. The Viggle app version works like an agent: you drop in a clip between 5 and 60 seconds long and keep chatting to adjust the result. Viggle's page lists recasting one or more performers, swapping, removing, or adding objects, changing the set, the weather, or the time of day, and restyling the footage. Output is 720p at 24 frames per second, in 16:9 or 9:16, with the audio left exactly as recorded.
+
+The open release is a pair of add-ons (LoRAs) for MiniMax H3, a large video model. One handles swapping people and characters, the other handles everything else, like objects, backgrounds, weather, and light. Instead of describing a new face in text, you give it one to four still frames you've edited to show the new look, and those frames decide who and what appears. It comes with a ComfyUI node pack and workflows, smaller compressed files for cards with less memory, and an MCP server so coding agents like Claude Code can drive it.
+
+## Why it matters for designers
+
+Reshoots are expensive, and a lot of motion and social work is versioning the same shot: a different spokesperson for another market, a product swapped in for this season, a summer spot turned into a winter one. A tool that keeps the camera move and the performance but changes the cast or the set goes straight at that work.
+
+The edited-frames approach is also familiar ground for designers. You decide the look in a still, in whatever image tool you already use, and the model carries it through the motion. That's more control than hoping a text prompt lands on the right face.
+
+## What to watch out for
+
+The app version tops out at 720p, which is fine for drafts and some social posts but not for broadcast or a big screen. Viggle's own page also admits that chrome and glass come out looking approximate.
+
+Running it yourself is a big job. The model card says the full repository is about 210GB, and the full-quality route wants a single GPU with 80GB or more of memory. The compressed versions bring that down to cards with 12 to 24GB, at lower resolution and shorter clips. Each render covers a short window, with the project recommending up to about 12 seconds, so longer videos get split into pieces. The model card lists known weak spots too: non-human characters in long takes, small artifacts in fine detail, and drift across multi-shot clips. The release also comes with curated demos but no published quality comparisons against other tools.
+
+Check the license and the pricing before client work. The open weights carry MiniMax's community license, which has its own conditions for commercial use, and Viggle's pricing page and FAQ disagree about whether free accounts get Remake at all. And this is exactly the kind of tool that can put someone into footage they never agreed to be in, so stick to footage you own and people who've said yes. We haven't tried any of this ourselves, so treat the sidebar as a list of things to confirm first.
