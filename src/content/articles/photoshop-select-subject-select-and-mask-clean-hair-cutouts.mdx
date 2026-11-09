@@ -1,0 +1,124 @@
+---
+title: "Getting clean hair cutouts out of Photoshop's Select Subject and Select and Mask"
+dek: >-
+  One click gets you most of a portrait cutout. The hair is where it falls
+  apart. Pulling together Adobe's documentation and several independent
+  tutorials, here's how to choose between Cloud and Device, refine the edge
+  without turning hair into a helmet, and deal with the color fringe that's
+  usually left behind.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-09
+updatedAt: 2026-11-09
+lastVerified: 2026-11-09
+disciplines:
+  - Photo & Imaging
+art: hairmask
+tools:
+  - Adobe Photoshop
+sources:
+  - title: "Improve hair selections with the Refine Hair tool (Adobe Photoshop Help, updated February 23, 2026)"
+    url: https://helpx.adobe.com/photoshop/desktop/make-selections/automatic-color-based-selections/make-improved-hair-selections.html
+    accessed: 2026-11-09
+  - title: "Refine your selection and mask (Adobe Photoshop Help, updated February 23, 2026)"
+    url: https://helpx.adobe.com/photoshop/desktop/make-selections/refine-modify-selections/refine-your-selection-and-mask.html
+    accessed: 2026-11-09
+  - title: "Use Enhance edge to refine masks (Adobe Photoshop Help, updated October 5, 2026)"
+    url: https://helpx.adobe.com/photoshop/desktop/create-masks/layer-masks/use-enhance-edge-to-refine-masks.html
+    accessed: 2026-11-09
+  - title: "Select Subject's New Cloud Option in Photoshop 2022, by Steve Patterson (Photoshop Essentials)"
+    url: https://www.photoshopessentials.com/basics/select-subjects-powerful-new-cloud-option-in-photoshop-2022/
+    accessed: 2026-11-09
+  - title: "How to use Select and Mask in Photoshop. Refine edges on every cutout, by Colin Smith (PhotoshopCAFE)"
+    url: https://photoshopcafe.com/how-to-use-select-and-mask-in-photoshop-refine-edges-on-every-cutout/
+    accessed: 2026-11-09
+  - title: "How to Use Cloud Processing with Select Subject in Photoshop, by Aaron Nace (PHLEARN, May 22, 2025)"
+    url: https://phlearn.com/tutorial/photoshop-2025-updated-select-subject-tool/
+    accessed: 2026-11-09
+  - title: "Photoshop's New On-Device Select Subject Tool Matches Cloud Quality, by Enrique Flouret (Photoshop Roadmap, September 11, 2025)"
+    url: https://www.photoshoproadmap.com/photoshops-new-on-device-select-subject-tool-matches-cloud-quality/
+    accessed: 2026-11-09
+  - title: "Transforming a Photo Background with Photoshop, by Dan Rodney (VDCI, October 12, 2025)"
+    url: https://vdci.edu/learn/photoshop/transform-photo-background
+    accessed: 2026-11-09
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's documentation and several
+    independent tutorials on cutting out hair with Select Subject and the
+    Select and Mask workspace, plus Adobe's newer, credit-based Enhance
+    edge option for cleaning up a mask.
+  whyItMatters: >-
+    Portrait and product-with-model cutouts are everyday work for
+    compositing, ads, and social graphics, and the hair edge is what gives
+    a cutout away. The tools are good, but the sources disagree on how to
+    use them, and the defaults rarely finish the job.
+  bestFor: >-
+    Designers and photographers putting people onto new backgrounds for
+    composites, ads, thumbnails, and layouts, especially with flyaway or
+    curly hair.
+  timeToTry: >-
+    Fifteen to thirty minutes to work through one portrait carefully. After
+    that, a few minutes per image for most shots, longer for wispy hair on
+    busy backgrounds.
+beforeYouUse:
+  clientData: >-
+    known: several of the tutorials note that Select Subject's Cloud option
+    needs an internet connection because the processing happens on Adobe's
+    servers, while Device mode runs on your computer. Not verified: what
+    Adobe keeps from an image sent for Cloud processing. For files under
+    NDA, Device mode keeps the image local.
+  usageRights: >-
+    not applicable: Select Subject and Select and Mask make a selection
+    from your own image rather than generating new pixels, so the rights
+    are whatever you already hold for the photo.
+  disclosure: >-
+    not verified: whether Enhance edge, which uses generative credits,
+    adds Content Credentials or an AI label to the file. If a client or
+    competition has rules about AI processing, track it yourself.
+  accessibility: >-
+    not applicable: this is an image editing technique, not a published
+    interface or document.
+  cost: >-
+    known: PHLEARN's tutorial says Select Subject's Cloud option doesn't
+    use generative credits. Adobe's help page says each use of Enhance edge
+    consumes 20 generative credits.
+---
+Select Subject gets you most of the way through a portrait cutout in one click, and then you zoom in on the hair. This workflow pulls together Adobe's own documentation and several independent tutorials, plus general Photoshop know-how, into one approach for getting that edge right. It's synthesized from published sources, not something we've tested end to end ourselves.
+
+1. **Pick Cloud or Device before you start.** With the Object Selection tool active, the arrow next to Select Subject lets you choose Device or Cloud, and you can set the default in Photoshop's Image Processing preferences. Device is faster and keeps the file on your computer. Cloud takes a few seconds longer and needs a connection. Older tests found Cloud better overall, but not by much on hair, and a 2025 report says the newer on-device version now rivals it. One 2025 tutorial even found Device sometimes handles hair more cleanly. The sources do agree on one thing: neither always wins, so on a hard image, run both and compare.
+
+2. **Judge the starting point on the right background.** Open Select and Mask and cycle the View modes (press F) until you find one that shows the problem. On Black and On White reveal light halos and dark fringes, and Black and White shows the mask itself. The most useful habit across the sources is to preview against something close to your final background, because a halo that's invisible on white jumps out on a dark one.
+
+3. **Switch Refine Mode to Object Aware.** Adobe describes Color Aware as best for high-contrast or simple backgrounds and Object Aware as best for hair, fur, and complex backgrounds. If the subject was shot on a clean studio backdrop, try both.
+
+4. **Run Refine Hair, then brush the edge yourself.** Refine Hair widens the edge area around the hair and recalculates it, which gets you a head start. The sources agree it rarely finishes the job. Go over the hairline with the Refine Edge Brush, covering a little of the hair and a little of the background on both sides of the edge, so Photoshop has the full transition to work with. A smaller brush works better in tight spots, and Edge Detection's radius setting controls how wide an edge Photoshop analyzes everywhere else.
+
+5. **Go easy on the Global Refinements.** This is where the sources split. One approach uses a little Shift Edge to pull the edge in, a touch of Feather, and only a small amount of Smooth. Another warns that even one global slider can make hair look stiff and helmet-like, and keeps them for smooth edges only. Both can be right, since the sliders affect the whole selection at once. A practical middle path: leave Global Refinements at or near zero while you work on the hair, and fix smooth edges like shoulders and clothing separately (see the next step).
+
+6. **Output soft and hard versions if one setting won't do both.** Use Output To with New Layer with Layer Mask so nothing is destroyed. If the hair needs a soft edge and the shoulders need a crisp one, output twice with different settings, then mask the two layers together so each part uses the version that suits it. Saving the selection as a channel (Select, then Save Selection) before you experiment gives you something to fall back on.
+
+7. **Deal with the color fringe last.** Hair shot against a colored background usually carries a bit of that color at the edges. In Select and Mask, Decontaminate Colors replaces those fringe colors with nearby subject colors. Lower its Amount if the edges start looking flat, and note that it changes pixels, so it outputs to a new layer rather than just a mask. Outside Select and Mask, a common fix is to paint over the fringe with the real hair color on a clipped layer set to the Hue blend mode. Adobe's newer Enhance edge, run on a layer mask from the Contextual Task Bar, also removes leftover background color from mask edges, at 20 generative credits per use, and Adobe says it works best on high-contrast backgrounds.
+
+8. **Check at 100% and decide how good is good enough.** Zoom in on the hairline against the final background. For a small social graphic, a few stray pixels won't show. For a print composite, budget time for hand cleanup, and for patching a thin or broken hairline from a cleaner section of hair.
+
+## Why it matters for designers
+
+A cutout is only as convincing as its edge, and hair is the edge everyone notices. A clean selection is the difference between a composite that looks like one photo and one that looks pasted together, whether it's an ad, a YouTube thumbnail, or a team page with everyone on the same brand color.
+
+The disagreements between sources are useful. The Cloud versus Device question has changed over time, which is why older tutorials and newer reports point in different directions. The global sliders work well on smooth edges and badly on hair, which is why two tutorials give opposite advice and are both describing real results. Knowing why they disagree means you can make the call per image instead of following one recipe.
+
+There's also a choice between free and paid. Most of this workflow costs nothing beyond your subscription, while Enhance edge spends generative credits each time. It's worth trying the free tools first and saving Enhance edge for the shots that really need it.
+
+## What to watch out for
+
+Results change as Adobe updates the models. A comparison from a year or two ago may not match what your version of Photoshop does today, so test on your own images instead of trusting an old verdict.
+
+Watch for Refine Hair creeping onto areas like the forehead or a collar, and for heavy Feather or Smooth softening corners and adding halos. Check the whole subject, not just the hair.
+
+Cloud processing sends the image to Adobe's servers. For confidential shoots, stick to Device mode, which several sources say holds up much better than it used to.
+
+Decontaminate Colors and Enhance edge both change what you see at the edges, and neither can bring back hair the camera didn't capture against a busy background. When the hair is really lost, painting or patching by hand is still part of the job.
