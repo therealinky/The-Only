@@ -121,6 +121,8 @@ export const ART_MOTIFS = [
   'offswitch',
   'subtitles',
   'recast',
+  'cliplength',
+  'hairmask',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1523,6 +1525,36 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [frame(8, 20, 92, 88)],
     tones: [region(box(8, 20, 92, 88), 0.12)],
     strokeTone: 0.8,
+  },
+
+  // A video frame with a play button above a duration slider, its knob
+  // pushed out to the far end of the track: a longer AI video clip.
+  cliplength: {
+    fills: [outline(poly([42, 26, 42, 50, 62, 38]), 0.9), outline(box(10, 81, 72, 87), 0.6), outline(circle(84, 84, 7), 0.95)],
+    strokes: [frame(8, 8, 92, 68)],
+    tones: [region(box(8, 8, 92, 68), 0.12)],
+    strokeTone: 0.8,
+  },
+
+  // A head and shoulders cut out against a checkered transparent
+  // background, with loose strands of hair flying off to each side: a
+  // clean hair selection.
+  hairmask: {
+    fills: [outline(circle(50, 44, 15), 0.85), outline(poly([24, 92, 30, 70, 70, 70, 76, 92]), 0.85)],
+    strokes: [
+      cubic({ x: 40, y: 32 }, { x: 30, y: 18 }, { x: 20, y: 24 }, { x: 10, y: 14 }, 20),
+      cubic({ x: 37, y: 42 }, { x: 26, y: 40 }, { x: 18, y: 50 }, { x: 8, y: 46 }, 20),
+      cubic({ x: 60, y: 32 }, { x: 70, y: 18 }, { x: 80, y: 24 }, { x: 90, y: 14 }, 20),
+      cubic({ x: 63, y: 42 }, { x: 74, y: 40 }, { x: 82, y: 50 }, { x: 92, y: 46 }, 20),
+      cubic({ x: 50, y: 29 }, { x: 52, y: 18 }, { x: 46, y: 12 }, { x: 50, y: 4 }, 16),
+    ],
+    tones: [
+      region(box(0, 60, 16, 76), 0.3),
+      region(box(84, 60, 100, 76), 0.3),
+      region(box(0, 84, 12, 100), 0.3),
+      region(box(88, 84, 100, 100), 0.3),
+    ],
+    strokeTone: 0.95,
   },
 };
 
