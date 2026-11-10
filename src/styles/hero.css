@@ -178,35 +178,63 @@ main > .page-hero:first-child {
   }
 }
 
-/* The frosted panel is drawn by ::before so it can run past the text to
-   the hero's bottom edge and fade out there (tint, blur, and side outlines
-   together), meeting the page instead of ending in a bottom border. */
+/* The frosted panel is its own layer (.page-hero__glass-fill) so it can grow
+   past the text box. At rest it sits exactly behind the subtitle, running
+   down to the hero's bottom edge and fading out there. PageHero's script
+   sets --glass-p (0 to 1, spring-smoothed from scroll) and the panel's
+   starting rectangle (--glass-x/-y/-r); every edge interpolates from that
+   rectangle to the full hero, with the corners, outline, and bottom fade
+   easing away so it ends as a seamless full-width wash. */
+@property --glass-p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.page-hero {
+  --glass-p: 0;
+  --glass-x: 0px;
+  --glass-y: 0px;
+  --glass-r: 0px;
+}
+
 .page-hero__glass {
   position: relative;
   max-width: 34rem;
   padding: var(--space-4) var(--space-5);
 }
 
-.page-hero__glass::before {
-  content: '';
+.page-hero__glass-fill {
   position: absolute;
-  inset: 0 0 calc(-1 * var(--space-8)) 0;
-  z-index: -1;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 2;
+  top: calc(var(--glass-y) * (1 - var(--glass-p)));
+  left: calc(var(--glass-x) * (1 - var(--glass-p)));
+  right: calc(var(--glass-r) * (1 - var(--glass-p)));
+  bottom: 0;
+  border-radius: calc(var(--radius-lg) * (1 - var(--glass-p))) calc(var(--radius-lg) * (1 - var(--glass-p))) 0 0;
   background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, calc(0.28 * (1 - var(--glass-p))));
   border-bottom: 0;
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
-  mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  backdrop-filter: blur(calc(20px + 8px * var(--glass-p))) saturate(160%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(30% + 70% * var(--glass-p)),
+    transparent calc(92% + 8% * var(--glass-p))
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 calc(30% + 70% * var(--glass-p)),
+    transparent calc(92% + 8% * var(--glass-p))
+  );
   pointer-events: none;
+  will-change: top, left, right;
 }
 
 /* The home hero's panel gets a muted tint (#999b72, a sage with some of the
    hero's rose mixed in). Over the purple gradient the green and purple
    partly cancel, so it reads as a soft, dusty lavender: neutral, with just
    enough pink to sit with the gradient's pink corner. */
-.page-hero--purple .page-hero__glass::before {
+.page-hero--purple .page-hero__glass-fill {
   background:
     linear-gradient(
       color-mix(in srgb, #999b72 22%, transparent),
@@ -218,7 +246,7 @@ main > .page-hero:first-child {
 /* Older Safari's prefixed blur; see .site-header-float in global.css for
    why it's in its own block. */
 @supports not (backdrop-filter: blur(1px)) {
-  .page-hero__glass::before {
+  .page-hero__glass-fill {
     -webkit-backdrop-filter: blur(20px) saturate(160%);
   }
 }
