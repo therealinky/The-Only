@@ -29,10 +29,10 @@ const [hueA, hueB] = GRADIENT_PAIRS[artGradientVariant(article.id)];
     {data.status === 'draft' && <span class="badge badge--draft">Draft</span>}
   </div>
   <h2><a class="article-card__link" href={`/articles/${article.id}/`}>{data.title}</a></h2>
-  <p>{data.dek}</p>
-  <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
   <p class="article-card__date">
     <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
     <span class="article-card__date-readtime">{' '}· {readingTime} min read</span>
   </p>
+  <p>{data.dek}</p>
+  <p class="article-card__disciplines">{data.disciplines.join(', ')}</p>
 </article>

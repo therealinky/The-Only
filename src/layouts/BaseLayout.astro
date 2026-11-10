@@ -62,6 +62,80 @@ const structuredDataList = structuredData
         }, 3000);
       }
     </script>
+    <script is:inline>
+      // Page transitions (the CSS opt-in is the inline <style> just below). The browser
+      // cross-fades the whole page; these hooks add the two touches CSS alone
+      // can't: the clicked card's art morphing into the article's banner, and
+      // the header staying put. Two elements with the same name on a page cancel
+      // the whole transition, so only the clicked card gets the name here (and
+      // the article page's own banner gives it up when leaving to another one).
+      window.addEventListener('pageswap', function (e) {
+        if (!e.viewTransition) return;
+        var header = document.querySelector('.site-header');
+        if (header && window.scrollY > header.offsetHeight) {
+          header.style.viewTransitionName = 'none';
+        }
+        var to = e.activation && e.activation.entry && e.activation.entry.url;
+        if (!to) return;
+        var path = new URL(to).pathname;
+        if (path.indexOf('/articles/') !== 0) return;
+        var link = document.querySelector('.article-card__link[href="' + path + '"]');
+        var art = link && link.closest('.article-card') && link.closest('.article-card').querySelector('.article-card__art');
+        if (art) {
+          art.style.viewTransitionName = 'article-art';
+          var banner = document.querySelector('.hg-art');
+          if (banner) banner.style.viewTransitionName = 'none';
+        }
+      });
+    </script>
+    <!-- Page transitions: cross-fade between pages, header held in place, a
+         clicked card's art morphing into the article's banner (names are set by
+         the script above and the .hg-art rule below). Inline so it is in the first render of every page:
+         the browser decides whether to transition before bundled CSS arrives.
+         Browsers without support navigate normally; reduced motion opts out. -->
+    <style is:inline>
+      @media (prefers-reduced-motion: no-preference) {
+        @view-transition {
+          navigation: auto;
+        }
+
+        .site-header {
+          view-transition-name: site-header;
+        }
+
+        /* One banner per article page, so a fixed name is safe. */
+        .hg-art {
+          view-transition-name: article-art;
+        }
+
+        ::view-transition-group(root) {
+          animation-duration: 260ms;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        ::view-transition-group(article-art) {
+          animation-duration: 520ms;
+          animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 5;
+        }
+
+        /* Crop rather than stretch while the square list thumbnails grow into the
+           wide banner. */
+        ::view-transition-old(article-art),
+        ::view-transition-new(article-art) {
+          height: 100%;
+          object-fit: cover;
+        }
+
+        ::view-transition-group(site-header) {
+          animation-duration: 0s;
+        }
+      }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="-vO2BxmBrhJbNCj5xhP-5m4M4ye1f6TYX6CA9ADlAjg" />
     <title>{pageTitle}</title>

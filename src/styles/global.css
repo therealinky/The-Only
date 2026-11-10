@@ -1320,7 +1320,7 @@ main {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   color: var(--color-text-muted);
-  margin-block-end: 0;
+  margin-block-end: var(--space-2);
 }
 
 /* ---------- Badges ---------- */
