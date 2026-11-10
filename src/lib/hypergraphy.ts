@@ -123,6 +123,8 @@ export const ART_MOTIFS = [
   'recast',
   'cliplength',
   'hairmask',
+  'onecanvas',
+  'stylerange',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1549,6 +1551,52 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
     strokeTone: 0.95,
+  },
+
+  // One big canvas holding four kinds of work at once: a vector curve with
+  // anchor points, a small shaded cube, a play button, and a photo with a
+  // mountain: raster, vector, motion, and 3D on a single canvas.
+  onecanvas: {
+    fills: [
+      outline(box(13, 23, 19, 29), 0.95),
+      outline(box(38, 15, 44, 21), 0.95),
+      outline(poly([60, 16, 60, 40, 80, 28]), 0.9),
+      outline(poly([58, 86, 70, 66, 78, 76, 82, 70, 88, 86]), 0.85),
+    ],
+    strokes: [
+      frame(4, 4, 96, 96),
+      cubic({ x: 16, y: 26 }, { x: 22, y: 6 }, { x: 34, y: 38 }, { x: 41, y: 18 }, 20),
+      poly([28, 52, 40, 59, 40, 81, 28, 88, 16, 81, 16, 59, 28, 52]),
+      poly([28, 66, 40, 59]),
+      poly([28, 66, 16, 59]),
+      poly([28, 66, 28, 88]),
+      frame(54, 56, 92, 90),
+    ],
+    tones: [region(poly([16, 59, 28, 66, 28, 88, 16, 81]), 0.4), region(poly([28, 66, 40, 59, 40, 81, 28, 88]), 0.75)],
+    strokeTone: 0.9,
+  },
+
+  // The same sunset photo three times, each a step darker and moodier, over
+  // a style slider with its knob partway along: one prompt-based edit turned
+  // into an adjustable range of looks.
+  stylerange: {
+    fills: [
+      outline(wedge(18, 46, 0, 7, Math.PI, 2 * Math.PI), 0.9),
+      outline(wedge(50, 46, 0, 7, Math.PI, 2 * Math.PI), 0.9),
+      outline(wedge(82, 46, 0, 7, Math.PI, 2 * Math.PI), 0.9),
+      outline(box(8, 79, 92, 83), 0.5),
+      outline(circle(50, 81, 7), 0.95),
+    ],
+    strokes: [
+      frame(6, 24, 30, 62),
+      frame(38, 24, 62, 62),
+      frame(70, 24, 94, 62),
+      poly([6, 47, 30, 47]),
+      poly([38, 47, 62, 47]),
+      poly([70, 47, 94, 47]),
+    ],
+    tones: [region(box(6, 24, 30, 62), 0.1), region(box(38, 24, 62, 62), 0.35), region(box(70, 24, 94, 62), 0.6)],
+    strokeTone: 0.85,
   },
 };
 
