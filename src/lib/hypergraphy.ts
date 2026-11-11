@@ -1600,6 +1600,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     tones: [region(box(6, 24, 30, 62), 0.1), region(box(38, 24, 62, 62), 0.35), region(box(70, 24, 94, 62), 0.6)],
     strokeTone: 0.85,
   },
+
   // Three film frames in a row, each with a dashed square around a shaded
   // blob that drifts across them: a mask tracked through a shot.
   maskfollow: {
@@ -1614,6 +1615,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [region(circle(19, 44, 4), 0.85), region(circle(50, 50, 4), 0.85), region(circle(81, 56, 4), 0.85)],
   },
+
   // A monitor holding stacked layers, linked by a dashed line to a small
   // speech bubble: an outside agent working in a local app's files.
   deskagent: {
@@ -1625,9 +1627,9 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       frame(14, 44, 40, 56),
       frame(22, 52, 48, 64),
       frame(30, 60, 56, 72),
-      poly([68, 59, 72, 59]), poly([76, 59, 80, 59]),
+      poly([64, 59, 68, 59]), poly([72, 59, 76, 59]),
       frame(72, 12, 94, 32),
-      poly([78, 32, 78, 38]),
+      poly([78, 32, 78, 59]),
     ],
     tones: [region(box(30, 60, 56, 72), 0.5), region(box(72, 12, 94, 32), 0.2)],
   },
