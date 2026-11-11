@@ -125,6 +125,8 @@ export const ART_MOTIFS = [
   'hairmask',
   'onecanvas',
   'stylerange',
+  'maskfollow',
+  'deskagent',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1597,6 +1599,37 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [region(box(6, 24, 30, 62), 0.1), region(box(38, 24, 62, 62), 0.35), region(box(70, 24, 94, 62), 0.6)],
     strokeTone: 0.85,
+  },
+  // Three film frames in a row, each with a dashed square around a shaded
+  // blob that drifts across them: a mask tracked through a shot.
+  maskfollow: {
+    fills: [],
+    strokes: [
+      frame(6, 30, 32, 70),
+      frame(37, 30, 63, 70),
+      frame(68, 30, 94, 70),
+      poly([11, 38, 11, 42]), poly([11, 46, 11, 50]), poly([27, 38, 27, 42]), poly([27, 46, 27, 50]),
+      poly([42, 44, 42, 48]), poly([42, 52, 42, 56]), poly([58, 44, 58, 48]), poly([58, 52, 58, 56]),
+      poly([73, 50, 73, 54]), poly([73, 58, 73, 62]), poly([89, 50, 89, 54]), poly([89, 58, 89, 62]),
+    ],
+    tones: [region(circle(19, 44, 4), 0.85), region(circle(50, 50, 4), 0.85), region(circle(81, 56, 4), 0.85)],
+  },
+  // A monitor holding stacked layers, linked by a dashed line to a small
+  // speech bubble: an outside agent working in a local app's files.
+  deskagent: {
+    fills: [],
+    strokes: [
+      frame(8, 38, 62, 80),
+      poly([35, 80, 35, 90]),
+      poly([22, 90, 48, 90]),
+      frame(14, 44, 40, 56),
+      frame(22, 52, 48, 64),
+      frame(30, 60, 56, 72),
+      poly([68, 59, 72, 59]), poly([76, 59, 80, 59]),
+      frame(72, 12, 94, 32),
+      poly([78, 32, 78, 38]),
+    ],
+    tones: [region(box(30, 60, 56, 72), 0.5), region(box(72, 12, 94, 32), 0.2)],
   },
 };
 
