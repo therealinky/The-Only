@@ -1,6 +1,15 @@
 ---
 import { NEWSLETTER } from '../config/site';
 
+interface Props {
+  // "full" is the card on The Brief page. "compact" is the slimmer strip used
+  // on the homepage and under articles.
+  variant?: 'full' | 'compact';
+}
+
+const { variant = 'full' } = Astro.props;
+const compact = variant === 'compact';
+
 // Hidden entirely — no markup rendered at all — until NEWSLETTER_PROVIDER is
 // set to "buttondown" (see .env.example). Only
 // Buttondown is wired up; a different provider would need its own branch
@@ -10,9 +19,18 @@ const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondo
 
 {
   isButtondown && (
-    <section aria-labelledby="newsletter-heading" class="newsletter-signup">
-      <h2 id="newsletter-heading">Get The Brief by email</h2>
-      <p>Every Wednesday, a short summary of the most interesting stories from the past seven days.</p>
+    <section
+      aria-labelledby="newsletter-heading"
+      class:list={['newsletter-signup', compact && 'newsletter-signup--compact']}
+    >
+      <div class="newsletter-signup__copy">
+        <h2 id="newsletter-heading">Get The Brief by email</h2>
+        <p>
+          {compact
+            ? "Every Wednesday, a short summary of the week's most interesting stories."
+            : 'Every Wednesday, a short summary of the most interesting stories from the past seven days.'}
+        </p>
+      </div>
       <form
         action={`https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER.buttondownUsername}`}
         method="post"

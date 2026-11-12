@@ -1854,6 +1854,37 @@ img.media__frame {
   font-weight: 600;
 }
 
+/* Compact strip: copy on the left, form on the right, archive link tucked
+   underneath. Static on purpose: no hover color shifts or motion. */
+.newsletter-signup--compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--space-5);
+  row-gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+}
+
+.newsletter-signup--compact h2 {
+  margin-block: 0 var(--space-1);
+  font-size: var(--text-base);
+}
+
+.newsletter-signup--compact .newsletter-signup__copy p {
+  margin: 0;
+}
+
+.newsletter-signup--compact .newsletter-signup__archive {
+  grid-column: 1 / -1;
+  margin-block: 0;
+}
+
+@media (max-width: 40rem) {
+  .newsletter-signup--compact {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Keep reading (related articles under each article) ---------- */
 
 .keep-reading {

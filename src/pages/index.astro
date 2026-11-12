@@ -1,5 +1,6 @@
 ---
 import ArticleListing from '../components/ArticleListing.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 import PageHero from '../components/PageHero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config/site';
@@ -31,6 +32,7 @@ const eyebrow = lastUpdated
     subtitle={SITE.description}
     variant="purple"
   />
+  <NewsletterSignup variant="compact" />
   <p><a href="/search/">Search all articles</a></p>
   <ArticleListing articles={articles} allHref="/" disciplineBase="/discipline/" pageSize={9} />
 </BaseLayout>

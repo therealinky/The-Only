@@ -7,6 +7,7 @@ import EvidenceBadge from '../../components/EvidenceBadge.astro';
 import FormatBadge from '../../components/FormatBadge.astro';
 import HypergraphicArt from '../../components/HypergraphicArt.astro';
 import Media from '../../components/Media.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import SourcesList from '../../components/SourcesList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getRelatedArticles, getRenderableArticles } from '../../lib/articles';
@@ -135,6 +136,8 @@ const structuredData = {
       )
     }
   </article>
+
+  {!isWithdrawn && <NewsletterSignup variant="compact" />}
 
   {
     related.length > 0 && (
