@@ -127,6 +127,7 @@ export const ART_MOTIFS = [
   'stylerange',
   'maskfollow',
   'deskagent',
+  'clickpick',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1614,6 +1615,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([73, 50, 73, 54]), poly([73, 58, 73, 62]), poly([89, 50, 89, 54]), poly([89, 58, 89, 62]),
     ],
     tones: [region(circle(19, 44, 4), 0.85), region(circle(50, 50, 4), 0.85), region(circle(81, 56, 4), 0.85)],
+  },
+
+  // A photo frame holding a shaded object with a selection outline hugging
+  // it, and a mouse pointer clicking it: select an object with one click.
+  clickpick: {
+    fills: [],
+    strokes: [
+      frame(6, 12, 94, 88),
+      closeLoop(ellipse(44, 52, 24, 20)),
+      poly([68, 56, 68, 82, 74, 76, 79, 87, 83, 85, 78, 74, 86, 74, 68, 56]),
+    ],
+    tones: [region(ellipse(44, 52, 16, 12), 0.6), region(box(6, 76, 94, 88), 0.15)],
   },
 
   // A monitor holding stacked layers, linked by a dashed line to a small
