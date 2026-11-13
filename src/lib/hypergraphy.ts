@@ -128,6 +128,7 @@ export const ART_MOTIFS = [
   'maskfollow',
   'deskagent',
   'clickpick',
+  'pipeline',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1148,6 +1149,23 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     tones: [region(wedge(50, 58, 0, 36, -Math.PI / 2, -Math.PI / 2 + Math.PI / 3), 0.35)],
   },
   // A color wheel: eight wedges, light to dark, between two rings.
+  // A start point that splits into two parallel steps which rejoin into one
+  // result: a node-graph pipeline, one input feeding two branches and one output.
+  pipeline: {
+    fills: [
+      outline(box(36, 12, 60, 34), 0.35),
+      outline(box(36, 66, 60, 88), 0.35),
+      outline(box(78, 38, 94, 62), 0.6),
+      dot(10, 50, 3.4),
+    ],
+    strokes: [
+      poly([14, 50, 24, 50, 24, 23, 36, 23]),
+      poly([24, 50, 24, 77, 36, 77]),
+      poly([60, 23, 69, 23, 69, 50, 78, 50]),
+      poly([60, 77, 69, 77, 69, 50]),
+    ],
+    tones: [],
+  },
   wheel: {
     fills: [],
     strokes: [
