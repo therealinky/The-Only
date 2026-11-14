@@ -1,0 +1,72 @@
+---
+title: "Figma adds 3D transform, so layers can rotate on all three axes"
+dek: >-
+  A November 12 release note says a new effect lets you rotate objects along
+  the x, y, and z axes, with on-canvas handles. It also mentions the Figma
+  agent and Figma Motion, so it reaches past static mockups.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-14
+updatedAt: 2026-11-14
+lastVerified: 2026-11-14
+disciplines:
+  - UI/UX
+  - Motion & Video
+art: tilt3d
+tools:
+  - Figma
+  - Figma Motion
+sources:
+  - title: "3D transform (Figma release notes, November 12, 2026)"
+    url: https://www.figma.com/release-notes/
+    accessed: 2026-11-14
+  - title: "Introducing Figma Motion: Your canvas now has a timeline (Figma Blog)"
+    url: https://www.figma.com/blog/introducing-figma-motion/
+    accessed: 2026-11-14
+beforeYouUse:
+  clientData: >-
+    not applicable: 3D transform is a layer effect, and the release note
+    doesn't describe any data leaving your file. If you hand a design to the
+    Figma agent or send it through the Figma MCP, check Figma's terms for
+    what that shares.
+  usageRights: >-
+    not applicable: this changes how you transform your own layers. It
+    doesn't generate new imagery.
+  disclosure: >-
+    not applicable: nothing in the release note involves generated content
+    that would need flagging.
+  accessibility: >-
+    not verified: the note doesn't say how rotated or animated layers behave
+    for people who prefer reduced motion. If you animate flips and turns,
+    plan for that yourself.
+  cost: >-
+    not verified: the release note doesn't say which plans or seats get 3D
+    transform, or whether using the Figma agent to build 3D designs draws on
+    AI credits.
+---
+Figma has added a 3D transform effect. The short version from the release note: you can now tip a layer back in space instead of only spinning it flat. This is based on Figma's own release note, and we haven't tried it ourselves.
+
+## What changed
+
+The note, dated November 12, 2026, says that with 3D transform you can "rotate objects along the x, y, and z axes." It describes on-canvas rotation handles with a live preview, and controls for perspective and depth when you're building a 3D scene.
+
+It also names a few connections. It says the effect pairs with Figma Motion for animating flips and turns. It says you can copy CSS from Dev Mode or send a design to a coding agent through the Figma MCP. And it says you can let the Figma agent compose 3D designs for you.
+
+The note doesn't say which plans get it, and it lists no limitations. It also doesn't say whether the agent route is any different in cost from other agent work.
+
+## Why it matters for designers
+
+Fake depth has been a chore in Figma for a long time. Card flips, tilted device mockups, and perspective hero shots usually meant a plugin, a trip to another tool, or a pre-rendered image. Doing it with a handle on the canvas, and with a live preview, should make small touches like a tilted product card much faster to try.
+
+The Motion and CSS mentions are the interesting part for UI work. A flip you animate in Figma Motion, and a transform you can copy out of Dev Mode, are closer to what a developer actually builds than a flattened image of the same thing.
+
+## What to watch out for
+
+A transform that looks right in Figma still has to be built in code, and the note doesn't say how closely the copied CSS matches what you see on the canvas. Check it in a real browser before you promise a client the exact same tilt.
+
+Perspective can also cost legibility. Text that's rotated off-axis is harder to read, so look at it at actual size before you commit.
+
+Finally, if you use the Figma agent to compose 3D designs, treat the result as a starting point and inspect each layer. The sidebar lists what we couldn't confirm.
