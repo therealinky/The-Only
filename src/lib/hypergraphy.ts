@@ -1148,7 +1148,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [region(wedge(50, 58, 0, 36, -Math.PI / 2, -Math.PI / 2 + Math.PI / 3), 0.35)],
   },
-  // A color wheel: eight wedges, light to dark, between two rings.
+
   // A start point that splits into two parallel steps which rejoin into one
   // result: a node-graph pipeline, one input feeding two branches and one output.
   pipeline: {
@@ -1166,6 +1166,8 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
   },
+
+  // A color wheel: eight wedges, light to dark, between two rings.
   wheel: {
     fills: [],
     strokes: [
