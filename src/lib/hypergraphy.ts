@@ -129,6 +129,8 @@ export const ART_MOTIFS = [
   'deskagent',
   'clickpick',
   'pipeline',
+  'tilt3d',
+  'blemishfix',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1665,6 +1667,26 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([78, 32, 78, 59]),
     ],
     tones: [region(box(30, 60, 56, 72), 0.5), region(box(72, 12, 94, 32), 0.2)],
+  },
+
+  // A flat card outline with a tilted copy in perspective in front of it,
+  // and an axis line through the middle: rotating a layer in 3D.
+  tilt3d: {
+    fills: [],
+    strokes: [
+      poly([14, 28, 14, 74, 40, 74, 40, 28, 14, 28]),
+      poly([46, 22, 90, 10, 90, 90, 46, 78, 46, 22]),
+      poly([68, 4, 68, 96]),
+    ],
+    tones: [region(poly([46, 22, 90, 10, 90, 90, 46, 78]), 0.45)],
+  },
+
+  // A patch of skin with three blemish dots, one of them ringed by a
+  // retouch brush circle: one-tap blemish removal.
+  blemishfix: {
+    fills: [dot(30, 36, 3), dot(70, 30, 3), dot(62, 68, 3.4)],
+    strokes: [frame(8, 10, 92, 90), closeLoop(circle(62, 68, 12, 24))],
+    tones: [region(box(8, 10, 92, 90), 0.12)],
   },
 };
 
