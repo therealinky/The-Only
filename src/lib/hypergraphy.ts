@@ -1669,7 +1669,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     tones: [region(box(30, 60, 56, 72), 0.5), region(box(72, 12, 94, 32), 0.2)],
   },
 
-  // A flat card (dashed) with a tilted copy in perspective in front of it,
+  // A flat card outline with a tilted copy in perspective in front of it,
   // and an axis line through the middle: rotating a layer in 3D.
   tilt3d: {
     fills: [],

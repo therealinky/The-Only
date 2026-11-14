@@ -7,7 +7,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-14
 updatedAt: 2026-11-14
@@ -20,11 +21,11 @@ tools:
   - Figma
   - Figma Motion
 sources:
-  - title: "3D transform (Figma release notes, November 12, 2026)"
+  - title: "Design in 3D, natively in Figma, and ship directly to code (Figma release notes, November 12, 2026)"
     url: https://www.figma.com/release-notes/
     accessed: 2026-11-14
-  - title: "Introducing Figma Motion: Your canvas now has a timeline (Figma Blog)"
-    url: https://www.figma.com/blog/introducing-figma-motion/
+  - title: "Create 3D effects in Figma Design (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/44568893374999
     accessed: 2026-11-14
 beforeYouUse:
   clientData: >-
@@ -43,11 +44,12 @@ beforeYouUse:
     for people who prefer reduced motion. If you animate flips and turns,
     plan for that yourself.
   cost: >-
-    not verified: the release note doesn't say which plans or seats get 3D
-    transform, or whether using the Figma agent to build 3D designs draws on
-    AI credits.
+    known: Figma's help page lists 3D transform on all plans, for people
+    with a Full seat and edit access to the file. Not verified: whether
+    using the Figma agent to compose 3D designs costs more AI credits than
+    other agent work.
 ---
-Figma has added a 3D transform effect. The short version from the release note: you can now tip a layer back in space instead of only spinning it flat. This is based on Figma's own release note, and we haven't tried it ourselves.
+Figma has added a 3D transform effect. The short version from the release note: you can now tip a layer back in space instead of only spinning it flat. This is based on Figma's own release note and help page, and we haven't tried it ourselves.
 
 ## What changed
 
@@ -55,7 +57,7 @@ The note, dated November 12, 2026, says that with 3D transform you can "rotate o
 
 It also names a few connections. It says the effect pairs with Figma Motion for animating flips and turns. It says you can copy CSS from Dev Mode or send a design to a coding agent through the Figma MCP. And it says you can let the Figma agent compose 3D designs for you.
 
-The note doesn't say which plans get it, and it lists no limitations. It also doesn't say whether the agent route is any different in cost from other agent work.
+Figma's help page fills in the rest. 3D transform is on all plans, for anyone with a Full seat and edit access, and it works on vectors, images, frames, components, and text. It's non-destructive, so layers stay editable and you can hide or remove the effect. To make several layers share one 3D space, like the faces of a cube, you turn on Keep nested layers 3D on the parent frame. That comes with a catch: the parent's opacity control is disabled, blend modes, shaders, other effects, and clip content stop working there, and its own fills and strokes are hidden. You can flatten the composition back to a 2D plane when you need those again.
 
 ## Why it matters for designers
 
@@ -65,7 +67,9 @@ The Motion and CSS mentions are the interesting part for UI work. A flip you ani
 
 ## What to watch out for
 
-A transform that looks right in Figma still has to be built in code, and the note doesn't say how closely the copied CSS matches what you see on the canvas. Check it in a real browser before you promise a client the exact same tilt.
+A transform that looks right in Figma still has to be built in code. The help page maps Keep nested layers 3D and the flat-plane option to CSS's `transform-style: preserve-3d` and `flat`, which is a good sign, but it doesn't promise the copied CSS matches the canvas pixel for pixel. Check it in a real browser before you promise a client the exact same tilt.
+
+If a 3D composition suddenly loses its frame's fill, shadow, or clipping, that's Keep nested layers 3D at work, not a bug.
 
 Perspective can also cost legibility. Text that's rotated off-axis is harder to read, so look at it at actual size before you commit.
 
