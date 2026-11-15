@@ -20,7 +20,7 @@ const sourceSchema = z.object({
 
 const summarySchema = z.object({
   // Optional per-field: Keystatic saves this whole object as `{}` (no keys
-  // at all) when every field is left blank, e.g. on a Brief that doesn't
+  // at all) when every field is left blank, e.g. on an Update that doesn't
   // need one — this must not fail schema validation on its own. Whether a
   // summary is actually *required* is enforced separately, in superRefine.
   whatChanged: z.string().optional(),

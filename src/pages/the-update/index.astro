@@ -1,0 +1,23 @@
+---
+import ArticleListing from '../../components/ArticleListing.astro';
+import PageHero from '../../components/PageHero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { filterByFormat, getListableArticles } from '../../lib/articles';
+
+const articles = filterByFormat(await getListableArticles(), 'brief');
+---
+
+<BaseLayout title="The Update" description="Concise, sourced updates on what changed in AI for designers.">
+  <PageHero
+    eyebrow="The Update"
+    lines={['What', 'Changed']}
+    subtitle="Concise, sourced updates: what changed and why it matters."
+    variant="gold"
+  />
+  <ArticleListing
+    articles={articles}
+    allHref="/the-update/"
+    disciplineBase="/the-update/"
+    emptyMessage="No Update articles match this filter yet."
+  />
+</BaseLayout>

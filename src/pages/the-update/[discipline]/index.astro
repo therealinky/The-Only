@@ -18,17 +18,17 @@ const intro = `Concise, sourced updates on what changed in AI for ${discipline}.
 ---
 
 <BaseLayout
-  title={`${discipline} — The Brief`}
+  title={`${discipline} — The Update`}
   description={intro}
   noindex={filterByDiscipline(articles, discipline).length === 0}
 >
-  <h1>The Brief: {discipline}</h1>
+  <h1>The Update: {discipline}</h1>
   <p>{intro}</p>
   <ArticleListing
     articles={articles}
-    allHref="/the-brief/"
-    disciplineBase="/the-brief/"
+    allHref="/the-update/"
+    disciplineBase="/the-update/"
     activeDiscipline={discipline}
-    emptyMessage="No Brief articles match this filter yet."
+    emptyMessage="No Update articles match this filter yet."
   />
 </BaseLayout>
