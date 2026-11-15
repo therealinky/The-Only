@@ -442,28 +442,16 @@ main {
   color: var(--color-accent);
 }
 
-/* The email CTA. Filled like the signup Subscribe button so it reads as an
-   action, not a section tab. Static: opacity on hover, no color shifts.
+/* The header's "Get The Brief" link uses the shared .button-accent look.
    Phones get the same link inside the menu instead. */
-.site-header__subscribe {
+/* Doubled class so these win over .button-accent, which is defined later. */
+.site-header__subscribe.button-accent {
   display: none;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-decoration: none;
   white-space: nowrap;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
-  transition: opacity var(--transition-fast);
-}
-
-.site-header__subscribe:hover {
-  opacity: 0.85;
 }
 
 @media (min-width: 48rem) {
-  .site-header__subscribe {
+  .site-header__subscribe.button-accent {
     display: inline-block;
   }
 }
@@ -1860,20 +1848,29 @@ img.media__frame {
   color: var(--color-text);
 }
 
-.newsletter-signup button {
+/* Accent-filled button, shared by the signup Subscribe button and the
+   header's Get The Brief link. Hover swaps to a solid, AA-checked fill
+   (--color-accent-hover) instead of fading the accent into the page. */
+.button-accent {
+  display: inline-block;
   font: inherit;
   font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
   padding: var(--space-2) var(--space-4);
   border: 1.5px solid var(--color-accent);
   border-radius: var(--radius-sm);
   background: var(--color-accent);
   color: var(--color-accent-contrast);
   cursor: pointer;
-  transition: opacity var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
-.newsletter-signup button:hover {
-  opacity: 0.85;
+.button-accent:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-accent-contrast);
 }
 
 .newsletter-signup__archive {
