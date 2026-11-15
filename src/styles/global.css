@@ -1879,6 +1879,12 @@ img.media__frame {
   margin-block: 0;
 }
 
+/* Under an article the sticky sidebar runs to the bottom of the article, so
+   leave room (48px) between it and the strip. */
+article + .newsletter-signup--compact {
+  margin-block-start: var(--space-7);
+}
+
 @media (max-width: 40rem) {
   .newsletter-signup--compact {
     grid-template-columns: 1fr;
