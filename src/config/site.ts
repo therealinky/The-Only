@@ -2,9 +2,9 @@
 
 export const SITE = {
   name: 'The Only',
-  descriptor: 'AI Guide for Working Designers',
+  descriptor: 'A Clear-Eyed AI Guide for Designers',
   description:
-    "A practical field guide to AI for working designers: what changed, why it matters, what's worth trying, and what could go wrong.",
+    "A practical field guide to AI for designers, skeptics included: what changed, why it matters, what's worth trying, and what could go wrong.",
   url:
     // Astro's own `site`, set in astro.config.mjs. The rest is for scripts
     // that run outside Astro.

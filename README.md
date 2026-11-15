@@ -1,6 +1,6 @@
-# The Only — AI for Working Designers
+# The Only — A Clear-Eyed AI Guide for Designers
 
-A practical field guide to AI for working designers: what changed, why it matters, what's worth trying, and what to
+A practical field guide to AI for designers, skeptics included: what changed, why it matters, what's worth trying, and what to
 watch out for.
 
 Astro (static output, TypeScript), Markdown/MDX content collections, Keystatic as a local-only editing UI, Pagefind

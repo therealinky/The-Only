@@ -1873,6 +1873,44 @@ img.media__frame {
   color: var(--color-accent-contrast);
 }
 
+/* Secondary button: outlined, and fills with the same AA-checked hover color
+   as .button-accent. */
+.button-outline {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.button-outline:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-accent-contrast);
+}
+
+/* "Read past issues" block under the signup card on /the-brief/. */
+.brief-archive {
+  margin-block: var(--space-7);
+}
+
+.brief-archive h2 {
+  margin-block: 0 var(--space-2);
+  font-size: var(--text-xl);
+}
+
+.brief-archive p {
+  margin-block: 0 var(--space-4);
+}
+
 .newsletter-signup__archive {
   margin-block: var(--space-4) 0;
   font-size: var(--text-sm);
