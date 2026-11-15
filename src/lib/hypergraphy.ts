@@ -102,6 +102,7 @@ export const ART_MOTIFS = [
   'wand',
   'waveform',
   'wheel',
+  'gradepad',
   'transition',
   'matte',
   'headmesh',
@@ -1189,6 +1190,24 @@ const MOTIFS: Record<ArtMotif, Motif> = {
         tone,
       ),
     ),
+  },
+  // A square grading pad with a crosshair and a puck pushed off-center, arrow
+  // tips on all four sides: a two-way color control.
+  gradepad: {
+    fills: [
+      dot(62, 36, 6),
+      outline(box(12, 12, 88, 88), 0.12),
+    ],
+    strokes: [
+      closeLoop(box(12, 12, 88, 88)),
+      poly([50, 18, 50, 82]),
+      poly([18, 50, 82, 50]),
+      poly([46, 24, 50, 18, 54, 24]),
+      poly([46, 76, 50, 82, 54, 76]),
+      poly([24, 46, 18, 50, 24, 54]),
+      poly([76, 46, 82, 50, 76, 54]),
+    ],
+    tones: [],
   },
   // A five-point star drawn as a vector path, with a square anchor point on
   // every corner: a generated shape that arrives as editable points.
