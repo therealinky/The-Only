@@ -3,7 +3,7 @@
 // once at the top of the page inside the header, and once in the floating
 // bar that slides in on scroll-up further down the page (see SiteHeader).
 import ThemeToggle from './ThemeToggle.astro';
-import { SITE } from '../config/site';
+import { NEWSLETTER, SITE } from '../config/site';
 import { getNavItems } from '../lib/articles';
 
 interface Props {
@@ -15,6 +15,8 @@ const { floating = false } = Astro.props;
 const navItems = await getNavItems();
 const currentPath = Astro.url.pathname;
 const suffix = floating ? ', floating bar' : '';
+// The Brief email page has nothing to show until the signup form is switched on.
+const showBrief = NEWSLETTER.provider === 'buttondown' && Boolean(NEWSLETTER.buttondownUsername);
 
 function isActive(href: string): boolean {
   if (href === '/') return currentPath === '/';
@@ -42,6 +44,17 @@ function isActive(href: string): boolean {
   </nav>
 
   <div class="site-header__actions">
+    {
+      showBrief && (
+        <a
+          class="site-header__subscribe"
+          href="/the-brief/"
+          aria-current={currentPath.startsWith('/the-brief/') ? 'page' : undefined}
+        >
+          Get The Brief
+        </a>
+      )
+    }
     <a class="site-header__search" href="/search/">Search</a>
     <ThemeToggle />
     <details class="mobile-nav">
@@ -61,6 +74,15 @@ function isActive(href: string): boolean {
                 </a>
               </li>
             ))
+          }
+          {
+            showBrief && (
+              <li>
+                <a href="/the-brief/" aria-current={currentPath.startsWith('/the-brief/') ? 'page' : undefined}>
+                  Get The Brief
+                </a>
+              </li>
+            )
           }
         </ul>
       </nav>

@@ -442,6 +442,32 @@ main {
   color: var(--color-accent);
 }
 
+/* The email CTA. Filled like the signup Subscribe button so it reads as an
+   action, not a section tab. Static: opacity on hover, no color shifts.
+   Phones get the same link inside the menu instead. */
+.site-header__subscribe {
+  display: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  transition: opacity var(--transition-fast);
+}
+
+.site-header__subscribe:hover {
+  opacity: 0.85;
+}
+
+@media (min-width: 48rem) {
+  .site-header__subscribe {
+    display: inline-block;
+  }
+}
+
 .theme-toggle {
   font-family: var(--font-body);
   width: 2.25rem;
