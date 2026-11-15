@@ -2,6 +2,9 @@
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { NEWSLETTER } from '../../config/site';
+
+const showArchive = NEWSLETTER.provider === 'buttondown' && Boolean(NEWSLETTER.buttondownUsername);
 ---
 
 <BaseLayout
@@ -15,4 +18,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     variant="gold"
   />
   <NewsletterSignup />
+  {
+    showArchive && (
+      <section class="brief-archive" aria-labelledby="brief-archive-heading">
+        <h2 id="brief-archive-heading">Not sure yet? Read past issues</h2>
+        <p>See exactly what lands in your inbox every Wednesday.</p>
+        <a class="button-outline" href={`https://buttondown.com/${NEWSLETTER.buttondownUsername}/archive/`}>
+          Read past issues
+        </a>
+      </section>
+    )
+  }
 </BaseLayout>
