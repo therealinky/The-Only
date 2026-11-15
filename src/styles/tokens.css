@@ -16,6 +16,9 @@
   --color-accent-2: #2d766d; /* cool teal-green — secondary accent, "researched" evidence */
   --color-accent-3: #9c4a73; /* dusty rose — decorative tertiary */
   --color-accent-contrast: #ffffff;
+  /* Hover fill for accent-filled buttons: a solid color checked for AA with
+     --color-accent-contrast text (6.7:1), unlike an opacity fade over the page. */
+  --color-accent-hover: #5a4cb3;
 
   /* Wordmark only — a deep, desaturated navy-purple instead of plain
      charcoal, so "The Only" reads as a deliberate mark rather than default
@@ -144,6 +147,7 @@
     --color-accent-2: #7fc7a0;
     --color-accent-3: #e39dbe;
     --color-accent-contrast: #14121c;
+    --color-accent-hover: #b9aff5; /* 9.3:1 with --color-accent-contrast */
     --hero-purple: #8f7ff0;
     --hero-rose: #d982ab;
     --hero-sage: #5fb98c;
@@ -189,6 +193,7 @@
   --color-accent-2: #7fc7a0;
   --color-accent-3: #e39dbe;
   --color-accent-contrast: #14121c;
+  --color-accent-hover: #b9aff5; /* 9.3:1 with --color-accent-contrast */
   --hero-purple: #8f7ff0;
   --hero-rose: #d982ab;
   --hero-sage: #5fb98c;

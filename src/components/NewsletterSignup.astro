@@ -40,7 +40,7 @@ const isButtondown = NEWSLETTER.provider === 'buttondown' && NEWSLETTER.buttondo
         <label for="newsletter-email">Email address</label>
         <input id="newsletter-email" type="email" name="email" required autocomplete="email" />
         <input type="hidden" value="1" name="embed" />
-        <button type="submit">Subscribe</button>
+        <button type="submit" class="button-accent">Subscribe</button>
       </form>
       <p class="newsletter-signup__archive">
         <a href={`https://buttondown.com/${NEWSLETTER.buttondownUsername}/archive/`}>Read past issues</a>
