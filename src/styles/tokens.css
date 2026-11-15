@@ -27,6 +27,20 @@
      which checks out at ~6.25:1 against this dark background (AA). */
   --color-inverse-muted: #b0a8c3;
 
+  /* Article sidebar panel. Light mode: inverted (dark plum with light text).
+     Dark mode overrides these below so the panel matches the signup strip
+     (elevated background + border) instead of flipping to a bright panel. */
+  --sidebar-bg: var(--color-brand);
+  --sidebar-border: var(--color-brand);
+  --sidebar-text: var(--color-bg);
+  --sidebar-muted: var(--color-inverse-muted);
+  --sidebar-rule: color-mix(in srgb, var(--color-bg) 20%, transparent);
+  --sidebar-cutout: var(--color-brand);
+
+  /* Headings keep the full-strength text color; body copy may be dimmer
+     (dark mode) so long reads are easier on the eyes. */
+  --color-text-strong: var(--color-text);
+
   /* Frosted-glass header — deliberately whiter/more opaque than --color-bg
      so it reads as its own distinct layer, with just enough translucency
      for the blur to show. */
@@ -109,12 +123,17 @@
     color-scheme: dark;
     --color-bg: #14121c;
     --color-bg-elevated: #1e1b29;
-    --color-text: #edeaf5;
+    --color-text: #cdc7dc; /* dimmed body copy, ~11:1 on --color-bg */
+    --color-text-strong: #edeaf5;
     --color-text-muted: #b0a8c3;
     --color-brand: #edeaf5;
-    /* --color-brand is light here, so the sidebar panel flips to a light
-       background — reuse light mode's own muted color (~5.37:1 against it). */
-    --color-inverse-muted: #625c72;
+    /* Sidebar panel matches the signup strip: elevated bg + border. */
+    --sidebar-bg: var(--color-bg-elevated);
+    --sidebar-border: var(--color-border);
+    --sidebar-text: var(--color-text);
+    --sidebar-muted: var(--color-text-muted);
+    --sidebar-rule: var(--color-border);
+    --sidebar-cutout: var(--color-bg-elevated);
     --color-border: #322c42;
     --color-border-strong: #6b6280;
     --color-row-hover-bg: rgb(255 255 255 / 5%);
@@ -149,12 +168,17 @@
   color-scheme: dark;
   --color-bg: #14121c;
   --color-bg-elevated: #1e1b29;
-  --color-text: #edeaf5;
+  --color-text: #cdc7dc; /* dimmed body copy, ~11:1 on --color-bg */
+  --color-text-strong: #edeaf5;
   --color-text-muted: #b0a8c3;
   --color-brand: #edeaf5;
-  /* --color-brand is light here, so the sidebar panel flips to a light
-     background — reuse light mode's own muted color (~5.37:1 against it). */
-  --color-inverse-muted: #625c72;
+  /* Sidebar panel matches the signup strip: elevated bg + border. */
+  --sidebar-bg: var(--color-bg-elevated);
+  --sidebar-border: var(--color-border);
+  --sidebar-text: var(--color-text);
+  --sidebar-muted: var(--color-text-muted);
+  --sidebar-rule: var(--color-border);
+  --sidebar-cutout: var(--color-bg-elevated);
   --color-border: #322c42;
   --color-border-strong: #6b6280;
   --color-row-hover-bg: rgb(255 255 255 / 5%);
