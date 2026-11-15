@@ -38,6 +38,7 @@ h1,
 h2,
 h3,
 h4 {
+  color: var(--color-text-strong);
   font-family: var(--font-display);
   font-weight: 700;
   line-height: var(--leading-tight);
@@ -1655,20 +1656,21 @@ img.media__frame {
    use it" checklist read as a distinct, higher-contrast unit from the prose. */
 
 .article-sidebar {
-  background: var(--color-brand);
-  color: var(--color-bg);
+  background: var(--sidebar-bg);
+  border: 1px solid var(--sidebar-border);
+  color: var(--sidebar-text);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
 }
 
 .article-sidebar p,
 .article-sidebar dd {
-  color: var(--color-bg);
+  color: var(--sidebar-text);
   max-width: none;
 }
 
 .article-sidebar a {
-  color: var(--color-bg);
+  color: var(--sidebar-text);
 }
 
 .article-sidebar a:hover {
@@ -1676,7 +1678,7 @@ img.media__frame {
 }
 
 .article-sidebar dt {
-  color: var(--color-inverse-muted);
+  color: var(--sidebar-muted);
 }
 
 /* Room above each label (Client data, What changed, ...) so it doesn't sit
@@ -1693,7 +1695,7 @@ img.media__frame {
 .article-sidebar__section + .article-sidebar__section {
   margin-block-start: var(--space-5);
   padding-block-start: var(--space-5);
-  border-block-start: 1px solid color-mix(in srgb, var(--color-bg) 20%, transparent);
+  border-block-start: 1px solid var(--sidebar-rule);
 }
 
 .article-sidebar__heading {
@@ -1702,7 +1704,7 @@ img.media__frame {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-bg);
+  color: var(--sidebar-text);
   margin: 0 0 var(--space-4);
 }
 
@@ -1723,8 +1725,8 @@ img.media__frame {
    sentiment, pattern strength): white-on-brand instead of the default
    badge's light-page colors. */
 .badge--sidebar {
-  color: var(--color-bg);
-  border-color: var(--color-bg);
+  color: var(--sidebar-text);
+  border-color: var(--sidebar-text);
 }
 
 /* "Before you use it" status: an icon + label right after each field name.
@@ -1750,12 +1752,12 @@ img.media__frame {
 }
 
 .article-sidebar .check-status {
-  --check-cutout: var(--color-brand);
-  color: var(--color-bg);
+  --check-cutout: var(--sidebar-cutout);
+  color: var(--sidebar-text);
 }
 
 .article-sidebar .check-status[data-status='not-applicable'] {
-  color: var(--color-inverse-muted);
+  color: var(--sidebar-muted);
 }
 
 .check-status__icon {
