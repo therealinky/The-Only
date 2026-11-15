@@ -4,6 +4,7 @@ import {
   DIFFICULTY_LEVELS,
   DISCIPLINES,
   EVIDENCE_LEVELS,
+  FORMAT_LABELS,
   FORMATS,
   PATTERN_STRENGTH_LABELS,
   PATTERN_STRENGTH_LEVELS,
@@ -151,8 +152,8 @@ export default config({
         format: fields.select({
           label: 'Format',
           description:
-            'Brief: a concise sourced update. Test: a hands-on assessment. Workflow: a repeatable tutorial. Pulse: a synthesis of real community discussion and sentiment.',
-          options: FORMATS.map((value) => ({ label: value[0].toUpperCase() + value.slice(1), value })),
+            'Update: a concise sourced update (stored as `brief`). Test: a hands-on assessment. Workflow: a repeatable tutorial. Pulse: a synthesis of real community discussion and sentiment.',
+          options: FORMATS.map((value) => ({ label: FORMAT_LABELS[value], value })),
           defaultValue: 'brief',
         }),
         evidence: fields.select({

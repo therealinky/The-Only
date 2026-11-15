@@ -49,7 +49,7 @@ export const NAV_ITEMS = [
   { href: '/try-it/', label: 'Try It' },
   { href: '/workflows/', label: 'Workflows' },
   { href: '/the-pulse/', label: 'The Pulse' },
-  { href: '/the-brief/', label: 'The Brief' },
+  { href: '/the-update/', label: 'The Update' },
   { href: '/tools/', label: 'The Toolkit' },
 ] as const;
 
@@ -85,7 +85,7 @@ export const FORMATS = ['brief', 'test', 'workflow', 'pulse'] as const;
 export type Format = (typeof FORMATS)[number];
 
 export const FORMAT_LABELS: Record<Format, string> = {
-  brief: 'Brief',
+  brief: 'Update',
   test: 'Test',
   workflow: 'Workflow',
   pulse: 'Pulse',

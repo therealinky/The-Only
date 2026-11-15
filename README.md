@@ -51,7 +51,7 @@ rules are enforced there too, not just documented: a `published` article without
 Test/Workflow) a `summary` fails the build with a specific error; `evidence: tested` requires format `test` or
 `workflow`; `withdrawn` requires a `withdrawnNote`.
 
-Formats: **Brief** (a concise sourced update), **Test** (a hands-on assessment), **Workflow** (a repeatable
+Formats: **Update** (a concise sourced update; the format id stays `brief`), **Test** (a hands-on assessment), **Workflow** (a repeatable
 tutorial), **Pulse** (a synthesis of real community discussion and sentiment, not tied to a single sourced
 change — evidence is always `researched` for this one, enforced in `content.config.ts`). Evidence levels:
 **Announced** (reported by the maker), **Researched** (checked against sources), **Tested** (hands-on tested by
@@ -178,7 +178,7 @@ a branch like any other article. Nothing publishes without going through this sa
 ### Automated drafting
 
 A scheduled Routine can run the [`daily-articles`](.claude/skills/daily-articles/SKILL.md) skill to research and
-draft a batch of Brief articles on its own. It only ever produces `status: draft` articles and opens a PR, it never
+draft a batch of Update articles on its own. It only ever produces `status: draft` articles and opens a PR, it never
 sets `reviewedBy`, never sets `status: published`, and never merges, publishing still goes through the same Approve
 and Publish steps above. The skill file is the source of truth for what it will and won't write; it can also be run
 manually anytime with `/daily-articles`.
@@ -204,13 +204,13 @@ only works against a real build; running `npm run build && npm run preview` is h
 
 ## Email digest
 
-The Brief is also an email: every Wednesday, a hand-written summary of the most interesting stories from the past
+The Brief is the email (the article section is called The Update): every Wednesday, a hand-written summary of the most interesting stories from the past
 seven days, composed and sent manually from **Buttondown's free plan**. (Its RSS-to-email feature needs a paid plan,
 so it isn't used.) The site's only job is the signup form and a **Read past issues** link to Buttondown's public
 archive at [buttondown.com/theonly/archive](https://buttondown.com/theonly/archive/); past issues live there, not on
 this site. Keep the web archive switched on in Buttondown's settings, or that link breaks.
 
-Both live in `NewsletterSignup.astro` on The Brief page. The Buttondown account is **`theonly`** ("The Only Brief"),
+Both live in `NewsletterSignup.astro`: the full card on the `/the-brief/` page and a compact strip on the homepage and under each article. The Buttondown account is **`theonly`** ("The Only Brief"),
 the default in `src/config/site.ts`; `NEWSLETTER_BUTTONDOWN_USERNAME` only needs setting to override it.
 
 The form posts straight to Buttondown's public embeddable-subscribe endpoint

@@ -1,25 +1,18 @@
 ---
-import ArticleListing from '../../components/ArticleListing.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { filterByFormat, getListableArticles } from '../../lib/articles';
-
-const articles = filterByFormat(await getListableArticles(), 'brief');
 ---
 
-<BaseLayout title="The Brief" description="Concise, sourced updates on what changed in AI for designers.">
+<BaseLayout
+  title="The Brief"
+  description="The Brief is a short email every Wednesday with the week's most interesting AI-for-designers stories."
+>
   <PageHero
-    eyebrow="The Brief"
-    lines={['Made', 'Brief']}
-    subtitle="Concise, sourced updates: what changed and why it matters."
+    eyebrow="By email"
+    lines={['The', 'Brief']}
+    subtitle="Every Wednesday, a short summary of the week's most interesting stories."
     variant="gold"
   />
   <NewsletterSignup />
-  <ArticleListing
-    articles={articles}
-    allHref="/the-brief/"
-    disciplineBase="/the-brief/"
-    emptyMessage="No Brief articles match this filter yet."
-  />
 </BaseLayout>
