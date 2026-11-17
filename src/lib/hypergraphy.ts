@@ -132,6 +132,8 @@ export const ART_MOTIFS = [
   'pipeline',
   'tilt3d',
   'blemishfix',
+  'doccheck',
+  'reframe',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1706,6 +1708,29 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [dot(30, 36, 3), dot(70, 30, 3), dot(62, 68, 3.4)],
     strokes: [frame(8, 10, 92, 90), closeLoop(circle(62, 68, 12, 24))],
     tones: [region(box(8, 10, 92, 90), 0.12)],
+  },
+
+  // A page of text lines with a round check badge beside its lower corner:
+  // a document scanned for problems before export.
+  doccheck: {
+    fills: [],
+    strokes: [frame(6, 6, 54, 94), closeLoop(circle(78, 74, 15, 28)), poly([70, 74, 76, 81, 87, 66])],
+    tones: [
+      region(box(6, 6, 54, 94), 0.1),
+      region(box(14, 16, 46, 24), 0.65),
+      region(box(14, 34, 46, 40), 0.5),
+      region(box(14, 50, 40, 56), 0.5),
+      region(box(14, 66, 46, 72), 0.5),
+      region(box(14, 82, 34, 88), 0.5),
+    ],
+  },
+
+  // A wide 16:9 frame with a tall 9:16 crop window shaded around a person
+  // off to one side: reframing a horizontal shot for vertical.
+  reframe: {
+    fills: [outline(circle(66, 38, 5, 20), 0.9), outline(poly([56, 72, 58, 52, 74, 52, 76, 72]), 0.85)],
+    strokes: [frame(4, 20, 96, 72), frame(52, 20, 80, 72), poly([14, 46, 34, 46]), poly([28, 40, 34, 46, 28, 52])],
+    tones: [region(box(4, 20, 96, 72), 0.08), region(box(52, 20, 80, 72), 0.25)],
   },
 };
 
