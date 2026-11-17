@@ -1,0 +1,103 @@
+---
+title: "Getting vertical cuts that hold up from Auto Reframe in Adobe Premiere Pro"
+dek: >-
+  Auto Reframe will turn a horizontal edit into a 9:16 or square version in
+  one pass, and it's rarely finished when it hands it back. Pulling several
+  tutorials together, here's how to set it up, clean up the drift, and even
+  borrow its tracking for pan and scan.
+format: workflow
+evidence: researched
+difficulty: moderate
+status: draft
+example: false
+publishedAt: 2026-11-17
+updatedAt: 2026-11-17
+lastVerified: 2026-11-17
+disciplines:
+  - Motion & Video
+art: reframe
+tools:
+  - Adobe Premiere Pro
+sources:
+  - title: "Auto Reframe for social platforms (Adobe Learn tutorial, January 6, 2026)"
+    url: https://www.adobe.com/learn/premiere-pro/web/auto-reframe-for-socials
+    accessed: 2026-11-17
+  - title: "How to Use Auto Reframe in Premiere Pro, by Jonathan Lam (Envato Tuts+, February 7, 2024)"
+    url: https://photography.tutsplus.com/tutorials/how-to-use-auto-reframe-in-premiere-pro--cms-106794
+    accessed: 2026-11-17
+  - title: "Tool Tip Tuesday for Adobe Premiere Pro: Steal Auto Reframe's Motion Analysis for Pan and Scan, by Jeff Greenberg (ProVideo Coalition, June 17, 2025)"
+    url: https://www.provideocoalition.com/?p=293224
+    accessed: 2026-11-17
+  - title: "How to use auto reframe in Premiere Pro: step-by-step tutorial (Miracamp)"
+    url: https://miracamp.com/learn/premiere-pro/auto-reframe
+    accessed: 2026-11-17
+  - title: "How do I keep captions, stickers and motion graphics aligned when auto-reframing a video for Reels, Shorts and YouTube in Premiere Pro? (VIDIO blog, December 21, 2025)"
+    url: https://www.vidio.ai/blog/article/how-do-i-keep-captions-stickers-and-motion-graphics-aligned-when-autoreframing-a-video-for-reels-shorts-and-youtube-in-p
+    accessed: 2026-11-17
+summary:
+  whatChanged: >-
+    Nothing new. Auto Reframe has been in Premiere Pro for years. This is a
+    synthesis of Adobe's own tutorial and several independent guides on
+    getting a usable result from it, plus general Premiere Pro editing
+    technique.
+  whyItMatters: >-
+    Almost every horizontal edit now needs a vertical or square version too.
+    Auto Reframe does the tedious first pass, but the difference between a
+    cut that looks automated and one that looks edited is in the cleanup.
+  bestFor: >-
+    Motion designers and video editors who deliver the same piece to
+    YouTube, Reels, Shorts, and TikTok, and anyone with a back catalog of
+    horizontal work to repurpose.
+  timeToTry: >-
+    A few minutes to reframe one short sequence. Cleaning up a full edit
+    shot by shot takes longer, depending on how much movement and on-screen
+    text it has.
+beforeYouUse:
+  clientData: >-
+    not verified: none of the sources say whether Auto Reframe's motion
+    analysis runs on your machine or sends footage to Adobe. It doesn't use
+    generative credits as far as the sources show, which suggests local
+    processing, but check before using it on footage under NDA.
+  usageRights: >-
+    not applicable: Auto Reframe crops and repositions your own footage. It
+    doesn't generate new image content.
+  disclosure: >-
+    not applicable: reframing isn't generative output, so there's nothing
+    AI-made in the frame to disclose.
+  accessibility: >-
+    not verified: the sources don't cover it. Reframing can push burned-in
+    captions out of frame or over a face, so recheck every caption in the
+    new version.
+  cost: >-
+    known: Auto Reframe is part of Premiere Pro, and none of the sources
+    mention extra charges or generative credits for using it.
+---
+Delivering a vertical cut of a horizontal edit used to mean resizing and keyframing every shot by hand. Auto Reframe in Adobe Premiere Pro analyzes each clip, works out where the action is, and builds a new sequence at the aspect ratio you pick. It's genuinely faster, and it also tends to hand back shots that drift, captions that fall off the edge, and the odd frame that follows the wrong person.
+
+This workflow is synthesized from Adobe's own tutorial and several independent guides, plus general Premiere Pro knowledge, not from any one person's process. We haven't tested it hands-on end to end.
+
+1. **Lock the horizontal edit first.** Auto Reframe makes a separate, duplicate sequence, so changes to your original after the fact won't carry over. Finish the cut, then reframe. If you're still shooting, frame a little wider than you normally would, with room around your subject, so there's something to crop into.
+
+2. **Decide what happens to your text and graphics.** Every guide agrees that titles, captions, and logos are where Auto Reframe needs the most help. The approaches differ. One option is to leave graphics on their own tracks and reposition them by hand afterward, which gives you the most control. Another, suggested by a vendor guide, is to build captions as Essential Graphics pinned to a point in the frame and nest everything before reframing, so overlays stay together with their footage. Pinning saves time on long, caption-heavy edits, but it's more setup, and you'll still check every one.
+
+3. **Run Auto Reframe Sequence.** Right-click the sequence in the Project panel and choose Auto Reframe Sequence (it's also under the Sequence menu). Pick a target aspect ratio, such as Vertical 9:16 or Square 1:1. Then choose a motion tracking setting: Slower Motion for locked-off or gently moving shots, Faster Motion for quick, busy action, or Default in between. The dialog also asks whether to nest your clips. Tutorials suggest nesting when your timeline already has a lot of motion adjustments you don't want Premiere to fight with. Click Create, and the new sequence lands in an Auto Reframed Sequences folder.
+
+4. **Review every shot, not just the first few.** Play the new sequence through and note the shots where the crop drifts, cuts off a face, or follows the wrong subject. Shots with more than one person or fast movement are the usual suspects.
+
+5. **Fix the drift.** Select a problem clip and open Effect Controls. The regular Motion controls are greyed out on a reframed clip, and Auto Reframe's own controls take their place. Choose the option to override the generated path, which turns the analysis into keyframes you can edit. For a shot that should feel locked-off, the simplest fix one guide recommends is deleting every position and reframe keyframe except the first, so the crop stops wandering. Then use Reframe Offset and Reframe Scale to place and size the shot. Adobe's own tutorial frames the cleanup as adjusting Position, Scale, and Rotation with your own keyframes instead. Either works. Overriding keeps Auto Reframe's tracking as a starting point, while doing it by hand gives you a clean slate on shots where the tracking was wrong to begin with.
+
+6. **Do a dedicated text and graphics pass.** Go back through with only overlays in mind. Keep captions and calls to action inside the platform's safe area, away from the bottom edge where app interfaces sit, and make sure no caption lands over a face. If something shifted after a pinned setup, check its pin before moving it by hand.
+
+7. **Borrow the tracking for pan and scan.** This is a less obvious use. If you've got 4K footage in a 1080 sequence, you may want slow pan and scan movement that follows the action. Auto Reframe won't do anything here on its own, since both are 16:9. One documented workaround is to copy the clips into a temporary square sequence, working in batches of about ten, apply Auto Reframe there, and override the generated path to bake the movement into keyframes. Copy the clips back into the 16:9 sequence and adjust Reframe Offset and Reframe Scale until the frame is filled. The movement keyframes come along with them.
+
+8. **Export each version separately.** Make one export per platform rather than reusing a single vertical master everywhere, since safe areas and preferred lengths differ. Work from your highest-resolution source when you reframe, because a 9:16 crop from 1080p footage is already throwing away most of the frame.
+
+## Why it matters for designers
+
+If you make motion work for brands, the vertical version is often the one more people see. Auto Reframe takes the most repetitive part of that job off your plate, and steps 5 and 6 are where your eye still matters. The pan and scan trick in step 7 is also a reminder that a feature built for one job can do quiet work elsewhere in an edit.
+
+## What to watch out for
+
+Auto Reframe is a first pass, not a finished deliverable. The tutorials agree it gets most shots roughly right and some clearly wrong, and the generated movement can add motion you never wanted, so budget time for review.
+
+The option names have shifted between Premiere versions, and the guides use slightly different wording for the same control, so expect small differences from what's described here. Some of the sources are a couple of years old, and one is a vendor blog that ends by pitching its own tool, so weigh it accordingly. Finally, cropping a wide shot to vertical always loses most of the frame. If a shot only works wide, no amount of keyframing will save it, and it may be better to swap in a different take.

@@ -1,0 +1,82 @@
+---
+title: "InDesign's new Check Document flags missing alt text and inconsistent copy before you export"
+dek: >-
+  InDesign 22.0 adds one panel that scans a layout for missing alt text,
+  tables without summaries, inconsistent formatting, and typos. Scanning is
+  free, but some of the fixes cost generative credits, and early replies
+  report some rough edges.
+format: brief
+evidence: announced
+difficulty: quick
+status: draft
+example: false
+publishedAt: 2026-11-17
+updatedAt: 2026-11-17
+lastVerified: 2026-11-17
+disciplines:
+  - Brand & Graphic
+art: doccheck
+tools:
+  - Adobe InDesign
+sources:
+  - title: "Introducing Check Document in InDesign: Catch accessibility and copy issues before you export (Adobe Community announcement and replies, November 10, 2026)"
+    url: https://community.adobe.com/announcements-670/introducing-check-document-in-indesign-catch-accessibility-and-copy-issues-before-you-export-1647626
+    accessed: 2026-11-17
+  - title: "InDesign 22.0 is here: AI Assistant, Check Document, Flex Layout upgrades, and native Windows ARM (Adobe Community announcement and replies, November 10, 2026)"
+    url: https://community.adobe.com/announcements-670/indesign-22-0-is-here-ai-assistant-check-document-flex-layout-upgrades-and-native-windows-arm-1646117
+    accessed: 2026-11-17
+  - title: "Meet AI Assistant (Beta) in InDesign 22.0: Edit layouts and run multi-step workflows just by asking (Adobe Community announcement, November 10, 2026)"
+    url: https://community.adobe.com/announcements-670/meet-ai-assistant-beta-in-indesign-22-0-edit-layouts-and-run-multi-step-workflows-just-by-asking-1647709
+    accessed: 2026-11-17
+beforeYouUse:
+  clientData: >-
+    not verified: Adobe's announcement doesn't say whether your document's
+    text and images are sent to Adobe's servers to generate alt text,
+    summaries, or copy suggestions. Since some of these use generative
+    credits, assume content leaves your machine until Adobe says otherwise,
+    and check your client agreements before running it on confidential work.
+  usageRights: >-
+    not applicable: Check Document suggests fixes to your own copy and
+    descriptions of your own images. It doesn't generate artwork.
+  disclosure: >-
+    not verified: the announcement doesn't say whether AI-written alt text
+    or table summaries carry Content Credentials or any other label in the
+    exported file.
+  accessibility: >-
+    known: the accessibility checks are the point of the feature, covering
+    images without alt text and tables without a summary. Not verified: how
+    good the generated alt text is, and whether passing Check Document means
+    an export meets any formal accessibility standard. Adobe doesn't claim it
+    does.
+  cost: >-
+    known: Adobe's post says scanning and rescanning are free on Creative
+    Cloud Pro and Standard. Alt text is free on Pro and 1 credit per image on
+    Standard. Table summaries cost 1 credit per generate or regenerate on
+    both. A consistency fix costs 1 credit when you apply the first
+    suggestion on a card, and the rest of that card is free. Not verified:
+    whether applying grammar fixes uses credits, since the table doesn't
+    list them.
+---
+InDesign 22.0, announced on November 10, adds a panel called Check Document. It scans a layout for accessibility gaps and copy problems in one pass, and you can run it whenever you like or have it check as part of exporting. We haven't tried it ourselves, so this is based on Adobe's own announcement posts and the early replies under them.
+
+## What changed
+
+Check Document looks for four kinds of problems. On the accessibility side, it flags images that don't have alt text and tables that don't have a summary. On the copy side, it catches inconsistent formatting, such as mixed date styles, unit names, URL styles, or British and American spellings in the same document, plus typos, punctuation, and spelling errors.
+
+You open it from File or Window, or let it run during export. Results show up as cards, one per kind of problem, and clicking an instance jumps you to it in the layout. From there you can apply the suggestion, dismiss it, or fix every instance on a card at once. For consistency problems, it recommends one format and lets you choose which one to apply throughout. For alt text and table summaries, it can generate a draft that you accept, regenerate, or edit.
+
+The same release adds an AI Assistant in beta, which takes plain-language requests to edit content, layouts, and objects. Adobe says it runs on partner models, including GPT 5.2 and Claude Sonnet 4.6.
+
+## Why it matters for designers
+
+Alt text and table summaries are the parts of an accessible PDF that tend to get skipped when a deadline hits, mostly because there's no single place that tells you what's missing. A panel that lists every untagged image before export makes that gap visible, even if you end up writing the descriptions yourself.
+
+The consistency check is a quieter win for anyone laying out long documents written by several people. Catching "Nov. 3" next to "3 November," or "colour" next to "color," usually falls to a proofreader late in the process. Having it surface while you're still in the layout saves a round of corrections.
+
+## What to watch out for
+
+Read every generated description before you accept it. Good alt text depends on why an image is on the page, and a generated draft can only describe what's in it. The same goes for table summaries.
+
+The early replies are mixed. Several people, some of them on business accounts, said the panel didn't appear at all for them or their teammates, and one got it working by reinstalling. One person reported Interactive PDF exports crashing after the update, though a community expert couldn't reproduce it on their setup. Another said a scan found nothing in a file they'd deliberately broken. A few replies also pushed back on paying a credit to apply a correction. Treat it as a helpful first pass rather than a guarantee, and keep your current accessibility checks in place until you've seen how it handles your own files.
+
+If you're on Creative Cloud Standard, note that alt text costs a credit per image, which adds up quickly on an image-heavy catalog or annual report. The sidebar has the full breakdown.
