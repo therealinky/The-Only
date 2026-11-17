@@ -1729,8 +1729,8 @@ const MOTIFS: Record<ArtMotif, Motif> = {
   // off to one side: reframing a horizontal shot for vertical.
   reframe: {
     fills: [outline(circle(66, 38, 5, 20), 0.9), outline(poly([56, 72, 58, 52, 74, 52, 76, 72]), 0.85)],
-    strokes: [frame(4, 20, 96, 72), frame(50, 12, 82, 80), poly([14, 46, 34, 46]), poly([28, 40, 34, 46, 28, 52])],
-    tones: [region(box(4, 20, 96, 72), 0.08), region(box(50, 12, 82, 80), 0.25)],
+    strokes: [frame(4, 20, 96, 72), frame(52, 20, 80, 72), poly([14, 46, 34, 46]), poly([28, 40, 34, 46, 28, 52])],
+    tones: [region(box(4, 20, 96, 72), 0.08), region(box(52, 20, 80, 72), 0.25)],
   },
 };
 

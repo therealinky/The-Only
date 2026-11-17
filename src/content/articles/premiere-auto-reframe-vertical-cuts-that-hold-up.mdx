@@ -8,7 +8,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: moderate
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-17
 updatedAt: 2026-11-17
@@ -19,14 +20,14 @@ art: reframe
 tools:
   - Adobe Premiere Pro
 sources:
-  - title: "Auto Reframe for social platforms (Adobe Learn tutorial, January 6, 2026)"
+  - title: "Reframe your video for multiple social platforms (Adobe Learn tutorial, January 6, 2026)"
     url: https://www.adobe.com/learn/premiere-pro/web/auto-reframe-for-socials
     accessed: 2026-11-17
   - title: "How to Use Auto Reframe in Premiere Pro, by Jonathan Lam (Envato Tuts+, February 7, 2024)"
     url: https://photography.tutsplus.com/tutorials/how-to-use-auto-reframe-in-premiere-pro--cms-106794
     accessed: 2026-11-17
   - title: "Tool Tip Tuesday for Adobe Premiere Pro: Steal Auto Reframe's Motion Analysis for Pan and Scan, by Jeff Greenberg (ProVideo Coalition, June 17, 2025)"
-    url: https://www.provideocoalition.com/?p=293224
+    url: https://www.provideocoalition.com/tool-tip-tuesday-for-adobe-premiere-pro-steal-auto-reframes-motion-analysis-for-pan-and-scan/
     accessed: 2026-11-17
   - title: "How to use auto reframe in Premiere Pro: step-by-step tutorial (Miracamp)"
     url: https://miracamp.com/learn/premiere-pro/auto-reframe
@@ -56,8 +57,8 @@ beforeYouUse:
   clientData: >-
     not verified: none of the sources say whether Auto Reframe's motion
     analysis runs on your machine or sends footage to Adobe. It doesn't use
-    generative credits as far as the sources show, which suggests local
-    processing, but check before using it on footage under NDA.
+    generative credits as far as the sources show, but check before using
+    it on footage under NDA.
   usageRights: >-
     not applicable: Auto Reframe crops and repositions your own footage. It
     doesn't generate new image content.
@@ -78,13 +79,13 @@ This workflow is synthesized from Adobe's own tutorial and several independent g
 
 1. **Lock the horizontal edit first.** Auto Reframe makes a separate, duplicate sequence, so changes to your original after the fact won't carry over. Finish the cut, then reframe. If you're still shooting, frame a little wider than you normally would, with room around your subject, so there's something to crop into.
 
-2. **Decide what happens to your text and graphics.** Every guide agrees that titles, captions, and logos are where Auto Reframe needs the most help. The approaches differ. One option is to leave graphics on their own tracks and reposition them by hand afterward, which gives you the most control. Another, suggested by a vendor guide, is to build captions as Essential Graphics pinned to a point in the frame and nest everything before reframing, so overlays stay together with their footage. Pinning saves time on long, caption-heavy edits, but it's more setup, and you'll still check every one.
+2. **Decide what happens to your text and graphics.** The guides that cover graphics agree that titles, captions, and logos are where Auto Reframe needs the most help. The approaches differ. One option is to leave graphics on their own tracks and reposition them by hand afterward, which gives you the most control. Another, suggested by a vendor guide, is to build captions as Essential Graphics pinned to a point in the frame and nest everything before reframing, so overlays stay together with their footage. Pinning saves time on long, caption-heavy edits, but it's more setup, and you'll still check every one.
 
 3. **Run Auto Reframe Sequence.** Right-click the sequence in the Project panel and choose Auto Reframe Sequence (it's also under the Sequence menu). Pick a target aspect ratio, such as Vertical 9:16 or Square 1:1. Then choose a motion tracking setting: Slower Motion for locked-off or gently moving shots, Faster Motion for quick, busy action, or Default in between. The dialog also asks whether to nest your clips. Tutorials suggest nesting when your timeline already has a lot of motion adjustments you don't want Premiere to fight with. Click Create, and the new sequence lands in an Auto Reframed Sequences folder.
 
 4. **Review every shot, not just the first few.** Play the new sequence through and note the shots where the crop drifts, cuts off a face, or follows the wrong subject. Shots with more than one person or fast movement are the usual suspects.
 
-5. **Fix the drift.** Select a problem clip and open Effect Controls. The regular Motion controls are greyed out on a reframed clip, and Auto Reframe's own controls take their place. Choose the option to override the generated path, which turns the analysis into keyframes you can edit. For a shot that should feel locked-off, the simplest fix one guide recommends is deleting every position and reframe keyframe except the first, so the crop stops wandering. Then use Reframe Offset and Reframe Scale to place and size the shot. Adobe's own tutorial frames the cleanup as adjusting Position, Scale, and Rotation with your own keyframes instead. Either works. Overriding keeps Auto Reframe's tracking as a starting point, while doing it by hand gives you a clean slate on shots where the tracking was wrong to begin with.
+5. **Fix the drift.** Select a problem clip and open Effect Controls. The regular Motion controls are greyed out on a reframed clip, and Auto Reframe's own controls take their place. Choose the option to override the generated path, which turns the analysis into keyframes you can edit. For a shot that should feel locked-off, the simplest fix one guide recommends is deleting every position and reframe keyframe except the first, so the crop stops wandering. Then use Reframe Offset and Reframe Scale to place and size the shot. Adobe's own tutorial instead says to adjust Position, Scale, and Rotation in Effect Controls and keyframe them, and doesn't mention the override. If the Motion controls are greyed out on your clip, as Envato's guide describes, use the override and the Reframe controls instead.
 
 6. **Do a dedicated text and graphics pass.** Go back through with only overlays in mind. Keep captions and calls to action inside the platform's safe area, away from the bottom edge where app interfaces sit, and make sure no caption lands over a face. If something shifted after a pinned setup, check its pin before moving it by hand.
 
@@ -98,6 +99,6 @@ If you make motion work for brands, the vertical version is often the one more p
 
 ## What to watch out for
 
-Auto Reframe is a first pass, not a finished deliverable. The tutorials agree it gets most shots roughly right and some clearly wrong, and the generated movement can add motion you never wanted, so budget time for review.
+Auto Reframe is a first pass, not a finished deliverable. Every guide expects some cleanup afterward, and the generated movement can add motion you never wanted, so budget time for review.
 
 The option names have shifted between Premiere versions, and the guides use slightly different wording for the same control, so expect small differences from what's described here. Some of the sources are a couple of years old, and one is a vendor blog that ends by pitching its own tool, so weigh it accordingly. Finally, cropping a wide shot to vertical always loses most of the frame. If a shot only works wide, no amount of keyframing will save it, and it may be better to swap in a different take.
