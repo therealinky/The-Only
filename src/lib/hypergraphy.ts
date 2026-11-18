@@ -134,6 +134,8 @@ export const ART_MOTIFS = [
   'blemishfix',
   'doccheck',
   'reframe',
+  'sixup',
+  'splats',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1731,6 +1733,42 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     fills: [outline(circle(66, 38, 5, 20), 0.9), outline(poly([56, 72, 58, 52, 74, 52, 76, 72]), 0.85)],
     strokes: [frame(4, 20, 96, 72), frame(52, 20, 80, 72), poly([14, 46, 34, 46]), poly([28, 40, 34, 46, 28, 52])],
     tones: [region(box(4, 20, 96, 72), 0.08), region(box(52, 20, 80, 72), 0.25)],
+  },
+
+  // Six image tiles in a 3x2 grid, one shaded as the pick, above a prompt
+  // bar: one prompt producing several options to choose from.
+  sixup: {
+    fills: [],
+    strokes: [
+      frame(6, 6, 30, 34), frame(38, 6, 62, 34), frame(70, 6, 94, 34),
+      frame(6, 44, 30, 72), frame(38, 44, 62, 72), frame(70, 44, 94, 72),
+      frame(6, 82, 94, 96),
+    ],
+    tones: [
+      region(box(38, 44, 62, 72), 0.6),
+      region(box(6, 82, 94, 96), 0.15),
+    ],
+  },
+
+  // A loose cloud of overlapping soft ellipses of different sizes, with a
+  // few outlined, building up a rough shape: a Gaussian splat scan.
+  splats: {
+    fills: [],
+    strokes: [
+      closeLoop(ellipse(34, 40, 18, 11)),
+      closeLoop(ellipse(64, 58, 22, 13)),
+      closeLoop(ellipse(76, 24, 10, 15)),
+    ],
+    tones: [
+      region(ellipse(34, 40, 18, 11), 0.35),
+      region(ellipse(64, 58, 22, 13), 0.35),
+      region(ellipse(76, 24, 10, 15), 0.3),
+      region(ellipse(50, 30, 12, 8), 0.3),
+      region(ellipse(30, 70, 14, 9), 0.3),
+      region(ellipse(52, 82, 10, 6), 0.25),
+      region(ellipse(16, 52, 6, 10), 0.25),
+      region(ellipse(88, 74, 6, 8), 0.25),
+    ],
   },
 };
 

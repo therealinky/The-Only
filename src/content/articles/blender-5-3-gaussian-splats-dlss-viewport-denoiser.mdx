@@ -1,0 +1,78 @@
+---
+title: "Blender 5.3 opens Gaussian splat scans and adds an AI denoiser to the viewport"
+dek: >-
+  Blender 5.3 can import and render 3D Gaussian splats, the format many
+  scanning and AI capture tools now export, and NVIDIA owners get a DLSS
+  denoiser for cleaner Cycles previews. Both come with real caveats.
+format: brief
+evidence: announced
+difficulty: moderate
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-18
+updatedAt: 2026-11-18
+lastVerified: 2026-11-18
+disciplines:
+  - 3D
+art: splats
+tools:
+  - Blender
+sources:
+  - title: "Blender 5.3: Rendering (Blender release notes)"
+    url: https://developer.blender.org/docs/release_notes/5.3/rendering/
+    accessed: 2026-11-18
+  - title: "Blender 5.3: Cycles (Blender release notes)"
+    url: https://developer.blender.org/docs/release_notes/5.3/cycles/
+    accessed: 2026-11-18
+  - title: "Blender 5.3: Pipeline & I/O (Blender release notes)"
+    url: https://developer.blender.org/docs/release_notes/5.3/pipeline_io/
+    accessed: 2026-11-18
+  - title: "Blender 5.3: Splat Happens, and Everything Else Gets Better, by Bela Beier (Digital Production, November 11, 2026)"
+    url: https://digitalproduction.com/2026/11/11/blender-5-3-splat-happens-and-everything-else-gets-better/
+    accessed: 2026-11-18
+beforeYouUse:
+  clientData: >-
+    known: Blender is free software that runs locally, and nothing in the
+    5.3 release notes involves an online service for these features. Not verified:
+    how any outside scanning or capture app you use to make the splat
+    handles your footage, which is a separate question for that app.
+  usageRights: >-
+    known: Blender is free, open-source software, and the release notes add
+    no new terms for these features. Not verified: the rights to a splat
+    itself depend on whoever captured or generated it, and on the terms of
+    the tool that produced it.
+  disclosure: >-
+    not applicable: importing a scan or denoising a viewport preview doesn't
+    create anything that would need AI labeling on its own.
+  accessibility: >-
+    not applicable: these are 3D import and preview features with no effect
+    on accessibility.
+  cost: >-
+    known: Blender is free. The release notes say the DLSS denoiser needs an
+    NVIDIA GPU and NVIDIA driver version 620 or newer, so on other hardware
+    it isn't available.
+---
+Blender 5.3 came out on November 10, and two of its changes are worth a closer look for anyone working with scanned or AI-captured 3D. It can now bring in Gaussian splats and render them in every engine, and on NVIDIA cards there's a new DLSS denoiser for the viewport. This is based on Blender's own release notes and press coverage. We haven't tried it ourselves.
+
+## What changed
+
+**Gaussian splats.** A splat scene is a cloud of soft, colored blobs rather than a mesh, and it's become a common output for photo-based scanning and newer AI capture tools. Blender's release notes say 5.3 imports splats from PLY and SPZ files, and the pipeline notes add splat import through USD and glTF too. There's no export yet.
+
+Inside Blender, splats are stored as a point cloud with a new type setting, so Geometry Nodes can work with them, and new nodes handle setting the type and importing SPZ. The notes say Workbench, EEVEE, and Cycles can all render them. By default a splat glows with its own captured color, and you can get rough relighting by swapping its emission shader for something like a Diffuse BSDF.
+
+**DLSS viewport denoising.** The Cycles notes describe a new DLSS denoiser for the viewport on NVIDIA GPUs. It cleans up the preview faster by upscaling and reusing samples from earlier frames. It's a viewport feature, so it changes how quickly you can judge lighting and materials while you work, not your final render.
+
+## Why it matters for designers
+
+Splats have been easy to capture and awkward to use. You could scan a room, a product, or a location and get something that looks great in its own viewer, then hit a wall bringing it into a real scene. Native support in a free, widely used 3D app makes a splat something you can actually place next to modeled objects, light, and render for a still or an animation.
+
+The viewport denoiser is a quieter win. Waiting for a noisy Cycles preview to settle is a lot of the friction of look development. A faster, steadier preview makes it easier to try more lighting ideas in the same amount of time. If you want to tune the denoiser for your final frames, our earlier workflow on Cycles' AI denoiser covers that side.
+
+## What to watch out for
+
+Blender is unusually candid about the splat limits. The release notes say performance isn't ideal yet, and that rendering isn't fully correct because splats are usually made in sRGB while Cycles and EEVEE work in linear space, which shows most in faint, bright areas. Apply Transform doesn't handle splats correctly yet either. Relighting is basic, so don't expect a scan to behave like a properly shaded asset.
+
+SPZ files from different apps don't always use the same orientation, and the notes say you may need to fix the axes by hand. Since there's no export, Blender is a place to use splats, not to clean them up and send them on.
+
+The DLSS denoiser only helps if you're on supported NVIDIA hardware with a recent driver. Mac users and anyone on AMD or Intel graphics won't see it. The sidebar has what we could and couldn't confirm.
