@@ -8,7 +8,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-19
 updatedAt: 2026-11-19
@@ -20,7 +21,7 @@ art: rowboards
 tools:
   - Adobe Illustrator
 sources:
-  - title: "Meet AI Assistant (Beta) in Illustrator: Less busywork, more time to create, by Harshika Verma (Adobe Community announcement and replies, November 10, 2026)"
+  - title: "Meet AI Assistant (beta) in Illustrator: Less busywork, more time to create, by Harshika Verma (Adobe Community announcement and replies, November 10, 2026)"
     url: https://community.adobe.com/announcements-651/meet-ai-assistant-beta-in-illustrator-less-busywork-more-time-to-create-1653403
     accessed: 2026-11-19
   - title: "Illustrator 2027 v31.0 | Automate tasks with AI Assistant, create smoother blends, explore new presets, learn with Quick Skill guide, and more, by Harshika Verma (Adobe Community announcement and replies, November 10, 2026)"
@@ -31,31 +32,36 @@ sources:
     accessed: 2026-11-19
 beforeYouUse:
   clientData: >-
-    not verified: Adobe's announcement doesn't say whether your open document,
-    or files you attach such as spreadsheets and screenshots, are processed on
-    Adobe's servers or by a partner model. Assume they leave your machine
-    until Adobe's FAQ or terms say otherwise, and check your client
-    agreements before using it on confidential work.
+    known: Adobe's FAQ says the assistant needs an internet connection, and
+    that your content "isn't and will not be used to train generative AI
+    models." Not verified: where your open document and attached files are
+    processed, or which models handle them. Check your client agreements
+    before using it on confidential work.
   usageRights: >-
     not verified: the assistant can generate vector artwork from a text
     description, and the announcement doesn't say which model does that or
     what commercial-use terms apply to the output. Organizing, exporting, and
     preflight tasks work on your own artwork and don't raise this question.
   disclosure: >-
-    not verified: the announcement doesn't say whether artwork the assistant
-    generates carries Content Credentials or any other label when exported.
+    known: Adobe's FAQ says responses that used generative AI are labeled in
+    the panel, with wording like "AI-generated image, created using Adobe
+    Illustrator." Not verified: whether exported artwork carries Content
+    Credentials or any other label.
   accessibility: >-
     known: Adobe's post says the preflight check covers accessibility along
     with fonts, links, color, and bleed. Not verified: what that accessibility
     check actually looks for in an Illustrator file, or whether it maps to any
     formal standard.
   cost: >-
-    known: Adobe's post says the assistant currently supports up to 15 artwork
-    generations per day, and points to its FAQ for credits and limits. Not
-    verified: which actions use generative credits and how many, since we
-    couldn't open the FAQ to confirm the details.
+    known: Adobe's FAQ says that since October 1, 2026, certain actions use
+    AI credits on paid plans, for most "AI-powered creative actions, such as
+    generating and editing content," and you can hover over the credits icon
+    after an action to see what it used. It calls the rates introductory and
+    subject to change, caps artwork generation at 15 per day, and says free
+    users get a daily allowance that refreshes at midnight GMT. Not verified:
+    the exact credit cost of each action.
 ---
-Illustrator 31.0, announced on November 10, adds an AI Assistant in beta. You describe a production job in plain language and it does the clicking, from tidying layers to setting up a print file. We haven't tried it ourselves, so this is based on Adobe's own announcement posts and the replies under them.
+Illustrator 31.0, announced on November 10, adds an AI Assistant in beta. You describe a production job in plain language and it does the clicking, from tidying layers to setting up a print file. We haven't tried it ourselves, so this is based on Adobe's own announcement posts, the replies under them, and Adobe's FAQ for the assistant.
 
 ## What changed
 
@@ -63,9 +69,11 @@ You open the assistant from the Application Bar, then either describe what you w
 
 It can also read files you attach. Adobe lists Illustrator files, Markdown, spreadsheets (XLSX or CSV), and pasted images or screenshots. Its examples include pulling swatches or styles out of another Illustrator file and turning each row of a spreadsheet into its own artboard, which is the kind of variable-data job that used to mean scripting or a lot of duplicating.
 
-There's a preflight check too. It looks at fonts, text, images and links, color, print and bleed, layout, and accessibility, then sorts what it finds into critical issues, warnings, and passed checks. If you ask, it can fix many of the critical ones.
+There's a preflight check too. It looks at fonts, text, images and links, color, print and bleed, layout, and accessibility, then sorts what it finds into critical issues, warnings, and passed checks. If you ask, it can fix many of the critical ones. Adobe's FAQ gives examples: converting a document from RGB to CMYK, removing overprint from white objects, replacing the registration color, and setting the bleed. Others, like assigning a color profile or extending artwork to the bleed edge, still need manual steps.
 
-If you find yourself asking for the same thing every week, you can save that prompt or workflow as a Skill and call it up later by typing a slash in the prompt field. Longer jobs run in the background while you keep working elsewhere in the file.
+If you find yourself asking for the same thing every week, you can save that prompt or workflow as a Skill and call it up later by typing a slash in the prompt field. The FAQ says Skills can also run on their own when the assistant recognizes the task, and that more are coming during the beta. Longer jobs run in the background while you keep working elsewhere in the file.
+
+Adobe's FAQ says it's available on all paid Creative Cloud plans and some free accounts, for adults 18 and older. It's available but not optimized for enterprise and higher-ed users, and it isn't in Adobe's web or mobile apps, some legacy enterprise plans, or K-12.
 
 The same release adds new Blend panel options with easing handles on the canvas, a refreshed set of brushes, styles, patterns, and gradients, and an in-app Quick Skill Guide with short lessons on shape, color, and type.
 
@@ -79,8 +87,10 @@ For anyone skeptical of generative AI, it's worth noticing that most of these ta
 
 ## What to watch out for
 
-It's a beta, and Adobe's post says not to edit the same objects the assistant is working on while a longer job runs. Save a copy before pointing it at a client file, and check the result before you trust it, especially anything it says it fixed in preflight.
+It's a beta, and Adobe's post says not to edit the same objects the assistant is working on while a longer job runs. Save a copy before pointing it at a client file, and check the result before you trust it, especially anything it says it fixed in preflight. Adding "Show me a plan before making changes" to a prompt lets you review its steps first.
 
-Generation is capped. Adobe says the assistant currently supports up to 15 artwork generations per day, and it points to an FAQ for credits and limits that we couldn't open to confirm. Check how many credits your plan includes before building it into a routine.
+It also has limits. It only works on the document you have open, not across files or other apps, and it doesn't apply brand guidelines automatically. Adobe says simple tasks may be faster by hand, and large files with many objects, layers, or artboards slow it down.
+
+Generation is capped at 15 artwork generations per day, and on paid plans most creative actions now draw on your AI credits at rates Adobe calls introductory. Check what each action costs with the credits icon before building it into a routine.
 
 The replies so far are few and mixed. One person called it and the new blend handles real time-savers for production work. Others asked what the AI was trained on, or why Adobe is leaning on AI at all when its strength is human creativity. Adobe's community manager answered that the tools are meant to cut manual steps, not replace creative direction. None of the replies under Adobe's two posts mention bugs yet, but it's early.
