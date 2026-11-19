@@ -135,6 +135,7 @@ export const ART_MOTIFS = [
   'doccheck',
   'reframe',
   'sixup',
+  'rowboards',
   'splats',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
@@ -1768,6 +1769,25 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(ellipse(52, 82, 10, 6), 0.25),
       region(ellipse(16, 52, 6, 10), 0.25),
       region(ellipse(88, 74, 6, 8), 0.25),
+    ],
+  },
+
+  // A small spreadsheet on the left with an arrow pointing to three stacked
+  // artboards on the right: an assistant turning data rows into artboards.
+  rowboards: {
+    fills: [],
+    strokes: [
+      frame(4, 22, 36, 78),
+      poly([4, 36, 36, 36]), poly([4, 50, 36, 50]), poly([4, 64, 36, 64]),
+      poly([16, 22, 16, 78]),
+      poly([44, 50, 56, 50]), poly([50, 44, 56, 50, 50, 56]),
+      frame(64, 4, 96, 26), frame(64, 39, 96, 61), frame(64, 74, 96, 96),
+    ],
+    tones: [
+      region(box(4, 22, 36, 36), 0.45),
+      region(box(64, 4, 96, 26), 0.35),
+      region(box(64, 39, 96, 61), 0.35),
+      region(box(64, 74, 96, 96), 0.35),
     ],
   },
 };
