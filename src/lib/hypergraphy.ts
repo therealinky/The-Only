@@ -137,6 +137,7 @@ export const ART_MOTIFS = [
   'sixup',
   'rowboards',
   'splats',
+  'redline',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1788,6 +1789,24 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(box(64, 4, 96, 26), 0.35),
       region(box(64, 39, 96, 61), 0.35),
       region(box(64, 74, 96, 96), 0.35),
+    ],
+  },
+
+  // A component card with a shaded button inside, measured by redline
+  // dimension lines across the top and down the right side, with end ticks:
+  // inspecting a design's specs for developer handoff.
+  redline: {
+    fills: [],
+    strokes: [
+      frame(8, 30, 72, 92),
+      frame(18, 66, 62, 82),
+      poly([8, 18, 72, 18]), poly([8, 10, 8, 24]), poly([72, 10, 72, 24]),
+      poly([88, 30, 88, 92]), poly([82, 30, 94, 30]), poly([82, 92, 94, 92]),
+    ],
+    tones: [
+      region(box(8, 30, 72, 92), 0.12),
+      region(box(18, 40, 54, 48), 0.45),
+      region(box(18, 66, 62, 82), 0.6),
     ],
   },
 };

@@ -1,0 +1,89 @@
+---
+title: "The Figma agent now works in Dev Mode, so you can ask a design what changed"
+dek: >-
+  You can now prompt the Figma agent from Dev Mode to explain a design,
+  compare versions, suggest code, and gather download links for assets.
+  Dev seats can ask questions without touching the file, but it's a paid
+  feature and every run uses AI credits.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-20
+updatedAt: 2026-11-20
+lastVerified: 2026-11-20
+disciplines:
+  - UI/UX
+  - Web
+art: redline
+tools:
+  - Figma
+sources:
+  - title: "Work with the Figma agent in dev mode (Figma release notes, November 19, 2026)"
+    url: https://www.figma.com/release-notes/
+    accessed: 2026-11-20
+  - title: "Work with the Figma agent in design files (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/37998629035799-Work-with-the-Figma-agent-in-design-files
+    accessed: 2026-11-20
+  - title: "How Figma AI credits work (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/33459875669015-How-Figma-AI-credits-work
+    accessed: 2026-11-20
+beforeYouUse:
+  clientData: >-
+    not verified: the release note and help page we read don't say how the
+    file content the agent reads is stored or used. Check Figma's AI terms
+    and your org's AI settings before pointing it at NDA'd or unreleased
+    client work.
+  usageRights: >-
+    not verified: nothing we read covers ownership or licensing of code
+    snippets the agent writes. Treat them like any generated code and review
+    them before they go into a client's codebase.
+  disclosure: >-
+    not applicable: the agent explains and summarizes a design rather than
+    producing published creative work, so there's usually nothing to
+    disclose. If generated code ships as is, follow your team's own policy.
+  accessibility: >-
+    known: the help page says the agent can give accessibility feedback on
+    designs in Figma Design. Not verified: whether it considers accessibility
+    when it suggests layout code or explains components in Dev Mode. Check
+    any snippet for semantics, focus order, and contrast yourself.
+  cost: >-
+    known: Figma's help page says Dev Mode isn't available on Starter plans
+    or with View or Collab seats, and that the credits an agent run uses
+    change with the complexity of the task. Its credits page says Dev seats
+    get 500 AI credits a month on Professional, Organization, and Enterprise
+    plans, and gives rough agent costs in Figma Design as of November 19,
+    2026: about 30+ credits to change the fonts on a design and about 100+
+    to summarize what's on the canvas. Not verified: what a Dev Mode
+    question, version comparison, or snippet costs, since Dev Mode tasks
+    aren't listed separately.
+---
+Dev Mode has always been the place to inspect a design: click a layer, read its properties, copy what you need. Figma's November 19 release note adds a second way in. You can now prompt the Figma agent from inside Dev Mode and ask it about the design instead. This is based on Figma's release note and help page. We haven't tried it ourselves.
+
+## What changed
+
+The release note lists three things you can ask for: compare versions of a design, get code snippets, and get download links so you can save assets in bulk.
+
+Figma's help page for the agent fills in a bit more. It lists Dev Mode tasks like asking how a component's interactions work, finding layers that could use variables you already have, getting implementation advice such as a CSS grid or flexbox approach or a React snippet, seeing a version comparison as a visual diff or as a list of changes in the chat, and generating links to save icon components as SVGs or CSS for your variables.
+
+Seats matter here. The help page says people with a Dev seat can chat with the agent without changing the design, while Full seats can also ask it to make edits. It also says Dev Mode isn't available on Starter plans or with View or Collab seats. The agent runs in Figma Design, in the desktop app or a browser.
+
+## Why it matters for designers
+
+The version comparison is the part designers will feel most. "What changed since the last handoff?" is a question developers ask constantly, and the honest answer usually lives in someone's memory or a pile of comments. If the agent can show a visual diff or a plain list of changes, that's less time spent walking someone through a file you redesigned on Tuesday.
+
+It also gives developers a way to ask questions without asking you. Which variable should this spacing use? How is this component supposed to behave? That can mean fewer interruptions, or it can mean a confident wrong answer you don't hear about until review. Which one you get depends on how clean your file is.
+
+And because Dev seats can only chat, not edit, a developer poking around with the agent can't accidentally move your layers.
+
+## What to watch out for
+
+It isn't free to use. The help page says the credits an agent run uses change with the complexity of the task, and it doesn't give fixed amounts. Figma's credits page doesn't list Dev Mode tasks separately, but its nearest examples in Figma Design run from about 30+ credits for a simple change to about 100+ for summarizing a canvas. With 500 credits a month on a Dev seat, that could mean only a handful of bigger questions before the month runs out. A big version comparison on a large file may cost more than a quick question. Seat credits are per person and don't roll over, so if developers on Dev seats will use it regularly, ask your admin whether the team has extra credits.
+
+It can only explain what's in the file. If your components are detached, your layers are unnamed, or values are hard-coded instead of using variables, expect its answers and snippets to reflect that. The help page's own example of finding layers that could use existing variables shows the agent can help spot those gaps, too.
+
+The agent prepares downloads but doesn't export for you. The help page marks exporting assets as something it can't do directly. It generates links instead, so someone still has to download and check them.
+
+Generated code is a starting point, not a spec. A React snippet or a flexbox suggestion still needs a developer to fit it into the real codebase, with its own components and conventions. The sidebar covers what we couldn't confirm about client files and code.
