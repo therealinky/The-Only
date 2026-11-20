@@ -8,7 +8,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-20
 updatedAt: 2026-11-20
@@ -26,6 +27,9 @@ sources:
   - title: "Work with the Figma agent in design files (Figma Help Center)"
     url: https://help.figma.com/hc/en-us/articles/37998629035799-Work-with-the-Figma-agent-in-design-files
     accessed: 2026-11-20
+  - title: "How Figma AI credits work (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/33459875669015-How-Figma-AI-credits-work
+    accessed: 2026-11-20
 beforeYouUse:
   clientData: >-
     not verified: the release note and help page we read don't say how the
@@ -41,14 +45,20 @@ beforeYouUse:
     producing published creative work, so there's usually nothing to
     disclose. If generated code ships as is, follow your team's own policy.
   accessibility: >-
-    not verified: the help page doesn't say whether the agent considers
-    accessibility when it suggests layout code or explains components. Check
+    known: the help page says the agent can give accessibility feedback on
+    designs in Figma Design. Not verified: whether it considers accessibility
+    when it suggests layout code or explains components in Dev Mode. Check
     any snippet for semantics, focus order, and contrast yourself.
   cost: >-
     known: Figma's help page says Dev Mode isn't available on Starter plans
     or with View or Collab seats, and that the credits an agent run uses
-    change with the complexity of the task. Not verified: how many credits a
-    typical Dev Mode question, version comparison, or snippet costs.
+    change with the complexity of the task. Its credits page says Dev seats
+    get 500 AI credits a month on Professional, Organization, and Enterprise
+    plans, and gives rough agent costs in Figma Design as of November 19,
+    2026: about 30+ credits to change the fonts on a design and about 100+
+    to summarize what's on the canvas. Not verified: what a Dev Mode
+    question, version comparison, or snippet costs, since Dev Mode tasks
+    aren't listed separately.
 ---
 Dev Mode has always been the place to inspect a design: click a layer, read its properties, copy what you need. Figma's November 19 release note adds a second way in. You can now prompt the Figma agent from inside Dev Mode and ask it about the design instead. This is based on Figma's release note and help page. We haven't tried it ourselves.
 
@@ -70,9 +80,9 @@ And because Dev seats can only chat, not edit, a developer poking around with th
 
 ## What to watch out for
 
-It isn't free to use. The help page says the credits an agent run uses change with the complexity of the task, and it doesn't give fixed amounts. A big version comparison on a large file may cost more than a quick question, so if your team shares a credit pool, it's worth agreeing who uses it for what.
+It isn't free to use. The help page says the credits an agent run uses change with the complexity of the task, and it doesn't give fixed amounts. Figma's credits page doesn't list Dev Mode tasks separately, but its nearest examples in Figma Design run from about 30+ credits for a simple change to about 100+ for summarizing a canvas. With 500 credits a month on a Dev seat, that could mean only a handful of bigger questions before the month runs out. A big version comparison on a large file may cost more than a quick question. Seat credits are per person and don't roll over, so if developers on Dev seats will use it regularly, ask your admin whether the team has extra credits.
 
-It can only explain what's in the file. If your components are detached, your layers are unnamed, or values are hard-coded instead of using variables, expect its answers and snippets to reflect that. The help page's own example of finding layers that could use existing variables is a hint at how often that's an issue.
+It can only explain what's in the file. If your components are detached, your layers are unnamed, or values are hard-coded instead of using variables, expect its answers and snippets to reflect that. The help page's own example of finding layers that could use existing variables shows the agent can help spot those gaps, too.
 
 The agent prepares downloads but doesn't export for you. The help page marks exporting assets as something it can't do directly. It generates links instead, so someone still has to download and check them.
 
