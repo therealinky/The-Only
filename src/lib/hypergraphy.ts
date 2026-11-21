@@ -138,6 +138,7 @@ export const ART_MOTIFS = [
   'rowboards',
   'splats',
   'redline',
+  'humanpick',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1545,6 +1546,21 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
     strokeTone: 0.9,
+  },
+
+  // A content library as a 2x2 grid of tiles: three solid, creator-made
+  // tiles and one faded tile carrying an AI sparkle, turned down: choosing
+  // to see less AI-generated content.
+  humanpick: {
+    fills: [
+      outline(box(8, 8, 44, 44), 0.85),
+      outline(box(56, 8, 92, 44), 0.85),
+      outline(box(8, 56, 44, 92), 0.85),
+      outline(star4(74, 74, 13, 4), 0.35),
+    ],
+    strokes: [frame(56, 56, 92, 92)],
+    tones: [],
+    strokeTone: 0.35,
   },
 
   // A video frame holding the same pose twice, dark original on the left
