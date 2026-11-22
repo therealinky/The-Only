@@ -1826,6 +1826,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(box(18, 66, 62, 82), 0.6),
     ],
   },
+
   // An isometric cube with a speech bubble above it holding a checkmark,
   // linked by a dashed tail: an assistant waiting for approval before it
   // changes a 3D scene.
