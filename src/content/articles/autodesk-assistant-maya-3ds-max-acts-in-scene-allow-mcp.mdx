@@ -1,0 +1,89 @@
+---
+title: "Autodesk Assistant in Maya and 3ds Max can now change your scene, after you click Allow"
+dek: >-
+  Autodesk's built-in Assistant in Maya and 3ds Max moves past answering
+  questions and can now propose and run scripts in your scene, as a Tech
+  Preview that's off by default. Both apps also get an MCP server for
+  outside agents like Claude, and Arnold gets a faster viewport mode.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-22
+updatedAt: 2026-11-22
+lastVerified: 2026-11-22
+disciplines:
+  - 3D
+art: allowcube
+tools:
+  - Autodesk Maya
+  - Autodesk 3ds Max
+  - Autodesk Arnold
+sources:
+  - title: "What's new in AI: More of what energizes you, less of what drains you with Autodesk Assistant and MCP servers (Autodesk Media & Entertainment blog, November 18, 2026)"
+    url: https://blogs.autodesk.com/media-and-entertainment/2026/11/18/whats-new-in-ai-more-of-what-energizes-you-less-of-what-drains-you-with-autodesk-assistant-and-mcp-servers/
+    accessed: 2026-11-22
+  - title: "New Arnold Viewport: See more of the final render as you work (Autodesk Media & Entertainment blog, November 18, 2026)"
+    url: https://blogs.autodesk.com/media-and-entertainment/2026/11/18/new-arnold-viewport-in-maya-and-3ds-max/
+    accessed: 2026-11-22
+  - title: "Maya and 3ds Max gain scene-aware assistants and a faster Arnold viewport, by Bela Beier (Digital Production, November 20, 2026)"
+    url: https://digitalproduction.com/2026/11/20/maya-3ds-max-mcp-arnold-viewport/
+    accessed: 2026-11-22
+beforeYouUse:
+  clientData: >-
+    known: Autodesk says prompts and conversation history sent to Autodesk
+    Assistant aren't shared with third-party model providers for training
+    their models. Not verified: where prompts and scene data are processed,
+    or how long they're kept. Autodesk links an AI transparency card we
+    haven't read. If you connect an outside agent through the MCP server,
+    that agent's own data terms apply to whatever it sees.
+  usageRights: >-
+    not applicable: the Assistant works on your own scene by running scripts
+    rather than generating new images or models, so it doesn't raise the
+    usual questions about who owns AI-generated output.
+  disclosure: >-
+    not applicable: the changes are ordinary script edits to your scene, and
+    nothing in Autodesk's posts suggests the work gets labeled as AI-made.
+    Whether to tell a client an assistant helped with cleanup is up to you.
+  accessibility: >-
+    not verified: Autodesk's posts don't say how the Assistant window works
+    with screen readers or keyboard-only use. A text-prompt way to do scene
+    chores could help artists who find dense menus hard, but that's untested.
+  cost: >-
+    known: Autodesk says the Assistant and the Maya and 3ds Max MCP servers
+    come with your Maya or 3ds Max subscription, and that you pay separately
+    for any outside agent you connect. Digital Production lists Maya and 3ds
+    Max at US$2,010 a year each in Autodesk's US store. Not verified: whether there are usage
+    limits on the built-in Assistant during the Tech Preview.
+---
+Autodesk Assistant, the built-in AI helper in Maya and 3ds Max, can now do work in your scene instead of only answering questions about it. Autodesk announced it on November 18 as a Tech Preview, alongside MCP servers that let outside AI agents connect to both apps and a faster Arnold viewport. We haven't tried any of it, so this is based on Autodesk's two blog posts and Digital Production's write-up.
+
+## What changed
+
+Until now, Autodesk Assistant could answer how-to questions and analyze your scene. The new part, labeled "Do tasks for you," lets it act. Autodesk's examples include scene checks, UV mapping, scene and geometry cleanup, material management, and building a custom UI, mostly shown in 3ds Max. Autodesk says it needs no setup and comes with skills Autodesk built.
+
+The guardrails are the interesting part. You choose read-only or read-write access, and read-write is off by default. With it on, the Assistant proposes a script and nothing runs until you click Allow. Each action it takes is a single undo step. A Safe Mode, also on by default, blocks scripts that reach outside your scene to read, change, or delete files on your computer, or run system commands.
+
+Maya and 3ds Max also each get an MCP server, also a Tech Preview, so an outside agent you already use can drive the app. The only one Autodesk and Digital Production name is Claude, in an example where a tools developer has it run Maya unit tests and report back. Autodesk says that took his testing from more than an hour to about five minutes, though that's one artist's own test suite. The same controls apply: scene writes are opt-in, scripts need approval, and you can generate a fresh authentication token each time the server starts or keep one until you ask for a new one.
+
+Separately, Arnold gets a new viewport mode in both apps that uses NVIDIA's DLSS to upscale and denoise the image while you move around, and Autodesk says it reduces how much data has to pass from Maya to Arnold on frame changes. Digital Production says that in Maya you turn it on by choosing Arnold as the viewport renderer and enabling Accelerated Viewport in the toolbar.
+
+## Why it matters for designers
+
+A lot of 3D time goes to the chores around the actual modeling and lighting: checking a scene before handoff, cleaning up names and materials, unwrapping UVs. Studios have long handled that with custom scripts, which only helps if someone on the team writes them. Describing the job in a sentence and reviewing the script before it runs puts some of that within reach of artists who don't code.
+
+The approval step also sets a useful baseline. Plenty of AI tools now edit files directly. Having writes off by default, a visible script to approve, one undo step per action, and a block on touching anything outside the scene is a sensible model, and it's worth asking for the same from other tools.
+
+If you'd rather not use any of it, nothing changes. Read-write access is off unless you switch it on.
+
+## What to watch out for
+
+This is a Tech Preview, so expect rough edges and changes. Autodesk's posts don't say whether the Assistant runs in the cloud or needs an internet connection, so check before using it on a locked-down or offline machine.
+
+Approving a script only protects you if you read it. A single undo step per action helps, but save a copy of the scene before pointing the Assistant at a client file, and check its results, especially for something like UV layout where a quick glance can miss problems.
+
+The MCP server opens the app to an outside agent, and that agent's pricing, data handling, and mistakes are separate from Autodesk's. Keep write access off until you know what the agent is going to do, and read every script before you click Allow. Safe Mode is a setting for the built-in Assistant, and Autodesk doesn't list it among the MCP server's controls.
+
+For the Arnold viewport, Digital Production notes that the accelerated view takes pixels straight from the renderer and skips Arnold imagers, including color corrections and output denoisers, which production renders still apply. Compare a frame through both before signing off on a look.
