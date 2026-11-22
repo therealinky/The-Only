@@ -139,6 +139,7 @@ export const ART_MOTIFS = [
   'splats',
   'redline',
   'humanpick',
+  'allowcube',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1823,6 +1824,26 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(box(8, 30, 72, 92), 0.12),
       region(box(18, 40, 54, 48), 0.45),
       region(box(18, 66, 62, 82), 0.6),
+    ],
+  },
+  // An isometric cube with a speech bubble above it holding a checkmark,
+  // linked by a dashed tail: an assistant waiting for approval before it
+  // changes a 3D scene.
+  allowcube: {
+    fills: [],
+    strokes: [
+      poly([32, 46, 54, 58, 54, 84, 32, 96, 10, 84, 10, 58, 32, 46]),
+      poly([32, 70, 54, 58]),
+      poly([32, 70, 10, 58]),
+      poly([32, 70, 32, 96]),
+      frame(56, 6, 94, 36),
+      poly([64, 21, 72, 30, 87, 12]),
+      poly([62, 40, 58, 46]), poly([55, 51, 52, 56]),
+    ],
+    tones: [
+      region(poly([32, 46, 54, 58, 32, 70, 10, 58]), 0.14),
+      region(poly([10, 58, 32, 70, 32, 96, 10, 84]), 0.45),
+      region(poly([32, 70, 54, 58, 54, 84, 32, 96]), 0.78),
     ],
   },
 };
