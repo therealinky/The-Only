@@ -1848,6 +1848,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(poly([32, 70, 54, 58, 54, 84, 32, 96]), 0.78),
     ],
   },
+
   // A name tag on a string: a luggage-style label with a punched hole and
   // three lines of writing, for giving layers real names.
   nametag: {

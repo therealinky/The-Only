@@ -8,7 +8,8 @@ dek: >-
 format: workflow
 evidence: researched
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-23
 updatedAt: 2026-11-23
@@ -31,16 +32,16 @@ sources:
   - title: "How Figma AI credits work (Figma Help Center)"
     url: https://help.figma.com/hc/en-us/articles/33459875669015-How-Figma-AI-credits-work
     accessed: 2026-11-23
-  - title: "Figma AI in 2026: Everything it can do — and what it still can't, by Bart Krawczyk (LogRocket Blog, April 21, 2026)"
+  - title: "Figma AI in 2026: Everything it can do — and what it still can’t, by Bart Krawczyk (LogRocket Blog, April 21, 2026)"
     url: https://blog.logrocket.com/ux-design/figma-ai-2026-quick-overview/
     accessed: 2026-11-23
   - title: "Rename Layers, Rewrite or Translate Text, and Remove Image Backgrounds Automatically in Figma, by Pallav Pathak (All Things How, updated May 21, 2025)"
-    url: https://allthings.how/?p=7381
+    url: https://allthings.how/rename-layers-rewrite-or-translate-text-and-remove-image-backgrounds-automatically-in-figma/
     accessed: 2026-11-23
   - title: "Figma AI rename not working (Figma Forum, April to June 2026)"
     url: https://forum.figma.com/report-a-problem-6/figma-ai-rename-not-working-52882
     accessed: 2026-11-23
-  - title: "Rename layers AI not working (Figma Forum, June 10, 2026)"
+  - title: "Rename Layers AI not working (Figma Forum, June 10, 2026)"
     url: https://forum.figma.com/report-a-problem-6/rename-layers-ai-not-working-54689
     accessed: 2026-11-23
   - title: "Rename layers (AI) skips layers inside slots (Figma Forum, November 4, 2026)"
@@ -99,7 +100,7 @@ Figma has two ways to name your layers with AI. There's the built-in Rename laye
 
 4. **Know what it will skip, and fix those by hand.** It renames frames, groups, text layers, rectangles with an image fill, and instances still using their component's default name. It doesn't rename anything nested inside an instance, individual vector shapes like ellipses, stars, and polygons, or rectangles without an image fill. A recent forum report adds layers placed inside a component's slot to that list. For instance sublayers, the fix is to name them once in the main component, so every instance picks them up.
 
-5. **Use "Rename anyway" when it says there's nothing to do.** If every layer in your selection already looks named, Figma shows "No layers need renaming." Choosing Rename anyway runs it again regardless. The help page doesn't spell out whether that replaces names you set yourself, so try it on a duplicate of the frame first.
+5. **Use "Rename anyway" when it says there's nothing to do.** If every layer in your selection already looks named, Figma shows "No layers need renaming." Choosing Rename anyway runs it again regardless. Figma's help page doesn't say what happens to names you set yourself, but both independent guides describe it as overriding them, so try it on a duplicate of the frame first.
 
 6. **Check what it did to duplicates.** If the same unnamed layer appears in several top-level frames, Figma renames the matching copies too, so prototype features like Smart animate and scroll position keep lining up. That's helpful, but click through a prototype afterward to make sure transitions still behave the way you built them.
 
@@ -115,7 +116,7 @@ The sources split on how much to automate. Figma's own pages push the agent, whi
 
 ## What to watch out for
 
-It isn't always reliable. Figma Forum threads from April and June 2026 describe Rename layers freezing the app or spinning and then closing without renaming anything, and Figma staff said in June that they were looking into a backend issue, with no fix recorded in those threads. If it hangs, try the browser version before assuming your file is the problem.
+It isn't always reliable. Figma Forum threads from April and June 2026 describe Rename layers freezing the app or spinning and then closing without renaming anything, and Figma staff said in June that they were looking into a backend issue, with no fix recorded in those threads. Figma's support has suggested trying the browser version or the Figma beta app, though one person said it froze in both. If it keeps failing, report it with your app version so Figma can open a ticket.
 
 The skip list is longer than it looks. Vectors, layers inside instances, and slot content all stay as they were, and those are often the layers a developer actually needs to find. Plan a manual pass for them.
 
