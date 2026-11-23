@@ -1,0 +1,123 @@
+---
+title: "Getting tidy, useful layer names out of Figma's Rename layers before handoff"
+dek: >-
+  Figma's AI Rename layers will turn "Frame 427" into something a developer
+  can read, but it skips more than you'd expect. Pulling Figma's docs,
+  independent guides, and forum reports together, here's how to get a file
+  named properly without the cleanup turning into its own project.
+format: workflow
+evidence: researched
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-23
+updatedAt: 2026-11-23
+lastVerified: 2026-11-23
+disciplines:
+  - UI/UX
+art: nametag
+tools:
+  - Figma
+sources:
+  - title: "Rename layers with AI (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/24004711129879
+    accessed: 2026-11-23
+  - title: "AI layer namer (Figma solutions page)"
+    url: https://www.figma.com/solutions/ai-layer-namer/
+    accessed: 2026-11-23
+  - title: "AI credit updates FAQ (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/42614902212887-AI-credit-updates-FAQ
+    accessed: 2026-11-23
+  - title: "How Figma AI credits work (Figma Help Center)"
+    url: https://help.figma.com/hc/en-us/articles/33459875669015-How-Figma-AI-credits-work
+    accessed: 2026-11-23
+  - title: "Figma AI in 2026: Everything it can do — and what it still can’t, by Bart Krawczyk (LogRocket Blog, April 21, 2026)"
+    url: https://blog.logrocket.com/ux-design/figma-ai-2026-quick-overview/
+    accessed: 2026-11-23
+  - title: "Rename Layers, Rewrite or Translate Text, and Remove Image Backgrounds Automatically in Figma, by Pallav Pathak (All Things How, updated May 21, 2025)"
+    url: https://allthings.how/rename-layers-rewrite-or-translate-text-and-remove-image-backgrounds-automatically-in-figma/
+    accessed: 2026-11-23
+  - title: "Figma AI rename not working (Figma Forum, April to June 2026)"
+    url: https://forum.figma.com/report-a-problem-6/figma-ai-rename-not-working-52882
+    accessed: 2026-11-23
+  - title: "Rename Layers AI not working (Figma Forum, June 10, 2026)"
+    url: https://forum.figma.com/report-a-problem-6/rename-layers-ai-not-working-54689
+    accessed: 2026-11-23
+  - title: "Rename layers (AI) skips layers inside slots (Figma Forum, November 4, 2026)"
+    url: https://forum.figma.com/suggest-a-feature-11/rename-layers-ai-skips-layers-inside-slots-59694
+    accessed: 2026-11-23
+summary:
+  whatChanged: >-
+    Nothing new. Rename layers has been part of Figma AI for a while, and
+    the Figma agent can now rename to a convention you describe. This is a
+    synthesis of Figma's own docs, independent guides, and recent forum
+    reports, plus general Figma file-organization practice.
+  whyItMatters: >-
+    Layer names are what developers, prototype settings, and AI coding tools
+    see when they open your file. Default names like "Frame 427" make all of
+    that harder, and renaming by hand is the chore everyone skips.
+  bestFor: >-
+    Product and UI designers handing files to developers, anyone cleaning up
+    an inherited or exploratory file, and teams that want a consistent
+    naming convention without policing it by hand.
+  timeToTry: >-
+    A minute or two for one screen with the built-in action. Setting up a
+    convention with the agent and checking a whole file takes longer.
+beforeYouUse:
+  clientData: >-
+    not verified: Figma's Rename layers help page doesn't say how the layer
+    content it reads is processed or stored. Check your team's or org's AI
+    settings and Figma's AI terms before running it on NDA'd client files.
+  usageRights: >-
+    not applicable: the feature only changes layer names in your own file,
+    not any creative work that gets published.
+  disclosure: >-
+    not applicable: layer names are internal file structure, so there's
+    nothing to disclose to clients or audiences.
+  accessibility: >-
+    not verified: none of the sources say whether AI-chosen layer names feed
+    into anything assistive technology reads. Layer names aren't the same as
+    alt text or accessible labels, so don't treat a good name as a
+    substitute for either.
+  cost: >-
+    known: Figma's help page says Rename layers is available on
+    Professional, Education (not K-12), Organization, and Enterprise plans,
+    and needs edit access to the file. Figma's credits page lists the
+    built-in Rename layers action as free, and says the Figma agent uses AI
+    credits in Figma Design. Its credit FAQ says the agent started using
+    credits when it became generally available on October 6, 2026. Not
+    verified: what a renaming request to the agent costs, since it isn't
+    listed separately and Figma says agent costs vary with the task.
+---
+Figma has two ways to name your layers with AI. There's the built-in Rename layers action, which picks names on its own, and there's the Figma agent, which you can ask to follow a naming convention. Most guides cover one or the other. This pulls together Figma's own documentation, a couple of independent write-ups, and recent forum reports, plus general Figma file-organization practice, into one approach. It's synthesized from published sources, not something we've run end to end on a real project.
+
+1. **Finish the structure first, then name.** The built-in action only renames layers that still have Figma's default names, and it keeps anything you've already renamed. So naming works best near the end, once frames and groups have stopped moving around. Run it on a screen that's half built and you'll be running it again later anyway.
+
+2. **Protect what you don't want touched.** Figma's help page says it skips hidden and locked layers, so lock any layers whose names have to stay exactly as they are, like layers a developer has already wired up or ones a plugin depends on. That's the closest thing the built-in action has to an exclude list.
+
+3. **Run Rename layers on one screen at a time.** Select a frame (or a handful of related layers), then right-click and choose Rename layers, or find it under Actions in the toolbar or in the quick actions menu. Figma says it looks at each layer's contents, its location, and how it relates to the other layers you selected. Selecting one screen at a time keeps that context focused and makes the results easier to check than a whole page in one go.
+
+4. **Know what it will skip, and fix those by hand.** It renames frames, groups, text layers, rectangles with an image fill, and instances still using their component's default name. It doesn't rename anything nested inside an instance, individual vector shapes like ellipses, stars, and polygons, or rectangles without an image fill. A recent forum report adds layers placed inside a component's slot to that list. For instance sublayers, the fix is to name them once in the main component, so every instance picks them up.
+
+5. **Use "Rename anyway" when it says there's nothing to do.** If every layer in your selection already looks named, Figma shows "No layers need renaming." Choosing Rename anyway runs it again regardless. Figma's help page doesn't say what happens to names you set yourself, but both independent guides describe it as overriding them, so try it on a duplicate of the frame first.
+
+6. **Check what it did to duplicates.** If the same unnamed layer appears in several top-level frames, Figma renames the matching copies too, so prototype features like Smart animate and scroll position keep lining up. That's helpful, but click through a prototype afterward to make sure transitions still behave the way you built them.
+
+7. **Layer a convention on top.** The built-in action picks its own wording. If your team uses a convention, you have two routes. The manual one is Figma's bulk rename (it doesn't use AI), which can add prefixes, suffixes, or numbers and supports regular expressions, good for consistent patterns like putting a section name in front of every layer. The AI one is the Figma agent: select layers, a frame, or a page, describe the convention in plain words (something like "name by component and state, lowercase with hyphens"), review, and refine in the same chat thread. The agent is the better fit when the rule depends on what each layer actually is. Bulk rename is better when the rule is purely mechanical.
+
+8. **Do a quick handoff pass.** Open the frame in Dev Mode, or look at it the way a developer would, and scan the layer panel for leftovers: vectors still called "Vector," slot content, anything inside instances. Those are the gaps the steps above can't cover automatically.
+
+## Why it matters for designers
+
+Layer names used to be a courtesy. Now they do real work. Developers read them in Dev Mode, prototype settings use them to match layers across frames, and AI coding tools that read your file through Figma's MCP server or the agent see them too. A file full of "Frame 427" and "Group 12" is harder for all of them to make sense of.
+
+The sources split on how much to automate. Figma's own pages push the agent, which can follow a convention. The independent guides mostly stick to the built-in action and treat naming conventions as a manual job for bulk rename. Both have a point. The built-in action is fast and predictable about what it skips, while the agent is more flexible but gives you something new to review every time, and it costs credits where the built-in action is free.
+
+## What to watch out for
+
+It isn't always reliable. Figma Forum threads from April and June 2026 describe Rename layers freezing the app or spinning and then closing without renaming anything, and Figma staff said in June that they were looking into a backend issue, with no fix recorded in those threads. Figma's support has suggested trying the browser version or the Figma beta app, though one person said it froze in both. If it keeps failing, report it with your app version so Figma can open a ticket.
+
+The skip list is longer than it looks. Vectors, layers inside instances, and slot content all stay as they were, and those are often the layers a developer actually needs to find. Plan a manual pass for them.
+
+The agent's AI-chosen names are a draft, not a standard. If you go the agent route, review its names against your convention before handing off, and remember that every agent run draws on your AI credits. Figma's own solutions page still says the agent is free during an open beta, but that's out of date: Figma's credit FAQ says it left beta on October 6 and has used credits since. The built-in action is listed as free, so it's worth trying first. Check the sidebar for which plans include Rename layers.
