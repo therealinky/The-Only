@@ -140,6 +140,7 @@ export const ART_MOTIFS = [
   'redline',
   'humanpick',
   'allowcube',
+  'nametag',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1846,6 +1847,18 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       region(poly([10, 58, 32, 70, 32, 96, 10, 84]), 0.45),
       region(poly([32, 70, 54, 58, 54, 84, 32, 96]), 0.78),
     ],
+  },
+  // A name tag on a string: a luggage-style label with a punched hole and
+  // three lines of writing, for giving layers real names.
+  nametag: {
+    fills: [outline(poly([34, 22, 94, 22, 94, 78, 34, 78, 14, 50]), 0.06), dot(28, 50, 4.5)],
+    strokes: [
+      poly([44, 36, 84, 36]),
+      poly([44, 50, 76, 50]),
+      poly([44, 64, 82, 64]),
+      cubic({ x: 26, y: 50 }, { x: 10, y: 34 }, { x: 14, y: 14 }, { x: 4, y: 4 }),
+    ],
+    tones: [],
   },
 };
 
