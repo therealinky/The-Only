@@ -1862,6 +1862,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
   },
+
   // A cluster of sticky notes, an arrow, and a slide on an easel stand:
   // an agent turning a whiteboard into a presentation deck.
   boardtodeck: {
