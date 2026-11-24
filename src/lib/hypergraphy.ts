@@ -141,6 +141,7 @@ export const ART_MOTIFS = [
   'humanpick',
   'allowcube',
   'nametag',
+  'boardtodeck',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1858,6 +1859,28 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([44, 50, 76, 50]),
       poly([44, 64, 82, 64]),
       cubic({ x: 26, y: 50 }, { x: 10, y: 34 }, { x: 14, y: 14 }, { x: 4, y: 4 }),
+    ],
+    tones: [],
+  },
+  // A cluster of sticky notes, an arrow, and a slide on an easel stand:
+  // an agent turning a whiteboard into a presentation deck.
+  boardtodeck: {
+    fills: [
+      outline(box(2, 26, 16, 40), 0.35),
+      outline(box(22, 26, 36, 40), 0.7),
+      outline(box(2, 48, 16, 62), 0.9),
+      outline(box(22, 48, 36, 62), 0.5),
+      outline(poly([50, 36, 60, 44, 50, 52]), 1),
+      outline(frame(66, 20, 98, 64), 0.06),
+    ],
+    strokes: [
+      poly([40, 44, 52, 44]),
+      poly([71, 29, 91, 29]),
+      poly([71, 40, 93, 40]),
+      poly([71, 50, 87, 50]),
+      poly([82, 64, 82, 74]),
+      poly([82, 74, 72, 92]),
+      poly([82, 74, 92, 92]),
     ],
     tones: [],
   },
