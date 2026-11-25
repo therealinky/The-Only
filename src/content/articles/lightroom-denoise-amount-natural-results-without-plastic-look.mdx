@@ -1,0 +1,127 @@
+---
+title: "Getting natural-looking results from Lightroom's AI Denoise, now that it's a slider"
+dek: >-
+  AI Denoise in Adobe Lightroom no longer makes a separate DNG. It lives in
+  the Detail panel and always starts at the same strength. Pulling together
+  Adobe's own notes, independent guides, and a lot of forum threads, here's
+  how to set the amount, batch it without bloating your catalog, and avoid
+  the waxy, plastic look.
+format: workflow
+evidence: researched
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-25
+updatedAt: 2026-11-25
+lastVerified: 2026-11-25
+disciplines:
+  - Photo & Imaging
+art: dialback
+tools:
+  - Adobe Lightroom
+sources:
+  - title: "Enhance fine details in raw images (Adobe Lightroom Classic Help, updated May 1, 2026)"
+    url: https://helpx.adobe.com/lightroom-classic/desktop/process-and-develop-photos/enhance-details.html
+    accessed: 2026-11-25
+  - title: "Denoise is not working in Lightroom Classic versions 15.3 and earlier (Adobe Lightroom Classic Help, updated June 18, 2026)"
+    url: https://helpx.adobe.com/lightroom-classic/desktop/technical-support/workflow-issues/denoise-issues/troubleshoot-denoise-issues.html
+    accessed: 2026-11-25
+  - title: "Denoise demystified, by Eric Chan (Adobe Blog, April 18, 2023)"
+    url: https://blog.adobe.com/en/publish/2023/04/18/denoise-demystified
+    accessed: 2026-11-25
+  - title: "What’s New in Lightroom Classic 14.4, Mobile & Desktop (June 2025)? (The Lightroom Queen, June 17, 2025, updated July 31, 2025)"
+    url: https://www.lightroomqueen.com/whats-new-in-lightroom-2025-06/
+    accessed: 2026-11-25
+  - title: "Lightroom Classic 14.4, by Agen Schmitz (TidBITS, June 23, 2025)"
+    url: https://tidbits.com/watchlist/lightroom-classic-14-4/
+    accessed: 2026-11-25
+  - title: "P: Allow ability to adjust Denoise slider value prior to Denoise running (LrC) (Adobe Community, June 2025)"
+    url: https://community.adobe.com/feature-requests-676/p-allow-ability-to-adjust-denoise-slider-value-prior-to-denoise-running-lrc-666221
+    accessed: 2026-11-25
+  - title: "P: Bring back the ability of Enhance to run in the background. (LrC) (Adobe Community, June 2025)"
+    url: https://community.adobe.com/feature-requests-676/p-bring-back-the-ability-of-enhance-to-run-in-the-background-lrc-666179
+    accessed: 2026-11-25
+  - title: "P: Ability to set the default value of the Denoise slider (Adobe Community, July 31, 2025)"
+    url: https://community.adobe.com/feature-requests-676/p-ability-to-set-the-default-value-of-the-denoise-slider-666208
+    accessed: 2026-11-25
+  - title: "Camera Raw AI Denoise has gotten worse (Adobe Community, July 2025)"
+    url: https://community.adobe.com/questions-712/camera-raw-ai-denoise-has-gotten-worse-1180967
+    accessed: 2026-11-25
+summary:
+  whatChanged: >-
+    Not a new release. A synthesis of Adobe's current help pages, its earlier
+    notes, independent guides, and Adobe Community threads on AI Denoise since it moved into the Detail
+    panel as a non-destructive setting, plus general Lightroom technique.
+  whyItMatters: >-
+    Denoise is one of the most useful AI tools in Lightroom, but the move to
+    the Detail panel changed how you set the amount, how batches behave, and
+    how much space it takes. Most plastic-looking results come from leaving
+    the default strength alone.
+  bestFor: >-
+    Photographers and designers working with low-light, high-ISO, or
+    underexposed raw files, from event and interior shoots to product photos
+    a client shot on a phone or older camera.
+  timeToTry: >-
+    Fifteen minutes on a few noisy raw files to find an amount you like and
+    save it as a preset.
+beforeYouUse:
+  clientData: >-
+    Known: Adobe's Denoise write-up describes it as running on your
+    computer's GPU, and it isn't a generative, prompt-based feature. Not
+    verified: we didn't confirm whether any image data is sent to Adobe when
+    it runs, so check Adobe's terms if your files are under NDA.
+  usageRights: >-
+    Not applicable: Denoise cleans up your own photo rather than adding
+    generated content. If you deliver to a publication with rules about AI
+    processing of documentary images, check those rules first.
+  disclosure: >-
+    Not verified: we didn't confirm whether Lightroom records Denoise in
+    Content Credentials. If a client asks you to declare AI edits, check what
+    your export actually includes.
+  accessibility: >-
+    Not applicable: this is a photo cleanup technique, not a published
+    interface or document.
+  cost: >-
+    Known: TidBITS describes the Lightroom Classic update that moved Denoise
+    into the Detail panel as a free update for Creative Cloud subscribers.
+    Not verified: none of the sources mention generative credits for
+    Denoise, but we didn't confirm Adobe's current credit rules.
+---
+AI Denoise used to be a button that made a brand-new DNG file next to your raw. Since mid-2025 it works differently. In Lightroom Classic and the cloud-based Lightroom app, Denoise, Raw Details, and Super Resolution sit in the Detail panel as regular, non-destructive settings, and Denoise always switches on at the same starting strength. This workflow pulls together Adobe's current help pages, its earlier notes, independent guides, and a long run of Adobe Community threads, plus general Lightroom technique. It's synthesized from published sources, not something we've tested end to end. Adobe's help pages were updated in 2026, but much of the community experience dates from 2025, so check it against your current version.
+
+1. **Run it first, before healing and masking.** Adobe's own advice since launch is to apply Denoise early. It changes the underlying pixels, so anything built on top of them can shift: Adobe warns that the contents of Remove spots and AI masks may change unexpectedly when Denoise runs afterward, and independent coverage of the newer version says repairs made with generative Remove have to be regenerated once Denoise is turned on. Adobe's current help page gives the same advice: Denoise before AI masks and Remove. Watch for Lightroom's AI edit status icon, which flags AI edits that need updating.
+
+2. **Turn it on, then pull it back.** Enable Denoise in the Detail panel and it starts at an Amount of 50, with no way to set a different value before it runs. That default is where most complaints come from. Across several forum threads, people describe 50 as too strong for many images, with skin turning smooth and waxy, and many settle somewhere lower. The upside of the new setup is that once the first calculation finishes, moving the slider is close to instant, so try a few values instead of accepting the first one.
+
+3. **Judge it at 100%, on the parts that matter.** Zoom in on skin, hair, fabric, and foliage, where over-smoothing shows first, rather than the flat sky that always looks great. If you find yourself pulling the amount down so far that the noise comes back, that's a sign this image may be better with a light Denoise plus some manual cleanup than with AI Denoise doing everything.
+
+4. **Recheck shadows and contrast afterward.** Adobe notes that Denoise can subtly change a photo's overall tonality, especially by cleaning up the shadows. Once it's on, revisit Shadows, Clarity, and Dehaze, since settings that looked right on a noisy file can look heavier on a clean one.
+
+5. **Add a little grain back.** A denoised file can look too smooth, almost digital, and Adobe's own suggestion is the Grain controls in the Effects panel. A small amount of fine grain usually reads as more natural than either the original noise or perfectly clean pixels, and it helps hide any remaining smoothing on skin.
+
+6. **Save your amount as a preset instead of fixing it every time.** Since Denoise always starts at 50, the common workaround in the community is a preset that includes only the Detail panel's Denoise setting at the amount you prefer. Applying that preset turns Denoise on at your value in one step. Keep the preset narrow, because a preset that also carries tone or color settings will overwrite edits you've already made.
+
+7. **Batch with Sync, carefully.** For a whole shoot, set the amount on one photo, then Sync only Detail > Denoise to the rest. When the change first shipped, Lightroom Classic locked you out while a batch processed, but Adobe's help page now says Enhance features and AI adjustments applied through Copy/Paste, Presets, Sync, and Auto-Sync run in the background, so you can keep working. That arrived in Lightroom Classic 15.3 in April 2026. Several forum regulars warn against using Auto Sync while changing the amount, since early versions recalculated every selected photo on each change. Adobe said in August 2025 that it had fixed the recalculation, but it's still safer to Sync deliberately.
+
+8. **Only denoise the photos you'll deliver.** The new approach saves disk space compared with a full DNG per image. In one independent test on a 24 MB raw file, Denoise added about 5 MB of extra data, far less than Raw Details or Super Resolution. That data lives in your catalog's companion data file in Lightroom Classic, and if you write settings to XMP, sidecar files for proprietary raws can grow dramatically. Applied to a whole library by accident, it adds up fast, with forum users describing catalogs growing many times over. Use your picks or a filter to limit Denoise to the frames that are actually going out, and note that Lightroom's filters and smart collections can now find photos with Denoise applied if you need to audit.
+
+## Why it matters for designers
+
+Plenty of design work starts with a photo that wasn't shot in ideal light: an event in a dim venue, an interior shot without a tripod, a product photo a client took late in the day. Denoise can rescue those files in a way the old manual sliders never could, which makes it one of the more genuinely useful AI tools in the Lightroom toolbox.
+
+The sources agree that the move into the Detail panel was a real improvement for flexibility: you can come back and change the amount later instead of generating another DNG. Where they disagree is everything around it. Some guides welcome the space savings and the simpler workflow. Many longtime users, in long Adobe Community threads, missed the old background DNG process, which Adobe has since brought back in a new form, and still dislike that they can't set the amount before it runs. Both views are fair. The settings above get you most of the benefit while avoiding the worst of the friction.
+
+## What to watch out for
+
+The default strength is the main cause of the plastic look. Always pull it back and check at 100% before batching it across a shoot.
+
+Watch your catalog size and XMP sidecars, especially if you sync Denoise widely or have settings set to write to XMP automatically. Back up your catalog before a big batch.
+
+Order matters. Denoise applied after Remove or AI masks can change those edits, so do it first or expect to redo them.
+
+Denoise is for raw-type files. Adobe's current help page lists Bayer and X-Trans raws, linear DNGs (including HDR and panorama merges), Smart Previews, monochrome raws, Canon and Nikon small raws, Apple ProRAW, Samsung Expert RAW, Pentax Pixel Shift, and Foveon files. JPEGs, TIFFs, and HEICs aren't on the list. It also leans heavily on your GPU: Adobe's launch notes suggested at least 8 GB of GPU memory, and the help page says it doesn't use the Apple Neural Engine on a Mac, so it may run slowly on older machines.
+
+Adobe has also updated the Denoise models themselves, starting with Camera Raw 18.4, so results today may not match complaints from 2025. If Lightroom Classic 15.3 or earlier shows a "Denoise model version mismatch" error, Adobe's fix is to update to 15.4 or later.
+
+Adobe keeps changing how Denoise works, and Lightroom Classic is now on version 16. If a step doesn't match what you see, trust your version over this guide.
