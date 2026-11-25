@@ -1034,8 +1034,6 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [poly([56, 40, 62, 46])],
     tones: [],
   },
-  // A database: a stacked cylinder, its top face dark and two bands
-  // around the body. A CMS or backend behind a site.
   // A render split down the middle: speckled with grain on the left,
   // smooth and clean on the right. Denoising a render.
   denoise: {
@@ -1061,6 +1059,8 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     strokes: [frame(6, 6, 94, 62), poly([8, 80, 24, 80]), poly([40, 80, 92, 80]), poly([60, 72, 60, 88])],
     tones: [region(box(6, 6, 94, 62), 0.1)],
   },
+  // A database: a stacked cylinder, its top face dark and two bands
+  // around the body. A CMS or backend behind a site.
   database: {
     fills: [outline(ellipse(50, 20, 34, 9), 0.75)],
     strokes: [poly([16, 20, 16, 80]), poly([84, 20, 84, 80]), dbArc(40), dbArc(60), dbArc(80)],
