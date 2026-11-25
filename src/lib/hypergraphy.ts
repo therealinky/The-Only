@@ -52,6 +52,7 @@ export const ART_MOTIFS = [
   'cutout',
   'database',
   'denoise',
+  'dialback',
   'document',
   'dropdown',
   'eraser',
@@ -1045,6 +1046,20 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     strokes: [frame(4, 8, 96, 90), poly([50, 8, 50, 90])],
     tones: [region(box(58, 14, 90, 84), 0.45)],
+  },
+  // A photo of a hill under a lightly grainy sky, with an amount slider
+  // beneath it: the knob pulled back left of a tick mark at the default.
+  // Dialing an AI effect back from its starting strength.
+  dialback: {
+    fills: [
+      outline(poly([10, 58, 34, 30, 50, 44, 64, 26, 90, 58]), 0.6),
+      dot(20, 18),
+      dot(40, 14),
+      dot(76, 16),
+      outline(circle(32, 80, 6), 1),
+    ],
+    strokes: [frame(6, 6, 94, 62), poly([8, 80, 24, 80]), poly([40, 80, 92, 80]), poly([60, 72, 60, 88])],
+    tones: [region(box(6, 6, 94, 62), 0.1)],
   },
   database: {
     fills: [outline(ellipse(50, 20, 34, 9), 0.75)],
