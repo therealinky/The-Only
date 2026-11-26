@@ -143,6 +143,7 @@ export const ART_MOTIFS = [
   'allowcube',
   'nametag',
   'boardtodeck',
+  'promptmesh',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -322,6 +323,28 @@ const STAR5 = Array.from({ length: 10 }, (_, i) => {
 });
 
 const MOTIFS: Record<ArtMotif, Motif> = {
+  // A typed prompt bar with a blinking cursor, an arrow pointing down, and
+  // a faceted low-poly gem below it: generating an editable 3D model from a
+  // text prompt.
+  promptmesh: {
+    fills: [outline(box(10, 6, 90, 22), 0.25)],
+    strokes: [
+      poly([20, 10, 20, 18]),
+      poly([50, 28, 50, 40]),
+      poly([44, 35, 50, 41, 56, 35]),
+      closeLoop(poly([32, 50, 68, 50, 84, 62, 50, 94, 16, 62])),
+      poly([16, 62, 84, 62]),
+      poly([32, 50, 40, 62, 50, 50, 60, 62, 68, 50]),
+      poly([40, 62, 50, 94, 60, 62]),
+    ],
+    tones: [
+      region(poly([32, 50, 68, 50, 84, 62, 16, 62]), 0.2),
+      region(poly([40, 62, 60, 62, 50, 94]), 0.45),
+      region(poly([16, 62, 40, 62, 50, 94]), 0.25),
+    ],
+    strokeTone: 0.8,
+  },
+
   // A robot head: antenna, square eyes, mouth, and ears.
   agent: {
     fills: [
