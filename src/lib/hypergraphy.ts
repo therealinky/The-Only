@@ -1924,6 +1924,7 @@ const MOTIFS: Record<ArtMotif, Motif> = {
     ],
     tones: [],
   },
+
   // A manga page: a wide top panel holding a speech bubble, two middle
   // panels split by a slanted gutter, and a wide bottom panel: a multi-panel
   // comic page generated from one prompt.

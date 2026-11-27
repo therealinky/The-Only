@@ -9,7 +9,8 @@ dek: >-
 format: brief
 evidence: announced
 difficulty: quick
-status: draft
+status: published
+reviewedBy: Ana M. Rivas
 example: false
 publishedAt: 2026-11-27
 updatedAt: 2026-11-27
@@ -40,15 +41,18 @@ sources:
     accessed: 2026-11-27
 beforeYouUse:
   clientData: >-
-    known: Midjourney's terms say your content is publicly viewable and
+    Known: Midjourney's terms say your content is publicly viewable and
     remixable by default, and its Editor docs say edits made with the Edit
     model show up on midjourney.com for other members unless Stealth Mode is
-    on. Stealth Mode is only on the Pro and Mega plans. Not verified:
+    on, for both Midjourney images and images you upload. Stealth Mode is
+    only on the Pro and Mega plans, and even then the terms only promise
+    "best efforts" not to publish your work, while the broad license you
+    grant Midjourney on uploads and outputs still applies. Not verified:
     whether Niji 8 edits follow exactly the same visibility rules, since
     the docs describe the Edit model for V8.X and don't mention Niji 8 yet.
     Don't upload unreleased client characters without Stealth on.
   usageRights: >-
-    known: Midjourney's terms say you own what you create to the fullest
+    Known: Midjourney's terms say you own what you create to the fullest
     extent the law allows, but a company (or an employee of one) with more
     than $1,000,000 a year in revenue must be on Pro or Mega to own its
     images. You also grant Midjourney a broad license to your inputs and
@@ -56,14 +60,14 @@ beforeYouUse:
     upload, like a character sheet. Not verified: what Niji 8 was trained
     on, which the announcement doesn't say.
   disclosure: >-
-    not verified: neither the Niji 8 post nor the docs we read mention any
+    Not verified: neither the Niji 8 post nor the docs we read mention any
     label or metadata marking Niji 8 images as AI-generated. Whether to tell
     a client or audience is your call.
   accessibility: >-
-    not verified: the announcement doesn't cover how the edit feature works
+    Not verified: the announcement doesn't cover how the edit feature works
     with screen readers or keyboard-only use.
   cost: >-
-    known: Niji 8 needs a paid Midjourney plan. Midjourney's plan page lists
+    Known: Niji 8 needs a paid Midjourney plan. Midjourney's plan page lists
     Basic at $10 a month, Standard at $30, Pro at $60, and Mega at $120, as
     of November 27, 2026, with unlimited Relax image generations from
     Standard up. Not verified: how much GPU time a Niji 8 job, an HD job,
@@ -82,7 +86,7 @@ To use it, add `--niji 8` to your prompt in Discord, or pick "Niji 8" from the V
 - **Better spatial prompt following.** Prompts that place specific objects in specific relationships to each other come out more reliably, according to the announcement.
 - **Simple comic pages.** You can describe a page panel by panel (top, middle, bottom) and get a basic manga layout from a single prompt.
 - **More variety from short prompts.** Niji 7 tended to give you the same character every time you typed the same words. Niji 8 won't. It's meant to combine Niji 7's look with Niji 6's range, and it treats a longer prompt as a sign you know what you want, so longer prompts return less varied results.
-- **Speed and HD.** Midjourney calls it the fastest and most coherent Niji model so far, and recommends trying HD with it.
+- **Speed and HD.** The niji・journey team calls it the fastest and most coherent Niji model so far, and recommends trying HD with it.
 
 The team says it held the launch until characters could be reproduced through the edit feature, and that style references and moodboards were improved for the same reason.
 
@@ -98,6 +102,6 @@ If you're skeptical of generated illustration, the shift is still worth knowing 
 
 Old prompts will behave differently. If you relied on Niji 7 returning the same character from the same words, Niji 8 is designed not to do that, so plan on moving that work to the edit feature.
 
-Midjourney's documentation hasn't caught up yet. As of November 27, its Version page doesn't list Niji 8, and its Edit Model page describes the Edit model as compatible with V8.1 and V8.2, not working with `--tile`, and producing results that don't work with Remix. Whether those same limits apply to Niji 8's edit feature isn't stated, so test before you build a process around it. The announcement also only covers Discord and the web, not the niji・journey mobile app.
+Midjourney's documentation hasn't caught up yet. As of November 27, its Version page doesn't list Niji 8, and its Edit Model page describes the Edit model as compatible with V8.1 and V8.2, not working with `--tile`, and producing results that don't work with Remix. It also says Midjourney's V8 Edit model takes up to four reference images and replaces Character Reference and Omni Reference there. Whether any of that applies to Niji 8's edit feature isn't stated, so test before you build a process around it. The announcement also only covers Discord and the web, not the niji・journey mobile app.
 
-Privacy is the other thing to check. By default, Midjourney images are public, and its docs say Edit model creations appear on midjourney.com unless you have Stealth Mode, which only comes with Pro and Mega. If you're uploading a client's unreleased character to pose it in new scenes, that matters. See the sidebar for rights and cost details.
+Privacy is the other thing to check. By default, Midjourney images are public, and its docs say Edit model creations appear on midjourney.com unless you have Stealth Mode, which only comes with Pro and Mega. That covers images you upload, not just the results, so a client's unreleased character sheet could end up visible to other members. Stealth helps, but Midjourney's terms only promise "best efforts" not to publish, and you still grant Midjourney a broad license to what you upload. See the sidebar for rights and cost details.
