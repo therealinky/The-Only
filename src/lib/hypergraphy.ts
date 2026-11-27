@@ -144,6 +144,7 @@ export const ART_MOTIFS = [
   'nametag',
   'boardtodeck',
   'promptmesh',
+  'mangapage',
 ] as const;
 export type ArtMotif = (typeof ART_MOTIFS)[number];
 
@@ -1922,6 +1923,26 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       poly([82, 74, 92, 92]),
     ],
     tones: [],
+  },
+
+  // A manga page: a wide top panel holding a speech bubble, two middle
+  // panels split by a slanted gutter, and a wide bottom panel: a multi-panel
+  // comic page generated from one prompt.
+  mangapage: {
+    fills: [outline(ellipse(60, 19, 16, 8), 0.95)],
+    strokes: [
+      frame(10, 4, 90, 34),
+      poly([10, 42, 52, 42, 42, 66, 10, 66, 10, 42]),
+      poly([60, 42, 90, 42, 90, 66, 50, 66, 60, 42]),
+      frame(10, 74, 90, 96),
+      poly([50, 26, 40, 31]),
+    ],
+    tones: [
+      region(box(10, 4, 90, 34), 0.12),
+      region(poly([10, 42, 52, 42, 42, 66, 10, 66]), 0.6),
+      region(poly([60, 42, 90, 42, 90, 66, 50, 66]), 0.35),
+      region(box(10, 74, 90, 96), 0.75),
+    ],
   },
 };
 
