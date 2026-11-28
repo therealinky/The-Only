@@ -112,6 +112,7 @@ export const ART_MOTIFS = [
   'billboard',
   'folder',
   'lasso',
+  'loupe',
   'moodboard',
   'splittest',
   'upscale',
@@ -1410,6 +1411,19 @@ const MOTIFS: Record<ArtMotif, Motif> = {
       outline(box(44, 4, 84, 27), 0.12),
     ],
     strokes: [poly([52, 12, 76, 12]), poly([52, 20, 68, 20])],
+    tones: [],
+  },
+  // A magnifying glass held over a photo's corner, its lens full of a
+  // tight grid of dots, the handle angled down-right: fine detail you
+  // can inspect at full resolution, no upscaling.
+  loupe: {
+    fills: [
+      ...[26, 36, 46, 56].flatMap((y, row) =>
+        [26, 36, 46, 56].map((x) => dot(x + (row % 2) * 4, y, 2.2)),
+      ),
+      outline(poly([64, 68, 72, 60, 94, 82, 86, 90]), 1),
+    ],
+    strokes: [ring(42, 42, 26)],
     tones: [],
   },
   // A dashed freehand lasso loop with its trailing tail, and a sparkle inside:
