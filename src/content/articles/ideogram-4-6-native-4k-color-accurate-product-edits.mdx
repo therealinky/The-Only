@@ -1,0 +1,97 @@
+---
+title: "Ideogram 4.6 renders in native 4K and goes after product-shot color"
+dek: >-
+  Seven weeks after 4.5, Ideogram's new model generates at full resolution
+  without upscaling and claims edits that leave the rest of the image, and
+  your brand colors, alone.
+format: brief
+evidence: announced
+difficulty: quick
+status: published
+reviewedBy: Ana M. Rivas
+example: false
+publishedAt: 2026-11-28
+updatedAt: 2026-11-28
+lastVerified: 2026-11-28
+disciplines:
+  - Photo & Imaging
+  - Brand & Graphic
+art: loupe
+tools:
+  - Ideogram
+sources:
+  - title: "Ideogram 4.6 (Ideogram model page)"
+    url: https://ideogram.ai/models/4.6/
+    accessed: 2026-11-28
+  - title: "Pricing (Ideogram)"
+    url: https://ideogram.ai/pricing/
+    accessed: 2026-11-28
+  - title: "API pricing (Ideogram)"
+    url: https://ideogram.ai/pricing/?pricing_tab=api
+    accessed: 2026-11-28
+  - title: "Ideogram (Ideogram homepage and FAQ)"
+    url: https://ideogram.ai/
+    accessed: 2026-11-28
+  - title: "Ideogram 4.6 brings native 4K images and more precise multi-step editing (TechCity Authority, November 20, 2026)"
+    url: https://www.techcityauthority.com/2026/11/ideogram-4-6.html
+    accessed: 2026-11-28
+  - title: "Ideogram 4.6 Brings Native 4K AI Image Editing and Tops a Multi-Step Edit Benchmark (i10x, November 19, 2026)"
+    url: https://i10x.ai/news/ideogram-4-6-native-4k-ai-image-editing-model
+    accessed: 2026-11-28
+beforeYouUse:
+  clientData: >-
+    Known: Ideogram's homepage says Enterprise inputs are not used to train
+    its shared models, and that images made on the free plan are public,
+    while images on any paid option, including pay-as-you-go, stay private
+    until you publish them. Not verified: whether uploads on non-Enterprise plans can
+    be used for training. Editing means uploading your source photo, so
+    don't put unreleased client products on the free plan, and check the
+    terms of any partner app you use the model through.
+  usageRights: >-
+    Known: Ideogram's model page and FAQ say its Terms of Service permit
+    commercial use of outputs, and that it doesn't claim ownership of your
+    inputs or outputs. Not verified: what training data the model was built
+    on, which Ideogram's pages don't say, and whether partner platforms
+    pass the same terms through.
+  disclosure: >-
+    Not verified: nothing we found says whether 4.6 images carry Content
+    Credentials or other AI metadata. Ideogram's model page tells you to
+    identify AI-edited content when your publishing context requires it,
+    and to keep your original image, prompts, and outputs so you can trace
+    how an image changed. If a client needs AI edits disclosed, track that
+    yourself.
+  accessibility: "Not applicable: this is an image generation and editing model."
+  cost: >-
+    Known: Ideogram's model page lists API prices per image from $0.008
+    (very low quality, 2K) up to $0.60 (high quality edit at 4K), and its
+    pricing page lists in-app credit costs that run higher for 4K and for
+    edits with source images. Its homepage says every plan, free included,
+    can use all Ideogram models. Free accounts get weekly credits only if
+    they sign in with Google, Apple, or Microsoft; accounts made with an
+    email and password get none.
+---
+Ideogram 4.5 came out at the end of September as an edit model built to hold up over many rounds of changes. Ideogram 4.6, released November 19, keeps that focus and adds two things product and brand work cares about: images generated at full 4K resolution, and colors that are meant to stay put when you edit.
+
+## What changed
+
+A few specifics from Ideogram's own model page:
+
+- **Native 4K.** Ideogram says 4.6 generates images in native 4K, meaning no upscaling step. Each quality setting goes up to 2K or 4K, except the cheapest "very low" mode, which tops out at 2K. Ideogram also says it worked to remove the waxy "AI look" from skin and fabric, with visible pores and natural texture. One catch for edits: Precise Edit keeps the source image's dimensions, so you only get a 4K edit from a 4K original.
+- **Less drift, better color.** The headline claim is that 4.6 leaves far less pixel drift outside the area you edit and holds color more accurately than 4.5. Precise Edit takes an optional mask, or you can describe the change in the prompt, and each result can become the source for the next edit.
+- **References for generation.** Generate accepts up to five reference images.
+- **Ideogram's own numbers.** On its internal test set, Ideogram reports the share of usable results going up from 4.5 to 4.6 on tasks like exact color (recoloring an object to a brand hex code) and product shots. It also shows 4.6 at the top of a third-party multi-step edit leaderboard snapshot from November 17, with 4.5 close behind.
+- **Where it runs.** It's in the Ideogram app (pick it in the model picker) and the API. Launch coverage relays a partner list from Ideogram's announcement that includes Leonardo, Runway, fal, Comfy, HeyGen, and Luma.
+
+## Why it matters for designers
+
+Many AI image models generate at 1K to 2K, well below print or large-screen resolution, so getting a usable product shot or hero image has usually meant generating small and running an upscaler, which invents its own detail. Generating at 4K skips that second guess, which matters most for packaging mockups, e-commerce photography, and anything that gets cropped hard.
+
+The color claim is the bigger one for brand work. Recoloring a product to an exact brand color, then making three more edits without that color sliding, is exactly where AI edits tend to fail and where a client notices first. If 4.6 really holds a hex value across edits, that's a meaningful change for mockups and campaign variants.
+
+## What to watch out for
+
+The improvement figures come from Ideogram's own requests, and it hasn't published how it judged a result "usable." The leaderboard lead over 4.5 is also within the leaderboard's own margin of error. Treat both as reasons to test on your own images, not proof.
+
+Ideogram itself advises reviewing text, faces, colors, and product details after each edit, especially across long chains of edits. For a real product or a logo, compare the final against the original before it goes out.
+
+Some things we couldn't confirm. Ideogram's pages don't say whether 4.6 supports transparent backgrounds (its API pricing only lists those for older models), and that API price list states prices "as of November 27," so expect them to change. Coverage also reports Ideogram saying on X that it plans to release 4.6 as open weights, but there's no date and its own pages don't mention it. The sidebar covers data handling, rights, and cost.
